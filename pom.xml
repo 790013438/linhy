@@ -103,6 +103,13 @@
       <version>${spring.version}</version>
     </dependency>
 
+    <!-- 添加druid依赖 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+
     <!-- 添加mybatis依赖 -->
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -152,6 +159,13 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>${slf4j.version}</version>
+    </dependency>
+
+    <!--  mail-->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4</version>
     </dependency>
 
     <!-- log end -->

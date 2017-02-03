@@ -10,6 +10,8 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+    <mvc:annotation-driven />
+
     <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="com.xy.ssm.controller"/>
 
@@ -37,6 +39,9 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--静态资源-->
+    <mvc:resources mapping="/resource/**" location="/resource/" />
 
     <!-- 文件上传配置 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

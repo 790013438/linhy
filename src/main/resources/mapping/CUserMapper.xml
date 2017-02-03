@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.ssm.dao.CUserDao">
+    <select id="checkName" resultType="java.lang.Integer">
+        select count(*) from c_users
+        where user_name = #{username}
+    </select>
+
+    <select id="checkMail" resultType="java.lang.Integer">
+        select count(*) from c_users
+        where user_email = #{email}
+    </select>
+
+    <select id="checkPhone" resultType="java.lang.Integer">
+        select count(*) from c_users
+        where user_phone = #{phone}
+    </select>
+
+    <insert id="regUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CUser">
+        insert into c_users(user_name,user_phone,user_email,user_gender,user_password,user_type,validateCode,create_time)
+        values(#{userName},#{userPhone},#{userEmail},#{userGender},#{userPassword},#{userType},#{validateCode},#{createTime})
+    </insert>
+</mapper>
