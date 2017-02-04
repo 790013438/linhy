@@ -13,10 +13,8 @@ import com.xy.ssm.utils.MD5Util;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("currentUser")//讲登录后命名为currentUser的加入session
 public class UserController {
 
     private Logger log = Logger.getLogger(UserController.class);
@@ -193,7 +192,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String login(@RequestParam(required = true) String  json) {
+    public String login(@RequestParam(required = true) String  json,ModelMap  model) {
         log.info("--------------------/user/login  called");
         String result = "";
         BaseResult baseResult = null;
@@ -213,6 +212,7 @@ public class UserController {
                     if(!MD5Util.validate(pwd,cUser.getUserPassword())){
                         baseResult=new BaseResult(false,"登录失败！");
                     }else {
+                        model.addAttribute("currentUser",cUser);
                         baseResult=new BaseResult(true,"登录成功");
                     }
                 }else {
@@ -228,6 +228,29 @@ public class UserController {
         }catch (Exception e){
             log.error("登录用户出现异常"+e);
             baseResult=new BaseResult(false,"登录用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
+    /**
+     * 获取当前登录用户信息并测试session
+     * @param cUser
+     * @return
+     */
+    @RequestMapping(value = "/myinfo",produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String myinfo(@ModelAttribute("currentUser")CUser cUser){
+        log.info("--------------------/user/myinfo  called");
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            log.info(cUser.toString());
+            baseResult=new BaseResult(true,"");
+            baseResult.setData(cUser);
+        }catch (Exception e){
+            log.error("获取当前登录用户出现异常"+e);
+            baseResult=new BaseResult(false,"获取当前登录用户出现异常，请联系管理员或稍后再试");
         }
         result= JSON.toJSONString(baseResult);
         return result;
