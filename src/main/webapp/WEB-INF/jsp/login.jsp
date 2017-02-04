@@ -48,13 +48,25 @@
     </div>
     <div class="tab-content">
         <div id="login" class="tab-pane active">
-            <form action="index.html" class="form-signin">
+            <form action="index.html" class="form-signin" id="login_form">
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">
                     请输入用户名密码登录
                 </p>
-                <input type="text" placeholder="用户名" class="form-control" maxlength="16" />
-                <input type="password" placeholder="密码" class="form-control"  maxlength="32"/>
-                <button class="btn text-muted text-center btn-danger" type="submit">登录</button>
+                <input type="text" placeholder="用户名" class="form-control" maxlength="16" id="login_username"/>
+                <input type="password" placeholder="密码" class="form-control"  maxlength="32" id="login_password"/>
+                <div >
+                    <label>类型</label>
+                    <label class="checkbox-inline">
+                        <input type="radio" name="type" id="student" value="1" checked> 大学生
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="radio" name="type" id="company"  value="2"> 公司
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="radio" name="type" id="admin"  value="3"> 管理员
+                    </label>
+                </div>
+                <button class="btn text-muted text-center btn-danger" type="submit" id="login_btn">登录</button>
                 <a class="text-muted" href="#forgot" data-toggle="tab">忘记密码？</a>
             </form>
         </div>

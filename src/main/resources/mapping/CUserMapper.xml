@@ -20,4 +20,18 @@
         insert into c_users(user_name,user_phone,user_email,user_gender,user_password,user_type,validateCode,create_time)
         values(#{userName},#{userPhone},#{userEmail},#{userGender},#{userPassword},#{userType},#{validateCode},#{createTime})
     </insert>
+
+    <select id="getUserByUsername" resultType="com.xy.ssm.model.CUser">
+        select id,user_name as userName,user_phone as userPhone,user_email as userEmail,
+        user_icon as userIcon,user_gender as userGender,user_realname as userRealName,user_intention_job as userIntention ,
+        user_profile as userProfile,user_type as userType , user_status as userStatus,user_password as userPassword,
+        create_time as createTime,validateCode as validateCode from c_users where user_name = #{username}
+    </select>
+
+    <select id="getUserById" resultType="com.xy.ssm.model.CUser">
+        select id,user_name as userName,user_phone as userPhone,user_email as userEmail,
+        user_icon as userIcon,user_gender as userGender,user_realname as userRealName,user_intention_job as userIntention ,
+        user_profile as userProfile,user_type as userType , user_status as userStatus,user_password as userPassword,
+        create_time as createTime,validateCode as validateCode from c_users where id = #{id}
+    </select>
 </mapper>

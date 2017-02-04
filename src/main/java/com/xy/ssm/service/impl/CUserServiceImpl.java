@@ -1,6 +1,7 @@
 package com.xy.ssm.service.impl;
 
 import com.xy.ssm.dao.CUserDao;
+import com.xy.ssm.model.CUser;
 import com.xy.ssm.service.CUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,25 @@ public class CUserServiceImpl implements CUserService {
      */
     public Integer checkPhone(String phone) {
         return cUserDao.checkPhone(phone);
+    }
+
+    /**
+     * 根据用户名获取用户信息
+     *
+     * @param username
+     * @return
+     */
+    public CUser getUserByUsername(String username) {
+         return cUserDao.getUserByUsername(username);
+    }
+
+    /**
+     * 根据用户id获取用户信息
+     *
+     * @param id
+     * @return
+     */
+    public CUser getUserById(Long id) {
+        return cUserDao.getUserById(id);
     }
 }

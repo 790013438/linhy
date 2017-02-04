@@ -185,4 +185,51 @@ public class UserController {
         result= JSON.toJSONString(baseResult);
         return result;
     }
+
+    /**
+     *登录
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/login", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String login(@RequestParam(required = true) String  json) {
+        log.info("--------------------/user/login  called");
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            if(StringUtils.isEmpty(json)){
+                baseResult=new BaseResult(false,"登录信息获取异常，请联系管理员稍后再试");
+            }else {
+                log.info(json);
+                JSONObject obj=JSON.parseObject(json);
+                CUser cUser=new CUser();
+                cUser.setUserName(obj.getString("username"));
+                String pwd=obj.getString("password");
+                cUser.setUserType(obj.getInteger("type"));
+                if(cUser.getUserType()==1){
+                    cUser=cUserService.getUserByUsername(cUser.getUserName());
+                    log.info(cUser.getUserPassword()+"----------------------------------------"+pwd);
+                    if(!MD5Util.validate(pwd,cUser.getUserPassword())){
+                        baseResult=new BaseResult(false,"登录失败！");
+                    }else {
+                        baseResult=new BaseResult(true,"登录成功");
+                    }
+                }else {
+                    cUser=cUserService.getUserByUsername(cUser.getUserName());
+                    if(!MD5Util.validate(cUser.getUserPassword(),pwd)){
+                        baseResult=new BaseResult(false,"登录失败！");
+                    }else {
+                        baseResult=new BaseResult(true,"登录成功");
+                    }
+                }
+
+            }
+        }catch (Exception e){
+            log.error("登录用户出现异常"+e);
+            baseResult=new BaseResult(false,"登录用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
 }

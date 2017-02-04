@@ -37,6 +37,19 @@ public interface CUserDao {
      */
     Integer checkPhone(@Param("phone")String phone);
 
+    /**
+     * 根据用户名获取用户信息
+     * @param username
+     * @return
+     */
+    CUser getUserByUsername(@Param("username")String username);
+
+    /**
+     * 根据用户id获取用户信息
+     * @param id
+     * @return
+     */
+    CUser getUserById(@Param("id")Long id);
 
 
 }

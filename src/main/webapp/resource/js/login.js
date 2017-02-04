@@ -21,43 +21,58 @@ $(function () {
             $(activeForm).removeClass('magictime swap');
         }, 1000);
     });
-    
-    $("#signup_btn").click(function () {
-        // var test=$("#from_signin").serialize();
-        var from=$("#from_signin").serializeArray();
-        for(var i=0;i<from.length;i++){
-            if(from[i].name=="username"){
-                if(!username_val.test(from[i].value)){
-                    layerAlert("用户名格式输入不正确，只支持4-10位数字字母组合");
-                    button_val=false;
-                    return false;
-                }
-            }
-            if(from[i].name=="email"){
 
-            }
-            if(from[i].name=="password"){
+    $("#login_form").submit(function(e){
+        e.preventDefault();
+        login();
+    });
 
-            }
-
-            if(from[i].name=="phone"){
-
-            }
-        }
-    })
 });
+function getRootPath() {
+    var pathName = window.location.pathname.substring(1);
+    var webName = pathName == '' ? '' : pathName.substring(0, pathName
+            .indexOf('/'));
+    return window.location.protocol + '//' + window.location.host + '/'
+        + webName + '/';
+}
+
+function login() {
+    var obj=$("#login_form").serializeArray();
+    var json={};
+    json.username=$("#login_username").val();
+    json.password=$("#login_password").val();
+    if(json.username==null||json.password==null||json.username==""||json.password==""){
+        alert("请输入登录信息");
+        return;
+    }
+    json.type=obj[0].value;
+    var data={
+       json:JSON.stringify(json)
+    };
+    console.log(json);
+    $.ajax({ //一个Ajax过程
+        type: "post", //以post方式与后台沟通
+        url :getRootPath()+"/user/login", //与此页面沟通
+        dataType:'json',//返回的值以 JSON方式 解释
+        data: data, //发给的数据
+        success: function(json){//如果调用成功
+            console.log(json);
+            if(json.success== false){
+                alert(json.error);
+            }else {
+                alert(json.error);
+            }
+        },
+        error:function (json) {
+            console.log(json);
+            alert(json.error);
+        }
+    });
+}
 
 function layerAlert(msg) {
     layer.alert(msg, {
         skin: 'layui-layer-molv' //样式类名
         ,closeBtn: 0
     });
-}
-/**
- * 显示信息
- * @param target
- * @param Infos
- */
-function showInfo(target,Infos){
-    document.getElementById(target).innerHTML = Infos;
 }

@@ -1,5 +1,7 @@
 package com.xy.ssm.service;
 
+import com.xy.ssm.model.CUser;
+
 /**
  * Created by wuchenl on 2017/1/28.
  */
@@ -24,4 +26,18 @@ public interface CUserService {
      * @return
      */
     Integer checkPhone(String phone);
+
+    /**
+     * 根据用户名获取用户信息
+     * @param username
+     * @return
+     */
+    CUser getUserByUsername(String username);
+
+    /**
+     * 根据用户id获取用户信息
+     * @param id
+     * @return
+     */
+    CUser getUserById(Long id);
 }
