@@ -1,10 +1,14 @@
 package com.xy.ssm.service.impl;
 
 import com.xy.ssm.dao.CUserDao;
+import com.xy.ssm.model.CApplication;
+import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CUser;
 import com.xy.ssm.service.CUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by wuchenl on 2017/1/28.
@@ -20,7 +24,7 @@ public class CUserServiceImpl implements CUserService {
      * @param username
      * @return
      */
-    public Integer checkName(String username) {
+    public List<CUser> checkName(String username) {
         return cUserDao.checkName(username);
     }
 
@@ -30,7 +34,7 @@ public class CUserServiceImpl implements CUserService {
      * @param email
      * @return
      */
-    public Integer checkMail(String email) {
+    public List<CUser>  checkMail(String email) {
         return cUserDao.checkMail(email);
     }
 
@@ -40,7 +44,7 @@ public class CUserServiceImpl implements CUserService {
      * @param phone
      * @return
      */
-    public Integer checkPhone(String phone) {
+    public List<CUser> checkPhone(String phone) {
         return cUserDao.checkPhone(phone);
     }
 
@@ -50,8 +54,8 @@ public class CUserServiceImpl implements CUserService {
      * @param username
      * @return
      */
-    public CUser getUserByUsername(String username) {
-         return cUserDao.getUserByUsername(username);
+    public CUser getUserByUsername(String username,int userType) {
+         return cUserDao.getUserByUsername(username,userType);
     }
 
     /**
@@ -62,5 +66,29 @@ public class CUserServiceImpl implements CUserService {
      */
     public CUser getUserById(Long id) {
         return cUserDao.getUserById(id);
+    }
+
+    public int addJobApplication (CApplication cApplication)
+    {
+        return cUserDao.addJobApplication(cApplication);
+    }
+
+    public List<CJobs> getJobList (String condition, Integer offset, Integer limit)
+    {
+        return cUserDao.getJobList(condition,offset,limit);
+    }
+    public int getJobCount (String condition, Integer offset, Integer limit)
+    {
+        return cUserDao.getJobCount(condition,offset,limit);
+    }
+
+    public int updateUser (CUser cUser)
+    {
+        return cUserDao.updateUser(cUser);
+    }
+
+    public CApplication getAppliByTwoId (Long jobId, Long userId)
+    {
+        return cUserDao.getAppliByTwoId(jobId,userId);
     }
 }

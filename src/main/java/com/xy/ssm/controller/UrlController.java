@@ -2,26 +2,18 @@ package com.xy.ssm.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by wuchenl on 2017/1/13.
  */
 @Controller
-@RequestMapping("kn")
 public class UrlController {
 
     private Logger log = Logger.getLogger(UserController.class);
 
-    /**
-     * 跳转主页
-     * @return
-     */
-    @RequestMapping("index")
-    private String toIndex(){
-        log.info("--------------------call:index");
-        return "index";
-    }
 
     /**
      * 跳转登录
@@ -41,5 +33,38 @@ public class UrlController {
     private String toRegister(){
         log.info("--------------------call:register");
         return "register";
+    }
+
+    /**
+     * get方式访问后台所有页面
+     * @param action
+     * @return
+     */
+    @RequestMapping(value="/system/{action}",method= RequestMethod.GET)
+    public String getSystem(@PathVariable("action") String action){
+        log.info("getUrl:system/"+action);
+        return "system/"+action;
+    }
+
+    /**
+     * get方式访问后台所有页面
+     * @param action
+     * @return
+     */
+    @RequestMapping(value="/student/{action}",method= RequestMethod.GET)
+    public String getStudent(@PathVariable("action") String action){
+        log.info("getUrl:student/"+action);
+        return "student/"+action;
+    }
+
+    /**
+     * get方式访问后台所有页面
+     * @param action
+     * @return
+     */
+    @RequestMapping(value="/company/{action}",method= RequestMethod.GET)
+    public String getCompany(@PathVariable("action") String action){
+        log.info("getUrl:company/"+action);
+        return "company/"+action;
     }
 }

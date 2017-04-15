@@ -1,6 +1,9 @@
 package com.xy.ssm.dao;
 
+import com.xy.ssm.model.CComment;
+import com.xy.ssm.model.CUser;
 import com.xy.ssm.model.User;
+import com.xy.ssm.model.VOCApplication;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +17,11 @@ import java.util.List;
 //养成好习惯，将存储层Bean对应表明
 public interface UserDao {
     List<User> selectAllUser();
+    int updateStudentStatus(@Param("userId") Long userId,@Param("userStatus") int userStatus);
+    CUser getUserInfo(@Param("userId")Long userId);
+    List<CComment> getUserComment(@Param("userId") Long userId,@Param("offset") Integer offset,@Param("limit")Integer limit);
+    int getUserCommentCount(@Param("userId") Long userId);
+    List<VOCApplication> getMyAppliSituation(@Param("userId") Long userId,@Param("jobStatus") String jobStatus);
+    int quitJob(@Param("applicationId") Long applicationId,@Param("userId") Long userId);
+    int updateUserPassword(@Param("newPw") String newPw,@Param("userId") Long userId);
 }
