@@ -20,4 +20,5 @@ public interface UserService {
     List<VOCApplication> getMyAppliSituation(Long userId,String jobStatus);
     int quitJob(Long applicationId,Long userId);
     int updateUserPassword(String newPw,Long userId);
+    int delApplication(Long applicationId,Long userId);
 }

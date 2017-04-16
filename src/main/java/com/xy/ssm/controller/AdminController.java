@@ -7,6 +7,7 @@ import com.xy.ssm.model.CComment;
 import com.xy.ssm.model.CCompany;
 import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CUser;
+import com.xy.ssm.service.CUserService;
 import com.xy.ssm.service.CompanyService;
 import com.xy.ssm.service.UserService;
 import org.apache.log4j.Logger;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("admin")
-public class AdminController
+public class AdminController extends BaseController
 {
 
     private Logger log = Logger.getLogger(UserController.class);
@@ -29,6 +30,8 @@ public class AdminController
     private UserService userService;
     @Resource
     private CompanyService companyService;
+    @Resource
+    private CUserService cUserService;
 
     /**
      * 跳转到管理员用户页面
@@ -82,9 +85,15 @@ public class AdminController
     public String getJobDetails(@RequestParam(required = true) Long jobId) {
         String result = "";
         BaseResult baseResult = null;
+        CUser cUser =(CUser) getLoginUser ().get ("loginuser");
         try{
             CJobs job = companyService.getJobDetails(jobId);
             if(job != null) {
+                if(cUserService.getAppliByTwoId(job.getId (),cUser.getId ()) != null){
+                    job.setFlag(1);
+                }else{
+                    job.setFlag(0);
+                }
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(job);
             } else {

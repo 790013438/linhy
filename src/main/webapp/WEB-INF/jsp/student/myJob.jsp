@@ -37,46 +37,22 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div id="container"> 
    								<!-- 定义一个表格元素 --> 
-   									<table id="example" class="table table-striped table-bordered"> 
+   									<table id="myAppliJobs" class="table table-striped table-bordered">
     									<thead> 
-     										<tr> 
-      											<th>序号</th> 
+     										<tr>
       											<th>兼职标题</th> 
       											<th>兼职时间</th> 
-      											<th>兼职状态</th> 
-      											<th>发布企业</th> 
+      											<th>兼职状态</th>
+												<th>薪资类型</th>
+												<th>薪资金额</th>
+												<th>工作时长</th>
+												<th>发布企业</th>
       											<th>报名状态</th> 
       											<th>操作</th> 
      										</tr> 
     									</thead> 
     									<tbody>
-    										<tr>
-    											<td>11</td>
-    											<td>派发传单</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td>报名中</td>
-    											<td>测试公司2</td>
-    											<td>待审核</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">退出兼职</button></a></td>
-    										</tr>
-    										<tr>
-    											<td>2</td>
-    											<td>派发传单</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td>报名中</td>
-    											<td>测试公司3</td>
-    											<td>审核通过</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">退出兼职</button></a></td>
-    										</tr>
-    										<tr>
-    											<td>55</td>
-    											<td>英语翻译</td>
-    											<td>2017-02-29 22:14:53</td>
-    											<td>已满</td>
-    											<td>测试公司3</td>
-    											<td>审核拒绝</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">退出兼职</button></a></td>
-    										</tr>
+
     									</tbody> 
     
     								<!-- tbody是必须的 --> 
@@ -94,19 +70,10 @@
 				<i class="icon-double-angle-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-
-<!--删除弹窗start-->
-<div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
-    <div class="deletediv_btn">
-        <p class="pull-left"><button type="button" class="btn btn-primary" id="btnDoUpdate">确定</button></p>
-        <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
-        <input hidden="hidden" id="doId"/>
-        <input hidden="hidden" id="doStatus"/>
-    </div>
-</div>
 	<%@include file="commonFoot.jsp"%>
-		<script type="text/javascript">
+	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/myJob.js"></script>
+	<script type="text/javascript">
 			function closepop(){
 				$(".pop").hide();
 				$(".popinto").hide();
@@ -127,38 +94,6 @@
 						}
 					});
 				});
-				// var oTable1 = $('#sample-table-2').dataTable( {
-				// "aoColumns": [
-			 //      { "bSortable": false },
-			 //      null, null,null, null, null,
-				//   { "bSortable": false }
-				// ] } );
-				
-				
-				// $('table th input:checkbox').on('click' , function(){
-				// 	var that = this;
-				// 	$(this).closest('table').find('tr > td:first-child input:checkbox')
-				// 	.each(function(){
-				// 		this.checked = that.checked;
-				// 		$(this).closest('tr').toggleClass('selected');
-				// 	});
-						
-				// });
-			
-			
-				// $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				// function tooltip_placement(context, source) {
-				// 	var $source = $(source);
-				// 	var $parent = $source.closest('table')
-				// 	var off1 = $parent.offset();
-				// 	var w1 = $parent.width();
-			
-				// 	var off2 = $source.offset();
-				// 	var w2 = $source.width();
-			
-				// 	if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-				// 	return 'left';
-				// }
 			})
 		</script>
 </body>

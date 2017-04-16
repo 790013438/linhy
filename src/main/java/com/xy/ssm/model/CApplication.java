@@ -15,6 +15,8 @@ public class CApplication implements Serializable {
     private Long appliUserId;
     //兼职id
     private Long appliJobId;
+    //用户标记
+    private int userSign;
     //报名状态
     private String appliStatus;
     //用户名
@@ -169,5 +171,15 @@ public class CApplication implements Serializable {
     public void setCreateTime (Date createTime)
     {
         this.createTime = createTime;
+    }
+
+    public int getUserSign ()
+    {
+        return userSign;
+    }
+
+    public void setUserSign (int userSign)
+    {
+        this.userSign = userSign;
     }
 }

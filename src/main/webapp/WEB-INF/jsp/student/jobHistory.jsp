@@ -36,66 +36,19 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div id="container"> 
    								<!-- 定义一个表格元素 --> 
-   									<table id="example" class="table table-striped table-bordered"> 
+   									<table id="myJobHistory" class="table table-striped table-bordered">
     									<thead> 
-     										<tr> 
-      											<th>序号</th> 
+     										<tr>
       											<th>标题</th> 
-      											<th>兼职状态</th> 
-      											<th>兼职时间</th> 
+      											<th>兼职状态</th>
+												<th>企业名称</th>
+												<th>兼职时间</th>
       											<th>薪资类型</th> 
       											<th>薪资金额</th> 
       											<th>操作</th> 
      										</tr> 
     									</thead> 
     									<tbody>
-    										<tr>
-    											<td>11</td>
-    											<td>小学家教</td>
-    											<td>已结束</td>
-    											<td>2017-02-26 22:14:53</td>
-    											<td>时薪</td>
-    											<td>50</td>
-    											<td>
-    											<button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">删除</button></a>
-    											</td>
-    										</tr>
-    										<tr>
-    											<td>17</td>
-    											<td>钟点工</td>
-    											<td>已结束</td>
-    											<td>2017-02-27 22:14:53</td>
-    											<td>时薪</td>
-    											<td>50</td>
-    											<td>
-    											<button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">删除</button></a>
-    											</td>
-    										</tr>
-    										<tr>
-    											<td>22</td>
-    											<td>迎宾</td>
-    											<td>已结束</td>
-    											<td>2017-02-28 22:14:53</td>
-    											<td>日薪</td>
-    											<td>200</td>
-    											<td>
-    											<button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">删除</button></a>
-    											</td>
-    										</tr>
-    										<tr>
-    											<td>12</td>
-    											<td>发传单</td>
-    											<td>已结束</td>
-    											<td>2017-02-29 22:14:53</td>
-    											<td>时薪</td>
-    											<td>10</td>
-    											<td>
-    											<button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">删除</button></a>
-    											</td>
-    										</tr>
-    										
-    									
-    							
     									
     									</tbody> 
     
@@ -128,8 +81,10 @@
 <!--删除弹窗end-->
 <div class="pop" onclick="closepop()" style="display: none;"></div>
 	<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/job_history.js"></script>
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 			function closepop(){
 				$(".pop").hide();
 				$(".popinto").hide();

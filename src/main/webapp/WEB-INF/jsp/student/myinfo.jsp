@@ -77,15 +77,21 @@
 
 																<div class="col-xs-12 col-sm-8">
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right" for="form-field-username">学校</label>
-
+																		<label class="col-sm-4 control-label no-padding-right" for="form-field-username">用户名</label>
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-10" type="text" id="form-field-username" placeholder="Username" value="西南财经大学天府学院" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="form-field-username" placeholder="不超过10个字符" value="xiongyan1" />
 																		</div>
 																	</div>
 
 																	<div class="space-4"></div>
 
+																	<div class="form-group">
+																		<label class="col-sm-4 control-label no-padding-right" for="form-field-first">真实姓名</label>
+
+																		<div class="col-sm-8">
+																			<input class="col-xs-12 col-sm-6" type="text" id="user_realName" placeholder="不超过10个字符" value="熊艳" />
+																		</div>
+																	</div>
 																	<div class="form-group">
 																		<label class="col-sm-4 control-label no-padding-right" for="form-field-first">院系专业</label>
 
@@ -135,7 +141,7 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">描述信息</label>
+																<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">用户简介</label>
 
 																<div class="col-sm-9">
 																	<textarea id="form-field-comment"></textarea>
@@ -150,7 +156,7 @@
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input type="email" id="form-field-email" value="alexdoe@gmail.com" />
+																		<input type="email" id="form-field-email" value="" />
 																		<i class="icon-envelope"></i>
 																	</span>
 																</div>
@@ -172,44 +178,8 @@
 															</div>
 
 															<div class="space"></div>
-															<h4 class="header blue bolder smaller">社交</h4>
-
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-facebook">Facebook</label>
-
-																<div class="col-sm-9">
-																	<span class="input-icon">
-																		<input type="text" value="facebook_alexdoe" id="form-field-facebook" />
-																		<i class="icon-facebook blue"></i>
-																	</span>
-																</div>
-															</div>
-
 															<div class="space-4"></div>
 
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-twitter">Twitter</label>
-
-																<div class="col-sm-9">
-																	<span class="input-icon">
-																		<input type="text" value="twitter_alexdoe" id="form-field-twitter" />
-																		<i class="icon-twitter light-blue"></i>
-																	</span>
-																</div>
-															</div>
-
-															<div class="space-4"></div>
-
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-gplus">Google+</label>
-
-																<div class="col-sm-9">
-																	<span class="input-icon">
-																		<input type="text" value="google_alexdoe" id="form-field-gplus" />
-																		<i class="icon-google-plus red"></i>
-																	</span>
-																</div>
-															</div>
 														</div>
 
 														
@@ -279,7 +249,7 @@
 
 	<script type="text/javascript">
 			jQuery(function($) {
-			
+
 				///////////////////////////////////////////
 				$('#user-profile-3')
 				.find('input[type=file]').ace_file_input({
@@ -299,12 +269,12 @@
 							if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
 									|| ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )//for android default browser!
 								) return false;
-			
+
 							if( file.size > 110000 ) {//~100Kb
 								return false;
 							}
 						}
-			
+
 						return true;
 					}
 				})
@@ -315,9 +285,9 @@
 					$(this).prev().focus();
 				})
 				$('.input-mask-phone').mask('(999) 999-9999');
-			
-			
-	
+
+
+
 			});
 		</script>
 </body>

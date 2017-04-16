@@ -348,14 +348,15 @@ public class UserController extends BaseController{
         String result = "";
         BaseResult baseResult = null;
         CApplication cApplication = new CApplication();
-        CUser cUser =(CUser) super.getLoginUser ().get ("loginuser");
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
         try{
             CJobs job=companyService.getJobDetails (jobId);
             if(job == null){
                 baseResult=new BaseResult(false,"该兼职不存在");
+                result= JSON.toJSONString(baseResult);
             }else {
                 cApplication.setAppliJobId (jobId);
-                cApplication.setAppliStatus ("0");
+                cApplication.setAppliStatus ("appli_apply");
                 cApplication.setAppliUserId (cUser.getId ());
                 //向数据库中添加申请报名记录
                 int resultCode = cUserService.addJobApplication(cApplication);
@@ -368,18 +369,22 @@ public class UserController extends BaseController{
                         if(resultCode1 > 0){
                             baseResult=new BaseResult(true,"");
                         }else{
-                            baseResult=new BaseResult(false,"修改兼职状态失败");
+                            baseResult=new BaseResult(true,"修改兼职状态失败");
                         }
+                    }else{
+                        baseResult=new BaseResult(true,"");
                     }
                 }else{
-                    baseResult=new BaseResult(false,"申请报名失败，请刷新后重试");
+                    baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
                 }
             }
+            result= JSON.toJSONString(baseResult);
         }catch (Exception e){
             log.error("申请报名兼职异常"+e);
             baseResult=new BaseResult(false,"申请报名兼职异常");
+            result= JSON.toJSONString(baseResult);
         }
-        result= JSON.toJSONString(baseResult);
+        log.info (result);
         return result;
     }
 
@@ -390,9 +395,10 @@ public class UserController extends BaseController{
      */
     @RequestMapping(value = "/getMyAppliSituation", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getMyAppliSituation(@ModelAttribute("currentUser")CUser cUser,@RequestParam(required = false) String  jobStatus) {
+    public String getMyAppliSituation(@RequestParam(required = false) String  jobStatus) {
         String result = "";
         BaseResult baseResult = null;
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
         try{
             List<VOCApplication> vocApplicationList = userService.getMyAppliSituation(cUser.getId (),jobStatus);
             if(vocApplicationList != null && 0 < vocApplicationList.size ()) {
@@ -417,10 +423,11 @@ public class UserController extends BaseController{
      */
     @RequestMapping(value = "/quitJob", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String quitJob(@RequestParam(required = true) Long  applicationId,@ModelAttribute("currentUser")CUser cUser) {
+    public String quitJob(@RequestParam(required = true) Long  applicationId) {
         log.info("--------------------/user/quitJob  called");
         String result = "";
         BaseResult baseResult = null;
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
         try{
             int re=userService.quitJob (applicationId,cUser.getId ());
             if(re > 0){
@@ -435,6 +442,35 @@ public class UserController extends BaseController{
         result= JSON.toJSONString(baseResult);
         return result;
     }
+
+
+    /**
+     *删除兼职记录
+     * @param applicationId
+     * @return
+     */
+    @RequestMapping(value = "/delApplication", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String delApplication(@RequestParam(required = true) Long  applicationId) {
+        log.info("--------------------/user/delApplication  called");
+        String result = "";
+        BaseResult baseResult = null;
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
+        try{
+            int re=userService.delApplication (applicationId,cUser.getId ());
+            if(re > 0){
+                baseResult=new BaseResult(true,"");
+            }else {
+                baseResult=new BaseResult(true,"删除兼职记录失败");
+            }
+        }catch (Exception e){
+            log.error("删除兼职记录异常"+e);
+            baseResult=new BaseResult(false,"删除兼职记录异常");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
 
     /**
      *修改用户信息
@@ -482,6 +518,8 @@ public class UserController extends BaseController{
         result= JSON.toJSONString(baseResult);
         return result;
     }
+
+
 
     /**
      *修改用户密码

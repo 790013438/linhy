@@ -54,33 +54,20 @@ var queryJobList = function() {
 }
 
 //报名指定兼职
-var getJobDetails = function(id) {
+var applicationJob = function(id) {
     $.ajax({
-        url:"../user/getJobList",
+        url:"../user/applicationJob",
         type : 'post',
         data : data={jobId:id},
         dataType : 'json',
         success:function(result){
+            console.log(result);
             if (result.success == true) {
                 if (result.error != "") {
                     alert(result.error);
-                    $("#job_list tbody").empty();
                     return;
-                }
-                if (result.data.data!=null){
-                    console.log(result.data);
-                    $("#job_list tbody").empty();
-                    $.each(result.data.data, function (index, obj) {
-                        var tr = appendJobNode(obj);
-                        $("#job_list tbody").append(tr);
-                        appendTabTitleById("job_list");
-                    });
-                    $(document).ready(function(){
-                        $('#job_list').DataTable();
-                    });
-                } else{
-                    $("#job_list tbody").empty();
-                    var txt = "没有查询到符合条件的信息";
+                }else{
+                    var txt = "申请报名成功";
                     alert(txt);
                     return;
                 }
@@ -92,12 +79,13 @@ var getJobDetails = function(id) {
             }
         },
         error : function(obj, msg) {
-            //还得先清空所有行
-            $("#job_list tbody").empty();
-            var txt = "没有查询到符合条件的信息";
+            var txt = "报名兼职失败";
             alert(txt);
             return;
         },
+        complete: function () {
+            queryJobList();
+        }
     });
 }
 
@@ -155,7 +143,7 @@ var appendJobNode = function(obj) {
 		"<td>"+
 		"<a  href =\"../student/jobInfo?jobId="+obj.id+"\" >查看兼职详情</a> |";
 	    if(obj.flag== 0){
-            var job_str1 = job_str +"<button type=\"button\" onclick=\"getJobDetails('"+obj.id+"')\" class='btn btn-link'>申请报名</button>";
+            var job_str1 = job_str +"<button type=\"button\" onclick=\"applicationJob('"+obj.id+"')\" class='btn btn-link'>申请报名</button>";
         }else{
             var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>已报名</button>";
            // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已报名</a>";

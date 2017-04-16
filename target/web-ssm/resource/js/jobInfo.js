@@ -1,16 +1,19 @@
 
+var contextPath = window.location.href;
+var arrHref = contextPath.split("jobId=");
+var jobId = arrHref[1];
+// $("#jobId").val(jobId);
+var condition = {
+    jobId:jobId,
+};
 $(function(){
-    var contextPath = window.location.href;
-    var arrHref = contextPath.split("jobId=");
-    var jobId = arrHref[1];
-    // $("#jobId").val(jobId);
-    var condition = {
-        jobId:jobId,
-    };
     getJobInfoByID(condition);
+    $("#btn_appli").click(function () {
+        appliJobById(condition);
+    });
 });
 
-//查询兼职列表
+//查询兼职详情
 var getJobInfoByID = function(condition) {
 	$.ajax({
 		url:"../admin/getJobDetails",
@@ -28,6 +31,15 @@ var getJobInfoByID = function(condition) {
                     $("#ul_jobDetail").empty();
                     //填充信息
                     var detail_str = initJobDetailForm(result.data);
+                    console.log(result.data);
+                    if(result.data.flag == 0){
+                        document.getElementById("btn_appli").value="报名兼职";
+                    }else{
+                        document.getElementById("btn_appli").value="已报名";
+                        console.log(result.data);
+                        $("#btn_appli").attr("disabled", true);
+                    }
+                    $("#jobId").val(result.data.id);
                     $("#ul_jobDetail").append(detail_str);
 				} else{
                     $("#ul_jobDetail").empty();
@@ -50,6 +62,43 @@ var getJobInfoByID = function(condition) {
 			return;
 		},
 	});
+}
+
+
+//报名指定兼职
+var appliJobById = function(data) {
+    $.ajax({
+        url:"../user/applicationJob",
+        type : 'post',
+        data :data,
+        dataType : 'json',
+        success:function(result){
+            console.log(result);
+            if (result.success == true) {
+                if (result.error != "") {
+                    alert(result.error);
+                    return;
+                }else{
+                    var txt = "申请报名成功";
+                    alert(txt);
+                    return;
+                }
+            } else {
+                //还得先清空所有行
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        },
+        error : function(obj, msg) {
+            var txt = "报名兼职失败";
+            alert(txt);
+            return;
+        },
+        complete: function () {
+            getJobInfoByID(condition);
+        }
+    });
 }
 
 

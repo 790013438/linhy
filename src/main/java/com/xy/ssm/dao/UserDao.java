@@ -23,5 +23,6 @@ public interface UserDao {
     int getUserCommentCount(@Param("userId") Long userId);
     List<VOCApplication> getMyAppliSituation(@Param("userId") Long userId,@Param("jobStatus") String jobStatus);
     int quitJob(@Param("applicationId") Long applicationId,@Param("userId") Long userId);
+    int delApplication(@Param("applicationId") Long applicationId,@Param("userId") Long userId);
     int updateUserPassword(@Param("newPw") String newPw,@Param("userId") Long userId);
 }

@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
     {
         return userDao.updateUserPassword(newPw,userId);
     }
+
+    public int delApplication (Long applicationId, Long userId)
+    {
+        return userDao.delApplication(applicationId,userId);
+    }
 }

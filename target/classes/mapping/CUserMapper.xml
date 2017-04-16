@@ -35,7 +35,7 @@
         create_time as createTime,validateCode as validateCode from c_users where id = #{id}
     </select>
 
-    <insert id="addJobApplication" parameterType="int">
+    <insert id="addJobApplication" parameterType="com.xy.ssm.model.CApplication">
         insert into c_application(appli_user_id,appli_job_id,appli_status,create_time)
         values(#{appliUserId},#{appliJobId},#{appliStatus},#{createTime})
     </insert>

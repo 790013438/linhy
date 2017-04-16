@@ -24,6 +24,10 @@ public class CUser implements Serializable {
     private String userRealName;
     //用户兼职意向---如发传单等。
     private String userIntention;
+    //用户专业
+    private String user_major;
+    //用户院系
+    private String user_departments;
     //用户简介
     private String userProfile;
     //用户类型
@@ -41,6 +45,8 @@ public class CUser implements Serializable {
 
     //用户密码
     private String userPassword;
+    //出生日期
+    private Date birthdate;
     //创建时间
     private Date createTime;
 
@@ -150,4 +156,38 @@ public class CUser implements Serializable {
         this.createTime = createTime;
     }
 
+    public static long getSerialVersionUID ()
+    {
+        return serialVersionUID;
+    }
+
+    public String getUser_major ()
+    {
+        return user_major;
+    }
+
+    public void setUser_major (String user_major)
+    {
+        this.user_major = user_major;
+    }
+
+    public String getUser_departments ()
+    {
+        return user_departments;
+    }
+
+    public void setUser_departments (String user_departments)
+    {
+        this.user_departments = user_departments;
+    }
+
+    public Date getBirthdate ()
+    {
+        return birthdate;
+    }
+
+    public void setBirthdate (Date birthdate)
+    {
+        this.birthdate = birthdate;
+    }
 }

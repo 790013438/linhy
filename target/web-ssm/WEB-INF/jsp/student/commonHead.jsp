@@ -32,6 +32,8 @@
 <link rel="stylesheet" href="${resource}/resource/css/ace-skins.min.css" />
 <!--[if lte IE 8]>
 <link rel="stylesheet" href="${resource}/resource/css/ace-ie.min.css" />
+<link rel="stylesheet" href="${resource}/resource/css/public.css" />
+
 <![endif]-->
 <!-- inline styles related to this page -->
 <!-- ace settings handler -->

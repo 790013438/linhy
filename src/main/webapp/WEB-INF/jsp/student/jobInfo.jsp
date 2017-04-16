@@ -7,7 +7,6 @@
 	<head>
 		<%@include file="commonHead.jsp"%>
 	</head>
-
 	<body>
 	<%@include file="commonLeft.jsp"%>
 
@@ -55,7 +54,8 @@
 
 														<div class="widget-toolbar">
 															<label>
-																<button class="btn btn-xs btn-link" onclick="window.location='jz_fbjz.jsp'">报名兼职</button>
+																<button class="btn btn-xs btn-link" id="btn_appli"></button>
+																<input value="" id="jobId" type="hidden"></li>
 															</label>
 														</div>
 													</div>

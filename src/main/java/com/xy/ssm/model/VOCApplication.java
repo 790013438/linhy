@@ -16,7 +16,7 @@ public class VOCApplication implements Serializable {
     //兼职id
     private Long appliJobId;
     //报名状态
-    private int appliStatus;
+    private String appliStatus;
     //发布兼职企业名称
     private String jobCompanyName;
     //兼职名称
@@ -28,7 +28,7 @@ public class VOCApplication implements Serializable {
     //性别要求
     private String jobRequiresGender ;
     //薪资类型
-    private int jobSalaryType;
+    private String jobSalaryType;
     //每日工作时长
     private String jobHours  ;
     //薪资金额
@@ -40,11 +40,13 @@ public class VOCApplication implements Serializable {
     //联系电话
     private String jobContactPhone;
     //兼职状态
-    private int jobStatus ;
+    private String jobStatus ;
     //备注
     private String jobRemarks;
     //报名截止时间
     private Date jobDeadline;
+    //兼职时间
+    private Date jobTime;
     //创建时间
     private Date createTime;
 
@@ -83,12 +85,12 @@ public class VOCApplication implements Serializable {
         this.appliJobId = appliJobId;
     }
 
-    public int getAppliStatus ()
+    public String getAppliStatus ()
     {
         return appliStatus;
     }
 
-    public void setAppliStatus (int appliStatus)
+    public void setAppliStatus (String appliStatus)
     {
         this.appliStatus = appliStatus;
     }
@@ -143,12 +145,12 @@ public class VOCApplication implements Serializable {
         this.jobRequiresGender = jobRequiresGender;
     }
 
-    public int getJobSalaryType ()
+    public String getJobSalaryType ()
     {
         return jobSalaryType;
     }
 
-    public void setJobSalaryType (int jobSalaryType)
+    public void setJobSalaryType (String jobSalaryType)
     {
         this.jobSalaryType = jobSalaryType;
     }
@@ -203,12 +205,12 @@ public class VOCApplication implements Serializable {
         this.jobContactPhone = jobContactPhone;
     }
 
-    public int getJobStatus ()
+    public String getJobStatus ()
     {
         return jobStatus;
     }
 
-    public void setJobStatus (int jobStatus)
+    public void setJobStatus (String jobStatus)
     {
         this.jobStatus = jobStatus;
     }
@@ -241,5 +243,15 @@ public class VOCApplication implements Serializable {
     public void setCreateTime (Date createTime)
     {
         this.createTime = createTime;
+    }
+
+    public Date getJobTime ()
+    {
+        return jobTime;
+    }
+
+    public void setJobTime (Date jobTime)
+    {
+        this.jobTime = jobTime;
     }
 }

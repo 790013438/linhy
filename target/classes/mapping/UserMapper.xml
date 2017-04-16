@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xy.ssm.dao.CUserDao">
+<mapper namespace="com.xy.ssm.dao.UserDao">
 
     <select id="selectAllUser" resultType="com.xy.ssm.model.CUser">
         select id,user_name as userName,user_phone as userPhone,user_email as userEmail,
@@ -34,20 +34,32 @@
     </select>
 
     <select id="getMyAppliSituation" resultType="com.xy.ssm.model.VOCApplication">
-         select a.id,a.appli_user_id as appliUserId,a.appli_job_id as appliJobId,a.appli_status as appliStatus,a.create_time as createTime,
-        j.job_company_id as jobCompanyId,j.job_title as jobTitle,j.job_type as jobType,
+         select a.id,a.appli_user_id as appliUserId,a.appli_job_id as appliJobId,a.create_time as createTime,
+        j.job_company_id as jobCompanyId,j.job_title as jobTitle,j.job_type as jobType,j.job_time as jobTime,
         j.job_demand_number as jobDemandNumber,j.job_requires_gender as jobRequiresGender,j.job_salary_type as jobSalaryType,j.job_hours as jobHours ,
         j.job_salary as jobSalary,j.job_address as jobAddress , j.job_introduction as jobIntroduction,j.job_contact_phone as jobContactPhone,j.job_status as jobStatus,j.job_remarks as jobRemarks,
-        j.job_deadline as jobDeadline,c.comp_name as jobCompanyName
+        j.job_deadline as jobDeadline,c.comp_name as jobCompanyName,s.static_value as appliStatus
         from c_jobs as j
         INNER JOIN c_application as a on j.id = a.appli_job_id
         INNER JOIN c_company as c on j.job_company_id = c.id
-        WHERE  appli_user_id = #{userId} and appli_status = #{jobStatus}
+        INNER JOIN c_static as s on s.static_code=a.appli_status
+        WHERE  a.appli_user_id = #{userId}
+        <if test=" '5'== jobStatus">
+        and j.job_status = #{jobStatus}
+          and  user_sign = 1
+        </if>
+        <if test=" '3' == jobStatus">
+            and j.job_status == '3' or j.job_status == '4'
+        </if>
     </select>
 
     <delete id="quitJob">
         DELETE FROM c_application WHERE id = #{applicationId} and appli_user_id = #{userId}
     </delete>
+
+    <update id="delApplication">
+        update  c_application set user_sign = 0 where  appli_user_id = #{userId} and id = #{applicationId}
+    </update>
 
     <update id="updateUserPassword">
         update c_users set user_password =#{newPw} where id = #{userId}

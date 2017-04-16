@@ -114,14 +114,14 @@
 
                     <ul class="submenu">
                         <li>
-                            <a href="person_myjz.jsp">
+                            <a href="../student/myJob">
                                 <i class="icon-double-angle-right"></i>
                                 查看兼职报名情况
                             </a>
                         </li>
 
                         <li>
-                            <a href="person_history.jsp">
+                            <a href="../student/jobHistory">
                                 <i class="icon-double-angle-right"></i>
                                 我的兼职历史
                             </a>
@@ -130,14 +130,14 @@
                 </li>
 
                 <li>
-                    <a href="person_myinfo.jsp">
+                    <a href="../student/myinfo">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的信息 </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="person_message.jsp">
+                    <a href="../student/myMessage">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的消息 </span>
                     </a>
