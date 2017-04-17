@@ -49,14 +49,14 @@
 											<form class="form-horizontal">
 												<div class="tabbable">
 													<ul class="nav nav-tabs padding-16">
-														<li class="active">
+														<li class="active" id="li_basic">
 															<a data-toggle="tab" href="#edit-basic">
 																<i class="green icon-edit bigger-125"></i>
 																基础信息
 															</a>
 														</li>
 
-														<li>
+														<li id="li_password">
 															<a data-toggle="tab" href="#edit-password">
 																<i class="blue icon-key bigger-125"></i>
 																密码修改
@@ -77,27 +77,27 @@
 
 																<div class="col-xs-12 col-sm-8">
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right" for="form-field-username">用户名</label>
+																		<label class="col-sm-4 control-label no-padding-right" >用户名</label>
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-6" type="text" id="form-field-username" placeholder="不超过10个字符" value="xiongyan1" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="input_userName" placeholder="不超过10个字符" value="" />
 																		</div>
 																	</div>
 
 																	<div class="space-4"></div>
 
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right" for="form-field-first">真实姓名</label>
+																		<label class="col-sm-4 control-label no-padding-right">真实姓名</label>
 
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-6" type="text" id="user_realName" placeholder="不超过10个字符" value="熊艳" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="input_realName" placeholder="不超过10个字符" value="" />
 																		</div>
 																	</div>
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right" for="form-field-first">院系专业</label>
+																		<label class="col-sm-4 control-label no-padding-right">院系专业</label>
 
 																		<div class="col-sm-8">
-																			<input class="input-small" type="text" id="form-field-first" placeholder="First Name" value="工商" />
-																			<input class="input-small" type="text" id="form-field-last" placeholder="Last Name" value="会计" />
+																			<input class="input-small" type="text" id="input_department" placeholder="First Name" value="" />
+																			<input class="input-small" type="text" id="input_major" placeholder="Last Name" value="" />
 																		</div>
 																	</div>
 																</div>
@@ -126,13 +126,13 @@
 
 																<div class="col-sm-9">
 																	<label class="inline">
-																		<input name="form-field-radio" type="radio" class="ace" />
+																		<input name="form-field-radio" type="radio" class="ace" value="1 "/>
 																		<span class="lbl"> 男</span>
 																	</label>
 
 																	&nbsp; &nbsp; &nbsp;
 																	<label class="inline">
-																		<input name="form-field-radio" type="radio" class="ace" />
+																		<input name="form-field-radio" type="radio" class="ace" value="2" />
 																		<span class="lbl"> 女</span>
 																	</label>
 																</div>
@@ -141,10 +141,10 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">用户简介</label>
+																<label class="col-sm-3 control-label no-padding-right">用户简介</label>
 
 																<div class="col-sm-9">
-																	<textarea id="form-field-comment"></textarea>
+																	<textarea id="input_profile"></textarea>
 																</div>
 															</div>
 
@@ -152,11 +152,11 @@
 															<h4 class="header blue bolder smaller">联系方式</h4>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-email">邮箱</label>
+																<label class="col-sm-3 control-label no-padding-right">邮箱</label>
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input type="email" id="form-field-email" value="" />
+																		<input type="email" id="input_email" value="" />
 																		<i class="icon-envelope"></i>
 																	</span>
 																</div>
@@ -167,11 +167,11 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-phone">手机号</label>
+																<label class="col-sm-3 control-label no-padding-right">手机号</label>
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input class="input-medium input-mask-phone" type="text" id="form-field-phone" />
+																		<input class="input-medium input-mask-phone" type="text" id="input_phone" />
 																		<i class="icon-phone icon-flip-horizontal"></i>
 																	</span>
 																</div>
@@ -186,28 +186,28 @@
 														<div id="edit-password" class="tab-pane">
 															<div class="space-10"></div>
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">旧密码</label>
+																<label class="col-sm-3 control-label no-padding-right" >旧密码</label>
 
 																<div class="col-sm-9">
-																	<input type="password" id="form-field-pass1" />
+																	<input type="password" id="form-field-oldPass" />
 																</div>
 															</div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">新密码</label>
+																<label class="col-sm-3 control-label no-padding-right" id="label_pass" style="color:#646464">新密码</label>
 
 																<div class="col-sm-9">
-																	<input type="password" id="form-field-pass2" />
+																	<input type="password" id="form-field-newPass" />
 																</div>
 															</div>
 
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">密码重复</label>
+																<label class="col-sm-3 control-label no-padding-right">确认密码</label>
 
 																<div class="col-sm-9">
-																	<input type="password" id="form-field-pass3" />
+																	<input type="password" onchange="checkPassword()" id="form-field-rePass" />
 																</div>
 															</div>
 														</div>
@@ -215,16 +215,11 @@
 												</div>
 
 												<div class="clearfix form-actions">
+														&nbsp; &nbsp;
 													<div class="col-md-offset-3 col-md-9">
-														<button class="btn btn-info" type="button">
+														<button class="btn btn-info" type="button" id="btn_save">
 															<i class="icon-ok bigger-110"></i>
 															Save
-														</button>
-
-														&nbsp; &nbsp;
-														<button class="btn" type="reset">
-															<i class="icon-undo bigger-110"></i>
-															Reset
 														</button>
 													</div>
 												</div>
@@ -245,50 +240,9 @@
 		</div><!-- /.main-container -->
 
 	<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/myInfo.js"></script>
+	<script src="${resource}/resource/js/check.js"></script>
+	</body>
 
 
-	<script type="text/javascript">
-			jQuery(function($) {
-
-				///////////////////////////////////////////
-				$('#user-profile-3')
-				.find('input[type=file]').ace_file_input({
-					style:'well',
-					btn_choose:'Change avatar',
-					btn_change:null,
-					no_icon:'icon-picture',
-					thumbnail:'large',
-					droppable:true,
-					before_change: function(files, dropped) {
-						var file = files[0];
-						if(typeof file === "string") {//files is just a file name here (in browsers that don't support FileReader API)
-							if(! (/\.(jpe?g|png|gif)$/i).test(file) ) return false;
-						}
-						else {//file is a File object
-							var type = $.trim(file.type);
-							if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
-									|| ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )//for android default browser!
-								) return false;
-
-							if( file.size > 110000 ) {//~100Kb
-								return false;
-							}
-						}
-
-						return true;
-					}
-				})
-				.end().find('button[type=reset]').on(ace.click_event, function(){
-					$('#user-profile-3 input[type=file]').ace_file_input('reset_input');
-				})
-				.end().find('.date-picker').datepicker().next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				})
-				$('.input-mask-phone').mask('(999) 999-9999');
-
-
-
-			});
-		</script>
-</body>
 </html>

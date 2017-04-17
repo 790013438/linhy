@@ -44,12 +44,11 @@
         INNER JOIN c_company as c on j.job_company_id = c.id
         INNER JOIN c_static as s on s.static_code=a.appli_status
         WHERE  a.appli_user_id = #{userId}
-        <if test=" '5'== jobStatus">
-        and j.job_status = #{jobStatus}
-          and  user_sign = 1
+        <if test="5== jobStatus">
+        and j.job_status = #{jobStatus} and  user_sign = 1
         </if>
-        <if test=" '3' == jobStatus">
-            and j.job_status == '3' or j.job_status == '4'
+        <if test="3 == jobStatus">
+            and (j.job_status = 3 or j.job_status = 4)
         </if>
     </select>
 

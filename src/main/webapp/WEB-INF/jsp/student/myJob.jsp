@@ -27,7 +27,7 @@
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='person_index.jsp'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">兼职中心</button>
 						</div>
 					</div>
 
@@ -70,6 +70,15 @@
 				<i class="icon-double-angle-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
+	<div class="popinto" id="delPop">
+		<div class="font16 center deletediv">真的要退出该兼职吗？</div>
+		<div class="deletediv_btn">
+			<p class="pull-left"><button type="button" class="btn btn-primary" id="btnQuitAppli">确定</button></p>
+			<p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
+			<input hidden="hidden" id="input_applId"/>
+		</div>
+	</div>
+	<div class="pop" onclick="closepop()" style="display: none;"></div>
 	<%@include file="commonFoot.jsp"%>
 	<script src="${resource}/resource/js/moment.js"></script>
 	<script src="${resource}/resource/js/myJob.js"></script>
@@ -79,7 +88,8 @@
 				$(".popinto").hide();
 			}
 			jQuery(function($) {
-				$(".del").click(function(){
+			    closepop();
+                $(".quit").on('click',function(){
 					$(".pop").show();
 				$(".popinto").show();
 				})
@@ -88,7 +98,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
+					bootbox.confirm("你确定要退出该兼职吗？", function(result) {
 						if(result) {
 							//
 						}

@@ -479,10 +479,12 @@ public class UserController extends BaseController{
      */
     @RequestMapping(value = "/updateUserInfo", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String updateUserInfo(@RequestParam(required = true) CUser  cUser) {
+    public String updateUserInfo(CUser  cUser) {
         log.info("--------------------/user/updateUserInfo  called");
         String result = "";
         BaseResult baseResult = null;
+        CUser cUser1 =(CUser)getLoginUser ().get ("loginuser");
+        cUser.setId (cUser1.getId ());
         try{
             List<CUser> cUsers = cUserService.checkName (cUser.getUserName ());
             List<CUser> cUsers1 = cUserService.checkPhone (cUser.getUserPhone ());
@@ -528,12 +530,12 @@ public class UserController extends BaseController{
      */
     @RequestMapping(value = "/updateUserPassword", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String updateUserPassword(@ModelAttribute("currentUser")CUser cUser,
-                                 @RequestParam(required = true)String oldPassword,
+    public String updateUserPassword(@RequestParam(required = true)String oldPassword,
                                  @RequestParam(required = true)String newPassword) {
         log.info("--------------------/user/updateUserPassword  called");
         String result = "";
         BaseResult baseResult = null;
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
         try{
             String oldPw = MD5Util.encode2hex(oldPassword);
             String newPw = MD5Util.encode2hex(newPassword);
@@ -553,6 +555,34 @@ public class UserController extends BaseController{
             baseResult=new BaseResult(false,"修改密码异常");
         }
         result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
+    /**
+     * 查询个人信息
+     */
+    @RequestMapping("/queryUserInf")
+    public @ResponseBody String queryUserInf() {
+        String result = "";
+        BaseResult baseResult = null;
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
+        try {
+            CUser user1 = cUserService.getUserById(cUser.getId ());
+            if (user1 != null) {
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(user1);
+            } else {
+                baseResult = new BaseResult(true, "该用户不存在");
+            }
+            result= JSON.toJSONString(baseResult);
+        }
+        catch(Exception e)
+        {
+            log.error("获取用户信息异常",e);
+            baseResult = new BaseResult(false, "获取用户信息异常");
+            result= JSON.toJSONString(baseResult);
+        }
+        log.info (result);
         return result;
     }
 }

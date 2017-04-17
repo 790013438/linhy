@@ -182,4 +182,25 @@ public class CApplication implements Serializable {
     {
         this.userSign = userSign;
     }
+
+    @Override
+    public String toString ()
+    {
+        return "CApplication{" +
+                "id=" + id +
+                ", appliUserId=" + appliUserId +
+                ", appliJobId=" + appliJobId +
+                ", userSign=" + userSign +
+                ", appliStatus='" + appliStatus + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userIcon='" + userIcon + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userGender='" + userGender + '\'' +
+                ", userRealName='" + userRealName + '\'' +
+                ", userIntention='" + userIntention + '\'' +
+                ", userProfile='" + userProfile + '\'' +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

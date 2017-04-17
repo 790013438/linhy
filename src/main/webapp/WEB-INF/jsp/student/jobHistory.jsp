@@ -26,7 +26,7 @@
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='person_index.jsp'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">兼职中心</button>
 						</div>
 					</div>
 
@@ -72,10 +72,9 @@
 <div class="popinto" id="doUpdate">
     <div class="font16 center deletediv">真的要删除该兼职吗？</div>
     <div class="deletediv_btn">
-        <p class="pull-left"><button type="button" class="btn btn-primary" id="btnDoUpdate">确定</button></p>
+        <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_delApplication">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
-        <input hidden="hidden" id="doId"/>
-        <input hidden="hidden" id="doStatus"/>
+        <input hidden="hidden" id="input_applId"/>
     </div>
 </div>
 <!--删除弹窗end-->
@@ -90,6 +89,7 @@
 				$(".popinto").hide();
 			}
 			jQuery(function($) {
+			    closepop();
 				$(".del").click(function(){
 					$(".pop").show();
 				$(".popinto").show();

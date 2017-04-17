@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xy.ssm.dao.CUserDao">
-    <select id="checkName" parameterType="com.xy.ssm.model.CUser">
-        select id,user_name,user_phone,user_email from c_users
+    <select id="checkName" resultType="com.xy.ssm.model.CUser">
+        select id,user_name as userName,user_phone as userPhone,user_email as userEmail from c_users
         where user_name = #{username}
     </select>
 
-    <select id="checkMail" parameterType="com.xy.ssm.model.CUser">
+    <select id="checkMail" resultType="com.xy.ssm.model.CUser">
         select id,user_name,user_phone,user_email from c_users
         where user_email = #{email}
     </select>
 
-    <select id="checkPhone" parameterType="com.xy.ssm.model.CUser">
+    <select id="checkPhone" resultType="com.xy.ssm.model.CUser">
         select id,user_name,user_phone,user_email from c_users
         where user_phone = #{phone}
     </select>
@@ -29,7 +29,7 @@
     </select>
 
     <select id="getUserById" resultType="com.xy.ssm.model.CUser">
-        select id,user_name as userName,user_phone as userPhone,user_email as userEmail,
+        select id,user_name as userName,user_phone as userPhone,user_email as userEmail,user_major as userMajor ,user_departments as userDepartments,
         user_icon as userIcon,user_gender as userGender,user_realname as userRealName,user_intention_job as userIntention ,
         user_profile as userProfile,user_type as userType , user_status as userStatus,user_password as userPassword,
         create_time as createTime,validateCode as validateCode from c_users where id = #{id}
@@ -54,8 +54,9 @@
     </select>
     <update id="updateUser" parameterType="com.xy.ssm.model.CUser">
         update c_users
-        SET accept_status=#{acceptStatus},status=#{status},finish_time=#{finishTime}
-        WHERE ord_id=#{ordId}
+        SET user_name=#{userName},user_realname=#{userRealName},user_departments=#{userDepartments},user_major=#{userMajor},
+        user_gender=#{userGender},user_profile=#{userProfile},user_phone=#{userPhone},user_email=#{userEmail}
+        WHERE id=#{id}
     </update>
     <select id="getAppliByTwoId" resultType="com.xy.ssm.model.CApplication">
         SELECT id,appli_user_id as appliUserId,appli_job_id as appliJobId,appli_status as appliStatus,create_time as createTime

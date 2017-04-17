@@ -26,7 +26,7 @@
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='person_index.jsp'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">兼职中心</button>
 						</div>
 					</div>
 
@@ -75,7 +75,7 @@
 			</a>
 		</div><!-- /.main-container -->
 
-<!--删除弹窗start-->
+		<!--删除弹窗start-->
 <div class="popinto" id="delPop">
     <div class="font16 center deletediv">真的要删除该消息吗？</div>
     <div class="deletediv_btn">
@@ -107,12 +107,12 @@
 		<%@include file="commonFoot.jsp"%>
 
 		<script type="text/javascript">
-
 		function closepop(){
 				$(".pop").hide();
 				$(".popinto").hide();
 			}
 			jQuery(function($) {
+			    closepop();
 				$(".del").click(function(){
 					$(".pop").show();
 					$("#delPop").show();
@@ -133,38 +133,6 @@
 						}
 					});
 				});
-				// var oTable1 = $('#sample-table-2').dataTable( {
-				// "aoColumns": [
-			 //      { "bSortable": false },
-			 //      null, null,null, null, null,
-				//   { "bSortable": false }
-				// ] } );
-				
-				
-				// $('table th input:checkbox').on('click' , function(){
-				// 	var that = this;
-				// 	$(this).closest('table').find('tr > td:first-child input:checkbox')
-				// 	.each(function(){
-				// 		this.checked = that.checked;
-				// 		$(this).closest('tr').toggleClass('selected');
-				// 	});
-						
-				// });
-			
-			
-				// $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				// function tooltip_placement(context, source) {
-				// 	var $source = $(source);
-				// 	var $parent = $source.closest('table')
-				// 	var off1 = $parent.offset();
-				// 	var w1 = $parent.width();
-			
-				// 	var off2 = $source.offset();
-				// 	var w2 = $source.width();
-			
-				// 	if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-				// 	return 'left';
-				// }
 			})
 		</script>
 </body>

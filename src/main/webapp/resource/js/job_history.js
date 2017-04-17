@@ -1,29 +1,18 @@
+var condition = {
+    jobStatus:"5",
+};
 $(function(){
-    var condition = {
-        jobStatus:"5",
-    };
+
     queryMyAppliJobs(condition);
-    // //弹出删除兼职记录s
-    // $(".btn_delApplication").click(function () {
-    //     $("#popTips_delAppli").show();
-    // });
-    // //确认是否退删除兼职记录
-    // $("#btn_ifDelAppli").click(function () {
-    //     var appliId = $(this).nextAll("input[name='application_id']").val();
-    //     var data = {
-    //         applicationId:appliId
-    //     };
-    //     delJobById(data);
-    // });
+
     $("#btn_delApplication").click(function () {
-        console.log("2222");
-            var appliId = $(this).nextAll("input[name='application_id']").val();
+            var appliId = $("#input_applId").val();
             var data = {
                 applicationId:appliId
             };
+        closepop();
         delApplicationById(data);
     });
-
 });
 
 //查询兼职历史
@@ -104,7 +93,7 @@ var delApplicationById = function(data) {
             return;
         },
         complete: function () {
-            getJobInfoByID(condition);
+            queryMyAppliJobs(condition);
         }
     });
 }
@@ -163,9 +152,15 @@ var appendJobNode = function(obj) {
             "<td> "+obj.jobSalary+"</td>"+
             "<td>"+
             "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看兼职详情</a> |"+
-            "<button type=\"button\" class='btn btn-link' id='btn_delApplication'>删除</button>";
+            "<button type=\"button\" class='btn btn-link' onclick=\"delAppli('"+obj.id+"')\" >删除</button>";
     "<input type=\"hidden\" name=\"application_id\" value=\""+obj.id+"\">"+
     "</td>"+
     "</tr>";
     return job_str;
+}
+function delAppli(data)
+{
+    $("#input_applId").val(data);
+    $(".pop").show();
+    $(".popinto").show();
 }

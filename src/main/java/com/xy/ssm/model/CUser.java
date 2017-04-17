@@ -25,9 +25,9 @@ public class CUser implements Serializable {
     //用户兼职意向---如发传单等。
     private String userIntention;
     //用户专业
-    private String user_major;
+    private String userMajor;
     //用户院系
-    private String user_departments;
+    private String userDepartments;
     //用户简介
     private String userProfile;
     //用户类型
@@ -52,133 +52,149 @@ public class CUser implements Serializable {
 
     private String validateCode;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
-
-    public String getUserIcon() {
-        return userIcon;
-    }
-
-    public void setUserIcon(String userIcon) {
-        this.userIcon = userIcon;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserGender() {
-        return userGender;
-    }
-
-    public void setUserGender(String userGender) {
-        this.userGender = userGender;
-    }
-
-    public String getUserRealName() {
-        return userRealName;
-    }
-
-    public void setUserRealName(String userRealName) {
-        this.userRealName = userRealName;
-    }
-
-    public String getUserIntention() {
-        return userIntention;
-    }
-
-    public void setUserIntention(String userIntention) {
-        this.userIntention = userIntention;
-    }
-
-    public String getUserProfile() {
-        return userProfile;
-    }
-
-    public void setUserProfile(String userProfile) {
-        this.userProfile = userProfile;
-    }
-
-    public Integer getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Integer userType) {
-        this.userType = userType;
-    }
-
-    public Integer getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(Integer userStatus) {
-        this.userStatus = userStatus;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
     public static long getSerialVersionUID ()
     {
         return serialVersionUID;
     }
 
-    public String getUser_major ()
+    public Long getId ()
     {
-        return user_major;
+        return id;
     }
 
-    public void setUser_major (String user_major)
+    public void setId (Long id)
     {
-        this.user_major = user_major;
+        this.id = id;
     }
 
-    public String getUser_departments ()
+    public String getUserName ()
     {
-        return user_departments;
+        return userName;
     }
 
-    public void setUser_departments (String user_departments)
+    public void setUserName (String userName)
     {
-        this.user_departments = user_departments;
+        this.userName = userName;
+    }
+
+    public String getUserPhone ()
+    {
+        return userPhone;
+    }
+
+    public void setUserPhone (String userPhone)
+    {
+        this.userPhone = userPhone;
+    }
+
+    public String getUserIcon ()
+    {
+        return userIcon;
+    }
+
+    public void setUserIcon (String userIcon)
+    {
+        this.userIcon = userIcon;
+    }
+
+    public String getUserEmail ()
+    {
+        return userEmail;
+    }
+
+    public void setUserEmail (String userEmail)
+    {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserGender ()
+    {
+        return userGender;
+    }
+
+    public void setUserGender (String userGender)
+    {
+        this.userGender = userGender;
+    }
+
+    public String getUserRealName ()
+    {
+        return userRealName;
+    }
+
+    public void setUserRealName (String userRealName)
+    {
+        this.userRealName = userRealName;
+    }
+
+    public String getUserIntention ()
+    {
+        return userIntention;
+    }
+
+    public void setUserIntention (String userIntention)
+    {
+        this.userIntention = userIntention;
+    }
+
+    public String getUserMajor ()
+    {
+        return userMajor;
+    }
+
+    public void setUserMajor (String userMajor)
+    {
+        this.userMajor = userMajor;
+    }
+
+    public String getUserDepartments ()
+    {
+        return userDepartments;
+    }
+
+    public void setUserDepartments (String userDepartments)
+    {
+        this.userDepartments = userDepartments;
+    }
+
+    public String getUserProfile ()
+    {
+        return userProfile;
+    }
+
+    public void setUserProfile (String userProfile)
+    {
+        this.userProfile = userProfile;
+    }
+
+    public Integer getUserType ()
+    {
+        return userType;
+    }
+
+    public void setUserType (Integer userType)
+    {
+        this.userType = userType;
+    }
+
+    public Integer getUserStatus ()
+    {
+        return userStatus;
+    }
+
+    public void setUserStatus (Integer userStatus)
+    {
+        this.userStatus = userStatus;
+    }
+
+    public String getUserPassword ()
+    {
+        return userPassword;
+    }
+
+    public void setUserPassword (String userPassword)
+    {
+        this.userPassword = userPassword;
     }
 
     public Date getBirthdate ()
@@ -189,5 +205,39 @@ public class CUser implements Serializable {
     public void setBirthdate (Date birthdate)
     {
         this.birthdate = birthdate;
+    }
+
+    public Date getCreateTime ()
+    {
+        return createTime;
+    }
+
+    public void setCreateTime (Date createTime)
+    {
+        this.createTime = createTime;
+    }
+
+    @Override
+    public String toString ()
+    {
+        return "CUser{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userIcon='" + userIcon + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userGender='" + userGender + '\'' +
+                ", userRealName='" + userRealName + '\'' +
+                ", userIntention='" + userIntention + '\'' +
+                ", userMajor='" + userMajor + '\'' +
+                ", userDepartments='" + userDepartments + '\'' +
+                ", userProfile='" + userProfile + '\'' +
+                ", userType=" + userType +
+                ", userStatus=" + userStatus +
+                ", userPassword='" + userPassword + '\'' +
+                ", birthdate=" + birthdate +
+                ", createTime=" + createTime +
+                ", validateCode='" + validateCode + '\'' +
+                '}';
     }
 }
