@@ -17,7 +17,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="jz_index.jsp">首页</a>
+								<a href="index.jsp">首页</a>
 							</li>
 
 							<li class="active">兼职详情</li>

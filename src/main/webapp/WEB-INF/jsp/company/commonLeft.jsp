@@ -93,7 +93,7 @@
 
             <ul class="nav nav-list">
                 <li>
-                    <a href="jz_index.jsp">
+                    <a href="index.jsp">
                         <i class="icon-dashboard"></i>
                         <span class="menu-text"> 企业端 </span>
                     </a>
@@ -107,17 +107,17 @@
                     </a>
 
                     <ul class="submenu">
-                        <li>
-                            <a href="jz_fbjz.jsp">
+                        <li class="active">
+                            <a href="../company/index">
                                 <i class="icon-double-angle-right"></i>
-                                发布兼职
+                                我的兼职
                             </a>
                         </li>
 
-                        <li class="active">
-                            <a href="jz_index.jsp">
+                        <li>
+                            <a href="../company/myJobs">
                                 <i class="icon-double-angle-right"></i>
-                                我的兼职
+                                发布历史
                             </a>
                         </li>
                     </ul>
@@ -125,14 +125,14 @@
 
 
                 <li>
-                    <a href="jz_myinfo.jsp">
+                    <a href="../company/myInfo">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的信息 </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="jz_myMessage.jsp">
+                    <a href="../company/myMessage">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的消息 </span>
                     </a>

@@ -88,8 +88,8 @@ public class CompanyServiceImpl implements CompanyService {
         return companyDao.updateCompPassword(newPw,cCompany);
     }
 
-    public List<CJobs> getJobsByCompanyId(String queryTerm, Long companyId, Integer offset, Integer limit) {
-        return companyDao.selectJobsByCompanyId(queryTerm,companyId, offset, limit);
+    public List<CJobs> getJobsByCompanyId(String queryTerm, Long companyId, Integer offset, Integer limit,String jobStatus) {
+        return companyDao.selectJobsByCompanyId(queryTerm,companyId, offset, limit,jobStatus);
     }
 
     public int getJobsCountByCompanyId(String queryTerm, Long companyId) {

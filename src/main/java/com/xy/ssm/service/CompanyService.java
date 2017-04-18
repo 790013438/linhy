@@ -18,7 +18,7 @@ public interface CompanyService {
      */
     Long addJobs(CJobs cJobs);
     CCompany getCompanyByAccount(String compAccount);
-    List<CJobs> getJobsByCompanyId(String queryTerm,Long companyId, Integer offset,Integer limit);
+    List<CJobs> getJobsByCompanyId(String queryTerm,Long companyId, Integer offset,Integer limit,String jobStatus);
     int getJobsCountByCompanyId(String queryTerm,Long companyId);
     List<CJobs> getAllJobs(String jobStatus,Integer offset,Integer limit);
     int getAllJobsCount(String jobStatus);

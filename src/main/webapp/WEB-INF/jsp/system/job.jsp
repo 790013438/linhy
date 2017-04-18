@@ -34,37 +34,20 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div id="container"> 
    								<!-- 定义一个表格元素 --> 
-   									<table id="example" class="table table-striped table-bordered"> 
+   									<table id="table_myJob" class="table table-striped table-bordered">
     									<thead> 
-     										<tr> 
-      											<th>序号</th> 
+     										<tr>
+      											<th>序号</th>
       											<th>标题</th> 
       											<th>状态</th> 
-      											<th>需求人</th> 
-      											<th>报名数</th> 
-      											<th>截止时间</th> 
-      											<th>操作</th> 
+      											<th>需求人数</th>
+      											<th>报名人数</th>
+      											<th>截止时间</th>
+												<th>兼职时间</th>
+												<th>操作</th>
      										</tr> 
     									</thead> 
     									<tbody>
-    										<tr>
-    											<td>2</td>
-    											<td>迎宾礼仪</td>
-    											<td>报名中</td>
-    											<td>5</td>
-    											<td>0</td>
-    											<td>2017-03-01 23:59:00</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
-    										</tr>
-    										<tr>
-    											<td>1</td>
-    											<td>派发传单</td>
-    											<td>已结束</td>
-    											<td>10</td>
-    											<td>10</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
-    										</tr>
     									</tbody> 
     
     								<!-- tbody是必须的 --> 
@@ -85,9 +68,9 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
+    <div class="font16 center deletediv">该兼职信息不真实，确定删除该兼职？</div>
     <div class="deletediv_btn">
-        <p class="pull-left"><button type="button" class="btn btn-primary" id="btnDoUpdate">确定</button></p>
+        <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_delJob">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
         <input hidden="hidden" id="doId"/>
         <input hidden="hidden" id="doStatus"/>
@@ -97,6 +80,8 @@
 <div class="pop" onclick="closepop()" style="display: none;"></div>
 		<!-- basic scripts -->
 		<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/system_job.js"></script>
 		<script type="text/javascript">
 			function closepop(){
 				$(".pop").hide();
@@ -110,46 +95,6 @@
 				$(document).ready(function(){
         			$('#example').DataTable();
     			});
-
-    			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
-						if(result) {
-							//
-						}
-					});
-				});
-				// var oTable1 = $('#sample-table-2').dataTable( {
-				// "aoColumns": [
-			 //      { "bSortable": false },
-			 //      null, null,null, null, null,
-				//   { "bSortable": false }
-				// ] } );
-				
-				
-				// $('table th input:checkbox').on('click' , function(){
-				// 	var that = this;
-				// 	$(this).closest('table').find('tr > td:first-child input:checkbox')
-				// 	.each(function(){
-				// 		this.checked = that.checked;
-				// 		$(this).closest('tr').toggleClass('selected');
-				// 	});
-						
-				// });
-			
-			
-				// $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				// function tooltip_placement(context, source) {
-				// 	var $source = $(source);
-				// 	var $parent = $source.closest('table')
-				// 	var off1 = $parent.offset();
-				// 	var w1 = $parent.width();
-			
-				// 	var off2 = $source.offset();
-				// 	var w2 = $source.width();
-			
-				// 	if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-				// 	return 'left';
-				// }
 			})
 		</script>
 </body>

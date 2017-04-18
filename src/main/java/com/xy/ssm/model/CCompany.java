@@ -32,7 +32,7 @@ public class CCompany implements Serializable {
     //用户头像
     private String compPhoto;
     //状态
-    private int compStatus ;
+    private String compStatus ;
     //创建时间
     private Date createTime;
 
@@ -128,11 +128,13 @@ public class CCompany implements Serializable {
         this.compPhoto = compPhoto;
     }
 
-    public int getCompStatus() {
+    public String getCompStatus ()
+    {
         return compStatus;
     }
 
-    public void setCompStatus(int compStatus) {
+    public void setCompStatus (String compStatus)
+    {
         this.compStatus = compStatus;
     }
 

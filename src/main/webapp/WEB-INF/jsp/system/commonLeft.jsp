@@ -108,14 +108,14 @@
 
                         <ul class="submenu">
                             <li class="active">
-                                <a href="system_index.jsp">
+                                <a href="../system/index">
                                     <i class="icon-double-angle-right"></i>
                                     待审核兼职管理
                                 </a>
                             </li>
 
                             <li >
-                                <a href="system_jzgl.jsp">
+                                <a href="../system/job">
                                     <i class="icon-double-angle-right"></i>
                                     已审核兼职管理
                                 </a>
@@ -134,14 +134,14 @@
 
                         <ul class="submenu">
                             <li>
-                                <a href="system_company.jsp">
+                                <a href="../system/student">
                                     <i class="icon-double-angle-right"></i>
                                     企业用户信息管理
                                 </a>
                             </li>
 
                             <li>
-                                <a href="system_person.jsp">
+                                <a href="../system/company">
                                     <i class="icon-double-angle-right"></i>
                                     大学生用户信息管理
                                 </a>
@@ -150,7 +150,7 @@
                     </li>
 
                     <li>
-                        <a href="system_message.jsp">
+                        <a href="../system/message">
                             <i class="icon-text-width"></i>
                             <span class="menu-text"> 我的消息 </span>
                         </a>

@@ -49,13 +49,11 @@ public class AdminController extends BaseController
      */
     @RequestMapping(value = "/getAllJobs", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getJobsByCompanyId(@RequestParam(required = true) Integer offset,
-                                     @RequestParam(required = true) Integer limit,
+    public String getJobsByCompanyId(@RequestParam(required = false) Integer offset,
+                                     @RequestParam(required = false) Integer limit,
                                      @RequestParam(required = true) String jobStatus) {
         String result = "";
         BaseResult baseResult = null;
-        offset = offset ==null ? 0 :offset;//默认设置0
-        limit = limit == null ? 10 : limit;//默认展示10条
         try{
             List<CJobs> list = companyService.getAllJobs(jobStatus,offset, limit);
             int count = companyService.getAllJobsCount(jobStatus);

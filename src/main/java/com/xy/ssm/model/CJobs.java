@@ -36,16 +36,16 @@ public class CJobs implements Serializable {
     //联系电话
     private String jobContactPhone;
     //兼职状态
-    private int jobStatus ;
+    private String jobStatus ;
     //标志
     private int flag ;
     //备注
     private String jobRemarks;
     //该兼职报名人数
     private int appliCount;
-    //报名截止时间
-    private Date jobTime;
     //工作时间
+    private Date jobTime;
+    //报名截止时间
     private Date jobDeadline;
     //创建时间
     private Date createTime;
@@ -185,12 +185,12 @@ public class CJobs implements Serializable {
         this.jobContactPhone = jobContactPhone;
     }
 
-    public int getJobStatus ()
+    public String getJobStatus ()
     {
         return jobStatus;
     }
 
-    public void setJobStatus (int jobStatus)
+    public void setJobStatus (String jobStatus)
     {
         this.jobStatus = jobStatus;
     }

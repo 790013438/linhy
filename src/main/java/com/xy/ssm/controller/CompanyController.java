@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/company")
 @SessionAttributes("currentUser")//讲登录后命名为currentUser的加入session
-public class CompanyController {
+public class CompanyController extends BaseController {
 
     private Logger log = Logger.getLogger(CompanyController.class);
     //上面是LOG的声明，下面的Resource 可以考虑使用Autowired来注入Service
@@ -49,9 +49,11 @@ public class CompanyController {
      */
     @RequestMapping(value = "/addJobs", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String addJobs(@RequestParam(required = true) CJobs cJobs,@ModelAttribute("currentUser")CCompany cCompany) {
+    public String addJobs(@RequestParam(required = true) CJobs cJobs) {
         String result = "";
         BaseResult baseResult = null;
+        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
+
         try{
             Long companyId = cCompany.getId();
             cJobs.setJobCompanyId(companyId);
@@ -76,17 +78,16 @@ public class CompanyController {
      */
     @RequestMapping(value = "/getJobsByCompanyId", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getJobsByCompanyId(@RequestParam(required = true) Integer offset,
-                                     @RequestParam(required = true) Integer limit,
+    public String getJobsByCompanyId(@RequestParam(required = false) Integer offset,
+                                     @RequestParam(required = false) Integer limit,
                                      @RequestParam(required = false) String queryTerm,
-                                     @ModelAttribute("currentUser")CCompany cCompany) {
+                                     @RequestParam(required = false) String jobStatus) {
         String result = "";
         BaseResult baseResult = null;
-        offset = offset ==null ? 0 :offset;//默认设置0
-        limit = limit == null ? 10 : limit;//默认展示10条
+        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
         Long companyId = cCompany.getId();
         try{
-            List<CJobs> list = companyService.getJobsByCompanyId(queryTerm,companyId, offset, limit);
+            List<CJobs> list = companyService.getJobsByCompanyId(queryTerm,companyId, offset,limit,jobStatus);
             int count = companyService.getJobsCountByCompanyId(queryTerm,companyId);
             if(list != null && 0<list.size()) {
                 BootStrapTableResult tableResult = new BootStrapTableResult<CJobs>(list,count);
@@ -98,7 +99,7 @@ public class CompanyController {
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
             log.error("获取兼职信息列表异常！", e);
-            baseResult = new BaseResult(false, "分页获取当前企业发布的兼职信息列表异常！");
+            baseResult = new BaseResult(false, "当前企业发布的兼职信息列表异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
@@ -199,6 +200,32 @@ public class CompanyController {
     }
 
     /**
+     * 提交审核
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/submitAudit", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String submitAudit(@RequestParam(required = true) Long jobId) {
+        String result = "";
+        BaseResult baseResult = null;
+        CCompany cCompany =(CCompany) getLoginUser ().get ("loginuser");
+        String jobStatus = "1";
+        try{
+            int rs = companyService.updateJobStatus (jobId,jobStatus);
+            if(rs > 0){
+                baseResult=new BaseResult(true,"");
+            }else{
+                baseResult=new BaseResult(false,"提交审核失败");
+            }
+        }catch (Exception e){
+            log.error("提交审核异常"+e);
+            baseResult=new BaseResult(false,"提交审核异常");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+    /**
      *修改企业用户密码
      * @param
      * @return
@@ -231,5 +258,32 @@ public class CompanyController {
         result= JSON.toJSONString(baseResult);
         return result;
     }
+    /**
+     * 查看兼职详情
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getJobDetails", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getJobDetails(@RequestParam(required = true) Long jobId) {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            CJobs job = companyService.getJobDetails(jobId);
+            if(job != null) {
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(job);
+            } else {
+                baseResult = new BaseResult(true, "该兼职不存在");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取兼职信息详情异常！", e);
+            baseResult = new BaseResult(false, "获取兼职信息详情异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
 
 }

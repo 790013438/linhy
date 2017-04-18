@@ -18,7 +18,7 @@ import java.util.List;
 public interface CompanyDao {
     Long insertJob(CJobs cJobs);
     CCompany selectCompanyByAccount(@Param("compAccount")String compAccount);
-    List<CJobs> selectJobsByCompanyId(@Param("queryTerm")String queryTerm, @Param("companyId")Long companyId, @Param("offset")Integer offset,@Param("limit") Integer limit);
+    List<CJobs> selectJobsByCompanyId(@Param("queryTerm")String queryTerm, @Param("companyId")Long companyId, @Param("offset")Integer offset,@Param("limit") Integer limit,@Param("jobStatus")String  jobStatus);
     int selectJobsCountByCompanyId(@Param("queryTerm")String queryTerm, @Param("companyId")Long companyId);
     List<CJobs> selectAllJobs(@Param("jobStatus")String jobStatus,@Param("offset")Integer offset, @Param("limit")Integer limit);
     int selectAllJobsCount(@Param("jobStatus")String jobStatus);

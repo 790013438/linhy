@@ -207,7 +207,8 @@ public class UserController extends BaseController{
     public String login(@RequestParam(required = true) String  json) {
         log.info("--------------------/user/login  called");
         String result = "";
-        BaseResult baseResult = null;
+        BaseResult baseResult = null;  CUser cUser=new CUser();
+        CCompany cCompany = new CCompany();
         Map map =new HashMap();
         try{
             if(StringUtils.isEmpty(json)){
@@ -215,8 +216,6 @@ public class UserController extends BaseController{
             }else {
                 log.info(json);
                 JSONObject obj=JSON.parseObject(json);
-                CUser cUser=new CUser();
-                CCompany cCompany = new CCompany();
                 if(obj.getInteger("type") == 1){
                     String pwd=obj.getString("password");
                     cUser=cUserService.getUserByUsername(obj.getString("username"),1);
@@ -236,7 +235,7 @@ public class UserController extends BaseController{
                     String pwd=obj.getString("password");
                     cCompany=companyService.getCompanyByAccount(obj.getString("username"));
                     if(cCompany != null){
-                        if(!MD5Util.validate(cCompany.getCompPassword(),pwd)){
+                        if(!MD5Util.validate(pwd,cCompany.getCompPassword())){
                             baseResult=new BaseResult(false,"用户名或密码错误，请重新输入！");
                         }else {
                             map.put("loginuser",cCompany);
