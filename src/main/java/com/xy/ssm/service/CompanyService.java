@@ -33,5 +33,13 @@ public interface CompanyService {
     List<CApplication> getEnrollmentSituation(Long jobId,String appliStatus);
     int updateApplicationStatus(Long jobId,Long userId,String appliStatus);
     int updateCompPassword(String newPw,Long cCompany);
+    int updateJobSign(Long jobId);
+    int updateCompSign(Long applicationId,Long jobId);
+    List<CCompany> checkAccount(String account);
+    List<CCompany> checkPhone(String phone);
+    List<CCompany> checkMail(String email);
+    int updateCompany(CCompany cCompany);
+    List<CCompany> getAllCompany();
+
 
 }

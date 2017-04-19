@@ -67,4 +67,10 @@ public class UserServiceImpl implements UserService {
     {
         return userDao.delApplication(applicationId,userId);
     }
+
+    @Override
+    public List<CUser> getAllUsers ()
+    {
+        return userDao.getAllUsers();
+    }
 }

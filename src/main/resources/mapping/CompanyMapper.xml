@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xy.ssm.dao.CompanyDao">
+    <select id="checkAccount" resultType="com.xy.ssm.model.CCompany">
+        select id,comp_account as compAccount,comp_name as compName,comp_phone as compPhone from c_company
+        where comp_account = #{account}
+    </select>
+
+    <select id="checkMail" resultType="com.xy.ssm.model.CCompany">
+      select id,comp_account as compAccount,comp_name as compName,comp_phone as compPhone from c_company
+      where comp_email = #{email}
+    </select>
+
+    <select id="checkPhone" resultType="com.xy.ssm.model.CCompany">
+        select id,comp_account as compAccount,comp_name as compName,comp_phone as compPhone from c_company
+        where comp_phone = #{phone}
+    </select>
     <insert id="insertJob" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CCompany">
         insert into c_jobs(job_company_id,job_title,job_type,job_demand_number,job_requires_gender,job_salary_type,job_hours,job_salary,job_address,job_introduction,
         job_contact_phone,job_remarks,job_deadline,job_status,create_time)
@@ -21,7 +35,7 @@
         left join c_static as b on b.static_code=a.job_status
         where job_company_id = #{companyId}
         <if test="2== jobStatus">
-            AND  (job_status = 1 or job_status = 0 or job_status = 2)
+            AND  (job_status = 1 or job_status = 0 or job_status = 2 or job_status = -1)
         </if>
         <if test="3== jobStatus">
             AND  (job_status = 3 or job_status = 4 or job_status = 5)
@@ -40,7 +54,7 @@
         select a.id,a.job_company_id as jobCompanyId,a.job_title as jobTitle,a.job_type as jobType,
         a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
         a.job_salary as jobSalary,a.job_address as jobAddress , a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
-        a.create_time as createTime,b.comp_name as jobCompanyName,d.static_value as jobStatus,a.job_time as jobTime from c_jobs as a
+        a.create_time as createTime,b.comp_name as jobCompanyName,d.static_value as jobStatus,a.job_time as jobTime,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount from c_jobs as a
         LEFT JOIN c_company as b on a.job_company_id=b.id
         LEFT JOIN c_static as d on d.static_code=a.job_status
         <if test="jobStatus == 1">
@@ -99,12 +113,15 @@
     </update>
 
     <select id="getEnrollmentSituation" resultType="com.xy.ssm.model.CApplication">
-        SELECT u.id,u.user_name as userName,u.user_phone as userPhone,u.user_email as userEmail,
+        SELECT a.id,u.id as appliUserId,u.user_name as userName,u.user_phone as userPhone,u.user_email as userEmail,
         u.user_icon as userIcon,u.user_gender as userGender,u.user_realname as userRealName,u.user_intention_job as userIntention ,
-        u.user_profile as userProfile,u.user_type as userType , u.user_status as userStatus,a.appli_status as appliStatus,a.create_time as createTime
+        u.user_profile as userProfile,u.user_type as userType , u.user_status as userStatus,a.appli_status as appliStatus,a.create_time as createTime,u.user_major as userMajor
         FROM c_application as a
         INNER JOIN c_users as u on a.appli_user_id = u.id
-        WHERE u.appli_job_id = #{jobId} and u.appli_status = #{appliStatus}
+        WHERE a.appli_job_id = #{jobId} and a.comp_sign = 1
+        <if test=" '' != appliStatus and appliStatus != null ">
+          and a.appli_status = #{appliStatus}
+        </if>
     </select>
 
     <update id="updateApplicationStatus">
@@ -112,14 +129,35 @@
     </update>
 
     <update id="updateCompPassword">
-        update c_application set comp_password =#{newPw} where id = #{cCompanyId}
+        update c_company set comp_password =#{newPw} where id = #{cCompanyId}
     </update>
 
     <select id="getCompanyInfo" resultType="com.xy.ssm.model.CCompany">
         select id,comp_account as compAccount,comp_password as compPassword,comp_name as compName,
-        comp_contacts as compContacts,comp_phone as compPhone,comp_email as compEmail,comp_info as compInfo ,
+        comp_contacts as compContacts,comp_phone as compPhone,comp_email as compEmail,comp_info as compInfo ,comm_website as commWebsite,
         comp_license as compLicense,comp_address as compAddress , comp_photo as compPhoto,comp_status as compStatus,
         create_time as createTime from c_company where id = #{companyId}
     </select>
+    <select id="getAllCompany" resultType="com.xy.ssm.model.CCompany">
+        select id,comp_account as compAccount,comp_password as compPassword,comp_name as compName,
+        comp_contacts as compContacts,comp_phone as compPhone,comp_email as compEmail,comp_info as compInfo ,comm_website as commWebsite,
+        comp_license as compLicense,comp_address as compAddress , comp_photo as compPhoto,comp_status as compStatus,
+        create_time as createTime from c_company
+    </select>
+
+    <update id="updateJobSign">
+        update c_jobs set comm_sign =0 where id = #{jobId}
+    </update>
+
+    <update id="updateCompSign">
+        update  c_application set comp_sign = 0 where  appli_job_id = #{jobId} and id = #{applicationId}
+    </update>
+
+    <update id="updateCompany" parameterType="com.xy.ssm.model.CCompany">
+        update c_company
+        SET comp_account=#{compAccount},comp_name=#{compName},comp_contacts=#{compContacts},comp_phone=#{compPhone},
+        comp_email=#{compEmail},comp_info=#{compInfo},comm_website=#{commWebsite},comp_address=#{compAddress}
+        WHERE id=#{id}
+    </update>
 
 </mapper>

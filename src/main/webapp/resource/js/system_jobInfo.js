@@ -1,15 +1,54 @@
 
+
 var contextPath = window.location.href;
-var arrHref = contextPath.split("jobId=");
-var jobId = arrHref[1];
-// $("#jobId").val(jobId);
+var index1 = contextPath.indexOf("jobId=");
+var index2 = contextPath.indexOf("&");
+var jobId = contextPath.substring(index1+6,index2);
+var arrHref = contextPath.split("sign=");
+var sign = arrHref[1];
+$("#input_jobId").val(jobId);
 var condition = {
-    jobId:jobId,
+    jobId:jobId
 };
 $(function(){
     getJobInfoByID(condition);
     $("#btn_appli").click(function () {
-        appliJobById(condition);
+        $(".pop").show();
+        if(sign == 0){
+            $("#popinto_delPop").show();
+
+        }else{
+            $("#popinto_adoptPop").show();
+        }
+    });
+    function closepop(){
+        $(".pop").hide();
+        $(".popinto").hide();
+    }
+    $("#btnAdoptJob").click(function () {
+        closepop();
+        var jobId = $("#input_jobId").val();
+        var condition = {
+            jobId:jobId,
+            jobStatus:3
+        };
+        updateJobStatus(condition);
+    });
+    $("#btnRefuseJob").click(function () {
+        closepop();
+        var jobId = $("#input_jobId").val();
+        var condition = {
+            jobId:jobId,
+            jobStatus:2
+        };
+        updateJobStatus(condition);
+    });
+    $("#btn_delJob").click(function () {
+        closepop();
+        var data = {
+            jobId:jobId
+        };
+        delJobById(data);
     });
 });
 
@@ -22,6 +61,11 @@ var getJobInfoByID = function(condition) {
 		dataType : 'json',
 		success:function(result){
 			if (result.success == true) {
+                if(sign == 0){
+                    $("#btn_appli").val("删除兼职");
+                }else{
+                    $("#btn_appli").val("审核兼职");
+                }
 				if (result.error != "") {
                     $("#ul_jobDetail").empty();
                     $("#ul_jobDetail").append("<li>该兼职不存在</li>");
@@ -32,14 +76,6 @@ var getJobInfoByID = function(condition) {
                     //填充信息
                     var detail_str = initJobDetailForm(result.data);
                     console.log(result.data);
-                    if(result.data.flag == 0){
-                        document.getElementById("btn_appli").value="报名兼职";
-                    }else{
-                        document.getElementById("btn_appli").value="已报名";
-                        console.log(result.data);
-                        $("#btn_appli").attr("disabled", true);
-                    }
-                    $("#jobId").val(result.data.id);
                     $("#ul_jobDetail").append(detail_str);
 				} else{
                     $("#ul_jobDetail").empty();
@@ -64,11 +100,10 @@ var getJobInfoByID = function(condition) {
 	});
 }
 
-
-//报名指定兼职
-var appliJobById = function(data) {
+//删除兼职
+var delJobById = function(data) {
     $.ajax({
-        url:"../user/applicationJob",
+        url:"../admin/deleteJobById",
         type : 'post',
         data :data,
         dataType : 'json',
@@ -79,7 +114,7 @@ var appliJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "申请报名成功";
+                    var txt = "删除兼职成功";
                     alert(txt);
                     return;
                 }
@@ -91,19 +126,55 @@ var appliJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "报名兼职失败";
+            var txt = "删除兼职失败";
             alert(txt);
             return;
         },
         complete: function () {
-            getJobInfoByID(condition);
+            window.location.href = '../system/job';
+        }
+    });
+}
+//审核兼职
+var updateJobStatus = function(data) {
+    $.ajax({
+        url:"../admin/auditingJob",
+        type : 'post',
+        data :data,
+        dataType : 'json',
+        success:function(result){
+            console.log(result);
+            if (result.success == true) {
+                if (result.error != "") {
+                    alert(result.error);
+                    return;
+                }else{
+                    var txt = "审核兼职成功";
+                    alert(txt);
+                    return;
+                }
+            } else {
+                //还得先清空所有行
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        },
+        error : function(obj, msg) {
+            var txt = "审核兼职失败";
+            alert(txt);
+            return;
+        },
+        complete: function () {
+            window.location.href = '../system/index';
         }
     });
 }
 
-
-
-
+function closepop(){
+    $(".pop").hide();
+    $(".popinto").hide();
+}
 
 var initJobDetailForm = function(obj) {
     if(obj.jobTitle != null){

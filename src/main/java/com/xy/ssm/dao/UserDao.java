@@ -25,4 +25,5 @@ public interface UserDao {
     int quitJob(@Param("applicationId") Long applicationId,@Param("userId") Long userId);
     int delApplication(@Param("applicationId") Long applicationId,@Param("userId") Long userId);
     int updateUserPassword(@Param("newPw") String newPw,@Param("userId") Long userId);
+    List<CUser> getAllUsers();
 }

@@ -15,6 +15,8 @@ public class CCompany implements Serializable {
     private String compAccount;
     //登录密码
     private String compPassword;
+    //公司网站
+    private String commWebsite ;
     //公司名
     private String compName ;
     //公司联系人
@@ -118,6 +120,16 @@ public class CCompany implements Serializable {
 
     public void setCompAddress(String compAddress) {
         this.compAddress = compAddress;
+    }
+
+    public String getCommWebsite ()
+    {
+        return commWebsite;
+    }
+
+    public void setCommWebsite (String commWebsite)
+    {
+        this.commWebsite = commWebsite;
     }
 
     public String getCompPhoto() {

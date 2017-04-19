@@ -88,6 +88,47 @@ public class CompanyServiceImpl implements CompanyService {
         return companyDao.updateCompPassword(newPw,cCompany);
     }
 
+    public int updateJobSign (Long jobId)
+    {
+        return companyDao.updateJobSign(jobId);
+    }
+
+    @Override
+    public int updateCompSign (Long applicationId, Long jobId)
+    {
+        return companyDao.updateCompSign(applicationId,jobId);
+    }
+
+    @Override
+    public List<CCompany> checkAccount (String account)
+    {
+        return companyDao.checkAccount(account);
+    }
+
+    @Override
+    public List<CCompany> checkPhone (String phone)
+    {
+        return companyDao.checkPhone(phone);
+    }
+
+    @Override
+    public List<CCompany> checkMail (String email)
+    {
+        return companyDao.checkMail(email);
+    }
+
+    @Override
+    public int updateCompany (CCompany cCompany)
+    {
+        return companyDao.updateCompany(cCompany);
+    }
+
+    @Override
+    public List<CCompany> getAllCompany ()
+    {
+        return companyDao.getAllCompany();
+    }
+
     public List<CJobs> getJobsByCompanyId(String queryTerm, Long companyId, Integer offset, Integer limit,String jobStatus) {
         return companyDao.selectJobsByCompanyId(queryTerm,companyId, offset, limit,jobStatus);
     }

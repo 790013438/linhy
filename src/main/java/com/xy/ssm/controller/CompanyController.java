@@ -1,6 +1,7 @@
 package com.xy.ssm.controller;
 
 
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
@@ -112,7 +113,7 @@ public class CompanyController extends BaseController {
      */
     @RequestMapping(value = "/getEnrollmentSituation", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getEnrollmentSituation(@RequestParam(required = true) Long jobId,@RequestParam(required = true) String appliStatus) {
+    public String getEnrollmentSituation(@RequestParam(required = true) Long jobId,@RequestParam(required = false) String appliStatus) {
         String result = "";
         BaseResult baseResult = null;
         try{
@@ -139,13 +140,13 @@ public class CompanyController extends BaseController {
      */
     @RequestMapping(value = "/screenApplicationUser", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getEnrollmentSituation(@RequestParam(required = true) Long jobId,@RequestParam(required = true) Long userId,@RequestParam(required = true) int demandNumber,@RequestParam(required = true) String appliStatus) {
+    public String getEnrollmentSituation(@RequestParam(required = true) Long jobId,@RequestParam(required = true) Long userId,@RequestParam(required = true) Integer demandNumber,@RequestParam(required = true) String appliStatus) {
         String result = "";
         BaseResult baseResult = null;
         try{
-            if(appliStatus.equals (1)){
+            if(appliStatus.equals ("appli_successful")){
                 //查询报名成功的人数
-                List<CApplication> applicationList = companyService.getEnrollmentSituation(jobId,"1");
+                List<CApplication> applicationList = companyService.getEnrollmentSituation(jobId,"appli_successful");
                 int appliSuccessCount = applicationList.size ();
                 if(appliSuccessCount == demandNumber){
                     baseResult = new BaseResult(false, "人数已达到需求人数");
@@ -232,11 +233,11 @@ public class CompanyController extends BaseController {
      */
     @RequestMapping(value = "/updateCompPassword", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String updateCompPassword(@ModelAttribute("currentUser")CCompany cCompany,
-                                 @RequestParam(required = true)String oldPassword,
+    public String updateCompPassword(@RequestParam(required = true)String oldPassword,
                                  @RequestParam(required = true)String newPassword) {
         String result = "";
         BaseResult baseResult = null;
+        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
         try{
             String oldPw = MD5Util.encode2hex(oldPassword);
             String newPw = MD5Util.encode2hex(newPassword);
@@ -284,6 +285,227 @@ public class CompanyController extends BaseController {
         }
         return result;
     }
+
+    /**
+     * 移除兼职（该兼职对企业用户不可见）
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/removeJobById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String removeJobById(@RequestParam(required = true) Long jobId) {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            int resultCode = companyService.updateJobSign(jobId);
+            if(resultCode > 0) {
+                baseResult = new BaseResult(true, "");
+            } else {
+                baseResult = new BaseResult(true, "移除兼职失败");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("移除兼职异常！", e);
+            baseResult = new BaseResult(false, "移除兼职异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
+    /**
+     *删除兼职记录
+     * @param applicationId
+     * @return
+     */
+    @RequestMapping(value = "/updateCompSign", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String updateCompSign(@RequestParam(required = true) Long  applicationId,
+                                 @RequestParam(required = true) Long  jobId) {
+        String result = "";
+        BaseResult baseResult = null;
+        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
+        try{
+            int re=companyService.updateCompSign (applicationId,jobId);
+            if(re > 0){
+                baseResult=new BaseResult(true,"");
+            }else {
+                baseResult=new BaseResult(true,"删除兼职记录失败");
+            }
+        }catch (Exception e){
+            log.error("删除兼职记录异常"+e);
+            baseResult=new BaseResult(false,"删除兼职记录异常");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+    /**
+     * 查看企业用户基本信息
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getCompanyInfoById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getCompanyInfoById() {
+        String result = "";
+        BaseResult baseResult = null;
+        CCompany cCompany =(CCompany) getLoginUser ().get ("loginuser");
+        try{
+            CCompany companyInfo = companyService.getCompanyInfo(cCompany.getId ());
+            if(companyInfo != null) {
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(companyInfo);
+            } else {
+                baseResult = new BaseResult(true, "该企业不存在");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取企业信息异常！", e);
+            baseResult = new BaseResult(false, "获取企业信息异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
+    /**
+     *修改用户信息
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/updateCompanyInfo", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String updateUserInfo(CCompany  cCompany) {
+        log.info("--------------------/company/updateCompanyInfo  called");
+        String result = "";
+        BaseResult baseResult = null;
+        CCompany cCompany1 =(CCompany) getLoginUser ().get ("loginuser");
+        cCompany.setId (cCompany1.getId ());
+        try{
+            List<CCompany> cCompanys = companyService.checkAccount (cCompany.getCompAccount ());
+            List<CCompany> cCompanys1 = companyService.checkPhone (cCompany.getCompPhone ());
+            List<CCompany> cCompanys2 = companyService.checkMail (cCompany.getCompEmail ());
+            if(cCompanys != null && cCompanys.size() > 1){
+                baseResult=new BaseResult(false,"登录名已存在，请重新输入");
+            }else if(cCompanys.size() == 1 && !cCompanys.get(0).getId().toString().equals(cCompany.getId().toString())){
+                baseResult=new BaseResult(false,"登录名已存在，请重新添加");
+            }else{
+                if(cCompanys1 != null && cCompanys1.size() > 1){
+                    baseResult=new BaseResult(false,"手机号已存在，请重新输入");
+                }else if(cCompanys1.size() == 1 && !cCompanys1.get(0).getId().toString().equals(cCompany.getId().toString())){
+                    baseResult=new BaseResult(false,"登录名已存在，请重新添加");
+                }else{
+                    if(cCompanys2 != null && cCompanys2.size() > 1){
+                        baseResult=new BaseResult(false,"邮箱已存在，请重新输入");
+                    }else if(cCompanys2.size() == 1 && !cCompanys2.get(0).getId().toString().equals(cCompany.getId().toString())){
+                        baseResult=new BaseResult(false,"邮箱已存在，请重新添加");
+                    }else{
+                        int rs = companyService.updateCompany(cCompany);
+                        if (rs == 1) {
+                            baseResult = new BaseResult(true, "修改企业信息成功");
+                        } else {
+                            baseResult = new BaseResult(true, "修改企业信息失败");
+                        }
+                    }
+                }
+            }
+        }catch (Exception e){
+            log.error("修改企业信息异常"+e);
+            baseResult=new BaseResult(false,"修改企业信息异常");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
+    /**
+     *检测用户名是否存在
+     * @param account
+     * @return
+     */
+    @RequestMapping(value = "/checkName", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String checkName(@RequestParam(required = true) String  account) {
+        log.info("--------------------/company/checkName  called");
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            if(StringUtils.isEmpty(account)){
+                baseResult=new BaseResult(false,"获取企业账号异常，请联系管理员稍后再试");
+            }else {
+                List<CCompany> cCompanys = companyService.checkAccount(account);
+                if(cCompanys != null && 0 < cCompanys.size ()){
+                    baseResult=new BaseResult(false,"企业账号已经存在");
+                }else {
+                    baseResult=new BaseResult(true,"");
+                }
+            }
+        }catch (Exception e){
+            log.error("注册用户出现异常"+e);
+            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
+
+    /**
+     *检测邮箱是否存在
+     * @param email
+     * @return
+     */
+    @RequestMapping(value = "/checkMail", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String checkMail(@RequestParam(required = true) String  email) {
+        log.info("--------------------/company/checkMail  called");
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            if(StringUtils.isEmpty(email)){
+                baseResult=new BaseResult(false,"邮箱信息获取异常，请联系管理员稍后再试");
+            }else {
+                List<CCompany> cCompanys = companyService.checkMail(email);
+                if(cCompanys != null && 0 < cCompanys.size ()){
+                    baseResult=new BaseResult(false,"邮箱已经存在");
+                }else {
+                    baseResult=new BaseResult(true,"");
+                }
+            }
+        }catch (Exception e){
+            log.error("注册用户出现异常"+e);
+            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
+    /**
+     *检测手机号是否存在
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/checkPhone", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String checkPhone(@RequestParam(required = true) String  phone) {
+        log.info("--------------------/company/checkPhone  called");
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            if(StringUtils.isEmpty(phone)){
+                baseResult=new BaseResult(false,"手机号信息获取异常，请联系管理员稍后再试");
+            }else {
+                List<CCompany> cCompanys = companyService.checkPhone(phone);
+                if(cCompanys != null && 0 < cCompanys.size ()){
+                    baseResult=new BaseResult(false,"手机号已经存在");
+                }else {
+                    baseResult=new BaseResult(true,"");
+                }
+            }
+        }catch (Exception e){
+            log.error("注册用户出现异常"+e);
+            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
 
 
 }

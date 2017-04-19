@@ -50,19 +50,19 @@
 											<form class="form-horizontal">
 												<div class="tabbable">
 													<ul class="nav nav-tabs padding-16">
-														<li class="active">
-															<a data-toggle="tab" href="#edit-basic">
-																<i class="green icon-edit bigger-125"></i>
-																基础信息
-															</a>
-														</li>
+													<li class="active" id="li_basic">
+														<a data-toggle="tab" href="#edit-basic">
+															<i class="green icon-edit bigger-125"></i>
+															基础信息
+														</a>
+													</li>
 
-														<li>
-															<a data-toggle="tab" href="#edit-password">
-																<i class="blue icon-key bigger-125"></i>
-																密码修改
-															</a>
-														</li>
+													<li id="li_password">
+														<a data-toggle="tab" href="#edit-password">
+															<i class="blue icon-key bigger-125"></i>
+															密码修改
+														</a>
+													</li>
 													</ul>
 
 													<div class="tab-content profile-edit-tab-content">
@@ -78,68 +78,49 @@
 
 																<div class="col-xs-12 col-sm-8">
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right" for="form-field-username">公司名</label>
+																		<label class="col-sm-4 control-label no-padding-right">账号名</label>
 
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-10" type="text" id="form-field-username" placeholder="Username" value="XXX公司" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="comp_account" placeholder="Username" value="" />
 																		</div>
 																	</div>
 
 																	<div class="space-4"></div>
 
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right" for="form-field-first">地址</label>
+																		<label class="col-sm-4 control-label no-padding-right">企业名</label>
 
 																		<div class="col-sm-8">
-																			<input class="input-small" type="text" id="form-field-first" placeholder="First Name" value="四川省" />
-																			<input class="input-small" type="text" id="form-field-last" placeholder="Last Name" value="成都市" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="comp_name" placeholder="Username" value="" />
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-4 control-label no-padding-right">公司联系人</label>
+
+																		<div class="col-sm-8">
+																			<input class="col-xs-12 col-sm-6" type="text" id="comp_contacts" placeholder="First Name" value="" />
 																		</div>
 																	</div>
 																</div>
 															</div>
 
 															<hr />
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-date">Birth Date</label>
+															<div class="space-4"></div>
 
+															<div class="form-group">
+																<label class="col-sm-3 control-label no-padding-right">企业地址</label>
 																<div class="col-sm-9">
-																	<div class="input-medium">
-																		<div class="input-group">
-																			<input class="input-medium date-picker" id="form-field-date" type="text" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
-																			<span class="input-group-addon">
-																				<i class="icon-calendar"></i>
-																			</span>
-																		</div>
-																	</div>
+																	<textarea class="col-xs-12 col-sm-8" id="comp_address"></textarea>
 																</div>
 															</div>
 
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right">性别</label>
+																<label class="col-sm-3 control-label no-padding-right">企业简介</label>
 
 																<div class="col-sm-9">
-																	<label class="inline">
-																		<input name="form-field-radio" type="radio" class="ace" />
-																		<span class="lbl"> 男</span>
-																	</label>
-
-																	&nbsp; &nbsp; &nbsp;
-																	<label class="inline">
-																		<input name="form-field-radio" type="radio" class="ace" />
-																		<span class="lbl"> 女</span>
-																	</label>
-																</div>
-															</div>
-
-															<div class="space-4"></div>
-
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">描述信息</label>
-
-																<div class="col-sm-9">
-																	<textarea id="form-field-comment"></textarea>
+																	<textarea class="col-xs-12 col-sm-8" id="comp_info"></textarea>
 																</div>
 															</div>
 
@@ -147,11 +128,11 @@
 															<h4 class="header blue bolder smaller">联系方式</h4>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-email">邮箱</label>
+																<label class="col-sm-3 control-label no-padding-right" >邮箱</label>
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input type="email" id="form-field-email" value="alexdoe@gmail.com" />
+																		<input type="email" id="input_email" value="" />
 																		<i class="icon-envelope"></i>
 																	</span>
 																</div>
@@ -160,11 +141,11 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-website">网站</label>
+																<label class="col-sm-3 control-label no-padding-right" >网站</label>
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input type="url" id="form-field-website" value="http://www.alexdoe.com/" />
+																		<input type="url" id="comm_website" value="" />
 																		<i class="icon-globe"></i>
 																	</span>
 																</div>
@@ -173,83 +154,48 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-phone">手机号</label>
+																<label class="col-sm-3 control-label no-padding-right">联系电话</label>
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input class="input-medium input-mask-phone" type="text" id="form-field-phone" />
+																		<input class="input-medium input-mask-phone" type="text" id="input_phone" />
 																		<i class="icon-phone icon-flip-horizontal"></i>
 																	</span>
 																</div>
 															</div>
 
 															<div class="space"></div>
-															<h4 class="header blue bolder smaller">社交</h4>
-
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-facebook">Facebook</label>
-
-																<div class="col-sm-9">
-																	<span class="input-icon">
-																		<input type="text" value="facebook_alexdoe" id="form-field-facebook" />
-																		<i class="icon-facebook blue"></i>
-																	</span>
-																</div>
-															</div>
 
 															<div class="space-4"></div>
 
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-twitter">Twitter</label>
-
-																<div class="col-sm-9">
-																	<span class="input-icon">
-																		<input type="text" value="twitter_alexdoe" id="form-field-twitter" />
-																		<i class="icon-twitter light-blue"></i>
-																	</span>
-																</div>
-															</div>
-
-															<div class="space-4"></div>
-
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-gplus">Google+</label>
-
-																<div class="col-sm-9">
-																	<span class="input-icon">
-																		<input type="text" value="google_alexdoe" id="form-field-gplus" />
-																		<i class="icon-google-plus red"></i>
-																	</span>
-																</div>
-															</div>
 														</div>
 
-														
+
 														<div id="edit-password" class="tab-pane">
 															<div class="space-10"></div>
-
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">旧密码</label>
+																<label class="col-sm-3 control-label no-padding-right" >旧密码</label>
 
 																<div class="col-sm-9">
-																	<input type="password" id="form-field-pass1" />
+																	<input type="password" id="form-field-oldPass" />
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="col-sm-3 control-label no-padding-right" id="label_pass" style="color:#646464">新密码</label>
+
+																<div class="col-sm-9">
+																	<input type="password" id="form-field-newPass" />
 																</div>
 															</div>
 
 															<div class="space-4"></div>
-                                                            <div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">新密码</label>
 
-																<div class="col-sm-9">
-																	<input type="password" id="form-field-pass2" />
-																</div>
-															</div>
-															<div class="space-4"></div>
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">密码重复</label>
+																<label class="col-sm-3 control-label no-padding-right">确认密码</label>
 
 																<div class="col-sm-9">
-																	<input type="password" id="form-field-pass3" />
+																	<input type="password" onchange="checkPassword()" id="form-field-rePass" />
 																</div>
 															</div>
 														</div>
@@ -258,16 +204,12 @@
 
 												<div class="clearfix form-actions">
 													<div class="col-md-offset-3 col-md-9">
-														<button class="btn btn-info" type="button">
+														<button class="btn btn-info" type="button" id="btn_save">
 															<i class="icon-ok bigger-110"></i>
 															Save
 														</button>
 
 														&nbsp; &nbsp;
-														<button class="btn" type="reset">
-															<i class="icon-undo bigger-110"></i>
-															Reset
-														</button>
 													</div>
 												</div>
 											</form>
@@ -287,6 +229,8 @@
 		</div><!-- /.main-container -->
 
 		<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/company_myInfo.js"></script>
+	<script src="${resource}/resource/js/check.js"></script>
 
 		<script type="text/javascript">
 			jQuery(function($) {
@@ -319,13 +263,6 @@
 						return true;
 					}
 				})
-				.end().find('button[type=reset]').on(ace.click_event, function(){
-					$('#user-profile-3 input[type=file]').ace_file_input('reset_input');
-				})
-				.end().find('.date-picker').datepicker().next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				})
-				$('.input-mask-phone').mask('(999) 999-9999');
 			
 			
 	

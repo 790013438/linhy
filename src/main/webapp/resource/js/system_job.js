@@ -1,82 +1,46 @@
 var condition = {
-    jobStatus:"5",
+    jobStatus:"2",
 };
 $(function(){
-
-    queryMyAppliJobs(condition);
-
-    $("#btn_delApplication").click(function () {
-            var appliId = $("#input_applId").val();
-            var data = {
-                applicationId:appliId
-            };
+    getMyJobs(condition);
+    $("#btn_delJob").click(function () {
         closepop();
-        delApplicationById(data);
+        var jobId = $("#input_jobId").val();
+        var data = {
+            jobId:jobId
+        };
+        delJobById(data);
     });
 });
 
-//查询兼职历史
-var queryMyAppliJobs = function(condition) {
+//查询待审核兼职列表
+var getMyJobs = function(condition) {
     $.ajax({
-        url:"../user/getMyAppliSituation",
+        url:"../admin/getAllJobs",
         type : 'post',
         data : condition,
         dataType : 'json',
         success:function(result){
-            console.log(result);
             if (result.success == true) {
                 if (result.error != "") {
                     alert(result.error);
-                    $("#myJobHistory tbody").empty();
+                    $("#table_myJob tbody").empty();
                     return;
                 }
-                if (result.data!=null){
-                    $("#myJobHistory tbody").empty();
-                    $.each(result.data, function (index, obj) {
+                if (result.data.data!=null){
+                    console.log(result.data);
+                    $("#table_myJob tbody").empty();
+                    $.each(result.data.data, function (index, obj) {
                         var tr = appendJobNode(obj);
-                        $("#myJobHistory tbody").append(tr);
-                        appendTabTitleById("myJobHistory");
+                        $("#table_myJob tbody").append(tr);
+                        appendTabTitleById("table_myJob");
                     });
                     $(document).ready(function(){
-                        $('#myJobHistory').DataTable();
+                        $('#table_myJob').DataTable();
                     });
                 } else{
-                    $("#myJobHistory tbody").empty();
+                    $("#table_myJob tbody").empty();
                     var txt = "没有查询到符合条件的信息";
-                    alert(txt);
-                    return;
-                }
-            } else {
-                //还得先清空所有行
-                alert(result.error);
-                return;
-            }
-        },
-        error : function(obj, msg) {
-            //还得先清空所有行
-            $("#myJobHistory tbody").empty();
-            var txt = "没有查询到符合条件的信息";
-            alert(txt);
-            return;
-        },
-    });
-}
-
-//删除指定报名记录
-var delApplicationById = function(data) {
-    $.ajax({
-        url:"../user/delApplication",
-        type : 'post',
-        data :data,
-        dataType : 'json',
-        success:function(result){
-            console.log(result);
-            if (result.success == true) {
-                if (result.error != "") {
-                    alert(result.error);
-                    return;
-                }else{
-                    var txt = "删除兼职记录成功";
                     alert(txt);
                     return;
                 }
@@ -88,16 +52,50 @@ var delApplicationById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "删除兼职记录失败";
+            //还得先清空所有行
+            $("#table_myJob tbody").empty();
+            var txt = "没有查询到符合条件的信息";
+            alert(txt);
+            return;
+        },
+    });
+}
+
+//删除兼职
+var delJobById = function(data) {
+    $.ajax({
+        url:"../admin/deleteJobById",
+        type : 'post',
+        data :data,
+        dataType : 'json',
+        success:function(result){
+            console.log(result);
+            if (result.success == true) {
+                if (result.error != "") {
+                    alert(result.error);
+                    return;
+                }else{
+                    var txt = "删除兼职成功";
+                    alert(txt);
+                    return;
+                }
+            } else {
+                //还得先清空所有行
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        },
+        error : function(obj, msg) {
+            var txt = "删除兼职失败";
             alert(txt);
             return;
         },
         complete: function () {
-            queryMyAppliJobs(condition);
+            getMyJobs(condition);
         }
     });
 }
-
 
 $(".table tr td input").each(function(){
     $(this).attr("title",$(this).val());
@@ -142,25 +140,29 @@ var appendTabTitle = function()
 
 
 var appendJobNode = function(obj) {
+    var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
     var jobTime1 = moment(obj.jobTime).format("YYYY-MM-DD HH:mm:ss");
+    var sign = 0;
     var job_str = "<tr>"+
+            "<td>"+obj.id+"</td>"+
             "<td>"+obj.jobTitle+"</td>"+
-            "<td> "+"已结束"+"</td>"+
-            "<td> "+obj.jobCompanyName+"</td>"+
+            "<td> "+obj.jobStatus+"</td>"+
+            "<td> "+obj.jobDemandNumber+"</td>"+
+            "<td> "+obj.appliCount+"</td>"+
+            "<td> "+jobDeadline1+"</td>"+
             "<td> "+jobTime1+"</td>"+
-            "<td> "+obj.jobSalaryType+"</td>"+
-            "<td> "+obj.jobSalary+"</td>"+
             "<td>"+
-            "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看兼职详情</a> |"+
-            "<button type=\"button\" class='btn btn-link' onclick=\"delAppli('"+obj.id+"')\" >删除</button>";
-    "<input type=\"hidden\" name=\"application_id\" value=\""+obj.id+"\">"+
+            "<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看兼职详情</a> |"+
+            "<button type=\"button\" onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>";
+    "<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
     "</td>"+
     "</tr>";
     return job_str;
 }
-function delAppli(data)
+function delJob(data)
 {
-    $("#input_applId").val(data);
+    $("#input_jobId").val(data);
     $(".pop").show();
     $(".popinto").show();
 }
+

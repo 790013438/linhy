@@ -70,7 +70,10 @@
 
 															<div class="row">
 																<div class="col-xs-12 col-sm-4">
-																	<input type="file" />
+																	<form method="post" action="../../photoUpload" enctype="multipart/form-data">
+																		<input type="file" name="file" value="file">
+																		<input type="submit" value="确定">
+																	</form>
 																</div>
 
 																<div class="vspace-xs"></div>

@@ -23,6 +23,8 @@ public class CApplication implements Serializable {
     private String userName;
     //用户手机号
     private String userPhone;
+    //用户专业
+    private String userMajor;
     //用户头像
     private String userIcon;
     //用户邮箱
@@ -183,6 +185,16 @@ public class CApplication implements Serializable {
         this.userSign = userSign;
     }
 
+    public String getUserMajor ()
+    {
+        return userMajor;
+    }
+
+    public void setUserMajor (String userMajor)
+    {
+        this.userMajor = userMajor;
+    }
+
     @Override
     public String toString ()
     {
@@ -194,6 +206,7 @@ public class CApplication implements Serializable {
                 ", appliStatus='" + appliStatus + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userPhone='" + userPhone + '\'' +
+                ", userMajor='" + userMajor + '\'' +
                 ", userIcon='" + userIcon + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userGender='" + userGender + '\'' +

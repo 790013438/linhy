@@ -49,33 +49,19 @@
 												<div class="widget-box">
 													<div class="widget-header widget-header-flat">
 														<h4 class="smaller">成都金牛万达广场发传单</h4>
-
 														<div class="widget-toolbar">
 															<label>
-																<small class="green">
-																	<b>已审核</b>
-																</small>
+																<button class="btn btn-xs btn-link" id="btn_appli"></button>
+																<input value="" id="jobId" type="hidden"></li>
 															</label>
 														</div>
 													</div>
 
 													<div class="widget-body">
 														<div class="widget-main">
-															<dl id="dt-list-1">
-																<dt>兼职标题：成都金牛万达广场发传单</dt>
-																<dt>兼职类型：发传单</dt>
-																<dt>需求人数：5人</dt>
-																<dt>报名人数：1人</dt>
-																<dt>薪资类型：时薪</dt>
-																<dt>薪资金额：20￥/小时</dt>
-																<dt>兼职时长：4小时</dt>
-																<dt>兼职时间：2017-01-01</dt>
-																<dt>截止时间：2017-02-25</dt>
-																<dt>兼职地址</dt>
-																<dd>四川省成都市金牛区万达广场</dd>
-																<dt>兼职描述</dt>
-																<dd>在四川省成都市金牛区万达广场进行传单的派发</dd>
-															</dl>
+															<ul id="ul_jobDetail">
+
+															</ul>
 														</div>
 													</div>
 												</div>
@@ -89,54 +75,82 @@
 											<div class="tabbable">
 											<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
 												<li class="active">
-													<a data-toggle="tab" href="#home4">未处理列表</a>
+													<a data-toggle="tab" href="#div_home">未处理列表</a>
 												</li>
 
 												<li>
-													<a data-toggle="tab" href="#profile4">已通过</a>
+													<a data-toggle="tab" href="#div_home1">已通过</a>
 												</li>
 
 												<li>
-													<a data-toggle="tab" href="#dropdown14">已拒绝</a>
+													<a data-toggle="tab" href="#div_home2">已拒绝</a>
 												</li>
 											</ul>
 
 											<div class="tab-content">
-												<div id="home4" class="tab-pane in active">
-													<table id="example" class="table table-striped table-bordered"> 
+												<div id="div_home" class="tab-pane in active">
+													<table id="table_wating" class="table table-striped table-bordered">
     									<thead> 
      										<tr> 
       											<th>序号</th> 
       											<th>用户名</th> 
-      											<th>性别</th> 
-      											<th>邮箱</th> 
-      											<th>用户真实姓名</th> 
-      											<th>联系电话</th> 
+      											<th>性别</th>
+												<th>用户真实姓名</th>
+												<th>专业</th>
+												<th>邮箱</th>
+												<th>联系电话</th>
       											<th>操作</th> 
      										</tr> 
     									</thead> 
     									<tbody>
-    										<tr>
-    											<td>1</td>
-    											<td>大白</td>
-    											<td>男</td>
-    											<td>1502774793@qq.com</td>
-    											<td>陈坤</td>
-    											<td>3558543875</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看报名用户</button><button class="btn btn-link delete">审批</button></td>
-    										</tr>
+
     									</tbody> 
     
     								<!-- tbody是必须的 --> 
    									</table> 
 												</div>
+												<div id="div_home1" class="tab-pane">
+													<table id="table_success" class="table table-striped table-bordered tab-dataTable">
+														<thead>
+														<tr>
+															<th>序号</th>
+															<th>用户名</th>
+															<th>性别</th>
+															<th>用户真实姓名</th>
+															<th>专业</th>
+															<th>邮箱</th>
+															<th>联系电话</th>
+															<th>操作</th>
+														</tr>
+														</thead>
+														<tbody>
 
-												<div id="profile4" class="tab-pane">
-													<p>暂无已通过列表</p>
+														</tbody>
+
+														<!-- tbody是必须的 -->
+													</table>
 												</div>
 
-												<div id="dropdown14" class="tab-pane">
-													<p>暂无已拒绝列表</p>
+												<div id="div_home2" class="tab-pane">
+													<table id="table_fail" class="table table-striped table-bordered">
+														<thead>
+														<tr>
+															<th>序号</th>
+															<th>用户名</th>
+															<th>性别</th>
+															<th>用户真实姓名</th>
+															<th>专业</th>
+															<th>邮箱</th>
+															<th>联系电话</th>
+															<th>操作</th>
+														</tr>
+														</thead>
+														<tbody>
+
+														</tbody>
+
+														<!-- tbody是必须的 -->
+													</table>
 												</div>
 											</div>
 										</div>
@@ -154,48 +168,38 @@
 				<i class="icon-double-angle-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-
 		<!-- basic scripts -->
+	<!--删除弹窗start-->
+	<div class="popinto" id="popinto_delRecord" style="top: 65%">
+		<div class="font16 center deletediv">真的要删除该记录吗？</div>
+		<div class="deletediv_btn">
+			<p class="pull-left"><button type="button" class="btn btn-primary" id="btn_delRecord">确定</button></p>
+			<p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
+			<input hidden="hidden" id="input_appliId"/>
+		</div>
+	</div>
+	<!--删除弹窗end-->
+	<!--删除弹窗start-->
+	<div class="popinto" id="popinto_screen" style="top: 65%">
+		<div class="font16 center deletediv">是否同意用户申请？</div>
+		<div class="deletediv_btn">
+			<p class="pull-left"><button type="button" class="btn btn-primary" id="btn_agree">同意</button></p>
+			<p class="pull-left"><button type="button" class="btn btn-primary" id="btn_refuse">拒绝</button></p>
+			<input hidden="hidden" id="input_userId"/>
+			<input hidden="hidden" id="input_jobDemandNumber"/>
+		</div>
+	</div>
+	<div class="pop" onclick="closepop()" style="display: none;"></div>
+	<!--删除弹窗end-->
 	<%@include file="commonFoot.jsp"%>
-
+	<script src="${resource}/resource/js/company_jobInfo.js"></script>
+	<script src="${resource}/resource/js/moment.js"></script>
 	<script type="text/javascript">
 			jQuery(function($) {
 
 				$(document).ready(function(){
         			$('#example').DataTable();
     			});
-				// var oTable1 = $('#sample-table-2').dataTable( {
-				// "aoColumns": [
-			 //      { "bSortable": false },
-			 //      null, null,null, null, null,
-				//   { "bSortable": false }
-				// ] } );
-				
-				
-				// $('table th input:checkbox').on('click' , function(){
-				// 	var that = this;
-				// 	$(this).closest('table').find('tr > td:first-child input:checkbox')
-				// 	.each(function(){
-				// 		this.checked = that.checked;
-				// 		$(this).closest('tr').toggleClass('selected');
-				// 	});
-						
-				// });
-			
-			
-				// $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				// function tooltip_placement(context, source) {
-				// 	var $source = $(source);
-				// 	var $parent = $source.closest('table')
-				// 	var off1 = $parent.offset();
-				// 	var w1 = $parent.width();
-			
-				// 	var off2 = $source.offset();
-				// 	var w2 = $source.width();
-			
-				// 	if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-				// 	return 'left';
-				// }
 			})
 		</script>
 </body>

@@ -74,6 +74,59 @@ public class AdminController extends BaseController
     }
 
     /**
+     * 获取大学生用户列表
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getAllUsers", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getAllUsers() {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            List<CUser> list = userService.getAllUsers();
+            if(list != null && 0<list.size()) {
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(list);
+            } else {
+                baseResult = new BaseResult(true, "暂无用户信息");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取用户信息异常！", e);
+            baseResult = new BaseResult(false, "获取用户信息异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+    /**
+     * 按状态获取企业信息列表
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getAllCompany", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getAllCompany() {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            List<CCompany> list = companyService.getAllCompany();
+            if(list != null && 0<list.size()) {
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(list);
+            } else {
+                baseResult = new BaseResult(true, "没有查询企业信息");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取企业信息列表异常！", e);
+            baseResult = new BaseResult(false, "获取企业信息列表异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
+    /**
      * 查看兼职详情
      * @param
      * @return
@@ -194,13 +247,11 @@ public class AdminController extends BaseController
      */
     @RequestMapping(value = "/getCompanyCommentById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getCompanyCommentById(@RequestParam(required = true) Integer offset,
-                                        @RequestParam(required = true) Integer limit,
+    public String getCompanyCommentById(@RequestParam(required = false) Integer offset,
+                                        @RequestParam(required = false) Integer limit,
                                         @RequestParam(required = true) Long companyId) {
         String result = "";
         BaseResult baseResult = null;
-        offset = offset ==null ? 0 :offset;//默认设置0
-        limit = limit == null ? 10 : limit;//默认展示10条
         try{
             List<CComment> comments = companyService.getCompanyComment(companyId,offset,limit);
             int count = companyService.getCompanyCommentCount (companyId);

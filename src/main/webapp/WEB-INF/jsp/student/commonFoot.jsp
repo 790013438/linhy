@@ -50,5 +50,6 @@ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+
 <script src="${resource}/resource/js/ace-elements.min.js"></script>
 <script src="${resource}/resource/js/ace.min.js"></script>
 
+<script src="${resource}/resource/js/common.js"></script>
 
 <!-- inline scripts related to this page -->

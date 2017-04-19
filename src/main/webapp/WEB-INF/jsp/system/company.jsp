@@ -35,50 +35,21 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div id="container"> 
    								<!-- 定义一个表格元素 --> 
-   									<table id="example" class="table table-striped table-bordered"> 
+   									<table id="table_company" class="table table-striped table-bordered">
     									<thead> 
-     										<tr> 
-      											<th>序号</th> 
+     										<tr>
       											<th>企业名</th> 
-      											<th>状态</th> 
+      											<th>企业状态</th>
       											<th>联系人</th> 
       											<th>联系电话</th> 
-      											<th>邮箱</th> 
-      											<th>企业地址</th> 
+      											<th>邮箱</th>
+												<th>企业网站</th>
+												<th>企业地址</th>
       											<th>操作</th> 
      										</tr> 
     									</thead> 
     									<tbody>
-    										<tr>
-    											<td>1</td>
-    											<td>测试公司1</td>
-    											<td>待审核</td>
-    											<td>马可</td>
-    											<td>3558543875</td>
-    											<td>1502774793@qq.com</td>
-    											<td>成都市高新区</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">审核</button><button class="btn btn-link delete">禁用</button></td>
-    										</tr>
-    										<tr>
-    											<td>2</td>
-    											<td>测试公司2</td>
-    											<td>待审核</td>
-    											<td>胡亮</td>
-    											<td>13370287361</td>
-    											<td>1161047485@qq.com</td>
-    											<td>四川省成都市龙泉驿区</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">审核</button><button class="btn btn-link delete">禁用</button></td>
-    										</tr>
-    										<tr>
-    											<td>3</td>
-    											<td>测试公司3</td>
-    											<td>审核通过</td>
-    											<td>陈坤</td>
-    											<td>15923556653</td>
-    											<td>157225708@qq.com</td>
-    											<td>成都市双流县</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete" disabled>审核</button><button class="btn btn-link delete">禁用</button></td>
-    										</tr>
+
     									</tbody> 
     
     								<!-- tbody是必须的 --> 
@@ -111,6 +82,8 @@
 <div class="pop" onclick="closepop()" style="display: none;"></div>
 		<!-- basic scripts -->
 	<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/system_company.js"></script>
 
 
 		<script type="text/javascript">
@@ -134,38 +107,7 @@
 						}
 					});
 				});
-				// var oTable1 = $('#sample-table-2').dataTable( {
-				// "aoColumns": [
-			 //      { "bSortable": false },
-			 //      null, null,null, null, null,
-				//   { "bSortable": false }
-				// ] } );
-				
-				
-				// $('table th input:checkbox').on('click' , function(){
-				// 	var that = this;
-				// 	$(this).closest('table').find('tr > td:first-child input:checkbox')
-				// 	.each(function(){
-				// 		this.checked = that.checked;
-				// 		$(this).closest('tr').toggleClass('selected');
-				// 	});
-						
-				// });
-			
-			
-				// $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				// function tooltip_placement(context, source) {
-				// 	var $source = $(source);
-				// 	var $parent = $source.closest('table')
-				// 	var off1 = $parent.offset();
-				// 	var w1 = $parent.width();
-			
-				// 	var off2 = $source.offset();
-				// 	var w2 = $source.width();
-			
-				// 	if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-				// 	return 'left';
-				// }
+
 			})
 		</script>
 </body>

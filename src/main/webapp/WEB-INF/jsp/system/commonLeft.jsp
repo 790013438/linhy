@@ -134,14 +134,14 @@
 
                         <ul class="submenu">
                             <li>
-                                <a href="../system/student">
+                                <a href="../system/company">
                                     <i class="icon-double-angle-right"></i>
                                     企业用户信息管理
                                 </a>
                             </li>
 
                             <li>
-                                <a href="../system/company">
+                                <a href="../system/student">
                                     <i class="icon-double-angle-right"></i>
                                     大学生用户信息管理
                                 </a>

@@ -21,4 +21,5 @@ public interface UserService {
     int quitJob(Long applicationId,Long userId);
     int updateUserPassword(String newPw,Long userId);
     int delApplication(Long applicationId,Long userId);
+    List<CUser> getAllUsers();
 }

@@ -26,17 +26,17 @@
 							<li>
 								<a href="#">信息查看</a>
 							</li>
-							<li class="active">公司信息</li>
+							<li class="active">用户信息</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								公司信息
+								用户信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									查看公司信息及评论信息
+									查看用户详细信息
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -54,13 +54,6 @@
 														个人信息
 													</a>
 												</li>
-
-												<li>
-													<a data-toggle="tab" href="#feed">
-														<i class="orange icon-rss bigger-120"></i>
-														评论
-													</a>
-												</li>
 											</ul>
 
 											<div class="tab-content no-border padding-24">
@@ -75,333 +68,77 @@
 														</div><!-- /span -->
 
 														<div class="col-xs-12 col-sm-9">
-															<h4 class="blue">
-																<span class="middle">XXX公司</span>
-															</h4>
 
 															<div class="profile-user-info">
-																<div class="profile-info-row">
-																	<div class="profile-info-name"> 公司名 </div>
+																<div class="profile-user-info">
+																	<div class="profile-info-row">
+																		<div class="profile-info-name"> 用户名 </div>
 
-																	<div class="profile-info-value">
-																		<span>XXXXX有限科技</span>
+																		<div class="profile-info-value">
+																			<span id="span_name"></span>
+																		</div>
+																	</div>
+
+																	<div class="profile-info-row">
+																		<div class="profile-info-name"> 性别 </div>
+
+																		<div class="profile-info-value">
+																			<span id="span_sex">无</span>
+																		</div>
+																	</div>
+
+																	<div class="profile-info-row">
+																		<div class="profile-info-name"> 真实姓名 </div>
+
+																		<div class="profile-info-value">
+																			<span id="span_realName">无</span>
+																		</div>
+																	</div>
+																	<div class="profile-info-row">
+																		<div class="profile-info-name"> 院系 </div>
+
+																		<div class="profile-info-value">
+																			<span id="span_departments">无</span>
+																		</div>
+																	</div>
+
+																	<div class="profile-info-row">
+																		<div class="profile-info-name"> 专业 </div>
+
+																		<div class="profile-info-value">
+																			<span id="span_major">无</span>
+																		</div>
+																	</div>
+
+																	<div class="profile-info-row">
+																		<div class="profile-info-name"> 联系电话 </div>
+
+																		<div class="profile-info-value">
+																			<span id="span_phone">无</span>
+																		</div>
+																	</div>
+
+																	<div class="profile-info-row">
+																		<div class="profile-info-name">  邮箱  </div>
+																		<div class="profile-info-value">
+																			<span id="span_email">无</span>
+																		</div>
+																	</div>
+																	<div class="profile-info-row">
+																		<div class="profile-info-name">  用户简介  </div>
+																		<div class="profile-info-value">
+																			<span id="span_profile">无</span>
+																		</div>
 																	</div>
 																</div>
 
-																<div class="profile-info-row">
-																	<div class="profile-info-name"> 位置 </div>
-
-																	<div class="profile-info-value">
-																		<i class="icon-map-marker light-orange bigger-110"></i>
-																		<span>四川省</span>
-																		<span>成都市</span>
-																	</div>
-																</div>
-
-																<div class="profile-info-row">
-																	<div class="profile-info-name"> 测试 </div>
-
-																	<div class="profile-info-value">
-																		<span>38</span>
-																	</div>
-																</div>
-
-																<div class="profile-info-row">
-																	<div class="profile-info-name"> 加入时间 </div>
-
-																	<div class="profile-info-value">
-																		<span>20/06/2010</span>
-																	</div>
-																</div>
-
-																<div class="profile-info-row">
-																	<div class="profile-info-name"> Last Online </div>
-
-																	<div class="profile-info-value">
-																		<span>3 hours ago</span>
-																	</div>
-																</div>
-															</div>
-
-															<div class="hr hr-8 dotted"></div>
-
-															<div class="profile-user-info">
-																<div class="profile-info-row">
-																	<div class="profile-info-name"> Website </div>
-
-																	<div class="profile-info-value">
-																		<a href="#" target="_blank">www.alexdoe.com</a>
-																	</div>
-																</div>
-
-																<div class="profile-info-row">
-																	<div class="profile-info-name">
-																		<i class="middle icon-facebook-sign bigger-150 blue"></i>
-																	</div>
-
-																	<div class="profile-info-value">
-																		<a href="#">Find me on Facebook</a>
-																	</div>
-																</div>
-
-																<div class="profile-info-row">
-																	<div class="profile-info-name">
-																		<i class="middle icon-twitter-sign bigger-150 light-blue"></i>
-																	</div>
-
-																	<div class="profile-info-value">
-																		<a href="#">Follow me on Twitter</a>
-																	</div>
-																</div>
-															</div>
+																<div class="hr hr-8 dotted"></div>
 														</div><!-- /span -->
 													</div><!-- /row-fluid -->
 
 													<div class="space-20"></div>
 												</div><!-- #home -->
 
-												<div id="feed" class="tab-pane">
-													<div class="profile-feed row-fluid">
-														<div class="span6">
-															<div class="profile-activity clearfix">
-																<div>
-																	<img class="pull-left" alt="Alex Doe's avatar" src="${resource}/resource/avatars/avatar5.png" />
-																	<a class="user" href="#"> Alex Doe </a>
-																	changed his profile photo.
-																	<a href="#">Take a look</a>
-
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		an hour ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<img class="pull-left" alt="Susan Smith's avatar" src="${resource}/resource/avatars/avatar1.png" />
-																	<a class="user" href="#"> Susan Smith </a>
-
-																	is now friends with Alex Doe.
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		2 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<i class="pull-left thumbicon icon-ok btn-success no-hover"></i>
-																	<a class="user" href="#"> Alex Doe </a>
-																	joined
-																	<a href="#">Country Music</a>
-
-																	group.
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		5 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<i class="pull-left thumbicon icon-picture btn-info no-hover"></i>
-																	<a class="user" href="#"> Alex Doe </a>
-																	uploaded a new photo.
-																	<a href="#">Take a look</a>
-
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		5 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<img class="pull-left" alt="David Palms's avatar" src="${resource}/resource/avatars/avatar4.png" />
-																	<a class="user" href="#"> David Palms </a>
-
-																	left a comment on Alex's wall.
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		8 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-														</div><!-- /span -->
-
-														<div class="span6">
-															<div class="profile-activity clearfix">
-																<div>
-																	<i class="pull-left thumbicon icon-edit btn-pink no-hover"></i>
-																	<a class="user" href="#"> Alex Doe </a>
-																	published a new blog post.
-																	<a href="#">Read now</a>
-
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		11 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<img class="pull-left" alt="Alex Doe's avatar" src="${resource}/resource/avatars/avatar5.png" />
-																	<a class="user" href="#"> Alex Doe </a>
-
-																	upgraded his skills.
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		12 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<i class="pull-left thumbicon icon-key btn-info no-hover"></i>
-																	<a class="user" href="#"> Alex Doe </a>
-
-																	logged in.
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		12 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<i class="pull-left thumbicon icon-off btn-inverse no-hover"></i>
-																	<a class="user" href="#"> Alex Doe </a>
-
-																	logged out.
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		16 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-
-															<div class="profile-activity clearfix">
-																<div>
-																	<i class="pull-left thumbicon icon-key btn-info no-hover"></i>
-																	<a class="user" href="#"> Alex Doe </a>
-
-																	logged in.
-																	<div class="time">
-																		<i class="icon-time bigger-110"></i>
-																		16 hours ago
-																	</div>
-																</div>
-
-																<div class="tools action-buttons">
-																	<a href="#" class="blue">
-																		<i class="icon-pencil bigger-125"></i>
-																	</a>
-
-																	<a href="#" class="red">
-																		<i class="icon-remove bigger-125"></i>
-																	</a>
-																</div>
-															</div>
-														</div><!-- /span -->
-													</div><!-- /row -->
-												</div><!-- /#feed -->
 											</div>
 										</div>
 									</div>
@@ -420,6 +157,7 @@
 
 		<!-- basic scripts -->
 		<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/company_showInfo.js"></script>
 
-</body>
+	</body>
 </html>

@@ -33,4 +33,12 @@ public interface CompanyDao {
     int updateApplicationStatus(@Param("jobId")Long jobId,@Param("userId")Long userId,@Param("appliStatus")String appliStatus);
     int updateCompPassword(@Param("newPw")String newPw,@Param("cCompanyId")Long cCompanyId);
     CCompany getCompanyInfo(@Param("companyId")Long companyId);
+    int updateJobSign(@Param("jobId")Long jobId);
+    int updateCompSign(@Param("applicationId")Long applicationId,@Param("jobId")Long jobId);
+    List<CCompany> checkAccount (@Param("account")String account);
+    List<CCompany> checkPhone (@Param("phone")String phone);
+    List<CCompany> checkMail (@Param("email")String email);
+    int updateCompany (CCompany cCompany);
+    List<CCompany> getAllCompany();
+
 }
