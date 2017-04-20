@@ -27,26 +27,9 @@ var phone_flag=false;
 
 $(function(){
 
-    $.fn.serializeJson=function(){
-        var serializeObj={};
-        var array=this.serializeArray();
-        var str=this.serialize();
-        $(array).each(function(){
-            if(serializeObj[this.name]){
-                if($.isArray(serializeObj[this.name])){
-                    serializeObj[this.name].push(this.value);
-                }else{
-                    serializeObj[this.name]=[serializeObj[this.name],this.value];
-                }
-            }else{
-                serializeObj[this.name]=this.value;
-            }
-        });
-        return serializeObj;
-    };
     $("#register").click(function () {
-
-        register();
+        var data = getParams();
+        register(data);
     });
 });
 
@@ -65,8 +48,8 @@ function getRootPath() {
  */
 function checkUserName(obj) {
     console.log(getRootPath());
-    if (checks(obj.value) == false) {
-        showInfo("username_notice", username_invalid);
+    if (obj.value.length < 1){
+        showInfo("username_notice", username_empty);
     } else {
         // 调用Ajax函数,向服务器端发送查询
         $.ajax({ //一个Ajax过程
@@ -80,7 +63,8 @@ function checkUserName(obj) {
                 }else {
                     showInfo("username_notice", username_can_register);
                     name_flag=true;
-change_submit();                    return;
+                   change_submit();
+                   return;
                 }
             }
         });
@@ -165,7 +149,7 @@ function checkConformPassword(conform_password)
     {
         showInfo("conform_password_notice",info_right);
         password_flag=true;
-     change_submit();   
+     change_submit();
         return;
     }
     password_flag=false;
@@ -197,7 +181,7 @@ function checkPhone(phone) {
                 }else {
                     showInfo("phone_notice",phone_can_register);
                     phone_flag=true;
-       change_submit();             
+       change_submit();
                     return;
                 }
             }
@@ -205,7 +189,7 @@ function checkPhone(phone) {
 
     }
     phone_flag=false;
-   change_submit(); 
+   change_submit();
 }
 
 
@@ -235,20 +219,14 @@ function showclass(target,Infos){
     document.getElementById(target).className = Infos;
 }
 
-function register() {
-    var form=$("#formUser").serializeJson
-    form=JSON.stringify(form);
-    console.log(form);
-    var data={
-      cUser:form
-    };
+function register(data) {
+    console.log(data);
     $.ajax({ //一个Ajax过程
         type: "post", //以post方式与后台沟通
         url :getRootPath()+"/user/userRegister", //与此页面沟通
         dataType:'json',//返回的值以 JSON方式 解释
         data: data, //发给的数据
         success: function(json){//如果调用成功
-            console.log(json);
             if(json.success== false){
                 alert(json.error);
             }else {
@@ -260,4 +238,29 @@ function register() {
             alert(json.error);
         }
     });
+}
+
+/**
+* 获取注册用户信息
+* @returns {{}}
+*/
+var getParams = function(){
+    var userName= $.trim($("#username").val());
+    var sex = $("input[type='radio']:checked").val();
+    if(sex == 1){
+        var userGender = "男";
+    }else{
+        var userGender = "女"
+    }
+    var userPhone = $("#phone").val();
+    var userEmail = $("#email").val();
+    var userPassword = $("#password").val();
+    var json = {};
+    json.userName = userName;
+    json.userGender = userGender;
+    json.userPhone = userPhone;
+    json.userEmail = userEmail;
+    json.userPassword = userPassword;
+    return json;
+
 }

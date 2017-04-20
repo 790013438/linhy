@@ -2,6 +2,10 @@ var condition = {
     jobStatus:"2",
 };
 $(function(){
+    $('.menu-list').removeClass('active open');
+    $("#jobManage").addClass('active open');
+    $('.submenu').find('li').removeClass('active open');
+    $("#li_myjob").addClass('active open');
     queryMyJob(condition);
     $("#btn_delJob").click(function () {
         closepop();

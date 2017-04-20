@@ -2,6 +2,7 @@ package com.xy.ssm.dao;
 
 import com.xy.ssm.model.CCompany;
 import com.xy.ssm.model.CJobs;
+import com.xy.ssm.model.CMessage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,12 @@ import java.util.List;
 public interface MessageDao
 {
 
+    void sendMessage(CMessage message);
+
+    /**
+     * 根据当前用户的类型和id获取自己的消息
+     * @param id
+     * @return
+     */
+    List<CMessage> getMessage(@Param ("id") Long id,@Param ("id2") Long id2);
 }

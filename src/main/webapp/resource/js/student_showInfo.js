@@ -5,6 +5,10 @@ var condition = {
     userId:userId
 };
 $(function() {
+    $('.menu-list').removeClass('active open');
+    $("#userManage").addClass('active open');
+    $('.submenu').find('li').removeClass('active open');
+    $("#systemStudent").addClass('active open');
     queryPersonalInf(condition);
     console.log("111"+userId);
 

@@ -26,7 +26,7 @@ public class CJobs implements Serializable {
     //薪资类型
     private String jobSalaryType;
     //每日工作时长
-    private String jobHours  ;
+    private String jobHours;
     //薪资金额
     private String jobSalary;
     //工作地点
@@ -49,6 +49,29 @@ public class CJobs implements Serializable {
     private Date jobDeadline;
     //创建时间
     private Date createTime;
+
+    public String getTime ()
+    {
+        return time;
+    }
+
+    public void setTime (String time)
+    {
+        this.time = time;
+    }
+
+    public String getDeadline ()
+    {
+        return deadline;
+    }
+
+    public void setDeadline (String deadline)
+    {
+        this.deadline = deadline;
+    }
+
+    private String time;
+    private String deadline;
 
     public static long getSerialVersionUID ()
     {

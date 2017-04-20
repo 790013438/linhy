@@ -93,18 +93,18 @@
 
             <ul class="nav nav-list">
                 <li>
-                    <a href="person_index.jsp">
+                    <a href="../student/index">
                         <i class="icon-dashboard"></i>
                         <span class="menu-text"> 大学生端 </span>
                     </a>
                 </li>
-                <li class="active">
+                <li class="active" id="job_center">
                     <a href="../student/index">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 兼职中心 </span>
                     </a>
                 </li>
-                <li>
+                <li id="li_myjob">
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-list"></i>
                         <span class="menu-text"> 我的兼职 </span>
@@ -113,14 +113,14 @@
                     </a>
 
                     <ul class="submenu">
-                        <li>
+                        <li id="li_myAppliJob">
                             <a href="../student/myJob">
                                 <i class="icon-double-angle-right"></i>
                                 查看兼职报名情况
                             </a>
                         </li>
 
-                        <li>
+                        <li id="li_history">
                             <a href="../student/jobHistory">
                                 <i class="icon-double-angle-right"></i>
                                 我的兼职历史
@@ -129,15 +129,15 @@
                     </ul>
                 </li>
 
-                <li>
+                <li id="li_myInfo">
                     <a href="../student/myinfo">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的信息 </span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="../student/myMessage">
+                <li id="li_message">
+                    <a href="../student/message">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的消息 </span>
                     </a>

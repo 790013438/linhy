@@ -1,5 +1,8 @@
 
 $(function(){
+    $('.menu-list').removeClass('active open');
+    $('.submenu').find('li').removeClass('active open');
+    $("#li_myInfo").addClass('active open');
     queryMyInfo();
     $("#btn_save").click(function () {
         var var1 = $("#li_basic").attr("class");

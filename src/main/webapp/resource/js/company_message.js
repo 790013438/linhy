@@ -1,12 +1,9 @@
-var condition = {
-    jobStatus:"2",
-};
+
 $(function(){
     $('.menu-list').removeClass('active open');
-    $("#jobManage").addClass('active open');
     $('.submenu').find('li').removeClass('active open');
-    $("#systemJob").addClass('active open');
-    getMyJobs(condition);
+    $("#li_message").addClass('active open');
+    queryMessageList();
     $("#btn_delJob").click(function () {
         closepop();
         var jobId = $("#input_jobId").val();
@@ -15,35 +12,36 @@ $(function(){
         };
         delJobById(data);
     });
+
 });
 
-//查询待审核兼职列表
-var getMyJobs = function(condition) {
+//查询我的消息
+var queryMessageList = function() {
     $.ajax({
-        url:"../admin/getAllJobs",
+        url:"../admin/queryMessageList",
         type : 'post',
-        data : condition,
+        data : null,
         dataType : 'json',
         success:function(result){
             if (result.success == true) {
                 if (result.error != "") {
                     alert(result.error);
-                    $("#table_myJob tbody").empty();
+                    $("#table_message tbody").empty();
                     return;
                 }
                 if (result.data.data!=null){
                     console.log(result.data);
-                    $("#table_myJob tbody").empty();
+                    $("#table_message tbody").empty();
                     $.each(result.data.data, function (index, obj) {
                         var tr = appendJobNode(obj);
-                        $("#table_myJob tbody").append(tr);
-                        appendTabTitleById("table_myJob");
+                        $("#table_message tbody").append(tr);
+                        appendTabTitleById("table_message");
                     });
                     $(document).ready(function(){
-                        $('#table_myJob').DataTable();
+                        $('#table_message').DataTable();
                     });
                 } else{
-                    $("#table_myJob tbody").empty();
+                    $("#table_message tbody").empty();
                     var txt = "没有查询到符合条件的信息";
                     alert(txt);
                     return;
@@ -57,18 +55,17 @@ var getMyJobs = function(condition) {
         },
         error : function(obj, msg) {
             //还得先清空所有行
-            $("#table_myJob tbody").empty();
+            $("#table_message tbody").empty();
             var txt = "没有查询到符合条件的信息";
             alert(txt);
             return;
         },
     });
 }
-
-//删除兼职
+//删除消息
 var delJobById = function(data) {
     $.ajax({
-        url:"../admin/deleteJobById",
+        url:"../admin/deleteMessageById",
         type : 'post',
         data :data,
         dataType : 'json',
@@ -79,7 +76,7 @@ var delJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "删除兼职成功";
+                    var txt = "删除消息成功";
                     alert(txt);
                     return;
                 }
@@ -91,12 +88,46 @@ var delJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "删除兼职失败";
+            var txt = "删除消息失败";
             alert(txt);
             return;
         },
         complete: function () {
-            getMyJobs(condition);
+            queryMessageList();
+        }
+    });
+}
+//将消息标记为已读
+var readMessage = function(id) {
+    $.ajax({
+        url:"../admin/readMessage",
+        type : 'post',
+        data : data={jobId:id},
+        dataType : 'json',
+        success:function(result){
+            if (result.success == true) {
+                if (result.error != "") {
+                    alert(result.error);
+                    return;
+                }else{
+                    var txt = "修改状态成功";
+                    alert(txt);
+                    return;
+                }
+            } else {
+                //还得先清空所有行
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        },
+        error : function(obj, msg) {
+            var txt = "修改状态失败";
+            alert(txt);
+            return;
+        },
+        complete: function () {
+            queryMessageList();
         }
     });
 }
@@ -145,28 +176,36 @@ var appendTabTitle = function()
 
 var appendJobNode = function(obj) {
     var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
-    var jobTime1 = moment(obj.jobTime).format("YYYY-MM-DD HH:mm:ss");
-    var sign = 0;
     var job_str = "<tr>"+
             "<td>"+obj.id+"</td>"+
             "<td>"+obj.jobTitle+"</td>"+
+            "<td> "+obj.jobType+"</td>"+
             "<td> "+obj.jobStatus+"</td>"+
             "<td> "+obj.jobDemandNumber+"</td>"+
-            "<td> "+obj.appliCount+"</td>"+
             "<td> "+jobDeadline1+"</td>"+
-            "<td> "+jobTime1+"</td>"+
             "<td>"+
-            "<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看兼职详情</a> |"+
-            "<button type=\"button\" onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>";
+            "<a  href =\"../company/jobDetails?jobId="+obj.id+"\" >查看兼职详情</a> |" +
+            "<button type=\"button\"  onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>|";
+    if(obj.jobStatus== "保存"){
+        var job_str1 = job_str +"<button type=\"button\" onclick=\"submitAudit('"+obj.id+"')\" class='btn btn-link'>提交审核</button>";
+    }else{
+        var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>提交审核</button>";
+        // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已报名</a>";
+    }
     "<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
     "</td>"+
     "</tr>";
-    return job_str;
+    return job_str1;
 }
-function delJob(data)
-{
+
+var delJob = function(data) {
     $("#input_jobId").val(data);
     $(".pop").show();
     $(".popinto").show();
 }
+
+
+
+
+
 

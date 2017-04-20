@@ -132,7 +132,7 @@
 										<label class="col-sm-3 control-label no-padding-right"> 兼职时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
-													<input type="text" id="input_jobTime" class="form-control hasDatepicker date-picker" id="jobTime">
+													<input type="text" id="input_jobTime" class="form-control hasDatepicker date-picker" id="jobTime" data-date-format="yyyy-mm-dd">
 													<span class="input-group-addon">
 														<i class="icon-calendar"></i>
 													</span>
@@ -142,14 +142,14 @@
 										<label class="col-sm-3 control-label no-padding-right"> 报名截止时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
-													<input type="text" id="input_deadline" class="form-control hasDatepicker date-picker" >
+													<input type="text" id="input_deadline" class="form-control hasDatepicker date-picker" data-date-format="yyyy-mm-dd" >
 													<span class="input-group-addon">
 														<i class="icon-calendar"></i>
 													</span>
 										</div>
 									</div>
 									<div align="center">
-										<button style="width:200px;height:50px;background:#338FCC;" id="btn_saveJob" type="submit">保存</button>
+										<button style="width:200px;height:50px;background:#338FCC;" id="btn_saveJob" type="button">保存</button>
 									</div>
 								</form>
 								<!-- PAGE CONTENT ENDS -->
@@ -169,6 +169,8 @@
 	<%@include file="commonFoot.jsp"%>
 	<script src="${resource}/resource/js/moment.js"></script>
 	<script src="${resource}/resource/js/company_addJob.js"></script>
+	<script src="${resource}/resource/js/check.js"></script>
+
 	<script type="text/javascript">
 			jQuery(function($) {
                 $('.date-picker').datepicker({

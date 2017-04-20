@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,30 +69,53 @@ public class UserController extends BaseController{
         return "showUser";
     }
 
+//    /**
+//     * 普通用户注册
+//     * @param cUser
+//     * @return
+//     */
+//    @RequestMapping(value = "/register", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+//    @ResponseBody
+//    public String register(CUser cUser) {
+//        String result = "";
+//        BaseResult baseResult = null;
+//        try{
+//            if(cUser == null){
+//                baseResult=new BaseResult(false,"用户注册信息获取异常");
+//            }else {
+//                Long rs=service.processRegister(cUser);
+//                if(rs!=null){
+//                    baseResult=new BaseResult(true,"注册用户信息成功");
+//                }else {
+//                    baseResult=new BaseResult(false,"用户注册失败");
+//                }
+//            }
+//        }catch (Exception e){
+//            log.error("注册用户出现异常"+e);
+//            baseResult=new BaseResult(false,"用户注册异常");
+//        }
+//        result= JSON.toJSONString(baseResult);
+//        return result;
+//    }
+
     /**
-     * 用户注册
-     * @param json
+     * 普通用户注册
+     * @param cUser
      * @return
      */
-    @RequestMapping(value = "/register", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/userRegister", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String register(@RequestParam(required = true) String  json) {
+    public String userRegister(CUser cUser) {
         String result = "";
         BaseResult baseResult = null;
+        cUser.setUserType (1);
+        String password = MD5Util.getMd5 (cUser.getUserPassword ());
+        cUser.setUserPassword (password);
+         log.info ("111"+111);
         try{
-            if(StringUtils.isEmpty(json)){
+            if(cUser == null){
                 baseResult=new BaseResult(false,"用户注册信息获取异常");
             }else {
-                CUser cUser=new CUser();
-                log.info(json);
-                JSONObject obj=JSON.parseObject(json);
-                cUser.setUserName(obj.getString("username"));
-                cUser.setUserEmail(obj.getString("email"));
-                cUser.setUserPassword(MD5Util.encode2hex(obj.getString("password")));
-                cUser.setUserGender(obj.getString("gender"));
-                cUser.setUserPhone(obj.getString("phone"));
-                cUser.setCreateTime(new Date());
-                cUser.setUserType(1);
                 Long rs=service.processRegister(cUser);
                 if(rs!=null){
                     baseResult=new BaseResult(true,"注册用户信息成功");
@@ -106,6 +130,37 @@ public class UserController extends BaseController{
         result= JSON.toJSONString(baseResult);
         return result;
     }
+    /**
+     * 企业用户注册
+     * @param cCompany
+     * @return
+     */
+    @RequestMapping(value = "/companyRegister", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String companyRegister(CCompany cCompany) {
+        String result = "";
+        BaseResult baseResult = null;
+        String password = MD5Util.getMd5 (cCompany.getCompPassword ());
+        cCompany.setCompPassword (password);
+        try{
+            if(cCompany == null){
+                baseResult=new BaseResult(false,"用户注册信息获取异常");
+            }else {
+                int rs=companyService.addCompany(cCompany);
+                if(rs > 0){
+                    baseResult=new BaseResult(true,"注册用户信息成功");
+                }else {
+                    baseResult=new BaseResult(false,"用户注册失败");
+                }
+            }
+        }catch (Exception e){
+            log.error("注册用户出现异常"+e);
+            baseResult=new BaseResult(false,"用户注册异常");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+
 
     /**
      *检测用户名是否存在

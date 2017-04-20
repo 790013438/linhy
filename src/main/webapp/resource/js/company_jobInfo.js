@@ -6,6 +6,10 @@ var condition = {
     jobId:jobId
 };
 $(function(){
+    $('.menu-list').removeClass('active open');
+    $("#jobManage").addClass('active open');
+    $('.submenu').find('li').removeClass('active open');
+    $("#li_history").addClass('active open');
     getJobInfoByID(condition);
     getAppliByID(condition);
     $("#btn_agree").click(function () {

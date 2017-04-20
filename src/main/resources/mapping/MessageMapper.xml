@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xy.ssm.dao.MessageDao">
 
 
+    <insert id="sendMessage" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.xy.ssm.model.CMessage">
+        insert into c_message(mes_sender_id,mes_object_id,mes_type,mes_contents,create_time)
+        values(#{mesSenderId},#{mesObjectId},#{mesType},#{mesContents},now())
+    </insert>
+
+    <select id="getMessage" resultType="com.xy.ssm.model.CMessage">
+        select id,mes_sender_id as mesSenderId,mes_object_id as mesObjectId,mes_type as mesType,mes_contents as mesContents,create_time as createTime, mes_status as mesStatus  from c_message
+        where mes_sender_id =#{id} and mes_object_id =#{id2} and mes_status != 2
+    </select>
 </mapper>

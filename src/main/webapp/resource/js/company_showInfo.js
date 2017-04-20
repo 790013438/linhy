@@ -5,6 +5,10 @@ var condition = {
     companyId:companyId
 };
 $(function() {
+    $('.menu-list').removeClass('active open');
+    $("#userManage").addClass('active open');
+    $('.submenu').find('li').removeClass('active open');
+    $("#systemCompany").addClass('active open');
     queryCompanyInf(condition);
 
 })

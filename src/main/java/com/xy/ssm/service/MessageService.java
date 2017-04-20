@@ -1,9 +1,6 @@
 package com.xy.ssm.service;
 
-import com.xy.ssm.model.CApplication;
-import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CCompany;
-import com.xy.ssm.model.CJobs;
+import com.xy.ssm.model.*;
 
 import java.util.List;
 
@@ -13,5 +10,18 @@ import java.util.List;
 public interface MessageService
 {
 
+    /**
+     * 发送消息
+     * @param message
+     */
+    void sendMessage(CMessage message);
+
+    /**
+     * 获取当前消息
+     * @param id
+     * @param id2
+     * @return
+     */
+    List<CMessage> getMessage(Long id,Long id2);
 
 }

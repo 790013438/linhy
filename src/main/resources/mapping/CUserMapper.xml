@@ -25,7 +25,7 @@
         select id,user_name as userName,user_phone as userPhone,user_email as userEmail,
         user_icon as userIcon,user_gender as userGender,user_realname as userRealName,user_intention_job as userIntention ,
         user_profile as userProfile,user_type as userType , user_status as userStatus,user_password as userPassword,
-        create_time as createTime from c_users where user_name = #{username} and user_type = #{userType}
+        create_time as createTime from c_users where user_name = #{username} and user_type = #{userType} and user_status = 1
     </select>
 
     <select id="getUserById" resultType="com.xy.ssm.model.CUser">

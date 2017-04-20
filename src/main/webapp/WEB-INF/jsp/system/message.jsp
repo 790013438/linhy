@@ -32,59 +32,17 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div id="container"> 
    								<!-- 定义一个表格元素 --> 
-   									<table id="example" class="table table-striped table-bordered"> 
+   									<table id="table_message" class="table table-striped table-bordered">
     									<thead> 
      										<tr> 
-      											<th>序号</th> 
-      											<th>触发用户id</th> 
-      											<th>状态</th> 
-      											<th>类型</th> 
+      											<th>序号</th>
+      											<th>类型</th>
       											<th>时间</th> 
-      											<th>操作</th> 
+      											<th>详情</th>
      										</tr> 
     									</thead> 
     									<tbody>
-    										<tr>
-    											<td>1</td>
-    											<td>1</td>
-    											<td>未读</td>
-    											<td>企业审核</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link see">查看详情</button><button class="btn btn-link del">删除</button></a></td>
-    										</tr>
-    										<tr>
-    											<td>2</td>
-    											<td>2</td>
-    											<td>未读</td>
-    											<td>兼职审核</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
-    										</tr>
-    										<tr>
-    											<td>3</td>
-    											<td>2</td>
-    											<td>未读</td>
-    											<td>企业审核</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
-    										</tr>
-    										<tr>
-    											<td>4</td>
-    											<td>1</td>
-    											<td>未读</td>
-    											<td>兼职审核</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
-    										</tr>
-    										<tr>
-    											<td>5</td>
-    											<td>1</td>
-    											<td>未读</td>
-    											<td>用户反馈</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
-    										</tr>
-    								
+
     									</tbody> 
     
     								<!-- tbody是必须的 --> 
@@ -133,8 +91,10 @@
 <div class="pop" onclick="closepop()" style="display: none;"></div>
 		<!-- basic scripts -->
 	<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/system_message.js"></script>
+	<script src="${resource}/resource/js/moment.js"></script>
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 
 		function closepop(){
 				$(".pop").hide();
@@ -150,9 +110,7 @@
 				$("#see").show();
 				})
 
-				$(document).ready(function(){
-        			$('#example').DataTable();
-    			});
+
 
     			$(".delete").on(ace.click_event, function() {
 					bootbox.confirm("Are you sure?", function(result) {

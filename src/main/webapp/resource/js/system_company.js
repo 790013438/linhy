@@ -1,5 +1,8 @@
 
 $(function(){
+    $('.menu-list').removeClass('active open');
+    $('.submenu').find('li').removeClass('active open');
+    $("#systemCompany").addClass('active open');
     getCompanyList();
     $("#btnFrozen").click(function () {
         closepop();

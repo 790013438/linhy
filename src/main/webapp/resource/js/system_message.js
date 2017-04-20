@@ -1,61 +1,51 @@
 
-var condition = {
-    jobStatus:"1",
-};
 $(function(){
     $('.menu-list').removeClass('active open');
-    $("#jobManage").addClass('active open');
     $('.submenu').find('li').removeClass('active open');
-    $("#systemIdex").addClass('active open');
-    getWaitingAudit(condition);
-    $("#btnAdoptJob").click(function () {
+    $("#li_message").addClass('active open');
+    queryMessageList();
+    $("#btn_delJob").click(function () {
         closepop();
         var jobId = $("#input_jobId").val();
-        var condition = {
-            jobId:jobId,
-            jobStatus:3
+        var data = {
+            jobId:jobId
         };
-        updateJobStatus(condition);
+        delJobById(data);
     });
-    $("#btnRefuseJob").click(function () {
-        closepop();
-        var jobId = $("#input_jobId").val();
-        var condition = {
-            jobId:jobId,
-            jobStatus:2
-        };
-        updateJobStatus(condition);
-    });
+
 });
 
-//查询待审核兼职列表
-var getWaitingAudit = function(condition) {
+//查询我的消息
+var queryMessageList = function() {
 	$.ajax({
-		url:"../admin/getAllJobs",
+		url:"../message/getMessage",
 		type : 'post',
-		data : condition,
+		data : {
+		    type:1
+        },
 		dataType : 'json',
 		success:function(result){
+		    console.log(result);
 			if (result.success == true) {
 				if (result.error != "") {
 					alert(result.error);
-					$("#waitingAudit tbody").empty();
+					$("#table_message tbody").empty();
 					return;
 				}
 				if (result.data.data!=null){
 					console.log(result.data);
-					$("#waitingAudit tbody").empty();
+					$("#table_message tbody").empty();
 					$.each(result.data.data, function (index, obj) {
 						var tr = appendJobNode(obj);
-						$("#waitingAudit tbody").append(tr);
-						appendTabTitleById("waitingAudit");
+						$("#table_message tbody").append(tr);
+						appendTabTitleById("table_message");
                     });
                     $(document).ready(function(){
-                        $('#waitingAudit').DataTable();
+                        $('#table_message').DataTable();
                     });
 				} else{
-					$("#waitingAudit tbody").empty();
-					var txt = "暂无待审核表兼职";
+					$("#table_message tbody").empty();
+					var txt = "没有查询到符合条件的信息";
 					alert(txt);
 					return;
 				}
@@ -68,18 +58,17 @@ var getWaitingAudit = function(condition) {
 		},
 		error : function(obj, msg) {
 			//还得先清空所有行
-			$("#waitingAudit tbody").empty();
-			var txt = "暂无待审核表兼职";
+			$("#table_message tbody").empty();
+			var txt = "没有查询到符合条件的信息";
 			alert(txt);
 			return;
 		},
 	});
 }
-
-//审核兼职
-var updateJobStatus = function(data) {
+//删除消息
+var delJobById = function(data) {
     $.ajax({
-        url:"../admin/auditingJob",
+        url:"../admin/deleteMessageById",
         type : 'post',
         data :data,
         dataType : 'json',
@@ -90,7 +79,7 @@ var updateJobStatus = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "审核兼职成功";
+                    var txt = "删除消息成功";
                     alert(txt);
                     return;
                 }
@@ -102,12 +91,46 @@ var updateJobStatus = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "审核兼职失败";
+            var txt = "删除消息失败";
             alert(txt);
             return;
         },
         complete: function () {
-            window.location.href = '../system/index';
+            queryMessageList();
+        }
+    });
+}
+//将消息标记为已读
+var readMessage = function(id) {
+    $.ajax({
+        url:"../admin/readMessage",
+        type : 'post',
+        data : data={jobId:id},
+        dataType : 'json',
+        success:function(result){
+            if (result.success == true) {
+                if (result.error != "") {
+                    alert(result.error);
+                    return;
+                }else{
+                    var txt = "修改状态成功";
+                    alert(txt);
+                    return;
+                }
+            } else {
+                //还得先清空所有行
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        },
+        error : function(obj, msg) {
+            var txt = "修改状态失败";
+            alert(txt);
+            return;
+        },
+        complete: function () {
+            queryMessageList();
         }
     });
 }
@@ -155,29 +178,29 @@ $(".table tr td input").each(function(){
 
 
 var appendJobNode = function(obj) {
-    var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
-    var sign = 1;
+    var jobDeadline1 = moment(obj.createTime).format("YYYY-MM-DD");
+    if(obj.mesType==1){
+        obj.mesType="兼职审批";
+    }
+    if(obj.mesType==2){
+        obj.mesType="兼职报名";
+    }
     var job_str = "<tr>"+
-            "<td>"+obj.id+"</td>"+
-		"<td>"+obj.jobTitle+"</td>"+
-		"<td> "+obj.jobStatus+"</td>"+
-		"<td> "+obj.jobDemandNumber+"</td>"+
-		"<td> "+obj.jobCompanyName+"</td>"+
+         "<td>"+obj.id+"</td>"+
+		"<td> "+obj.mesType+"</td>"+
 		"<td> "+jobDeadline1+"</td>"+
-		"<td>"+
-		"<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看兼职详情</a> |"+
-       "<button type=\"button\" onclick=\"auditJob('"+obj.id+"')\" class='btn btn-link'>审核兼职</button>";
-		"<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
-		"</td>"+
-		"</tr>";
+		"<td> "+obj.mesContents+"</td></tr>";
+    console.log(job_str);
 	return job_str;
 }
-function auditJob(data)
-{
+
+var delJob = function(data) {
     $("#input_jobId").val(data);
     $(".pop").show();
     $(".popinto").show();
 }
+
+
 
 
 

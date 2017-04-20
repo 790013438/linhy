@@ -5,18 +5,19 @@ import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
-import com.xy.ssm.model.CApplication;
-import com.xy.ssm.model.CCompany;
-import com.xy.ssm.model.CJobs;
-import com.xy.ssm.model.CUser;
+import com.xy.ssm.model.*;
 import com.xy.ssm.service.CompanyService;
+import com.xy.ssm.service.MessageService;
 import com.xy.ssm.service.UserService;
 import com.xy.ssm.utils.MD5Util;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,9 @@ public class CompanyController extends BaseController {
     @Resource
     private CompanyService companyService;
 
+    @Autowired
+    private MessageService messageService;
+
 //    /**
 //     * 跳转到企业用户页面
 //     * @return
@@ -45,28 +49,31 @@ public class CompanyController extends BaseController {
 
     /**
      * 发布兼职信息
-     * @param cJobs
      * @return
      */
     @RequestMapping(value = "/addJobs", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String addJobs(@RequestParam(required = true) CJobs cJobs) {
+    public String addJobs(@RequestParam(required = true) String  json) {
         String result = "";
         BaseResult baseResult = null;
         CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
-
         try{
+            CJobs cJobs=(CJobs)JSON.parseObject (json,CJobs.class);
+            log.info (JSON.toJSONString (cJobs));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            cJobs.setJobTime (sdf.parse (cJobs.getTime()));
+            cJobs.setJobDeadline (sdf.parse(cJobs.getDeadline()));
             Long companyId = cCompany.getId();
             cJobs.setJobCompanyId(companyId);
             Long id = companyService.addJobs(cJobs);
             if(id != null){
-                baseResult=new BaseResult(true,"发布兼职信息成功");
+                baseResult=new BaseResult(true,"保存兼职信息成功");
             }else{
-                baseResult=new BaseResult(false,"发布兼职信息失败");
+                baseResult=new BaseResult(false,"保存兼职信息失败");
             }
         }catch (Exception e){
-            log.error("发布兼职信息异常"+e);
-            baseResult=new BaseResult(false,"发布兼职信息异常");
+            log.error("保存兼职信息异常,请先登录"+e);
+            baseResult=new BaseResult(false,"保存兼职信息异常，请先登录");
         }
         result= JSON.toJSONString(baseResult);
         return result;
@@ -213,11 +220,17 @@ public class CompanyController extends BaseController {
         CCompany cCompany =(CCompany) getLoginUser ().get ("loginuser");
         String jobStatus = "1";
         try{
-            int rs = companyService.updateJobStatus (jobId,jobStatus);
-            if(rs > 0){
-                baseResult=new BaseResult(true,"");
+            if(cCompany.getCompStatus ().equals ("comp_apply")){
+                baseResult=new BaseResult(false,"企业还未通过审核，暂不能提交兼职");
             }else{
-                baseResult=new BaseResult(false,"提交审核失败");
+                int rs = companyService.updateJobStatus (jobId,jobStatus);
+                if(rs > 0){
+                    String message="兼职id为"+jobId+"的兼职进行请求审批！";
+                    messageService.sendMessage (MessageUtils.getMessage (1L,1L,1,message));
+                    baseResult=new BaseResult(true,"");
+                }else{
+                    baseResult=new BaseResult(false,"提交审核失败");
+                }
             }
         }catch (Exception e){
             log.error("提交审核异常"+e);
@@ -487,6 +500,7 @@ public class CompanyController extends BaseController {
         log.info("--------------------/company/checkPhone  called");
         String result = "";
         BaseResult baseResult = null;
+        log.info ("1111111111111111111111111111"+phone);
         try{
             if(StringUtils.isEmpty(phone)){
                 baseResult=new BaseResult(false,"手机号信息获取异常，请联系管理员稍后再试");

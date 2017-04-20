@@ -9,8 +9,10 @@ import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CUser;
 import com.xy.ssm.service.CUserService;
 import com.xy.ssm.service.CompanyService;
+import com.xy.ssm.service.MessageService;
 import com.xy.ssm.service.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +34,8 @@ public class AdminController extends BaseController
     private CompanyService companyService;
     @Resource
     private CUserService cUserService;
-
+    @Autowired
+    private MessageService messageService;
     /**
      * 跳转到管理员用户页面
      * @return
@@ -171,8 +174,11 @@ public class AdminController extends BaseController
         String result = "";
         BaseResult baseResult = null;
         try{
+            CJobs cJobs=companyService.getJobDetails (jobId);
             int resultCode = companyService.updateJobStatus(jobId,jobStatus);
             if(resultCode > 0) {
+                String message="兼职id为<a href=\"jobDetails?id=" + jobId + "\">"+jobId+"</a>的兼职已经审批！";
+                messageService.sendMessage (MessageUtils.getMessage (cJobs.getJobCompanyId (),2L,1,message));
                 baseResult = new BaseResult(true, "");
             } else {
                 baseResult = new BaseResult(true, "修改兼职状态失败");

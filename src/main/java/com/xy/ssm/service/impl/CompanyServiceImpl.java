@@ -129,6 +129,12 @@ public class CompanyServiceImpl implements CompanyService {
         return companyDao.getAllCompany();
     }
 
+    @Override
+    public int addCompany (CCompany cCompany)
+    {
+        return companyDao.addCompany(cCompany);
+    }
+
     public List<CJobs> getJobsByCompanyId(String queryTerm, Long companyId, Integer offset, Integer limit,String jobStatus) {
         return companyDao.selectJobsByCompanyId(queryTerm,companyId, offset, limit,jobStatus);
     }

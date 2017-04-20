@@ -94,12 +94,12 @@
 
             <ul class="nav nav-list">
                 <li>
-                    <a href="index.jsp">
+                    <a href="../company/index">
                         <i class="icon-dashboard"></i>
                         <span class="menu-text"> 企业端 </span>
                     </a>
                 </li>
-                <li class="active open">
+                <li class="" id="jobManage">
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-list"></i>
                         <span class="menu-text"> 兼职管理 </span>
@@ -108,14 +108,14 @@
                     </a>
 
                     <ul class="submenu">
-                        <li class="active">
+                        <li class="" id="li_myjob">
                             <a href="../company/index">
                                 <i class="icon-double-angle-right"></i>
                                 我的兼职
                             </a>
                         </li>
 
-                        <li>
+                        <li class=""  id="li_history">
                             <a href="../company/myJobs">
                                 <i class="icon-double-angle-right"></i>
                                 发布历史
@@ -125,15 +125,15 @@
                 </li>
 
 
-                <li>
+                <li id="li_myInfo">
                     <a href="../company/myInfo">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的信息 </span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="../company/myMessage">
+                <li id="li_message">
+                    <a href="../company/message">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的消息 </span>
                     </a>

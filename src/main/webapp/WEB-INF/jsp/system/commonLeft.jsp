@@ -29,21 +29,20 @@
                     <li class="green">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope icon-animated-vertical"></i>
-                            <span class="badge badge-success">5</span>
                         </a>
 
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
-                                <a href="#">
+                                <a href="../system/message">
                                     <i class="icon-envelope-alt"></i>
-                                    5 Messages
+                                    Messages
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <!-- 右上角头像信息维护 -->
                     <li class="light-blue">
-                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <a data-toggle="dropdown" class="dropdown-toggle">
                             <img class="nav-user-photo" src="${resource}/resource/avatars/avatar5.png" alt="Jason's Photo" />
                             <span class="user-info">
 									<small>欢迎您,</small>
@@ -87,12 +86,12 @@
 
                 <ul class="nav nav-list">
                     <li>
-                        <a href="system_index.jsp">
+                        <a href="../system/index">
                             <i class="icon-dashboard"></i>
                             <span class="menu-text"> 管理员端 </span>
                         </a>
                     </li>
-                    <li class="active open">
+                    <li class="" id="jobManage">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-list"></i>
                             <span class="menu-text"> 兼职管理 </span>
@@ -101,14 +100,14 @@
                         </a>
 
                         <ul class="submenu">
-                            <li class="active">
+                            <li class="active" id="systemIdex">
                                 <a href="../system/index">
                                     <i class="icon-double-angle-right"></i>
                                     待审核兼职管理
                                 </a>
                             </li>
 
-                            <li >
+                            <li id="systemJob">
                                 <a href="../system/job">
                                     <i class="icon-double-angle-right"></i>
                                     已审核兼职管理
@@ -118,7 +117,7 @@
                     </li>
 
 
-                    <li>
+                    <li class="menu-list" id="userManage">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-list"></i>
                             <span class="menu-text"> 用户管理 </span>
@@ -127,14 +126,14 @@
                         </a>
 
                         <ul class="submenu">
-                            <li>
+                            <li id="systemCompany">
                                 <a href="../system/company">
                                     <i class="icon-double-angle-right"></i>
                                     企业用户信息管理
                                 </a>
                             </li>
 
-                            <li>
+                            <li class="menu-list" id="systemStudent">
                                 <a href="../system/student">
                                     <i class="icon-double-angle-right"></i>
                                     大学生用户信息管理
@@ -143,7 +142,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="menu-list" id="li_message">
                         <a href="../system/message">
                             <i class="icon-text-width"></i>
                             <span class="menu-text"> 我的消息 </span>

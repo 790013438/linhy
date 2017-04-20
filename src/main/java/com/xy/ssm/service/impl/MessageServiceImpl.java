@@ -2,6 +2,7 @@ package com.xy.ssm.service.impl;
 
 
 import com.xy.ssm.dao.MessageDao;
+import com.xy.ssm.model.CMessage;
 import com.xy.ssm.service.MessageService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,4 +24,27 @@ public class MessageServiceImpl implements MessageService
     private MessageDao messageDao;
 
 
+    /**
+     * 发送消息
+     *
+     * @param message
+     */
+    @Override
+    public void sendMessage (CMessage message)
+    {
+        messageDao.sendMessage (message);
+    }
+
+    /**
+     * 获取当前消息
+     *
+     * @param id
+     * @param id2
+     * @return
+     */
+    @Override
+    public List<CMessage> getMessage (Long id, Long id2)
+    {
+        return messageDao.getMessage (id, id2);
+    }
 }

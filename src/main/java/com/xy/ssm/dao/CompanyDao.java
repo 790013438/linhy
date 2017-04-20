@@ -40,5 +40,6 @@ public interface CompanyDao {
     List<CCompany> checkMail (@Param("email")String email);
     int updateCompany (CCompany cCompany);
     List<CCompany> getAllCompany();
+    int addCompany(CCompany cCompany);
 
 }

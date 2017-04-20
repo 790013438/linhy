@@ -11,42 +11,45 @@ $(function(){
             alert("输入了空字符串或者信息不完善");
         }
         console.log(data);
-        // addJob(data);
+        addJob(JSON.stringify(data));
     });
 });
 
-// //发布兼职
-// var addJob = function (data) {
-//     $.ajax({
-//         url: "../company/addJobs",
-//         type: 'post',
-//         data: data,
-//         dataType : 'json',
-//         error: function (obj, msg) {
-//             var txt = "保存兼职失败";
-//             alert(txt);
-//             return;
-//         },
-//         complete: function () {
-//         },
-//         success: function (result) {
-//             if (result.success == true) {
-//                 if (result.data > 0) {
-//                     alert("保存兼职成功，可以提交审核");
-//                 }
-//                 else {
-//                     var txt = result.error;
-//                     alert(txt);
-//                     return;
-//                 }
-//             }else{
-//                 var txt = result.error;
-//                 alert(txt);
-//                 return;
-//             }
-//         }
-//     });
-// }
+//发布兼职s
+var addJob = function (data) {
+    $.ajax({
+        url: "../company/addJobs",
+        type: 'post',
+        data: {
+            json:data
+        },
+        dataType : 'json',
+        error: function (obj, msg) {
+            var txt = "保存兼职失败";
+            alert(txt);
+            return;
+        },
+        complete: function () {
+        },
+        success: function (result) {
+            if (result.success == true) {
+                if (result.data > 0) {
+                    alert("保存兼职成功，可以提交审核");
+                    window.location.href='index';
+                }
+                else {
+                    var txt = result.error;
+                    alert(txt);
+                    return;
+                }
+            }else{
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        }
+    });
+}
 function checkNumber(obj) {
     var num=/^[1-9]\d*$/;
     if ((num.test(obj))){// 判断是否是数字
@@ -109,7 +112,6 @@ var getParams = function(){
     var jobIntroduction = $("#input_introduction").val();
     var jobRemarks = $("#job_remarks").val();
     var jobSalaryType = $("#salary_type").val();
-
     var jobSalary = $("#salary_salary").val();
     var jobHours = $("#job_hours").val();
     var jobTime= $("#input_jobTime").val();
@@ -125,8 +127,8 @@ var getParams = function(){
     json.jobRemarks = jobRemarks;
     json.jobSalaryType = jobSalaryType;
     json.jobHours = jobHours;
-    json.jobTime = jobTime;
-    json.jobDeadline = jobDeadline;
+    json.time = jobTime;
+    json.deadline = jobDeadline;
     return json;
 
 }
