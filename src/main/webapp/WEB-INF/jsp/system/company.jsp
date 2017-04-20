@@ -68,17 +68,29 @@
 			</a>
 		</div><!-- /.main-container -->
 
-<!--删除弹窗start-->
-<div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
+<div class="popinto" id="popinto_frozen">
+    <div class="font16 center deletediv">是否禁用该用户？</div>
     <div class="deletediv_btn">
-        <p class="pull-left"><button type="button" class="btn btn-primary" id="btnDoUpdate">确定</button></p>
+        <p class="pull-left"><button type="button" class="btn btn-primary" id="btnFrozen">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
-        <input hidden="hidden" id="doId"/>
-        <input hidden="hidden" id="doStatus"/>
+        <input hidden="hidden" id="companyId"/>
     </div>
 </div>
-<!--删除弹窗end-->
+	<div class="popinto" id="popinto_thaw">
+		<div class="font16 center deletediv">是否解禁该用户？</div>
+		<div class="deletediv_btn">
+			<p class="pull-left"><button type="button" class="btn btn-primary" id="btnThaw">确定</button></p>
+			<p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
+		</div>
+	</div>
+	<div class="popinto" id="popinto_audit">
+		<div class="font16 center deletediv">请选择审核结果</div>
+		<div class="deletediv_btn">
+			<p class="pull-left"><button type="button" class="btn btn-primary" id="btnAuditAgree">通过</button></p>
+			<p class="pull-right"><button type="button" class="btn btn-default" id="btnAuditRefuse">拒绝</button></p>
+			<input hidden="hidden" id="doId"/>
+		</div>
+	</div>
 <div class="pop" onclick="closepop()" style="display: none;"></div>
 		<!-- basic scripts -->
 	<%@include file="commonFoot.jsp"%>

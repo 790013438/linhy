@@ -33,7 +33,7 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								公司信息
+								用户信息
 								<small>
 									<i class="icon-double-angle-right"></i>
 									查看用户详细信息
@@ -124,7 +124,7 @@
 																	</div>
 																</div>
 																<div class="profile-info-row">
-																	<div class="profile-info-name">  邮箱  </div>
+																	<div class="profile-info-name">  用户简介  </div>
 																	<div class="profile-info-value">
 																		<span id="span_profile">无</span>
 																	</div>

@@ -70,11 +70,14 @@
 
 															<div class="row">
 																<div class="col-xs-12 col-sm-4">
-																	<form method="post" action="../../photoUpload" enctype="multipart/form-data">
-																		<input type="file" name="file" value="file">
-																		<input type="submit" value="确定">
-																	</form>
+																	<img class="nav-user-photo" src="${resource}/resource/avatars/profile-pic.jpg"/>
 																</div>
+																<%--<div class="col-xs-12 col-sm-4">--%>
+																	<%--<form method="post" action="../../photoUpload" enctype="multipart/form-data">--%>
+																		<%--<input type="file" name="file" value="file">--%>
+																		<%--<input type="submit" value="确定">--%>
+																	<%--</form>--%>
+																<%--</div>--%>
 
 																<div class="vspace-xs"></div>
 
@@ -107,21 +110,6 @@
 															</div>
 
 															<hr />
-															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right" for="form-field-date">Birth Date</label>
-
-																<div class="col-sm-9">
-																	<div class="input-medium">
-																		<div class="input-group">
-																			<input class="input-medium date-picker" id="form-field-date" type="text" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
-																			<span class="input-group-addon">
-																				<i class="icon-calendar"></i>
-																			</span>
-																		</div>
-																	</div>
-																</div>
-															</div>
-
 															<div class="space-4"></div>
 
 															<div class="form-group">

@@ -13,8 +13,6 @@ var email_empty = "<span style='COLOR:#ff0000'> × 邮箱不能为空！</span>"
 var email_invalid = "<span style='COLOR:#ff0000'> × 邮箱格式出错！</span>";
 var email_have_register = "<span style='COLOR:#ff0000'> × 该邮箱已被注册！ </span>";
 var email_can_register = "<span style='COLOR:#006600'> √ 邮箱可以注册!</span>";
-var agreement_no = "<span style='COLOR:#ff0000'> × 您没有接受协议</span>";
-var agreement_yes= "<span style='COLOR:#006600'> √ 已经接受协议</span>";
 var info_can="<span style='COLOR:#006600'> √ 可以注册!</span>";
 var info_right="<span style='COLOR:#006600'> √ 填写正确!</span>";
 var phone_empty="<span style='COLOR:#ff0000'> × 手机号不能为空！</span>";
@@ -28,15 +26,6 @@ var accept_flag=false;
 var phone_flag=false;
 
 $(function(){
-    change_submit();
-    if(document.getElementById("agreement").checked){
-        alert("checkbox is checked");
-    }
-
-    $("form").submit(function(e){
-        e.preventDefault();
-        register();
-    });
 
     $.fn.serializeJson=function(){
         var serializeObj={};
@@ -55,6 +44,10 @@ $(function(){
         });
         return serializeObj;
     };
+    $("#register").click(function () {
+
+        register();
+    });
 });
 
 /*
@@ -74,13 +67,7 @@ function checkUserName(obj) {
     console.log(getRootPath());
     if (checks(obj.value) == false) {
         showInfo("username_notice", username_invalid);
-    } else if (obj.value.length < 1) {
-        showInfo("username_notice", username_empty);
-    }else if (obj.value.length < 3) {
-        showInfo("username_notice", username_shorter);
-    } else if(obj.value.length>30){
-        showInfo("username_notice", username_longer);
-    }else {
+    } else {
         // 调用Ajax函数,向服务器端发送查询
         $.ajax({ //一个Ajax过程
             type: "post", //以post方式与后台沟通
@@ -93,15 +80,13 @@ function checkUserName(obj) {
                 }else {
                     showInfo("username_notice", username_can_register);
                     name_flag=true;
-                    change_submit();
-                    return;
+change_submit();                    return;
                 }
             }
         });
     }
     name_flag=false;
-    change_submit();
-}
+change_submit();}
 /*
  * 用户名检测是否包含非法字符
  */
@@ -122,7 +107,6 @@ function checkEmail(email) {
     if (email.value.length < 1) {
         showInfo("email_notice", email_empty);
     } else if (!re.test(email.value)) {
-        email.className = "FrameDivWarn";
         showInfo("email_notice", email_invalid);
     } else {
         // 调用Ajax函数,向服务器端发送查询
@@ -139,15 +123,13 @@ function checkEmail(email) {
                 }else {
                     showInfo("email_notice", email_can_register);
                     email_flag=true;
-                    change_submit();
-                    return;
+change_submit();                    return;
                 }
             }
         });
     }
     email_flag=false;
-    change_submit();
-}
+change_submit();}
 
 
 
@@ -159,20 +141,11 @@ function checkPassword( password )
     if(password.value.length < 1){
         password_flag=false;
         showInfo("password_notice",password_empty);
-    }else if ( password.value.length < 6 )
-    {
-        password_flag=false;
-        showInfo("password_notice",password_shorter_s);
-    }
-    else if(password.value.length > 30){
-        password_flag=false;
-        showInfo("password_notice",password_shorter_m);
     }
     else
     {
         showInfo("password_notice",info_right);
     }
-    change_submit();
 }
 
 /*
@@ -180,7 +153,7 @@ function checkPassword( password )
  */
 function checkConformPassword(conform_password)
 {
-    password = $("#password").val();
+    var password = $("#password").val();
     if (password.length < 1)  {
         showInfo("conform_password_notice",password_empty);
 
@@ -192,7 +165,7 @@ function checkConformPassword(conform_password)
     {
         showInfo("conform_password_notice",info_right);
         password_flag=true;
-        change_submit();
+     change_submit();   
         return;
     }
     password_flag=false;
@@ -209,7 +182,6 @@ function checkPhone(phone) {
     if (phone.value.length < 1) {
         showInfo("phone_notice", phone_empty);
     } else if (!re.test(phone.value)) {
-        phone.className = "FrameDivWarn";
         showInfo("phone_notice", phone_invalid);
     }else {
         $.ajax({ //一个Ajax过程
@@ -225,7 +197,7 @@ function checkPhone(phone) {
                 }else {
                     showInfo("phone_notice",phone_can_register);
                     phone_flag=true;
-                    change_submit();
+       change_submit();             
                     return;
                 }
             }
@@ -233,111 +205,28 @@ function checkPhone(phone) {
 
     }
     phone_flag=false;
-    change_submit();
+   change_submit(); 
 }
+
 
 /*
- * 检测密码强度检测
- */
-function checkIntensity(pwd)
-{
-    var Mcolor = "#FFF",Lcolor = "#FFF",Hcolor = "#FFF";
-    var m=0;
-
-    var Modes = 0;
-    for (i=0; i<pwd.length; i++)
-    {
-        var charType = 0;
-        var t = pwd.charCodeAt(i);
-        if (t>=48 && t <=57)
-        {
-            charType = 1;
-        }
-        else if (t>=65 && t <=90)
-        {
-            charType = 2;
-        }
-        else if (t>=97 && t <=122)
-            charType = 4;
-        else
-            charType = 4;
-        Modes |= charType;
-    }
-
-    for (i=0;i<4;i++)
-    {
-        if (Modes & 1) m++;
-        Modes>>>=1;
-    }
-
-    if (pwd.length<=4)
-    {
-        m = 1;
-    }
-
-    switch(m)
-    {
-        case 1 :
-            Lcolor = "2px solid red";
-            Mcolor = Hcolor = "2px solid #DADADA";
-            break;
-        case 2 :
-            Mcolor = "2px solid #f90";
-            Lcolor = Hcolor = "2px solid #DADADA";
-            break;
-        case 3 :
-            Hcolor = "2px solid #3c0";
-            Lcolor = Mcolor = "2px solid #DADADA";
-            break;
-        case 4 :
-            Hcolor = "2px solid #3c0";
-            Lcolor = Mcolor = "2px solid #DADADA";
-            break;
-        default :
-            Hcolor = Mcolor = Lcolor = "";
-            break;
-    }
-    document.getElementById("pwd_lower").style.borderBottom  = Lcolor;
-    document.getElementById("pwd_middle").style.borderBottom = Mcolor;
-    document.getElementById("pwd_high").style.borderBottom   = Hcolor;
-}
-
-//--------------注册协议复选框状态检测---------------------//
-function checkAgreement(obj){
-    if(document.getElementById("agreement").checked){
-        showInfo("agreement_notice",agreement_yes);
-        accept_flag=true;
-        change_submit();
-    }else{
-        showInfo("agreement_notice",agreement_no);
-
-    }
-    /*   if($("#agreement").attr("checked")=="checked"){
-     alert('选中');
-     }*/
-    /*   if (document.formUser.agreement.checked==false)
-     {
-     showInfo("agreement_notice",checkAgreement);
-     } else {
-     showInfo("agreement_notice",info_right);
-     } */
-}
 /*
  * 按钮状态设置
  */
 function change_submit()
 {
-    if(name_flag&&email_flag&&password_flag&&accept_flag&&phone_flag){
-        document.forms['formUser'].elements['Submit1'].disabled = '';
+    if(name_flag&&email_flag&&password_flag&&phone_flag){
+        document.getElementById("register").disabled=false;
+        // document.forms['formUser'].elements['Submit1'].disabled = '';
     }
     else
     {
-        document.forms['formUser'].elements['Submit1'].disabled = 'disabled';
+        document.getElementById("register").disabled=true;
+        // document.forms['formUser'].elements['Submit1'].disabled = 'disabled';
     }
 
 }
-/*
- * 公用程序
+/* 公用程序
  */
 function showInfo(target,Infos){
     document.getElementById(target).innerHTML = Infos;
@@ -347,15 +236,15 @@ function showclass(target,Infos){
 }
 
 function register() {
-    var form=$("#formUser").serializeJson();
+    var form=$("#formUser").serializeJson
     form=JSON.stringify(form);
     console.log(form);
     var data={
-      json:form
+      cUser:form
     };
     $.ajax({ //一个Ajax过程
         type: "post", //以post方式与后台沟通
-        url :getRootPath()+"/user/register", //与此页面沟通
+        url :getRootPath()+"/user/userRegister", //与此页面沟通
         dataType:'json',//返回的值以 JSON方式 解释
         data: data, //发给的数据
         success: function(json){//如果调用成功

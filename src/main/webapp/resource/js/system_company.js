@@ -1,23 +1,41 @@
 
 $(function(){
     getCompanyList();
-    $("#btnFrozenUser").click(function () {
+    $("#btnFrozen").click(function () {
         closepop();
-        var userId = $("#input_userId").val();
+        var companyId = $("#companyId").val();
         var condition = {
-            userId:userId,
-            userStatus:0
+            companyId:companyId,
+            compStatus:'comp_frozen'
         };
-        updateUserStatus(condition);
+        updateCompStatus(condition);
     });
-    $("#btnThawUser").click(function () {
+    $("#btnThaw").click(function () {
         closepop();
-        var userId = $("#input_userId").val();
+        var companyId = $("#companyId").val();
         var condition = {
-            userId:userId,
-            userStatus:1
+            companyId:companyId,
+            compStatus:'comp_successful'
         };
-        updateUserStatus(condition);
+        updateCompStatus(condition);
+    });
+    $("#btnAuditAgree").click(function () {
+        closepop();
+        var companyId = $("#companyId").val();
+        var condition = {
+            companyId:companyId,
+            compStatus:'comp_successful'
+        };
+        updateCompStatus(condition);
+    });
+    $("#btnAuditRefuse").click(function () {
+        closepop();
+        var companyId = $("#companyId").val();
+        var condition = {
+            companyId:companyId,
+            compStatus:'comp_refused'
+        };
+        updateCompStatus(condition);
     });
 });
 
@@ -69,10 +87,10 @@ var getCompanyList = function() {
     });
 }
 
-//修改用户状态
-var updateUserStatus = function(data) {
+//修改企业状态
+var updateCompStatus = function(data) {
     $.ajax({
-        url:"../admin/updateStudentStatus",
+        url:"../admin/updateCompanyStatus",
         type : 'post',
         data :data,
         dataType : 'json',
@@ -83,7 +101,7 @@ var updateUserStatus = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "修改用户状态成功";
+                    var txt = "修改企业状态成功";
                     alert(txt);
                     return;
                 }
@@ -95,12 +113,12 @@ var updateUserStatus = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "修改用户状态失败";
+            var txt = "修改企业状态失败";
             alert(txt);
             return;
         },
         complete: function () {
-            getStudentList();
+            getCompanyList();
         }
     });
 }
@@ -154,34 +172,41 @@ var appendCompanyNode = function(obj) {
             "<td> "+obj.compContacts+"</td>"+
             "<td> "+obj.compPhone+"</td>"+
     "<td> "+obj.compEmail+"</td>"+
-    "<td> "+obj.commWebsite+"</td>E"+
-    "<td> "+obj.compAddress+"</td>";
+    "<td> "+obj.commWebsite+"</td>"+
+    "<td> "+obj.compAddress+"</td>"+
             "<td>"+
-            "<a  href =\"../system/company_showInfo?jobId="+obj.id+"\" >查看用户信息</a> |";
-    if(obj.compStatus == 'comp_frozen'){
-        user_str =user_str+ "<button type=\"button\" onclick=\"frozenUser('"+obj.id+"')\" class='btn btn-link'>禁用</button>";
-    }else if(obj.compStatus =='comp_successful'){
-        user_str = user_str+"<button type=\"button\" onclick=\"thawUser('"+obj.id+"')\" class='btn btn-link'>解禁</button>";
+            "<a  href =\"../system/company_showinfo?companyId="+obj.id+"\" >查看企业信息</a> |";
+    if(obj.compStatus == '禁用'){
+        user_str =user_str+ "<button type=\"button\" onclick=\"thawCompany('"+obj.id+"')\" class='btn btn-link'>解禁</button>";
+    }else if(obj.compStatus =='注册成功'){
+        user_str = user_str+"<button type=\"button\" onclick=\"frozenCompany('"+obj.id+"')\" class='btn btn-link'>禁用</button>";
     }
-    if(obj.compStatus == 'comp_apply'){
-        user_str =user_str+ "<button type=\"button\" onclick=\"frozenUser('"+obj.id+"')\" class='btn btn-link'>审核</button>";
+    if(obj.compStatus == '申请注册'){
+        user_str =user_str+ "<button type=\"button\" onclick=\" AuditCompany('"+obj.id+"')\" class='btn btn-link'>审核</button>";
     }else{
         user_str = user_str+"<button type=\"button\" disabled='disabled'  class='btn btn-link'>审核</button>";
     }
     user_str=user_str+"<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\"></td></tr>";
     return user_str;
 }
-function frozenUser(data)
+function frozenCompany(data)
 {
-    $("#input_userId").val(data);
+    $("#companyId").val(data);
     $(".pop").show();
-    $("#btnFrozenUser").show();
+    $("#popinto_frozen").show();
 }
-function thawUser(data)
+function thawCompany(data)
 {
-    $("#input_userId").val(data);
+    $("#companyId").val(data);
     $(".pop").show();
-    $("#btnThawUser").show();
+    $("#popinto_thaw").show();
+}
+
+function AuditCompany(data)
+{
+    $("#companyId").val(data);
+    $(".pop").show();
+    $("#popinto_audit").show();
 }
 
 

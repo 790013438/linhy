@@ -44,7 +44,7 @@
                     <!-- 右上角头像信息维护 -->
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
+                            <img class="nav-user-photo" src="${resource}/resource/avatars/avatar5.png" alt="Jason's Photo" />
                             <span class="user-info">
 									<small>欢迎您,</small>
 									管理员
@@ -54,17 +54,11 @@
                         </a>
 
                         <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-user"></i>
-                                    个人信息
-                                </a>
-                            </li>
 
                             <li class="divider"></li>
 
                             <li>
-                                <a href="#">
+                                <a href="../login">
                                     <i class="icon-off"></i>
                                     退出
                                 </a>

@@ -50,7 +50,7 @@ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+
 
 <script src="${resource}/resource/js/jquery.dataTables.min.js"></script>
 <script src="${resource}/resource/js/jquery.dataTables.bootstrap.js"></script>
-
+<script src="${resource}/resource/js/date-time/bootstrap-datepicker.min.js"></script>
 <!-- ace scripts -->
 <script src="${resource}/resource/js/bootbox.min.js"></script>
 <script src="${resource}/resource/js/ace-elements.min.js"></script>

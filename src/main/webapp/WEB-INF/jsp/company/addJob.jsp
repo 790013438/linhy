@@ -30,7 +30,7 @@
 								兼职信息发布
 								<small>
 									<i class="icon-double-angle-right"></i>
-									请合理准确的输入兼职信息（请勿填写虚假等信息，如发现将受到惩罚）
+									请合理准确的输入兼职信息（请勿发布虚假信息，如发现将受到惩罚）
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -44,33 +44,31 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 兼职名称 </label>
 
-										<div class="col-sm-9">
-											<input type="text" id="input_jobName" placeholder="请输入兼职名称" class="col-xs-10 col-sm-5" />
+										<div class="col-sm-6">
+											<input type="text" id="input_jobName" maxlength="100" placeholder="请输入兼职名称" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 兼职类型 </label>
-										<div class="col-sm-2">
-											<select class="form-control" id="select_jobtype">
-												<option value="">选择兼职类型</option>
-												<option value="">11</option>
-															</select>
-														</div>
+										<div class="col-sm-6">
+											<input type="text" id="input_jobType" placeholder="如：翻译" class="col-xs-10 col-sm-5" />
+										</div>
 									</div>
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"> 兼职人数</label>
+										<label class="col-sm-3 control-label no-padding-right"> 需求人数</label>
 
-										<div class="col-sm-9">
-											<input  id="input_jobNumber" placeholder="兼职人数" class="col-xs-10 col-sm-5" />
+										<div class="col-sm-6">
+											<input  id="input_jobNumber" maxlength="10" onchange="checkNumber(this.value)" placeholder="需求人数" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" > 工作地址 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="input_jobAddress" placeholder="工作地址" class="col-xs-10 col-sm-5" />
+											<textarea placeholder="工作地址" maxlength="100" id="input_jobAddress" class="col-xs-10 col-sm-5" ></textarea>
+											<%--<input type="text" id="input_jobAddress" placeholder="工作地址" class="col-xs-10 col-sm-5" />--%>
 										</div>
 									</div>
 									<div class="form-group">
@@ -78,7 +76,9 @@
 										<div class="col-sm-2">
 											<select class="form-control" id="requires_gender">
 												<option value="">性别要求</option>
-												<option value="">女</option>
+												<option value="male">男</option>
+												<option value="female">女</option>
+												<option value="unlimited">不限</option>
 											</select>
 										</div>
 									</div>
@@ -88,14 +88,15 @@
 										<label class="col-sm-3 control-label no-padding-right"> 兼职描述 </label>
 
 										<div class="col-sm-9">
-											<input  id="input_introduction" placeholder="兼职描述" class="col-xs-10 col-sm-5" />
+											<textarea placeholder="兼职描述" maxlength="500" id="input_introduction" class="col-xs-10 col-sm-5" ></textarea>
+											<%--<input  id="input_introduction" placeholder="兼职描述" class="col-xs-10 col-sm-5" />--%>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right">备注信息</label>
 
 										<div class="col-sm-9">
-											<input  id="job_remarks" placeholder="备注信息" class="col-xs-10 col-sm-5" />
+											<textarea placeholder="备注信息" maxlength="100" id="job_remarks" class="col-xs-10 col-sm-5" ></textarea>
 										</div>
 									</div>
 									<div class="form-group">
@@ -103,15 +104,18 @@
 										<div class="col-sm-2">
 											<select class="form-control" id="salary_type">
 												<option value="">薪资类型</option>
-												<option value="">000</option>
+												<option value="monthly_pay">月薪</option>
+												<option value="daily_wage">日薪</option>
+												<option value="hourly_wage">时薪</option>
+												<option value="other">其他</option>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" > 薪资金额</label>
 
-										<div class="col-sm-9">
-											<input type="text" id="salary_salary" placeholder="薪资金额" class="col-xs-10 col-sm-5" />
+										<div class="col-sm-6">
+											<input type="text" id="salary_salary" onchange="checkSalary(this.value)" maxlength="10" placeholder="薪资金额（元）" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
@@ -120,15 +124,15 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 每日工作时长</label>
 
-										<div class="col-sm-9">
-											<input  id="job_hours" placeholder="兼职时长" class="col-xs-10 col-sm-5" />
+										<div class="col-sm-6">
+											<input  id="job_hours" placeholder="兼职时长（时）" onchange="checkHours(this.value)" maxlength="5" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 兼职时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
-													<input type="text" id="datepicker" class="form-control hasDatepicker">
+													<input type="text" id="input_jobTime" class="form-control hasDatepicker date-picker" id="jobTime">
 													<span class="input-group-addon">
 														<i class="icon-calendar"></i>
 													</span>
@@ -138,7 +142,7 @@
 										<label class="col-sm-3 control-label no-padding-right"> 报名截止时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
-													<input type="text" id="" class="form-control hasDatepicker">
+													<input type="text" id="input_deadline" class="form-control hasDatepicker date-picker" >
 													<span class="input-group-addon">
 														<i class="icon-calendar"></i>
 													</span>
@@ -163,10 +167,16 @@
 		</div>
 		<!-- basic scripts -->
 	<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/company_addJob.js"></script>
 	<script type="text/javascript">
 			jQuery(function($) {
+                $('.date-picker').datepicker({
+                    autoclose: true,
+                    todayHighlight: true
+                })
 
-				$(document).ready(function(){
+                $(document).ready(function(){
         			$('#example').DataTable();
     			});
 			})

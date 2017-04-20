@@ -54,13 +54,6 @@
 														个人信息
 													</a>
 												</li>
-
-												<li>
-													<a data-toggle="tab" href="#feed">
-														<i class="orange icon-rss bigger-120"></i>
-														评论
-													</a>
-												</li>
 											</ul>
 
 											<div class="tab-content no-border padding-24">
@@ -68,7 +61,7 @@
 													<div class="row">
 														<div class="col-xs-12 col-sm-3 center">
 															<span class="profile-picture">
-																<img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="assets/avatars/profile-pic.jpg" />
+																<img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="${resource}/resource/avatars/profile-pic.jpg" />
 															</span>
 
 															<div class="space space-4"></div>
@@ -76,49 +69,62 @@
 
 														<div class="col-xs-12 col-sm-9">
 															<h4 class="blue">
-																<span class="middle">XXX公司</span>
+																<span class="middle" id="company_name"></span>
 															</h4>
 
 															<div class="profile-user-info">
 																<div class="profile-info-row">
+																	<div class="profile-info-name"> 企业账号 </div>
+
+																	<div class="profile-info-value">
+																		<span id="span_account">无</span>
+																	</div>
+																</div>
+
+																<div class="profile-info-row">
 																	<div class="profile-info-name"> 公司名 </div>
 
 																	<div class="profile-info-value">
-																		<span>XXXXX有限科技</span>
+																		<span id="span_name">无</span>
 																	</div>
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 位置 </div>
+																	<div class="profile-info-name"> 公司联系人 </div>
 
 																	<div class="profile-info-value">
-																		<i class="icon-map-marker light-orange bigger-110"></i>
-																		<span>四川省</span>
-																		<span>成都市</span>
+																		<span id="span_contacts">无</span>
+																	</div>
+																</div>
+																<div class="profile-info-row">
+																	<div class="profile-info-name"> 公司地址 </div>
+
+																	<div class="profile-info-value">
+																		<span id="span_address">无</span>
 																	</div>
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 测试 </div>
+																	<div class="profile-info-name"> 公司简介 </div>
 
 																	<div class="profile-info-value">
-																		<span>38</span>
+																		<span id="span_info">无</span>
 																	</div>
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 加入时间 </div>
+																	<div class="profile-info-name"> 联系电话 </div>
 
 																	<div class="profile-info-value">
-																		<span>20/06/2010</span>
+																		<span id="span_phone">无</span>
 																	</div>
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> Last Online </div>
+																	<div class="profile-info-name"> 公司邮箱 </div>
 
 																	<div class="profile-info-value">
-																		<span>3 hours ago</span>
+																		<span id="span_email">无</span>
 																	</div>
 																</div>
 															</div>
@@ -127,31 +133,10 @@
 
 															<div class="profile-user-info">
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> Website </div>
+																	<div class="profile-info-name"> 公司网站 </div>
 
 																	<div class="profile-info-value">
-																		<a href="#" target="_blank">www.alexdoe.com</a>
-																	</div>
-																</div>
-
-																<div class="profile-info-row">
-																	<div class="profile-info-name">
-																		<i class="middle icon-facebook-sign bigger-150 blue"></i>
-																	</div>
-
-																	<div class="profile-info-value">
-																		<a href="#">Find me on Facebook</a>
-																	</div>
-																</div>
-
-																<div class="profile-info-row">
-																	<div class="profile-info-name">
-																		<i class="middle icon-twitter-sign bigger-150 light-blue"></i>
-																	</div>
-
-																	<div class="profile-info-value">
-																		<a href="#">Follow me on Twitter</a>
-																	</div>
+																		<span id="span_website">无</span>																	</div>
 																</div>
 															</div>
 														</div><!-- /span -->
@@ -165,7 +150,8 @@
 														<div class="span6">
 															<div class="profile-activity clearfix">
 																<div>
-																	<img class="pull-left" alt="Alex Doe's avatar" src="assets/avatars/avatar5.png" />
+
+																	<img class="pull-left" alt="Alex Doe's avatar" src="${resource}/resource/avatars/avatar5.png" />
 																	<a class="user" href="#"> Alex Doe </a>
 																	changed his profile photo.
 																	<a href="#">Take a look</a>
@@ -189,7 +175,7 @@
 
 															<div class="profile-activity clearfix">
 																<div>
-																	<img class="pull-left" alt="Susan Smith's avatar" src="assets/avatars/avatar1.png" />
+																	<img class="pull-left" alt="Susan Smith's avatar" src="${resource}/resource/avatars/avatar1.png" />
 																	<a class="user" href="#"> Susan Smith </a>
 
 																	is now friends with Alex Doe.
@@ -261,7 +247,7 @@
 
 															<div class="profile-activity clearfix">
 																<div>
-																	<img class="pull-left" alt="David Palms's avatar" src="assets/avatars/avatar4.png" />
+																	<img class="pull-left" alt="David Palms's avatar" src="${resource}/resource/avatars/avatar4.png" />
 																	<a class="user" href="#"> David Palms </a>
 
 																	left a comment on Alex's wall.
@@ -310,7 +296,7 @@
 
 															<div class="profile-activity clearfix">
 																<div>
-																	<img class="pull-left" alt="Alex Doe's avatar" src="assets/avatars/avatar5.png" />
+																	<img class="pull-left" alt="Alex Doe's avatar" src="${resource}/resource/avatars/avatar5.png" />
 																	<a class="user" href="#"> Alex Doe </a>
 
 																	upgraded his skills.

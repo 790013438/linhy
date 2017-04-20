@@ -81,22 +81,47 @@
         <div id="signup" class="tab-pane">
             <form class="form-signin" id="from_signin">
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">请完整填写信息来完成注册</p>
-                <div><input name="username" type="text" placeholder="用户名" class="form-control" pattern=".{4,10}" /> <SPAN id="username_notice" style="float:left;" >*</SPAN></div>
+                <div><input name="username" type="text" placeholder="用户名" class="form-control" pattern=".{4,10}" /> <SPAN id="username_notice1" style="float:left;" >*</SPAN></div>
                 <input name="email" type="email" placeholder="邮箱" class="form-control" maxlength="32" minlength="8" />
                 <input name="password" type="password" placeholder="密码" class="form-control" minlength="6" maxlength="16" />
                 <input name="r_password" type="password" placeholder="确认密码" class="form-control"  minlength="6" maxlength="16"  />
                 <input name="tel" type="text" placeholder="手机号" class="form-control" minlength="11" maxlength="11"/>
                 <br/>
-                <div >
-                    <label>请选择你的性别</label>
-                    <label class="checkbox-inline">
-                        <input type="radio" name="gender" id="gender_man" value="man" checked> 男
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="radio" name="gender" id="gender_woman"  value="woman"> 女
-                    </label>
-                </div>
                 <button class="btn text-muted text-center btn-success" type="button" id="signup_btn">注册</button>
+            </form>
+        </div>
+        <div id="signup1" class="tab-pane">
+            <form class="form-signin" id="from_signin1">
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">请完整填写信息来完成注册</p>
+                <BR>
+                <TABLE width="100%" align=center border=0>
+                    <TBODY>
+                       <INPUT id="username" placeholder="用户名" onBlur="checkUserName(this)"
+                              class="form-control" pattern=".{4,10}" name="username">
+                            <SPAN id="username_notice" >*</SPAN></TD>
+                        <INPUT id="email" onBlur="checkEmail(this)" placeholder="邮箱" name="email"  class="form-control" pattern=".{4,10}">
+                            <SPAN id=email_notice >*</SPAN>
+                       <INPUT id="password" onBlur="checkPassword(this)"  placeholder="密码" class="form-control" pattern=".{4,10}" type="password" name="password">
+                            <SPAN id=password_notice >*</SPAN>
+
+                       <INPUT id="conform_password" class="form-control" pattern=".{4,10}" placeholder="确认密码" onBlur="checkConformPassword(this)"
+                                   type="password" name="confirm_password">
+                            <SPAN id=conform_password_notice >*</SPAN>
+                       <INPUT id="phone" class="form-control" pattern=".{4,10}" placeholder="手机号" onBlur="checkPhone(this)"
+                                   type="text" name="phone">
+                            <SPAN id=phone_notice >*</SPAN>
+                       <div >
+                           <label>请选择你的性别</label>
+                           <label class="checkbox-inline">
+                               <input type="radio" name="gender" id="gender_man" value="man" checked> 男
+                           </label>
+                           <label class="checkbox-inline">
+                               <input type="radio" name="gender" id="gender_woman"  value="woman"> 女
+                           </label>
+                       </div>
+                       <button class="btn text-muted text-center btn-success" name="Submit1"  type="button" id="register" class="anniu" disabled>注册</button>
+                    </TBODY>
+                </TABLE>
             </form>
         </div>
     </div>
@@ -104,7 +129,8 @@
         <ul class="list-inline">
             <li><a class="text-muted" href="#login" data-toggle="tab">登录</a></li>
             <li><a class="text-muted" href="#forgot" data-toggle="tab">忘记密码？</a></li>
-            <li><a class="text-muted" href="#signup" data-toggle="tab">注册</a></li>
+            <li><a class="text-muted" href="#signup" data-toggle="tab">企业注册</a></li>
+            <li><a class="text-muted" href="#signup1" data-toggle="tab">用户注册</a></li>
         </ul>
     </div>
 
@@ -118,6 +144,8 @@
 <script src="${ctx}/resource/plugins/bootstrap/js/bootstrap.js"></script>
 <script src="${ctx}/resource/js/layer.js"></script>
 <script src="${ctx}/resource/js/login.js"></script>
+<script src="${ctx}/resource/js/register.js"></script>
+
 <!--END PAGE LEVEL SCRIPTS -->
 
 </body>
