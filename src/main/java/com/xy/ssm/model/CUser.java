@@ -22,7 +22,7 @@ public class CUser implements Serializable {
     private String userGender;
     //用户真实姓名
     private String userRealName;
-    //用户兼职意向---如发传单等。
+    //用户资源意向---如发传单等。
     private String userIntention;
     //用户专业
     private String userMajor;

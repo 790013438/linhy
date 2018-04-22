@@ -5,7 +5,7 @@ $(function(){
 
 });
 
-//查询兼职列表
+//查询资源列表
 var queryJobList = function() {
 	$.ajax({
 		url:"../user/getJobList",
@@ -53,7 +53,7 @@ var queryJobList = function() {
 	});
 }
 
-//报名指定兼职
+//报名指定资源
 var applicationJob = function(id) {
     $.ajax({
         url:"../user/applicationJob",
@@ -79,7 +79,7 @@ var applicationJob = function(id) {
             }
         },
         error : function(obj, msg) {
-            var txt = "报名兼职失败";
+            var txt = "报名资源失败";
             alert(txt);
             return;
         },
@@ -141,7 +141,7 @@ var appendJobNode = function(obj) {
         "<td> "+obj.jobSalaryType+"</td>"+
         "<td> "+obj.jobSalary+"</td>"+
 		"<td>"+
-		"<a  href =\"../student/jobInfo?jobId="+obj.id+"\" >查看兼职详情</a> |";
+		"<a  href =\"../student/jobInfo?jobId="+obj.id+"\" >查看资源详情</a> |";
 	    if(obj.flag== 0){
             var job_str1 = job_str +"<button type=\"button\" onclick=\"applicationJob('"+obj.id+"')\" class='btn btn-link'>申请报名</button>";
         }else{

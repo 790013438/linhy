@@ -56,7 +56,7 @@ $(function(){
     });
 });
 
-//查询兼职详情
+//查询资源详情
 var getJobInfoByID = function(condition) {
 	$.ajax({
 		url:"../admin/getJobDetails",
@@ -66,13 +66,13 @@ var getJobInfoByID = function(condition) {
 		success:function(result){
 			if (result.success == true) {
                 if(sign == 0){
-                    $("#btn_appli").val("删除兼职");
+                    $("#btn_appli").val("删除资源");
                 }else{
-                    $("#btn_appli").val("审核兼职");
+                    $("#btn_appli").val("审核资源");
                 }
 				if (result.error != "") {
                     $("#ul_jobDetail").empty();
-                    $("#ul_jobDetail").append("<li>该兼职不存在</li>");
+                    $("#ul_jobDetail").append("<li>该资源不存在</li>");
                     return;
 				}
 				if (result.data!=null){
@@ -83,7 +83,7 @@ var getJobInfoByID = function(condition) {
                     $("#ul_jobDetail").append(detail_str);
 				} else{
                     $("#ul_jobDetail").empty();
-                    $("#ul_jobDetail").append("<li>该兼职不存在</li>");
+                    $("#ul_jobDetail").append("<li>该资源不存在</li>");
                     return;
 				}
 			} else {
@@ -104,7 +104,7 @@ var getJobInfoByID = function(condition) {
 	});
 }
 
-//删除兼职
+//删除资源
 var delJobById = function(data) {
     $.ajax({
         url:"../admin/deleteJobById",
@@ -118,7 +118,7 @@ var delJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "删除兼职成功";
+                    var txt = "删除资源成功";
                     alert(txt);
                     return;
                 }
@@ -130,7 +130,7 @@ var delJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "删除兼职失败";
+            var txt = "删除资源失败";
             alert(txt);
             return;
         },
@@ -139,7 +139,7 @@ var delJobById = function(data) {
         }
     });
 }
-//审核兼职
+//审核资源
 var updateJobStatus = function(data) {
     $.ajax({
         url:"../admin/auditingJob",
@@ -153,7 +153,7 @@ var updateJobStatus = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "审核兼职成功";
+                    var txt = "审核资源成功";
                     alert(txt);
                     return;
                 }
@@ -165,7 +165,7 @@ var updateJobStatus = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "审核兼职失败";
+            var txt = "审核资源失败";
             alert(txt);
             return;
         },
@@ -187,14 +187,14 @@ var initJobDetailForm = function(obj) {
         var tr = "<li><span>标题：</span>无</li>";
     }
     if(obj.jobType != null){
-        tr = tr + "<li><span>兼职类型：</span>"+obj.jobType+"</li>";
+        tr = tr + "<li><span>资源类型：</span>"+obj.jobType+"</li>";
     }else{
-        tr = tr + "<li><span>兼职类型：</span>无</li>";
+        tr = tr + "<li><span>资源类型：</span>无</li>";
     }
     if(obj.jobCompanyName != null){
-        tr = tr + "<li><span>企业名称：</span>"+obj.jobCompanyName+"</li>";
+        tr = tr + "<li><span>教师名称：</span>"+obj.jobCompanyName+"</li>";
     }else{
-        tr = tr + "<li><span>企业名称：</span>无</li>";
+        tr = tr + "<li><span>教师名称：</span>无</li>";
     }
     if(obj.jobDemandNumber != null){
         tr = tr + "<li><span>需求人数：</span>"+obj.jobDemandNumber+"<span>（人）</span></li>";
@@ -223,9 +223,9 @@ var initJobDetailForm = function(obj) {
     }
     if(obj.jobTime != null){
         var jobTime1 = moment(obj.jobTime).format("YYYY-MM-DD HH:mm:ss");
-         tr = tr + "<li><span>兼职开始时间：</span>"+jobTime1+"</li>";
+         tr = tr + "<li><span>资源开始时间：</span>"+jobTime1+"</li>";
     } else{
-         tr = tr + "<li><span>兼职开始时间：</span>无</li>";
+         tr = tr + "<li><span>资源开始时间：</span>无</li>";
     }
     if(obj.jobDeadline != null){
         var jobDeadlineTime = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
@@ -239,11 +239,11 @@ var initJobDetailForm = function(obj) {
         tr = tr + "<li><span>工作地点：</span>无</li>";
     }
     if(+obj.jobIntroduction != null){
-        tr = tr + "<li><span>兼职描述信息：</span>" +
+        tr = tr + "<li><span>资源描述信息：</span>" +
                 "<textarea style='width:70%;' disabled=\"disabled\">"+obj.jobIntroduction+"</textarea>" +
                 "</li>";
     }else{
-        tr = tr + "<li><span>兼职描述信息：</span>无</li>";
+        tr = tr + "<li><span>资源描述信息：</span>无</li>";
     }
     return tr;
 }

@@ -26,17 +26,17 @@
 							<li>
 								<a href="#">信息查看</a>
 							</li>
-							<li class="active">公司信息</li>
+							<li class="active">教师信息</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								公司信息
+								教师信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									查看公司信息及评论信息
+									查看教师信息及评论信息
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -74,7 +74,7 @@
 
 															<div class="profile-user-info">
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 企业账号 </div>
+																	<div class="profile-info-name"> 教师账号 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_account">无</span>
@@ -82,7 +82,7 @@
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 公司名 </div>
+																	<div class="profile-info-name"> 教师名 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_name">无</span>
@@ -90,14 +90,14 @@
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 公司联系人 </div>
+																	<div class="profile-info-name"> 教师联系人 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_contacts">无</span>
 																	</div>
 																</div>
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 公司地址 </div>
+																	<div class="profile-info-name"> 教师地址 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_address">无</span>
@@ -105,7 +105,7 @@
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 公司简介 </div>
+																	<div class="profile-info-name"> 教师简介 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_info">无</span>
@@ -121,7 +121,7 @@
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 公司邮箱 </div>
+																	<div class="profile-info-name"> 教师邮箱 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_email">无</span>
@@ -133,7 +133,7 @@
 
 															<div class="profile-user-info">
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 公司网站 </div>
+																	<div class="profile-info-name"> 教师网站 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_website">无</span>																	</div>

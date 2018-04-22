@@ -22,11 +22,11 @@
 								<a href="person_index.jsp">首页</a>
 							</li>
 
-							<li class="active">我的兼职历史</li>
+							<li class="active">我的资源历史</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">资源中心</button>
 						</div>
 					</div>
 
@@ -40,9 +40,9 @@
     									<thead> 
      										<tr>
       											<th>标题</th> 
-      											<th>兼职状态</th>
-												<th>企业名称</th>
-												<th>兼职时间</th>
+      											<th>资源状态</th>
+												<th>教师名称</th>
+												<th>资源时间</th>
       											<th>薪资类型</th> 
       											<th>薪资金额</th> 
       											<th>操作</th> 
@@ -70,7 +70,7 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
+    <div class="font16 center deletediv">真的要删除该资源吗？</div>
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_delApplication">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
@@ -99,7 +99,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
+					bootbox.confirm("你确定要删除改资源吗？", function(result) {
 						if(result) {
 							//
 						}

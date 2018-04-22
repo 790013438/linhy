@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--管理员端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="专为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--管理员端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="专为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -62,7 +62,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -144,7 +144,7 @@
 						<li >
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 兼职管理 </span>
+								<span class="menu-text"> 资源管理 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -153,14 +153,14 @@
 								<li >
 									<a href="system_index.jsp">
 										<i class="icon-double-angle-right"></i>
-										待审核兼职管理
+										待审核资源管理
 									</a>
 								</li>
 
 								<li >
 									<a href="system_jzgl.jsp">
 										<i class="icon-double-angle-right"></i>
-										审核后兼职管理
+										审核后资源管理
 									</a>
 								</li>
 							</ul>
@@ -179,7 +179,7 @@
 								<li class="active">
 									<a href="system_company.jsp">
 										<i class="icon-double-angle-right"></i>
-										企业用户信息管理
+										教师用户信息管理
 									</a>
 								</li>
 
@@ -221,7 +221,7 @@
 								<a href="system_index.jsp">首页</a>
 							</li>
 
-							<li class="active">企业用户管理</li>
+							<li class="active">教师用户管理</li>
 							
 						</ul><!-- .breadcrumb -->
 						
@@ -237,19 +237,19 @@
     									<thead> 
      										<tr> 
       											<th>序号</th> 
-      											<th>企业名</th> 
+      											<th>教师名</th>
       											<th>状态</th> 
       											<th>联系人</th> 
       											<th>联系电话</th> 
       											<th>邮箱</th> 
-      											<th>企业地址</th> 
+      											<th>教师地址</th>
       											<th>操作</th> 
      										</tr> 
     									</thead> 
     									<tbody>
     										<tr>
     											<td>1</td>
-    											<td>测试公司1</td>
+    											<td>测试教师1</td>
     											<td>待审核</td>
     											<td>马可</td>
     											<td>3558543875</td>
@@ -259,7 +259,7 @@
     										</tr>
     										<tr>
     											<td>2</td>
-    											<td>测试公司2</td>
+    											<td>测试教师2</td>
     											<td>待审核</td>
     											<td>胡亮</td>
     											<td>13370287361</td>
@@ -269,7 +269,7 @@
     										</tr>
     										<tr>
     											<td>3</td>
-    											<td>测试公司3</td>
+    											<td>测试教师3</td>
     											<td>审核通过</td>
     											<td>陈坤</td>
     											<td>15923556653</td>
@@ -297,7 +297,7 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
+    <div class="font16 center deletediv">真的要删除该资源吗？</div>
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btnDoUpdate">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
@@ -366,7 +366,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
+					bootbox.confirm("你确定要删除改资源吗？", function(result) {
 						if(result) {
 							//
 						}

@@ -21,11 +21,11 @@
 								<a href="index.jsp">首页</a>
 							</li>
 
-							<li class="active">我的兼职</li>
+							<li class="active">我的资源</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='../company/addJob'">发布兼职</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../company/addJob'">发布资源</button>
 						</div>
 					</div>
 
@@ -70,7 +70,7 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="popinto_remove">
-    <div class="font16 center deletediv">将改兼职从列表中移除？</div>
+    <div class="font16 center deletediv">将改资源从列表中移除？</div>
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_removeJob">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
@@ -80,7 +80,7 @@
 <!--删除弹窗end-->
 	<!--删除弹窗start-->
 	<div class="popinto" id="popinto_close">
-		<div class="font16 center deletediv">兼职还未结束，确定关闭该兼职？</div>
+		<div class="font16 center deletediv">资源还未结束，确定关闭该资源？</div>
 		<div class="deletediv_btn">
 			<p class="pull-left"><button type="button" class="btn btn-primary" id="btn_closeJob">确定</button></p>
 			<p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>

@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--大学生端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="转为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--大学生端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="转为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -62,7 +62,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -90,7 +90,7 @@
 								<img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎您,</small>
-									王同学
+									同学
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -144,13 +144,13 @@
 						<li>
 							<a href="person_index.jsp">
 								<i class="icon-text-width"></i>
-								<span class="menu-text"> 兼职中心 </span>
+								<span class="menu-text"> 资源中心 </span>
 							</a>
 						</li>
 						<li>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 我的兼职 </span>
+								<span class="menu-text"> 我的资源 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -159,14 +159,14 @@
 								<li >
 									<a href="person_myjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										查看兼职报名情况
+										查看资源报名情况
 									</a>
 								</li>
 
 								<li>
 									<a href="person_history.jsp">
 										<i class="icon-double-angle-right"></i>
-										我的兼职历史
+										我的资源历史
 									</a>
 								</li>
 							</ul>
@@ -212,7 +212,7 @@
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='person_index.jsp'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='person_index.jsp'">资源中心</button>
 						</div>
 					</div>
 
@@ -314,7 +314,7 @@
         <ul class="gray_three">
             <li><span>消息名称:</span>申请报名结果反馈</li>
             <li><span>消息时间:</span>2017-03-10 16:11:38</li>
-            <li><span>发送人:</span>测试公司1</li>
+            <li><span>发送人:</span>测试教师1</li>
             <li><span>申请岗位:</span>翻译</li>
             <li><span>消息内容:</span>拒绝</li>
         </ul>

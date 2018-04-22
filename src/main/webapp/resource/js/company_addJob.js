@@ -15,7 +15,7 @@ $(function(){
     });
 });
 
-//发布兼职s
+//发布资源s
 var addJob = function (data) {
     $.ajax({
         url: "../company/addJobs",
@@ -25,7 +25,7 @@ var addJob = function (data) {
         },
         dataType : 'json',
         error: function (obj, msg) {
-            var txt = "保存兼职失败";
+            var txt = "保存资源失败";
             alert(txt);
             return;
         },
@@ -34,7 +34,7 @@ var addJob = function (data) {
         success: function (result) {
             if (result.success == true) {
                 if (result.data > 0) {
-                    alert("保存兼职成功，可以提交审核");
+                    alert("保存资源成功，可以提交审核");
                     window.location.href='index';
                 }
                 else {

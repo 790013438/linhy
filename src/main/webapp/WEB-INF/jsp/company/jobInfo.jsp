@@ -20,20 +20,20 @@
 								<a href="index.jsp">首页</a>
 							</li>
 
-							<li class="active">兼职详情</li>
+							<li class="active">资源详情</li>
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='jz_fbjz.jsp'">发布兼职</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='jz_fbjz.jsp'">发布资源</button>
 						</div>
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								兼职信息
+								资源信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									兼职报名情况
+									资源报名情况
 								</small>
 							</h1>
 						</div><!-- /.page-header -->

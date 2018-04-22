@@ -2,9 +2,9 @@ var condition = {
     jobStatus:"3",
 };
 $(function(){
-    //弹出是否退出兼职弹窗
+    //弹出是否退出资源弹窗
     queryMyAppliJobs(condition);
-    //确认是否退出兼职
+    //确认是否退出资源
     $("#btnQuitAppli").click(function () {
         var appliId = $("#input_applId").val();
         var data = {
@@ -16,7 +16,7 @@ $(function(){
 
 });
 
-//查询兼职报名情况
+//查询资源报名情况
 var queryMyAppliJobs = function(condition) {
     $.ajax({
         url:"../user/getMyAppliSituation",
@@ -62,7 +62,7 @@ var queryMyAppliJobs = function(condition) {
     });
 }
 
-//退出指定兼职
+//退出指定资源
 var quitJobById = function(data) {
     $.ajax({
         url:"../user/quitJob",
@@ -76,7 +76,7 @@ var quitJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "退出兼职成功";
+                    var txt = "退出资源成功";
                     alert(txt);
                     return;
                 }
@@ -88,7 +88,7 @@ var quitJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "退出兼职失败";
+            var txt = "退出资源失败";
             alert(txt);
             return;
         },
@@ -153,11 +153,11 @@ var appendJobNode = function(obj) {
             "<td> "+obj.jobCompanyName+"</td>"+
             "<td> "+obj.appliStatus+"</td>"+
             "<td>"+
-            "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看兼职详情</a> |";
+            "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看资源详情</a> |";
     if(obj.appliStatus != "报名失败"){
-        var job_str1 = job_str +"<button type=\"button\" class='btn btn-link' onclick=\"queryMyAppli('"+obj.id+"')\">退出兼职</button>";
+        var job_str1 = job_str +"<button type=\"button\" class='btn btn-link' onclick=\"queryMyAppli('"+obj.id+"')\">退出资源</button>";
     }else{
-        var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>退出兼职</button>";
+        var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>退出资源</button>";
         // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已报名</a>";
     }
     "<input type=\"hidden\" name=\"application_id\" value=\""+obj.id+"\">"+

@@ -23,7 +23,7 @@
 								<a href="system_index.jsp">首页</a>
 							</li>
 
-							<li class="active">企业用户管理</li>
+							<li class="active">教师用户管理</li>
 							
 						</ul><!-- .breadcrumb -->
 						
@@ -38,13 +38,13 @@
    									<table id="table_company" class="table table-striped table-bordered">
     									<thead> 
      										<tr>
-      											<th>企业名</th> 
-      											<th>企业状态</th>
+      											<th>教师名</th>
+      											<th>教师状态</th>
       											<th>联系人</th> 
       											<th>联系电话</th> 
       											<th>邮箱</th>
-												<th>企业网站</th>
-												<th>企业地址</th>
+												<th>教师网站</th>
+												<th>教师地址</th>
       											<th>操作</th> 
      										</tr> 
     									</thead> 
@@ -113,7 +113,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
+					bootbox.confirm("你确定要删除改资源吗？", function(result) {
 						if(result) {
 							//
 						}

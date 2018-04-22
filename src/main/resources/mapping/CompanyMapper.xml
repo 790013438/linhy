@@ -7,8 +7,8 @@
     </select>
 
     <insert id="addCompany"  parameterType="com.xy.ssm.model.CCompany">
-        insert into c_company(comp_account,comp_password,comp_name,comp_contacts,comp_phone,comp_email,comm_website)
-        values(#{compAccount},#{compPassword},#{compName},#{compContacts},#{compPhone},#{compEmail},#{commWebsite})
+        insert into c_company(comp_account,comp_password,comp_name,comp_contacts,comp_phone,comp_email,create_time,comp_status)
+        values(#{compAccount},#{compPassword},#{compName},#{compContacts},#{compPhone},#{compEmail},#{createTime},#{compStatus})
     </insert>
 
     <select id="checkMail" resultType="com.xy.ssm.model.CCompany">

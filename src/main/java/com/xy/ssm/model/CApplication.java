@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Created by xiongyan on 2017/2/11.
- * 兼职报名表
+ * 资源报名表
  */
 public class CApplication implements Serializable {
     private static final long serialVersionUID = 4015147211524700827L;
@@ -13,7 +13,7 @@ public class CApplication implements Serializable {
     private Long id;
     //报名用户id
     private Long appliUserId;
-    //兼职id
+    //资源id
     private Long appliJobId;
     //用户标记
     private int userSign;
@@ -33,7 +33,7 @@ public class CApplication implements Serializable {
     private String userGender;
     //用户真实姓名
     private String userRealName;
-    //用户兼职意向---如发传单等。
+    //用户资源意向---如发传单等。
     private String userIntention;
     //用户简介
     private String userProfile;

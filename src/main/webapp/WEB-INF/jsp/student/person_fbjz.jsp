@@ -22,17 +22,17 @@
 								<a href="jz_index.jsp">首页</a>
 							</li>
 
-							<li class="active">发布兼职</li>
+							<li class="active">发布资源</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								兼职信息发布
+								资源信息发布
 								<small>
 									<i class="icon-double-angle-right"></i>
-									请合理准确的输入兼职信息（请勿填写虚假等信息，如发现将受到惩罚）
+									请合理准确的输入资源信息（请勿填写虚假等信息，如发现将受到惩罚）
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -44,14 +44,14 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" role="form">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 兼职名称 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 资源名称 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-1" placeholder="请输入兼职名称" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" placeholder="请输入资源名称" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 兼职类型 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 资源类型 </label>
 										<div class="col-sm-2">
 											<select class="form-control" id="form-field-select-2">
 												<option value="">发传单</option>
@@ -67,10 +67,10 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职人数</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源人数</label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="兼职人数" class="col-xs-10 col-sm-5" />
+											<input type="password" id="form-field-2" placeholder="资源人数" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -84,10 +84,10 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职描述 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源描述 </label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="兼职描述" class="col-xs-10 col-sm-5" />
+											<input type="password" id="form-field-2" placeholder="资源描述" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -112,14 +112,14 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职时长</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源时长</label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="兼职时长" class="col-xs-10 col-sm-5" />
+											<input type="password" id="form-field-2" placeholder="资源时长" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职时间</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
 													<input type="text" id="datepicker" class="form-control hasDatepicker">

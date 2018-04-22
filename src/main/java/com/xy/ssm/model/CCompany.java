@@ -5,31 +5,31 @@ import java.util.Date;
 
 /**
  * Created by xiongyan on 2017/2/11.
- * 企业信息表
+ * 教师信息表
  */
 public class CCompany implements Serializable {
     private static final long serialVersionUID = 4015147211524700827L;
     //流水号
     private Long id;
-    //企业账户名
+    //教师账户名
     private String compAccount;
     //登录密码
     private String compPassword;
-    //公司网站
-    private String commWebsite ;
-    //公司名
+/*    教师网站
+    private String commWebsite ;*/
+    //教师名
     private String compName ;
-    //公司联系人
+    //教师联系人
     private String compContacts;
     //联系电话
     private String compPhone ;
-    //公司邮箱
+    //教师邮箱
     private String compEmail;
-    //公司信息
+    //教师信息
     private String compInfo ;
-    //公司执照
+    //教师执照
     private String compLicense;
-    //公司地址
+    //教师地址
     private String compAddress ;
     //用户头像
     private String compPhoto;
@@ -122,15 +122,15 @@ public class CCompany implements Serializable {
         this.compAddress = compAddress;
     }
 
-    public String getCommWebsite ()
+/*    public String getCommWebsite ()
     {
         return commWebsite;
-    }
+    }*/
 
-    public void setCommWebsite (String commWebsite)
+/*    public void setCommWebsite (String commWebsite)
     {
         this.commWebsite = commWebsite;
-    }
+    }*/
 
     public String getCompPhoto() {
         return compPhoto;

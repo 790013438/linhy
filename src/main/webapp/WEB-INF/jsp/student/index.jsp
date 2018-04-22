@@ -21,11 +21,11 @@
 								<a href="person_index.jsp">首页</a>
 							</li>
 
-							<li class="active">兼职中心</li>
+							<li class="active">资源中心</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">资源中心</button>
 						</div>
 					</div>
 
@@ -40,7 +40,7 @@
      										<tr>
       											<th>标题</th> 
       											<th>状态</th>
-												<th>企业名称</th>
+												<th>教师名称</th>
 												<th>报名人数</th>
       											<th>截止时间</th> 
       											<th>薪资类型</th> 

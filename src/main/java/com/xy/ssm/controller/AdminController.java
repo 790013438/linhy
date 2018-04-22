@@ -46,7 +46,7 @@ public class AdminController extends BaseController
         return "system_index";
     }
     /**
-     * 按状态获取兼职列表
+     * 按状态获取资源列表
      * @param
      * @return
      */
@@ -65,12 +65,12 @@ public class AdminController extends BaseController
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(tableResult);
             } else {
-                baseResult = new BaseResult(true, "没有查询到待审核兼职信息");
+                baseResult = new BaseResult(true, "没有查询到待审核资源信息");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取兼职信息列表异常！", e);
-            baseResult = new BaseResult(false, "获取兼职信息列表异常！");
+            log.error("获取资源信息列表异常！", e);
+            baseResult = new BaseResult(false, "获取资源信息列表异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
@@ -103,7 +103,7 @@ public class AdminController extends BaseController
         return result;
     }
     /**
-     * 按状态获取企业信息列表
+     * 按状态获取教师信息列表
      * @param
      * @return
      */
@@ -118,19 +118,19 @@ public class AdminController extends BaseController
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(list);
             } else {
-                baseResult = new BaseResult(true, "没有查询企业信息");
+                baseResult = new BaseResult(true, "没有查询教师信息");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取企业信息列表异常！", e);
-            baseResult = new BaseResult(false, "获取企业信息列表异常！");
+            log.error("获取教师信息列表异常！", e);
+            baseResult = new BaseResult(false, "获取教师信息列表异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     * 查看兼职详情
+     * 查看资源详情
      * @param
      * @return
      */
@@ -151,19 +151,19 @@ public class AdminController extends BaseController
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(job);
             } else {
-                baseResult = new BaseResult(true, "该兼职不存在");
+                baseResult = new BaseResult(true, "该资源不存在");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取兼职信息详情异常！", e);
-            baseResult = new BaseResult(false, "获取兼职信息详情异常！");
+            log.error("获取资源信息详情异常！", e);
+            baseResult = new BaseResult(false, "获取资源信息详情异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     * 审核兼职
+     * 审核资源
      * @param
      * @return
      */
@@ -177,23 +177,23 @@ public class AdminController extends BaseController
             CJobs cJobs=companyService.getJobDetails (jobId);
             int resultCode = companyService.updateJobStatus(jobId,jobStatus);
             if(resultCode > 0) {
-                String message="兼职id为<a href=\"jobDetails?id=" + jobId + "\">"+jobId+"</a>的兼职已经审批！";
+                String message="资源id为<a href=\"jobDetails?id=" + jobId + "\">"+jobId+"</a>的资源已经审批！";
                 messageService.sendMessage (MessageUtils.getMessage (cJobs.getJobCompanyId (),2L,1,message));
                 baseResult = new BaseResult(true, "");
             } else {
-                baseResult = new BaseResult(true, "修改兼职状态失败");
+                baseResult = new BaseResult(true, "修改资源状态失败");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("修改兼职状态异常！", e);
-            baseResult = new BaseResult(false, "修改兼职状态异常！");
+            log.error("修改资源状态异常！", e);
+            baseResult = new BaseResult(false, "修改资源状态异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     * 删除某兼职
+     * 删除某资源
      * @param
      * @return
      */
@@ -207,12 +207,12 @@ public class AdminController extends BaseController
             if(resultCode > 0) {
                 baseResult = new BaseResult(true, "");
             } else {
-                baseResult = new BaseResult(true, "删除兼职失败");
+                baseResult = new BaseResult(true, "删除资源失败");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("删除兼职异常！", e);
-            baseResult = new BaseResult(false, "删除兼职异常！");
+            log.error("删除资源异常！", e);
+            baseResult = new BaseResult(false, "删除资源异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
@@ -220,7 +220,7 @@ public class AdminController extends BaseController
 
 
     /**
-     * 查看企业用户基本信息
+     * 查看教师用户基本信息
      * @param
      * @return
      */
@@ -235,19 +235,19 @@ public class AdminController extends BaseController
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(companyInfo);
             } else {
-                baseResult = new BaseResult(true, "该企业不存在");
+                baseResult = new BaseResult(true, "该教师不存在");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取企业信息异常！", e);
-            baseResult = new BaseResult(false, "获取企业信息异常！");
+            log.error("获取教师信息异常！", e);
+            baseResult = new BaseResult(false, "获取教师信息异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     * 查看企业用户评论信息
+     * 查看教师用户评论信息
      * @param
      * @return
      */
@@ -278,7 +278,7 @@ public class AdminController extends BaseController
     }
 
     /**
-     * 修改企业状态
+     * 修改教师状态
      * @param
      * @return
      */
@@ -293,12 +293,12 @@ public class AdminController extends BaseController
             if(resultCode > 0) {
                 baseResult = new BaseResult(true, "");
             } else {
-                baseResult = new BaseResult(true, "更新企业状态失败");
+                baseResult = new BaseResult(true, "更新教师状态失败");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("更新企业状态异常！", e);
-            baseResult = new BaseResult(false, "更新企业状态异常！");
+            log.error("更新教师状态异常！", e);
+            baseResult = new BaseResult(false, "更新教师状态异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;

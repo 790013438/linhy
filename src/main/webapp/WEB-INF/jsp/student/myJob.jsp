@@ -22,12 +22,12 @@
 								<a href="person_index.jsp">首页</a>
 							</li>
 
-							<li class="active">我的兼职</li>
-							<li class="active">兼职报名情况</li>
+							<li class="active">我的资源</li>
+							<li class="active">资源报名情况</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">资源中心</button>
 						</div>
 					</div>
 
@@ -40,13 +40,13 @@
    									<table id="myAppliJobs" class="table table-striped table-bordered">
     									<thead> 
      										<tr>
-      											<th>兼职标题</th> 
-      											<th>兼职时间</th> 
-      											<th>兼职状态</th>
+      											<th>资源标题</th>
+      											<th>资源时间</th>
+      											<th>资源状态</th>
 												<th>薪资类型</th>
 												<th>薪资金额</th>
 												<th>工作时长</th>
-												<th>发布企业</th>
+												<th>发布教师</th>
       											<th>报名状态</th> 
       											<th>操作</th> 
      										</tr> 
@@ -71,7 +71,7 @@
 			</a>
 		</div><!-- /.main-container -->
 	<div class="popinto" id="delPop">
-		<div class="font16 center deletediv">真的要退出该兼职吗？</div>
+		<div class="font16 center deletediv">真的要退出该资源吗？</div>
 		<div class="deletediv_btn">
 			<p class="pull-left"><button type="button" class="btn btn-primary" id="btnQuitAppli">确定</button></p>
 			<p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
@@ -98,7 +98,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要退出该兼职吗？", function(result) {
+					bootbox.confirm("你确定要退出该资源吗？", function(result) {
 						if(result) {
 							//
 						}

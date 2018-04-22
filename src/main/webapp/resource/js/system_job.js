@@ -17,7 +17,7 @@ $(function(){
     });
 });
 
-//查询待审核兼职列表
+//查询待审核资源列表
 var getMyJobs = function(condition) {
     $.ajax({
         url:"../admin/getAllJobs",
@@ -65,7 +65,7 @@ var getMyJobs = function(condition) {
     });
 }
 
-//删除兼职
+//删除资源
 var delJobById = function(data) {
     $.ajax({
         url:"../admin/deleteJobById",
@@ -79,7 +79,7 @@ var delJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "删除兼职成功";
+                    var txt = "删除资源成功";
                     alert(txt);
                     return;
                 }
@@ -91,7 +91,7 @@ var delJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "删除兼职失败";
+            var txt = "删除资源失败";
             alert(txt);
             return;
         },
@@ -156,7 +156,7 @@ var appendJobNode = function(obj) {
             "<td> "+jobDeadline1+"</td>"+
             "<td> "+jobTime1+"</td>"+
             "<td>"+
-            "<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看兼职详情</a> |"+
+            "<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看资源详情</a> |"+
             "<button type=\"button\" onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>";
     "<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
     "</td>"+

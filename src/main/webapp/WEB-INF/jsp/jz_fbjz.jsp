@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--企业端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="转为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--教师端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="转为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -61,7 +61,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -89,7 +89,7 @@
 								<img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎您,</small>
-									XX公司
+									XX教师
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -137,13 +137,13 @@
 						<li>
 							<a href="jz_index.jsp">
 								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 企业端 </span>
+								<span class="menu-text"> 教师端 </span>
 							</a>
 						</li>
 						<li class="active open">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 兼职管理 </span>
+								<span class="menu-text"> 资源管理 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -152,14 +152,14 @@
 								<li class="active">
 									<a href="jz_fbjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										发布兼职
+										发布资源
 									</a>
 								</li>
 
 								<li >
 									<a href="jz_index.jsp">
 										<i class="icon-double-angle-right"></i>
-										我的兼职
+										我的资源
 									</a>
 								</li>
 							</ul>
@@ -202,17 +202,17 @@
 								<a href="jz_index.jsp">首页</a>
 							</li>
 
-							<li class="active">发布兼职</li>
+							<li class="active">发布资源</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								兼职信息发布
+								资源信息发布
 								<small>
 									<i class="icon-double-angle-right"></i>
-									请合理准确的输入兼职信息（请勿填写虚假等信息，如发现将受到惩罚）
+									请合理准确的输入资源信息（请勿填写虚假等信息，如发现将受到惩罚）
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -224,14 +224,14 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" role="form">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 兼职名称 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 资源名称 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-1" placeholder="请输入兼职名称" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" placeholder="请输入资源名称" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 兼职类型 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 资源类型 </label>
 										<div class="col-sm-2">
 											<select class="form-control" id="form-field-select-1">
 												<option value="">发传单</option>
@@ -247,10 +247,10 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职人数</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源人数</label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="兼职人数" class="col-xs-10 col-sm-5" />
+											<input type="password" id="form-field-2" placeholder="资源人数" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -264,10 +264,10 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职描述 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源描述 </label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="兼职描述" class="col-xs-10 col-sm-5" />
+											<input type="password" id="form-field-2" placeholder="资源描述" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -292,14 +292,14 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职时长</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源时长</label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="兼职时长" class="col-xs-10 col-sm-5" />
+											<input type="password" id="form-field-2" placeholder="资源时长" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 兼职时间</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 资源时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
 													<input type="text" id="datepicker" class="form-control hasDatepicker">

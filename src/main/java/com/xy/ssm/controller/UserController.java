@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wuchen on 2017/1/12.
+ * Created by linhy on 2018/1/12.
  */
 
 @Controller
@@ -131,7 +131,7 @@ public class UserController extends BaseController{
         return result;
     }
     /**
-     * 企业用户注册
+     * 教师用户注册
      * @param cCompany
      * @return
      */
@@ -142,6 +142,8 @@ public class UserController extends BaseController{
         BaseResult baseResult = null;
         String password = MD5Util.getMd5 (cCompany.getCompPassword ());
         cCompany.setCompPassword (password);
+        cCompany.setCreateTime(new Date());//myself
+        cCompany.setCompStatus("comp_successful");//myself
         try{
             if(cCompany == null){
                 baseResult=new BaseResult(false,"用户注册信息获取异常");
@@ -163,7 +165,7 @@ public class UserController extends BaseController{
 
 
     /**
-     *检测用户名是否存在
+     *检测学生用户名是否存在
      * @param username
      * @return
      */
@@ -191,9 +193,38 @@ public class UserController extends BaseController{
         result= JSON.toJSONString(baseResult);
         return result;
     }
-
     /**
-     *检测邮箱是否存在
+     *检测教师用户名是否存在
+     * @param account
+     * @return
+     */
+    @RequestMapping(value = "/checkTname", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String checkTname(@RequestParam(required = true) String  account) {
+        log.info("--------------------/company/checkName  called");
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            if(StringUtils.isEmpty(account)){
+                baseResult=new BaseResult(false,"获取教师账号异常，请联系管理员稍后再试");
+            }else {
+                List<CCompany> cCompanys = companyService.checkAccount(account);
+
+                if(cCompanys != null && 0 < cCompanys.size ()){
+                    baseResult=new BaseResult(false,"教师账号已经存在");
+                }else {
+                    baseResult=new BaseResult(true,"");
+                }
+            }
+        }catch (Exception e){
+            log.error("注册用户出现异常"+e);
+            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+    /**
+     *检测学生邮箱是否存在
      * @param email
      * @return
      */
@@ -221,9 +252,37 @@ public class UserController extends BaseController{
         result= JSON.toJSONString(baseResult);
         return result;
     }
-
     /**
-     *检测手机号是否存在
+     *检测教师邮箱是否存在
+     * @param email
+     * @return
+     */
+    @RequestMapping(value = "/checkTmail", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String checkTmail(@RequestParam(required = true) String  email) {
+        log.info("--------------------/company/checkMail  called");
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            if(StringUtils.isEmpty(email)){
+                baseResult=new BaseResult(false,"邮箱信息获取异常，请联系管理员稍后再试");
+            }else {
+                List<CCompany> cCompanys = companyService.checkMail(email);
+                if(cCompanys != null && 0 < cCompanys.size ()){
+                    baseResult=new BaseResult(false,"邮箱已经存在");
+                }else {
+                    baseResult=new BaseResult(true,"");
+                }
+            }
+        }catch (Exception e){
+            log.error("注册用户出现异常"+e);
+            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+    /**
+     *检测学生手机号是否存在
      * @param phone
      * @return
      */
@@ -251,7 +310,36 @@ public class UserController extends BaseController{
         result= JSON.toJSONString(baseResult);
         return result;
     }
-
+    /**
+     *检测教师手机号是否存在
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/checkTphone", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String checkTphone(@RequestParam(required = true) String  phone) {
+        log.info("--------------------/company/checkPhone  called");
+        String result = "";
+        BaseResult baseResult = null;
+        log.info ("1111111111111111111111111111"+phone);
+        try{
+            if(StringUtils.isEmpty(phone)){
+                baseResult=new BaseResult(false,"手机号信息获取异常，请联系管理员稍后再试");
+            }else {
+                List<CCompany> cCompanys = companyService.checkPhone(phone);
+                if(cCompanys != null && 0 < cCompanys.size ()){
+                    baseResult=new BaseResult(false,"手机号已经存在");
+                }else {
+                    baseResult=new BaseResult(true,"");
+                }
+            }
+        }catch (Exception e){
+            log.error("注册用户出现异常"+e);
+            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
     /**
      *登录
      * @param json
@@ -262,7 +350,8 @@ public class UserController extends BaseController{
     public String login(@RequestParam(required = true) String  json) {
         log.info("--------------------/user/login  called");
         String result = "";
-        BaseResult baseResult = null;  CUser cUser=new CUser();
+        BaseResult baseResult = null;
+        CUser cUser=new CUser();
         CCompany cCompany = new CCompany();
         Map map =new HashMap();
         try{
@@ -271,6 +360,7 @@ public class UserController extends BaseController{
             }else {
                 log.info(json);
                 JSONObject obj=JSON.parseObject(json);
+                System.out.println("-------type--------:"+obj.getInteger("type"));
                 if(obj.getInteger("type") == 1){
                     String pwd=obj.getString("password");
                     cUser=cUserService.getUserByUsername(obj.getString("username"),1);
@@ -351,7 +441,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * 获取可报名兼职列表
+     * 获取可报名资源列表
      * @param
      * @return
      */
@@ -378,12 +468,12 @@ public class UserController extends BaseController{
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(tableResult);
             } else {
-                baseResult = new BaseResult(true, "暂无可报名兼职信息");
+                baseResult = new BaseResult(true, "暂无可报名资源信息");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取可报名兼职列表异常！", e);
-            baseResult = new BaseResult(false, "获取可报名兼职列表异常！");
+            log.error("获取可报名资源列表异常！", e);
+            baseResult = new BaseResult(false, "获取可报名资源列表异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
@@ -391,7 +481,7 @@ public class UserController extends BaseController{
 
 
     /**
-     *申请报名兼职
+     *申请报名资源
      * @param jobId
      * @return
      */
@@ -406,7 +496,7 @@ public class UserController extends BaseController{
         try{
             CJobs job=companyService.getJobDetails (jobId);
             if(job == null){
-                baseResult=new BaseResult(false,"该兼职不存在");
+                baseResult=new BaseResult(false,"该资源不存在");
                 result= JSON.toJSONString(baseResult);
             }else {
                 cApplication.setAppliJobId (jobId);
@@ -415,15 +505,15 @@ public class UserController extends BaseController{
                 //向数据库中添加申请报名记录
                 int resultCode = cUserService.addJobApplication(cApplication);
                 if(resultCode > 0){
-                    //查询该兼职的报名人数
+                    //查询该资源的报名人数
                     int count=companyService.getJobApplicationCount(jobId);
-                    //设置报名人数上限为需求人数的两倍，供企业筛选
+                    //设置报名人数上限为需求人数的两倍，供教师筛选
                     if(count == 2*job.getJobDemandNumber ()){
                         int resultCode1 = companyService.updateJobStatus (jobId,"4");
                         if(resultCode1 > 0){
                             baseResult=new BaseResult(true,"");
                         }else{
-                            baseResult=new BaseResult(true,"修改兼职状态失败");
+                            baseResult=new BaseResult(true,"修改资源状态失败");
                         }
                     }else{
                         baseResult=new BaseResult(true,"");
@@ -434,8 +524,8 @@ public class UserController extends BaseController{
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e){
-            log.error("申请报名兼职异常"+e);
-            baseResult=new BaseResult(false,"申请报名兼职异常");
+            log.error("申请报名资源异常"+e);
+            baseResult=new BaseResult(false,"申请报名资源异常");
             result= JSON.toJSONString(baseResult);
         }
         log.info (result);
@@ -443,7 +533,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * 查看我的兼职情况
+     * 查看我的资源情况
      * @param
      * @return
      */
@@ -471,7 +561,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     *退出兼职
+     *退出资源
      * @param applicationId
      * @return
      */
@@ -487,11 +577,11 @@ public class UserController extends BaseController{
             if(re > 0){
                 baseResult=new BaseResult(true,"");
             }else {
-                baseResult=new BaseResult(true,"退出兼职失败");
+                baseResult=new BaseResult(true,"退出资源失败");
             }
         }catch (Exception e){
-            log.error("退出兼职异常"+e);
-            baseResult=new BaseResult(false,"退出兼职异常");
+            log.error("退出资源异常"+e);
+            baseResult=new BaseResult(false,"退出资源异常");
         }
         result= JSON.toJSONString(baseResult);
         return result;
@@ -499,7 +589,7 @@ public class UserController extends BaseController{
 
 
     /**
-     *删除兼职记录
+     *删除资源记录
      * @param applicationId
      * @return
      */
@@ -515,11 +605,11 @@ public class UserController extends BaseController{
             if(re > 0){
                 baseResult=new BaseResult(true,"");
             }else {
-                baseResult=new BaseResult(true,"删除兼职记录失败");
+                baseResult=new BaseResult(true,"删除资源记录失败");
             }
         }catch (Exception e){
-            log.error("删除兼职记录异常"+e);
-            baseResult=new BaseResult(false,"删除兼职记录异常");
+            log.error("删除资源记录异常"+e);
+            baseResult=new BaseResult(false,"删除资源记录异常");
         }
         result= JSON.toJSONString(baseResult);
         return result;
@@ -538,6 +628,7 @@ public class UserController extends BaseController{
         String result = "";
         BaseResult baseResult = null;
         CUser cUser1 =(CUser)getLoginUser ().get ("loginuser");
+        System.out.println(cUser1.toString());
         cUser.setId (cUser1.getId ());
         try{
             List<CUser> cUsers = cUserService.checkName (cUser.getUserName ());

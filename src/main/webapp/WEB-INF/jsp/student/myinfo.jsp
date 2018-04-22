@@ -102,8 +102,8 @@
 																		<label class="col-sm-4 control-label no-padding-right">院系专业</label>
 
 																		<div class="col-sm-8">
-																			<input class="input-small" type="text" id="input_department" placeholder="First Name" value="" />
-																			<input class="input-small" type="text" id="input_major" placeholder="Last Name" value="" />
+																			<input class="input-small" type="text" id="input_department" placeholder="院系名字" value="" />
+																			<input class="input-small" type="text" id="input_major" placeholder="专业名字" value="" />
 																		</div>
 																	</div>
 																</div>

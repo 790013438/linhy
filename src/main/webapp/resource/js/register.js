@@ -54,7 +54,7 @@ function checkUserName(obj) {
         // 调用Ajax函数,向服务器端发送查询
         $.ajax({ //一个Ajax过程
             type: "post", //以post方式与后台沟通
-            url :getRootPath()+"/user/checkName", //与此页面沟通
+            url: getRootPath()+"/user/checkName", //与此页面沟通
             dataType:'json',//返回的值以 JSON方式 解释
             data: 'username='+obj.value, //发给的数据
             success: function(json){//如果调用成功
@@ -107,7 +107,8 @@ function checkEmail(email) {
                 }else {
                     showInfo("email_notice", email_can_register);
                     email_flag=true;
-change_submit();                    return;
+                    change_submit();
+                    return;
                 }
             }
         });
@@ -230,7 +231,8 @@ function register(data) {
             if(json.success== false){
                 alert(json.error);
             }else {
-                alert(json.error);
+                //alert(json.error); Xy
+                alert(json.success);//myself
             }
         },
         error:function (json) {

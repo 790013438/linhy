@@ -27,7 +27,7 @@ $(function(){
 
 });
 
-//查询我的兼职
+//查询我的资源
 var queryMyJob = function(data) {
 	$.ajax({
 		url:"../company/getJobsByCompanyId",
@@ -74,7 +74,7 @@ var queryMyJob = function(data) {
 		},
 	});
 }
-//移除兼职
+//移除资源
 var removeJobById = function(data) {
         $.ajax({
             url:"../company/removeJobById",
@@ -88,7 +88,7 @@ var removeJobById = function(data) {
                         alert(result.error);
                         return;
                     }else{
-                        var txt = "移除兼职成功";
+                        var txt = "移除资源成功";
                         alert(txt);
                         return;
                     }
@@ -100,7 +100,7 @@ var removeJobById = function(data) {
                 }
             },
             error : function(obj, msg) {
-                var txt = "移除兼职失败";
+                var txt = "移除资源失败";
                 alert(txt);
                 return;
             },
@@ -110,7 +110,7 @@ var removeJobById = function(data) {
         });
     }
 
-//关闭兼职
+//关闭资源
 var closeJobById = function(data) {
     $.ajax({
         url:"../admin/auditingJob",
@@ -124,7 +124,7 @@ var closeJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "关闭兼职成功";
+                    var txt = "关闭资源成功";
                     alert(txt);
                     return;
                 }
@@ -136,7 +136,7 @@ var closeJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "关闭兼职失败";
+            var txt = "关闭资源失败";
             alert(txt);
             return;
         },

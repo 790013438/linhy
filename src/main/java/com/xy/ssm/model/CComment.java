@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Created by xiongyan on 2017/2/11.
- * 兼职报名表
+ * 资源报名表
  */
 public class CComment implements Serializable {
     private static final long serialVersionUID = 4015147211524700827L;

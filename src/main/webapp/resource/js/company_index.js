@@ -18,7 +18,7 @@ $(function(){
 
 });
 
-//查询我的兼职
+//查询我的资源
 var queryMyJob = function(data) {
 	$.ajax({
 		url:"../company/getJobsByCompanyId",
@@ -65,7 +65,7 @@ var queryMyJob = function(data) {
 		},
 	});
 }
-//删除兼职
+//删除资源
 var delJobById = function(data) {
     $.ajax({
         url:"../admin/deleteJobById",
@@ -79,7 +79,7 @@ var delJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "删除兼职成功";
+                    var txt = "删除资源成功";
                     alert(txt);
                     return;
                 }
@@ -91,7 +91,7 @@ var delJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "删除兼职失败";
+            var txt = "删除资源失败";
             alert(txt);
             return;
         },
@@ -188,7 +188,7 @@ var appendJobNode = function(obj) {
 		"<td> "+obj.jobDemandNumber+"</td>"+
 		"<td> "+jobDeadline1+"</td>"+
 		"<td>"+
-		"<a  href =\"../company/jobDetails?jobId="+obj.id+"\" >查看兼职详情</a> |" +
+		"<a  href =\"../company/jobDetails?jobId="+obj.id+"\" >查看资源详情</a> |" +
             "<button type=\"button\"  onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>|";
     if(obj.jobStatus== "保存"){
         var job_str1 = job_str +"<button type=\"button\" onclick=\"submitAudit('"+obj.id+"')\" class='btn btn-link'>提交审核</button>";

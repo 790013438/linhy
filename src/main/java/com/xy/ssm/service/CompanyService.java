@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CompanyService {
     /**
-     * 发布兼职
+     * 发布资源
      * @param cJobs
      * @return
      */

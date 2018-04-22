@@ -38,7 +38,7 @@ public class CompanyController extends BaseController {
     private MessageService messageService;
 
 //    /**
-//     * 跳转到企业用户页面
+//     * 跳转到教师用户页面
 //     * @return
 //     */
 //    @RequestMapping("index")
@@ -48,7 +48,7 @@ public class CompanyController extends BaseController {
 //    }
 
     /**
-     * 发布兼职信息
+     * 发布资源信息
      * @return
      */
     @RequestMapping(value = "/addJobs", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
@@ -67,20 +67,20 @@ public class CompanyController extends BaseController {
             cJobs.setJobCompanyId(companyId);
             Long id = companyService.addJobs(cJobs);
             if(id != null){
-                baseResult=new BaseResult(true,"保存兼职信息成功");
+                baseResult=new BaseResult(true,"保存资源信息成功");
             }else{
-                baseResult=new BaseResult(false,"保存兼职信息失败");
+                baseResult=new BaseResult(false,"保存资源信息失败");
             }
         }catch (Exception e){
-            log.error("保存兼职信息异常,请先登录"+e);
-            baseResult=new BaseResult(false,"保存兼职信息异常，请先登录");
+            log.error("保存资源信息异常,请先登录"+e);
+            baseResult=new BaseResult(false,"保存资源信息异常，请先登录");
         }
         result= JSON.toJSONString(baseResult);
         return result;
     }
 
     /**
-     * 分页获取当前企业发布的兼职信息列表
+     * 分页获取当前教师发布的资源信息列表
      * @param
      * @return
      */
@@ -106,15 +106,15 @@ public class CompanyController extends BaseController {
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取兼职信息列表异常！", e);
-            baseResult = new BaseResult(false, "当前企业发布的兼职信息列表异常！");
+            log.error("获取资源信息列表异常！", e);
+            baseResult = new BaseResult(false, "当前教师发布的资源信息列表异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     * 获取兼职报名情况
+     * 获取资源报名情况
      * @param
      * @return
      */
@@ -129,19 +129,19 @@ public class CompanyController extends BaseController {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(applicationList);
             } else {
-                baseResult = new BaseResult(false, "暂无兼职报名情况");
+                baseResult = new BaseResult(false, "暂无资源报名情况");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取兼职报名情况异常！", e);
-            baseResult = new BaseResult(false, "获取兼职报名情况异常！");
+            log.error("获取资源报名情况异常！", e);
+            baseResult = new BaseResult(false, "获取资源报名情况异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     * 筛选兼职用户
+     * 筛选资源用户
      * @param
      * @return
      */
@@ -183,7 +183,7 @@ public class CompanyController extends BaseController {
     }
 
     /**
-     * 删除某兼职
+     * 删除某资源
      * @param
      * @return
      */
@@ -195,13 +195,13 @@ public class CompanyController extends BaseController {
         try{
             int rs = companyService.deleteJobById (jobId);
             if(rs > 0){
-                baseResult=new BaseResult(true,"删除兼职成功");
+                baseResult=new BaseResult(true,"删除资源成功");
             }else{
-                baseResult=new BaseResult(false,"删除兼职失败");
+                baseResult=new BaseResult(false,"删除资源失败");
             }
         }catch (Exception e){
-            log.error("删除兼职异常"+e);
-            baseResult=new BaseResult(false,"删除兼职异常");
+            log.error("删除资源异常"+e);
+            baseResult=new BaseResult(false,"删除资源异常");
         }
         result= JSON.toJSONString(baseResult);
         return result;
@@ -221,11 +221,11 @@ public class CompanyController extends BaseController {
         String jobStatus = "1";
         try{
             if(cCompany.getCompStatus ().equals ("comp_apply")){
-                baseResult=new BaseResult(false,"企业还未通过审核，暂不能提交兼职");
+                baseResult=new BaseResult(false,"教师还未通过审核，暂不能提交资源");
             }else{
                 int rs = companyService.updateJobStatus (jobId,jobStatus);
                 if(rs > 0){
-                    String message="兼职id为"+jobId+"的兼职进行请求审批！";
+                    String message="资源id为"+jobId+"的资源进行请求审批！";
                     messageService.sendMessage (MessageUtils.getMessage (1L,1L,1,message));
                     baseResult=new BaseResult(true,"");
                 }else{
@@ -240,7 +240,7 @@ public class CompanyController extends BaseController {
         return result;
     }
     /**
-     *修改企业用户密码
+     *修改教师用户密码
      * @param
      * @return
      */
@@ -273,7 +273,7 @@ public class CompanyController extends BaseController {
         return result;
     }
     /**
-     * 查看兼职详情
+     * 查看资源详情
      * @param
      * @return
      */
@@ -288,19 +288,19 @@ public class CompanyController extends BaseController {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(job);
             } else {
-                baseResult = new BaseResult(true, "该兼职不存在");
+                baseResult = new BaseResult(true, "该资源不存在");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取兼职信息详情异常！", e);
-            baseResult = new BaseResult(false, "获取兼职信息详情异常！");
+            log.error("获取资源信息详情异常！", e);
+            baseResult = new BaseResult(false, "获取资源信息详情异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     * 移除兼职（该兼职对企业用户不可见）
+     * 移除资源（该资源对教师用户不可见）
      * @param
      * @return
      */
@@ -314,19 +314,19 @@ public class CompanyController extends BaseController {
             if(resultCode > 0) {
                 baseResult = new BaseResult(true, "");
             } else {
-                baseResult = new BaseResult(true, "移除兼职失败");
+                baseResult = new BaseResult(true, "移除资源失败");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("移除兼职异常！", e);
-            baseResult = new BaseResult(false, "移除兼职异常！");
+            log.error("移除资源异常！", e);
+            baseResult = new BaseResult(false, "移除资源异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
 
     /**
-     *删除兼职记录
+     *删除资源记录
      * @param applicationId
      * @return
      */
@@ -342,17 +342,17 @@ public class CompanyController extends BaseController {
             if(re > 0){
                 baseResult=new BaseResult(true,"");
             }else {
-                baseResult=new BaseResult(true,"删除兼职记录失败");
+                baseResult=new BaseResult(true,"删除资源记录失败");
             }
         }catch (Exception e){
-            log.error("删除兼职记录异常"+e);
-            baseResult=new BaseResult(false,"删除兼职记录异常");
+            log.error("删除资源记录异常"+e);
+            baseResult=new BaseResult(false,"删除资源记录异常");
         }
         result= JSON.toJSONString(baseResult);
         return result;
     }
     /**
-     * 查看企业用户基本信息
+     * 查看教师用户基本信息
      * @param
      * @return
      */
@@ -368,12 +368,12 @@ public class CompanyController extends BaseController {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(companyInfo);
             } else {
-                baseResult = new BaseResult(true, "该企业不存在");
+                baseResult = new BaseResult(true, "该教师不存在");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取企业信息异常！", e);
-            baseResult = new BaseResult(false, "获取企业信息异常！");
+            log.error("获取教师信息异常！", e);
+            baseResult = new BaseResult(false, "获取教师信息异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
@@ -413,113 +413,19 @@ public class CompanyController extends BaseController {
                     }else{
                         int rs = companyService.updateCompany(cCompany);
                         if (rs == 1) {
-                            baseResult = new BaseResult(true, "修改企业信息成功");
+                            baseResult = new BaseResult(true, "修改教师信息成功");
                         } else {
-                            baseResult = new BaseResult(true, "修改企业信息失败");
+                            baseResult = new BaseResult(true, "修改教师信息失败");
                         }
                     }
                 }
             }
         }catch (Exception e){
-            log.error("修改企业信息异常"+e);
-            baseResult=new BaseResult(false,"修改企业信息异常");
+            log.error("修改教师信息异常"+e);
+            baseResult=new BaseResult(false,"修改教师信息异常");
         }
         result= JSON.toJSONString(baseResult);
         return result;
     }
-
-    /**
-     *检测用户名是否存在
-     * @param account
-     * @return
-     */
-    @RequestMapping(value = "/checkName", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
-    public String checkName(@RequestParam(required = true) String  account) {
-        log.info("--------------------/company/checkName  called");
-        String result = "";
-        BaseResult baseResult = null;
-        try{
-            if(StringUtils.isEmpty(account)){
-                baseResult=new BaseResult(false,"获取企业账号异常，请联系管理员稍后再试");
-            }else {
-                List<CCompany> cCompanys = companyService.checkAccount(account);
-                if(cCompanys != null && 0 < cCompanys.size ()){
-                    baseResult=new BaseResult(false,"企业账号已经存在");
-                }else {
-                    baseResult=new BaseResult(true,"");
-                }
-            }
-        }catch (Exception e){
-            log.error("注册用户出现异常"+e);
-            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
-        }
-        result= JSON.toJSONString(baseResult);
-        return result;
-    }
-
-
-    /**
-     *检测邮箱是否存在
-     * @param email
-     * @return
-     */
-    @RequestMapping(value = "/checkMail", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
-    public String checkMail(@RequestParam(required = true) String  email) {
-        log.info("--------------------/company/checkMail  called");
-        String result = "";
-        BaseResult baseResult = null;
-        try{
-            if(StringUtils.isEmpty(email)){
-                baseResult=new BaseResult(false,"邮箱信息获取异常，请联系管理员稍后再试");
-            }else {
-                List<CCompany> cCompanys = companyService.checkMail(email);
-                if(cCompanys != null && 0 < cCompanys.size ()){
-                    baseResult=new BaseResult(false,"邮箱已经存在");
-                }else {
-                    baseResult=new BaseResult(true,"");
-                }
-            }
-        }catch (Exception e){
-            log.error("注册用户出现异常"+e);
-            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
-        }
-        result= JSON.toJSONString(baseResult);
-        return result;
-    }
-
-    /**
-     *检测手机号是否存在
-     * @param phone
-     * @return
-     */
-    @RequestMapping(value = "/checkPhone", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
-    public String checkPhone(@RequestParam(required = true) String  phone) {
-        log.info("--------------------/company/checkPhone  called");
-        String result = "";
-        BaseResult baseResult = null;
-        log.info ("1111111111111111111111111111"+phone);
-        try{
-            if(StringUtils.isEmpty(phone)){
-                baseResult=new BaseResult(false,"手机号信息获取异常，请联系管理员稍后再试");
-            }else {
-                List<CCompany> cCompanys = companyService.checkPhone(phone);
-                if(cCompanys != null && 0 < cCompanys.size ()){
-                    baseResult=new BaseResult(false,"手机号已经存在");
-                }else {
-                    baseResult=new BaseResult(true,"");
-                }
-            }
-        }catch (Exception e){
-            log.error("注册用户出现异常"+e);
-            baseResult=new BaseResult(false,"注册用户信息出现异常，请联系管理员或稍后再试");
-        }
-        result= JSON.toJSONString(baseResult);
-        return result;
-    }
-
-
-
+    /*将用户名检测功能放到了UserController里面，放在这里会被spring-mvc里面配置的连接器拦截，返回login页*/
 }

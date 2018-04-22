@@ -5,19 +5,19 @@ import java.util.Date;
 
 /**
  * Created by xiongyan on 2017/2/11.
- * 兼职表
+ * 资源表
  */
 public class CJobs implements Serializable {
     private static final long serialVersionUID = 4015147211524700827L;
-    //兼职id
+    //资源id
     private Long id;
-    //发布兼职企业id
+    //发布资源教师id
     private Long jobCompanyId;
-    //发布兼职企业id
+    //发布资源教师id
     private String jobCompanyName;
-    //兼职名称
+    //资源名称
     private String jobTitle;
-    //兼职类型
+    //资源类型
     private String jobType ;
     //需求人数
     private int jobDemandNumber;
@@ -31,17 +31,17 @@ public class CJobs implements Serializable {
     private String jobSalary;
     //工作地点
     private String jobAddress ;
-    //兼职描述
+    //资源描述
     private String jobIntroduction;
     //联系电话
     private String jobContactPhone;
-    //兼职状态
+    //资源状态
     private String jobStatus ;
     //标志
     private int flag ;
     //备注
     private String jobRemarks;
-    //该兼职报名人数
+    //该资源报名人数
     private int appliCount;
     //工作时间
     private Date jobTime;

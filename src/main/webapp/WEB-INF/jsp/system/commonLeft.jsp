@@ -19,7 +19,7 @@
                 <a href="#" class="navbar-brand">
                     <small>
                         <i class="icon-leaf"></i>
-                        大学生兼职系统
+                        计算机专业学习资源系统
                     </small>
                 </a><!-- /.brand -->
             </div><!-- /.navbar-header -->
@@ -94,7 +94,7 @@
                     <li class="" id="jobManage">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-list"></i>
-                            <span class="menu-text"> 兼职管理 </span>
+                            <span class="menu-text"> 资源管理 </span>
 
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -103,14 +103,14 @@
                             <li class="active" id="systemIdex">
                                 <a href="../system/index">
                                     <i class="icon-double-angle-right"></i>
-                                    待审核兼职管理
+                                    待审核资源管理
                                 </a>
                             </li>
 
                             <li id="systemJob">
                                 <a href="../system/job">
                                     <i class="icon-double-angle-right"></i>
-                                    已审核兼职管理
+                                    已审核资源管理
                                 </a>
                             </li>
                         </ul>
@@ -129,7 +129,7 @@
                             <li id="systemCompany">
                                 <a href="../system/company">
                                     <i class="icon-double-angle-right"></i>
-                                    企业用户信息管理
+                                    教师用户信息管理
                                 </a>
                             </li>
 

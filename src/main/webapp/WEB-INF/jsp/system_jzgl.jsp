@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--管理员端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="专为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--管理员端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="专为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -62,7 +62,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -144,7 +144,7 @@
 						<li class="active open">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 兼职管理 </span>
+								<span class="menu-text"> 资源管理 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -153,14 +153,14 @@
 								<li >
 									<a href="system_index.jsp">
 										<i class="icon-double-angle-right"></i>
-										待审核兼职管理
+										待审核资源管理
 									</a>
 								</li>
 
 								<li class="active">
 									<a href="system_jzgl.jsp">
 										<i class="icon-double-angle-right"></i>
-										已审核兼职管理
+										已审核资源管理
 									</a>
 								</li>
 							</ul>
@@ -179,7 +179,7 @@
 								<li>
 									<a href="system_company.jsp">
 										<i class="icon-double-angle-right"></i>
-										企业用户信息管理
+										教师用户信息管理
 									</a>
 								</li>
 
@@ -221,7 +221,7 @@
 								<a href="system_index.jsp">首页</a>
 							</li>
 
-							<li class="active">审核后兼职管理</li>
+							<li class="active">审核后资源管理</li>
 							
 						</ul><!-- .breadcrumb -->
 						
@@ -284,7 +284,7 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
+    <div class="font16 center deletediv">真的要删除该资源吗？</div>
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btnDoUpdate">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
@@ -353,7 +353,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
+					bootbox.confirm("你确定要删除改资源吗？", function(result) {
 						if(result) {
 							//
 						}

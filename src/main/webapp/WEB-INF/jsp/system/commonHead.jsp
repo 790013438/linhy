@@ -10,9 +10,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="resource" value="${pageContext.request.contextPath}" />
 <meta charset="utf-8" />
-<title>XX大学生兼职系统--管理员端</title>
-<meta name="keywords" content="大学生兼职系统" />
-<meta name="description" content="专为大学和企业用户设计的桥梁" />
+<title>计算机专业学习资源系统--管理员端</title>
+<meta name="keywords" content="计算机专业学习资源系统" />
+<meta name="description" content="专为大学和教师用户设计的桥梁" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- basic styles -->

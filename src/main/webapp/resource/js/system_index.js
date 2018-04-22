@@ -28,7 +28,7 @@ $(function(){
     });
 });
 
-//查询待审核兼职列表
+//查询待审核资源列表
 var getWaitingAudit = function(condition) {
 	$.ajax({
 		url:"../admin/getAllJobs",
@@ -55,7 +55,7 @@ var getWaitingAudit = function(condition) {
                     });
 				} else{
 					$("#waitingAudit tbody").empty();
-					var txt = "暂无待审核表兼职";
+					var txt = "暂无待审核表资源";
 					alert(txt);
 					return;
 				}
@@ -69,14 +69,14 @@ var getWaitingAudit = function(condition) {
 		error : function(obj, msg) {
 			//还得先清空所有行
 			$("#waitingAudit tbody").empty();
-			var txt = "暂无待审核表兼职";
+			var txt = "暂无待审核表资源";
 			alert(txt);
 			return;
 		},
 	});
 }
 
-//审核兼职
+//审核资源
 var updateJobStatus = function(data) {
     $.ajax({
         url:"../admin/auditingJob",
@@ -90,7 +90,7 @@ var updateJobStatus = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "审核兼职成功";
+                    var txt = "审核资源成功";
                     alert(txt);
                     return;
                 }
@@ -102,7 +102,7 @@ var updateJobStatus = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "审核兼职失败";
+            var txt = "审核资源失败";
             alert(txt);
             return;
         },
@@ -165,8 +165,8 @@ var appendJobNode = function(obj) {
 		"<td> "+obj.jobCompanyName+"</td>"+
 		"<td> "+jobDeadline1+"</td>"+
 		"<td>"+
-		"<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看兼职详情</a> |"+
-       "<button type=\"button\" onclick=\"auditJob('"+obj.id+"')\" class='btn btn-link'>审核兼职</button>";
+		"<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看资源详情</a> |"+
+       "<button type=\"button\" onclick=\"auditJob('"+obj.id+"')\" class='btn btn-link'>审核资源</button>";
 		"<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
 		"</td>"+
 		"</tr>";

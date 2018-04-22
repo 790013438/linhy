@@ -23,10 +23,10 @@ var phone_flag = false;
 
 $ (function ()
 {
-
+/*registerComp是教师注册按钮*/
     $ ("#registerComp").click (function ()
     {
-        var data = getComParams ();
+        var data = getComParams ();//得到注册信息
         registerComp (data);
     });
 });
@@ -47,22 +47,22 @@ function getRootPath ()
  */
 function checkCompName (obj)
 {
-    console.log (getRootPath ());
     if (obj.value.length < 1)
     {
-        showInfo ("username_notice", username_empty);
+        showInfo ("compname_notice", username_empty); /*username_notice-->compname_notice myself*/
     } else
     {
         // 调用Ajax函数,向服务器端发送查询
         $.ajax ({ //一个Ajax过程
             type: "post", //以post方式与后台沟通
-            url: getRootPath () + "/company/checkName", //与此页面沟通
+            url: getRootPath() + "/user/checkTname", //与此页面沟通company/checkName
             dataType: 'json',//返回的值以 JSON方式 解释
             data: 'account=' + obj.value, //发给的数据
-            success: function (json)
+            success: function (json)//这个方法没有进去，里面的内容没有实现
             {//如果调用成功
                 if (!json.success)
                 {
+
                     showInfo ("compname_notice", username_have_register);
                 } else
                 {
@@ -109,7 +109,7 @@ function checkCompEmail (email)
         // 调用Ajax函数,向服务器端发送查询
         $.ajax ({ //一个Ajax过程
             type: "post", //以post方式与后台沟通
-            url: getRootPath () + "/company/checkMail", //与此页面沟通
+            url: getRootPath () + "/user/checkTmail", //与此页面沟通
             dataType: 'json',//返回的值以 JSON方式 解释
             data: 'email=' + email.value, //发给的数据
             success: function (json)
@@ -192,7 +192,7 @@ function checkComPhone (phone)
     {
         $.ajax ({ //一个Ajax过程
             type: "post", //以post方式与后台沟通
-            url: getRootPath () + "company/checkPhone", //与此页面沟通
+            url: getRootPath () + "user/checkTphone", //与此页面沟通
             dataType: 'json',//返回的值以 JSON方式 解释
             data: data = {phone: phone.value}, //发给的数据
             success: function (json)
@@ -260,7 +260,7 @@ function registerComp (data)
                 alert (json.error);
             } else
             {
-                alert (json.error);
+                alert (json.success);//error-->success myslef
             }
         },
         error: function (json)
@@ -272,7 +272,7 @@ function registerComp (data)
 }
 
 /**
- * 获取注册企业信息
+ * 获取注册教师信息
  * @returns {{}}
  */
 var getComParams = function ()

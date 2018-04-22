@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
-  User: wuchen
-  Date: 2017/1/13
+  User: linhy
+  Date: 2018/1/13
   Time: 22:14
   To change this template use File | Settings | File Templates.
 --%>
@@ -57,10 +57,10 @@
                 <div >
                     <label>类型</label>
                     <label class="checkbox-inline">
-                        <input type="radio" name="type" id="student" value="1" checked> 大学生
+                        <input type="radio" name="type" id="student" value="1" checked> 学生
                     </label>
                     <label class="checkbox-inline">
-                        <input type="radio" name="type" id="company"  value="2"> 公司
+                        <input type="radio" name="type" id="company"  value="2"> 教师(教师)
                     </label>
                     <label class="checkbox-inline">
                         <input type="radio" name="type" id="admin"  value="3"> 管理员
@@ -99,7 +99,8 @@
                            type="text" name="phone">
                     <SPAN id=comphone_notice >*</SPAN>
                     <br>
-                    <button class="btn text-muted text-center btn-success" name="Submit1"  type="button" id="registerComp" class="anniu" disabled>企业注册</button>
+                    <button class="btn text-muted text-center btn-success" name="Submit1"  type="submit" id="registerComp" class="anniu">教师注册</button>
+                    <%--id:comp_register-->registerComp--%>
                     </TBODY>
                 </TABLE>
             </form>
@@ -133,7 +134,7 @@
                                <input type="radio" name="gender" id="gender_woman"  value="0"> 女
                            </label>
                        </div>
-                       <button class="btn text-muted text-center btn-success" name="Submit1"  type="button" id="register" class="anniu" disabled>大学生注册</button>
+                       <button class="btn text-muted text-center btn-success" name="Submit1"  type="submit" id="register" class="anniu">学生注册</button>
                     </TBODY>
                 </TABLE>
             </form>
@@ -143,7 +144,7 @@
         <ul class="list-inline">
             <li><a class="text-muted" href="#login" data-toggle="tab">登录</a></li>
             <li><a class="text-muted" href="#forgot" data-toggle="tab">忘记密码？</a></li>
-            <li><a class="text-muted" href="#signup" data-toggle="tab">企业注册</a></li>
+            <li><a class="text-muted" href="#signup" data-toggle="tab">教师注册</a></li>
             <li><a class="text-muted" href="#signup1" data-toggle="tab">用户注册</a></li>
         </ul>
     </div>

@@ -13,7 +13,7 @@ $(function(){
     });
 });
 
-//查询兼职详情
+//查询资源详情
 var getJobInfoByID = function(condition) {
 	$.ajax({
 		url:"../admin/getJobDetails",
@@ -24,7 +24,7 @@ var getJobInfoByID = function(condition) {
 			if (result.success == true) {
 				if (result.error != "") {
                     $("#ul_jobDetail").empty();
-                    $("#ul_jobDetail").append("<li>该兼职不存在</li>");
+                    $("#ul_jobDetail").append("<li>该资源不存在</li>");
                     return;
 				}
 				if (result.data!=null){
@@ -33,7 +33,7 @@ var getJobInfoByID = function(condition) {
                     var detail_str = initJobDetailForm(result.data);
                     console.log(result.data);
                     if(result.data.flag == 0){
-                        document.getElementById("btn_appli").value="报名兼职";
+                        document.getElementById("btn_appli").value="报名资源";
                     }else{
                         document.getElementById("btn_appli").value="已报名";
                         console.log(result.data);
@@ -43,7 +43,7 @@ var getJobInfoByID = function(condition) {
                     $("#ul_jobDetail").append(detail_str);
 				} else{
                     $("#ul_jobDetail").empty();
-                    $("#ul_jobDetail").append("<li>该兼职不存在</li>");
+                    $("#ul_jobDetail").append("<li>该资源不存在</li>");
                     return;
 				}
 			} else {
@@ -65,7 +65,7 @@ var getJobInfoByID = function(condition) {
 }
 
 
-//报名指定兼职
+//报名指定资源
 var appliJobById = function(data) {
     $.ajax({
         url:"../user/applicationJob",
@@ -91,7 +91,7 @@ var appliJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "报名兼职失败";
+            var txt = "报名资源失败";
             alert(txt);
             return;
         },
@@ -112,14 +112,14 @@ var initJobDetailForm = function(obj) {
         var tr = "<li><span>标题：</span>无</li>";
     }
     if(obj.jobType != null){
-        tr = tr + "<li><span>兼职类型：</span>"+obj.jobType+"</li>";
+        tr = tr + "<li><span>资源类型：</span>"+obj.jobType+"</li>";
     }else{
-        tr = tr + "<li><span>兼职类型：</span>无</li>";
+        tr = tr + "<li><span>资源类型：</span>无</li>";
     }
     if(obj.jobCompanyName != null){
-        tr = tr + "<li><span>企业名称：</span>"+obj.jobCompanyName+"</li>";
+        tr = tr + "<li><span>教师名称：</span>"+obj.jobCompanyName+"</li>";
     }else{
-        tr = tr + "<li><span>企业名称：</span>无</li>";
+        tr = tr + "<li><span>教师名称：</span>无</li>";
     }
     if(obj.jobDemandNumber != null){
         tr = tr + "<li><span>需求人数：</span>"+obj.jobDemandNumber+"<span>（人）</span></li>";
@@ -148,9 +148,9 @@ var initJobDetailForm = function(obj) {
     }
     if(obj.jobTime != null){
         var jobTime1 = moment(obj.jobTime).format("YYYY-MM-DD HH:mm:ss");
-         tr = tr + "<li><span>兼职开始时间：</span>"+jobTime1+"</li>";
+         tr = tr + "<li><span>资源开始时间：</span>"+jobTime1+"</li>";
     } else{
-         tr = tr + "<li><span>兼职开始时间：</span>无</li>";
+         tr = tr + "<li><span>资源开始时间：</span>无</li>";
     }
     if(obj.jobDeadline != null){
         var jobDeadlineTime = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
@@ -164,11 +164,11 @@ var initJobDetailForm = function(obj) {
         tr = tr + "<li><span>工作地点：</span>无</li>";
     }
     if(+obj.jobIntroduction != null){
-        tr = tr + "<li><span>兼职描述信息：</span>" +
+        tr = tr + "<li><span>资源描述信息：</span>" +
                 "<textarea style='width:70%;' disabled=\"disabled\">"+obj.jobIntroduction+"</textarea>" +
                 "</li>";
     }else{
-        tr = tr + "<li><span>兼职描述信息：</span>无</li>";
+        tr = tr + "<li><span>资源描述信息：</span>无</li>";
     }
     return tr;
 }

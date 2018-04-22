@@ -15,7 +15,7 @@ $(function(){
     });
 });
 
-//发布兼职
+//发布资源
 var updateCompany = function (data) {
     $.ajax({
         url: "../company/updateCompanyInfo",
@@ -23,7 +23,7 @@ var updateCompany = function (data) {
         data: data,
         dataType : 'json',
         error: function (obj, msg) {
-            var txt = "保存兼职失败";
+            var txt = "保存资源失败";
             alert(txt);
             return;
         },
@@ -33,7 +33,7 @@ var updateCompany = function (data) {
         success: function (result) {
             if (result.success == true) {
                 if (result.data > 0) {
-                    alert("保存兼职成功，可以提交审核");
+                    alert("保存资源成功，可以提交审核");
                 }
                 else {
                     var txt = result.error;

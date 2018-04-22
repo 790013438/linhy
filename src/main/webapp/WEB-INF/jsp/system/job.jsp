@@ -22,7 +22,7 @@
 								<a href="system_index.jsp">首页</a>
 							</li>
 
-							<li class="active">审核后兼职管理</li>
+							<li class="active">审核后资源管理</li>
 							
 						</ul><!-- .breadcrumb -->
 						
@@ -43,7 +43,7 @@
       											<th>需求人数</th>
       											<th>报名人数</th>
       											<th>截止时间</th>
-												<th>兼职时间</th>
+												<th>资源时间</th>
 												<th>操作</th>
      										</tr> 
     									</thead> 
@@ -68,7 +68,7 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">该兼职信息不真实，确定删除该兼职？</div>
+    <div class="font16 center deletediv">该资源信息不真实，确定删除该资源？</div>
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_delJob">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>

@@ -21,11 +21,11 @@
 								<a href="index.jsp">首页</a>
 							</li>
 
-							<li class="active">我的兼职</li>
+							<li class="active">我的资源</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='../company/addJob'">发布兼职</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../company/addJob'">发布资源</button>
 						</div>
 					</div>
 
@@ -69,7 +69,7 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
+    <div class="font16 center deletediv">真的要删除该资源吗？</div>
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_delJob">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
@@ -96,7 +96,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
+					bootbox.confirm("你确定要删除改资源吗？", function(result) {
 						if(result) {
 							//
 						}

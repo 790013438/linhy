@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--企业端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="转为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--教师端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="转为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -62,7 +62,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -90,7 +90,7 @@
 								<img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎您,</small>
-									XX公司
+									XX教师
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -138,13 +138,13 @@
 						<li>
 							<a href="jz_index.jsp">
 								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 企业端 </span>
+								<span class="menu-text"> 教师端 </span>
 							</a>
 						</li>
 						<li>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 兼职管理 </span>
+								<span class="menu-text"> 资源管理 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -153,14 +153,14 @@
 								<li>
 									<a href="jz_fbjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										发布兼职
+										发布资源
 									</a>
 								</li>
 
 								<li>
 									<a href="jz_index.jsp">
 										<i class="icon-double-angle-right"></i>
-										我的兼职
+										我的资源
 									</a>
 								</li>
 							</ul>
@@ -207,7 +207,7 @@
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='jz_fbjz.jsp'">发布兼职</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='jz_fbjz.jsp'">发布资源</button>
 						</div>
 					</div>
 
@@ -241,7 +241,7 @@
     											<td>28</td>
     											<td>4</td>
     											<td>已读</td>
-    											<td>兼职审核通过</td>
+    											<td>资源审核通过</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -291,10 +291,10 @@
     </h1>
     <div class="popcon">
         <ul class="gray_three">
-            <li><span>消息名称:</span>有人报名了你的兼职</li>
+            <li><span>消息名称:</span>有人报名了你的资源</li>
             <li><span>消息时间:</span>2017-03-10 16:11:38</li>
             <li><span>发送人:</span>系统提示</li>
-            <li><span>消息内容:</span>你发布的兼职金牛万达广场发传单已经有人报名了，请前去处理</li>
+            <li><span>消息内容:</span>你发布的资源金牛万达广场发传单已经有人报名了，请前去处理</li>
         </ul>
     </div>
 </div>

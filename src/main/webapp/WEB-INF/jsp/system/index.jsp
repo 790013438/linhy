@@ -22,7 +22,7 @@
 								<a href="../system/index">首页</a>
 							</li>
 
-							<li class="active">兼职审批管理</li>
+							<li class="active">资源审批管理</li>
 							
 						</ul><!-- .breadcrumb -->
 						
@@ -41,7 +41,7 @@
       											<th>标题</th> 
       											<th>状态</th> 
       											<th>需求人数</th>
-												<th>发布企业</th>
+												<th>发布教师</th>
       											<th>截止时间</th>
       											<th>操作</th> 
      										</tr> 
@@ -67,7 +67,7 @@
 		</div><!-- /.main-container -->
 
 	<div class="popinto" id="delPop">
-		<div class="font16 center deletediv">请选择对该兼职的审核结果</div>
+		<div class="font16 center deletediv">请选择对该资源的审核结果</div>
 		<div class="deletediv_btn">
 			<p class="pull-left"><button type="button" class="btn btn-primary" id="btnAdoptJob">通过</button></p>
 			<p class="pull-right"><button type="button" class="btn btn-default" id="btnRefuseJob" >拒绝</button></p>

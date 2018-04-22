@@ -110,7 +110,7 @@ var queryMyInfo = function() {
                 initCompanyForm(result.data);
             }
             else{
-                var txt = "无企业信息";
+                var txt = "无教师信息";
                 alert(txt);
                 return;
             }
@@ -130,7 +130,7 @@ var updateCompany = function (data) {
         data: data,
         dataType : 'json',
         error: function (obj, msg) {
-            var txt = "修改企业信息失败";
+            var txt = "修改教师信息失败";
             alert(txt);
             return;
         },
@@ -140,7 +140,7 @@ var updateCompany = function (data) {
         success: function (result) {
             if (result.success == true) {
                 if (result.data > 0) {
-                    alert("修改企业信息成功");
+                    alert("修改教师信息成功");
                 }
                 else {
                     var txt = result.error;
@@ -170,16 +170,16 @@ var checkUserInformation = function(data)
                 var name = "账号";
             }
             if(p == "compName"){
-                var name = "企业名";
+                var name = "教师名";
             }
             if(p == "compContacts"){
-                var name = "公司联系人";
+                var name = "教师联系人";
             }
             if(p == "compAddress"){
-                var name = "企业地址";
+                var name = "教师地址";
             }
             if(p == "compInfo"){
-                var name = "企业简介";
+                var name = "教师简介";
             }
             if(p == "compEmail"){
                 var name = "邮箱";
@@ -188,7 +188,7 @@ var checkUserInformation = function(data)
                 var name = "联系电话";
             }
             if(p == "commWebsite"){
-                var name = "企业网站";
+                var name = "教师网站";
             }
             alert("请输入"+name);
             return false;
@@ -284,7 +284,7 @@ $('#user-profile-3')
 })
 
 /**
- * 向个人信息设置页面填充企业信息
+ * 向个人信息设置页面填充教师信息
  */
 var initCompanyForm = function (obj) {
     console.log(obj);

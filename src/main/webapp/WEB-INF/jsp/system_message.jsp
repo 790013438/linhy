@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--管理员端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="专为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--管理员端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="专为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -62,7 +62,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -144,7 +144,7 @@
 						<li >
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 兼职管理 </span>
+								<span class="menu-text"> 资源管理 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -153,14 +153,14 @@
 								<li >
 									<a href="system_index.jsp">
 										<i class="icon-double-angle-right"></i>
-										待审核兼职管理
+										待审核资源管理
 									</a>
 								</li>
 
 								<li >
 									<a href="system_jzgl.jsp">
 										<i class="icon-double-angle-right"></i>
-										审核后兼职管理
+										审核后资源管理
 									</a>
 								</li>
 							</ul>
@@ -179,7 +179,7 @@
 								<li >
 									<a href="system_company.jsp">
 										<i class="icon-double-angle-right"></i>
-										企业用户信息管理
+										教师用户信息管理
 									</a>
 								</li>
 
@@ -248,7 +248,7 @@
     											<td>1</td>
     											<td>1</td>
     											<td>未读</td>
-    											<td>企业审核</td>
+    											<td>教师审核</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link see">查看详情</button><button class="btn btn-link del">删除</button></a></td>
     										</tr>
@@ -256,7 +256,7 @@
     											<td>2</td>
     											<td>2</td>
     											<td>未读</td>
-    											<td>兼职审核</td>
+    											<td>资源审核</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -264,7 +264,7 @@
     											<td>3</td>
     											<td>2</td>
     											<td>未读</td>
-    											<td>企业审核</td>
+    											<td>教师审核</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -272,7 +272,7 @@
     											<td>4</td>
     											<td>1</td>
     											<td>未读</td>
-    											<td>兼职审核</td>
+    											<td>资源审核</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -321,10 +321,10 @@
     </h1>
     <div class="popcon">
         <ul class="gray_three">
-            <li><span>消息名称:</span>有人报名了你的兼职</li>
+            <li><span>消息名称:</span>有人报名了你的资源</li>
             <li><span>消息时间:</span>2017-03-10 16:11:38</li>
             <li><span>发送人:</span>系统提示</li>
-            <li><span>消息内容:</span>你发布的兼职金牛万达广场发传单已经有人报名了，请前去处理</li>
+            <li><span>消息内容:</span>你发布的资源金牛万达广场发传单已经有人报名了，请前去处理</li>
         </ul>
     </div>
 </div>

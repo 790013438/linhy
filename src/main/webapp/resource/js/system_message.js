@@ -180,10 +180,10 @@ $(".table tr td input").each(function(){
 var appendJobNode = function(obj) {
     var jobDeadline1 = moment(obj.createTime).format("YYYY-MM-DD");
     if(obj.mesType==1){
-        obj.mesType="兼职审批";
+        obj.mesType="资源审批";
     }
     if(obj.mesType==2){
-        obj.mesType="兼职报名";
+        obj.mesType="资源报名";
     }
     var job_str = "<tr>"+
          "<td>"+obj.id+"</td>"+

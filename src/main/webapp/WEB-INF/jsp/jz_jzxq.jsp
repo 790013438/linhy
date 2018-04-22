@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--企业端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="转为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--教师端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="转为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -61,7 +61,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -89,7 +89,7 @@
 								<img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎您,</small>
-									XX公司
+									XX教师
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -137,13 +137,13 @@
 						<li>
 							<a href="jz_index.jsp">
 								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 企业端 </span>
+								<span class="menu-text"> 教师端 </span>
 							</a>
 						</li>
 						<li class="active open">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 兼职管理 </span>
+								<span class="menu-text"> 资源管理 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -152,14 +152,14 @@
 								<li >
 									<a href="jz_fbjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										发布兼职
+										发布资源
 									</a>
 								</li>
 
 								<li class="active">
 									<a href="jz_index.jsp">
 										<i class="icon-double-angle-right"></i>
-										我的兼职
+										我的资源
 									</a>
 								</li>
 							</ul>
@@ -202,20 +202,20 @@
 								<a href="jz_index.jsp">首页</a>
 							</li>
 
-							<li class="active">兼职详情</li>
+							<li class="active">资源详情</li>
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='jz_fbjz.jsp'">发布兼职</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='jz_fbjz.jsp'">发布资源</button>
 						</div>
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								兼职信息
+								资源信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									兼职报名情况
+									资源报名情况
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -244,18 +244,18 @@
 													<div class="widget-body">
 														<div class="widget-main">
 															<dl id="dt-list-1">
-																<dt>兼职标题：成都金牛万达广场发传单</dt>
-																<dt>兼职类型：发传单</dt>
+																<dt>资源标题：成都金牛万达广场发传单</dt>
+																<dt>资源类型：发传单</dt>
 																<dt>需求人数：5人</dt>
 																<dt>报名人数：1人</dt>
 																<dt>薪资类型：时薪</dt>
 																<dt>薪资金额：20￥/小时</dt>
-																<dt>兼职时长：4小时</dt>
-																<dt>兼职时间：2017-01-01</dt>
+																<dt>资源时长：4小时</dt>
+																<dt>资源时间：2017-01-01</dt>
 																<dt>截止时间：2017-02-25</dt>
-																<dt>兼职地址</dt>
+																<dt>资源地址</dt>
 																<dd>四川省成都市金牛区万达广场</dd>
-																<dt>兼职描述</dt>
+																<dt>资源描述</dt>
 																<dd>在四川省成都市金牛区万达广场进行传单的派发</dd>
 															</dl>
 														</div>

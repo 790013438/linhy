@@ -19,7 +19,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
-                    大学生兼职系统
+                    计算机专业学习资源系统
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
@@ -47,7 +47,7 @@
                         <img class="nav-user-photo" src="${resource}/resource/avatars/avatar5.png" alt="Jason's Photo" />
                         <span class="user-info">
 									<small>欢迎您,</small>
-									王同学
+									同学
 								</span>
 
                         <i class="icon-caret-down"></i>
@@ -101,13 +101,13 @@
                 <li class="active" id="job_center">
                     <a href="../student/index">
                         <i class="icon-text-width"></i>
-                        <span class="menu-text"> 兼职中心 </span>
+                        <span class="menu-text"> 资源中心 </span>
                     </a>
                 </li>
                 <li id="li_myjob">
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-list"></i>
-                        <span class="menu-text"> 我的兼职 </span>
+                        <span class="menu-text"> 我的资源 </span>
 
                         <b class="arrow icon-angle-down"></b>
                     </a>
@@ -116,14 +116,14 @@
                         <li id="li_myAppliJob">
                             <a href="../student/myJob">
                                 <i class="icon-double-angle-right"></i>
-                                查看兼职报名情况
+                                查看资源报名情况
                             </a>
                         </li>
 
                         <li id="li_history">
                             <a href="../student/jobHistory">
                                 <i class="icon-double-angle-right"></i>
-                                我的兼职历史
+                                我的资源历史
                             </a>
                         </li>
                     </ul>

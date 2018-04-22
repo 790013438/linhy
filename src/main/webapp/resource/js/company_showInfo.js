@@ -15,7 +15,7 @@ $(function() {
 
 
     /**
-     * 查询企业信息
+     * 查询教师信息
      */
     var queryCompanyInf = function (condition) {
         $.ajax({

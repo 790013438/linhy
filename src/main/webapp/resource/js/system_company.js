@@ -90,7 +90,7 @@ var getCompanyList = function() {
     });
 }
 
-//修改企业状态
+//修改教师状态
 var updateCompStatus = function(data) {
     $.ajax({
         url:"../admin/updateCompanyStatus",
@@ -104,7 +104,7 @@ var updateCompStatus = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "修改企业状态成功";
+                    var txt = "修改教师状态成功";
                     alert(txt);
                     return;
                 }
@@ -116,7 +116,7 @@ var updateCompStatus = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "修改企业状态失败";
+            var txt = "修改教师状态失败";
             alert(txt);
             return;
         },
@@ -178,7 +178,7 @@ var appendCompanyNode = function(obj) {
     "<td> "+obj.commWebsite+"</td>"+
     "<td> "+obj.compAddress+"</td>"+
             "<td>"+
-            "<a  href =\"../system/company_showinfo?companyId="+obj.id+"\" >查看企业信息</a> |";
+            "<a  href =\"../system/company_showinfo?companyId="+obj.id+"\" >查看教师信息</a> |";
     if(obj.compStatus == '禁用'){
         user_str =user_str+ "<button type=\"button\" onclick=\"thawCompany('"+obj.id+"')\" class='btn btn-link'>解禁</button>";
     }else if(obj.compStatus =='注册成功'){

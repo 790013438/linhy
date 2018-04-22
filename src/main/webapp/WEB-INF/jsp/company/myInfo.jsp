@@ -26,17 +26,17 @@
 							<li>
 								<a href="#">信息维护</a>
 							</li>
-							<li class="active">公司信息</li>
+							<li class="active">教师信息</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								公司信息
+								教师信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									可对公司信息进行维护和登录密码更改
+									可对教师信息进行维护和登录密码更改
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -88,14 +88,14 @@
 																	<div class="space-4"></div>
 
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right">企业名</label>
+																		<label class="col-sm-4 control-label no-padding-right">教师名</label>
 
 																		<div class="col-sm-8">
 																			<input class="col-xs-12 col-sm-6" type="text" id="comp_name" placeholder="Username" value="" />
 																		</div>
 																	</div>
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right">公司联系人</label>
+																		<label class="col-sm-4 control-label no-padding-right">教师联系人</label>
 
 																		<div class="col-sm-8">
 																			<input class="col-xs-12 col-sm-6" type="text" id="comp_contacts" placeholder="First Name" value="" />
@@ -108,7 +108,7 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right">企业地址</label>
+																<label class="col-sm-3 control-label no-padding-right">教师地址</label>
 																<div class="col-sm-9">
 																	<textarea class="col-xs-12 col-sm-8" id="comp_address"></textarea>
 																</div>
@@ -117,7 +117,7 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right">企业简介</label>
+																<label class="col-sm-3 control-label no-padding-right">教师简介</label>
 
 																<div class="col-sm-9">
 																	<textarea class="col-xs-12 col-sm-8" id="comp_info"></textarea>

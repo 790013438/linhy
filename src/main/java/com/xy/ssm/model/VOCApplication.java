@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Created by xiongyan on 2017/2/11.
- * 兼职报名表
+ * 资源报名表
  */
 public class VOCApplication implements Serializable {
     private static final long serialVersionUID = 4015147211524700827L;
@@ -13,15 +13,15 @@ public class VOCApplication implements Serializable {
     private Long id;
     //报名用户id
     private Long appliUserId;
-    //兼职id
+    //资源id
     private Long appliJobId;
     //报名状态
     private String appliStatus;
-    //发布兼职企业名称
+    //发布资源教师名称
     private String jobCompanyName;
-    //兼职名称
+    //资源名称
     private String jobTitle;
-    //兼职类型
+    //资源类型
     private String jobType ;
     //需求人数
     private int jobDemandNumber;
@@ -35,17 +35,17 @@ public class VOCApplication implements Serializable {
     private String jobSalary;
     //工作地点
     private String jobAddress ;
-    //兼职描述
+    //资源描述
     private String jobIntroduction;
     //联系电话
     private String jobContactPhone;
-    //兼职状态
+    //资源状态
     private String jobStatus ;
     //备注
     private String jobRemarks;
     //报名截止时间
     private Date jobDeadline;
-    //兼职时间
+    //资源时间
     private Date jobTime;
     //创建时间
     private Date createTime;

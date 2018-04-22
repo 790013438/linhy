@@ -22,17 +22,17 @@
 								<a href="person_index.jsp">首页</a>
 							</li>
 
-							<li class="active">兼职详情</li>
+							<li class="active">资源详情</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								兼职信息
+								资源信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									请仔细核查兼职信息，避免不实兼职信息。
+									请仔细核查资源信息，避免不实资源信息。
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -80,7 +80,7 @@
 			</a>
 		</div><!-- /.main-container -->
 	<div class="popinto" id="popinto_adoptPop">
-		<div class="font16 center deletediv">请选择对该兼职的审核结果</div>
+		<div class="font16 center deletediv">请选择对该资源的审核结果</div>
 		<div class="deletediv_btn">
 			<p class="pull-left"><button type="button" class="btn btn-primary" id="btnAdoptJob">通过</button></p>
 			<p class="pull-right"><button type="button" class="btn btn-default" id="btnRefuseJob" >拒绝</button></p>

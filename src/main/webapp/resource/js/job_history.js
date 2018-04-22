@@ -15,7 +15,7 @@ $(function(){
     });
 });
 
-//查询兼职历史
+//查询资源历史
 var queryMyAppliJobs = function(condition) {
     $.ajax({
         url:"../user/getMyAppliSituation",
@@ -76,7 +76,7 @@ var delApplicationById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "删除兼职记录成功";
+                    var txt = "删除资源记录成功";
                     alert(txt);
                     return;
                 }
@@ -88,7 +88,7 @@ var delApplicationById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "删除兼职记录失败";
+            var txt = "删除资源记录失败";
             alert(txt);
             return;
         },
@@ -151,7 +151,7 @@ var appendJobNode = function(obj) {
             "<td> "+obj.jobSalaryType+"</td>"+
             "<td> "+obj.jobSalary+"</td>"+
             "<td>"+
-            "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看兼职详情</a> |"+
+            "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看资源详情</a> |"+
             "<button type=\"button\" class='btn btn-link' onclick=\"delAppli('"+obj.id+"')\" >删除</button>";
     "<input type=\"hidden\" name=\"application_id\" value=\""+obj.id+"\">"+
     "</td>"+

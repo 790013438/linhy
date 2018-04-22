@@ -6,9 +6,9 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>XX大学生兼职系统--大学生端</title>
-		<meta name="keywords" content="大学生兼职系统" />
-		<meta name="description" content="专为大学和企业用户设计的桥梁" />
+		<title>计算机专业学习资源系统--大学生端</title>
+		<meta name="keywords" content="计算机专业学习资源系统" />
+		<meta name="description" content="专为大学和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -62,7 +62,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生兼职系统
+							计算机专业学习资源系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -90,7 +90,7 @@
 								<img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎您,</small>
-									王同学
+									同学
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -144,13 +144,13 @@
 						<li>
 							<a href="person_index.jsp">
 								<i class="icon-text-width"></i>
-								<span class="menu-text"> 兼职中心 </span>
+								<span class="menu-text"> 资源中心 </span>
 							</a>
 						</li>
 						<li class="active open">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
-								<span class="menu-text"> 我的兼职 </span>
+								<span class="menu-text"> 我的资源 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
@@ -159,14 +159,14 @@
 								<li class="active">
 									<a href="person_myjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										兼职报名情况
+										资源报名情况
 									</a>
 								</li>
 
 								<li>
 									<a href="person_history.jsp">
 										<i class="icon-double-angle-right"></i>
-										我的兼职历史
+										我的资源历史
 									</a>
 								</li>
 							</ul>
@@ -208,12 +208,12 @@
 								<a href="person_index.jsp">首页</a>
 							</li>
 
-							<li class="active">我的兼职</li>
-							<li class="active">兼职报名情况</li>
+							<li class="active">我的资源</li>
+							<li class="active">资源报名情况</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='person_index.jsp'">兼职中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='person_index.jsp'">资源中心</button>
 						</div>
 					</div>
 
@@ -227,10 +227,10 @@
     									<thead> 
      										<tr> 
       											<th>序号</th> 
-      											<th>兼职标题</th> 
-      											<th>兼职时间</th> 
-      											<th>兼职状态</th> 
-      											<th>发布企业</th> 
+      											<th>资源标题</th>
+      											<th>资源时间</th>
+      											<th>资源状态</th>
+      											<th>发布教师</th>
       											<th>报名状态</th> 
       											<th>操作</th> 
      										</tr> 
@@ -241,27 +241,27 @@
     											<td>派发传单</td>
     											<td>2017-02-25 22:14:53</td>
     											<td>报名中</td>
-    											<td>测试公司2</td>
+    											<td>测试教师2</td>
     											<td>待审核</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">退出兼职</button></a></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">退出资源</button></a></td>
     										</tr>
     										<tr>
     											<td>2</td>
     											<td>派发传单</td>
     											<td>2017-02-25 22:14:53</td>
     											<td>报名中</td>
-    											<td>测试公司3</td>
+    											<td>测试教师3</td>
     											<td>审核通过</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">退出兼职</button></a></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">退出资源</button></a></td>
     										</tr>
     										<tr>
     											<td>55</td>
     											<td>英语翻译</td>
     											<td>2017-02-29 22:14:53</td>
     											<td>已满</td>
-    											<td>测试公司3</td>
+    											<td>测试教师3</td>
     											<td>审核拒绝</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看兼职详情</button><button class="btn btn-link delete">退出兼职</button></a></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">退出资源</button></a></td>
     										</tr>
     									</tbody> 
     
@@ -283,7 +283,7 @@
 
 <!--删除弹窗start-->
 <div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该兼职吗？</div>
+    <div class="font16 center deletediv">真的要删除该资源吗？</div>
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btnDoUpdate">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
@@ -352,7 +352,7 @@
     			});
 
     			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改兼职吗？", function(result) {
+					bootbox.confirm("你确定要删除改资源吗？", function(result) {
 						if(result) {
 							//
 						}
