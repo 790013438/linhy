@@ -51,7 +51,7 @@ $(function(){
 var getJobInfoByID = function(condition)
         {
             $.ajax ({
-                url: "../company/getJobDetails",
+                url: "../teacher/getJobDetails",
                 type: 'post',
                 data: condition,
                 dataType: 'json',
@@ -101,7 +101,7 @@ var getJobInfoByID = function(condition)
     //删除指定报名记录
     var delApplicationById = function(data) {
         $.ajax({
-            url:"../company/updateCompSign",
+            url:"../teacher/updateCompSign",
             type : 'post',
             data :data,
             dataType : 'json',
@@ -137,7 +137,7 @@ var getJobInfoByID = function(condition)
 //查询资源报名情况
 var getAppliByID = function(condition) {
     $.ajax({
-        url:"../company/getEnrollmentSituation",
+        url:"../teacher/getEnrollmentSituation",
         type : 'post',
         data : condition,
         dataType : 'json',
@@ -207,7 +207,7 @@ var getAppliByID = function(condition) {
 var updateAppliStatus = function(data) {
     console.log(data);
     $.ajax({
-        url:"../company/screenApplicationUser",
+        url:"../teacher/screenApplicationUser",
         type : 'post',
         data :data,
         dataType : 'json',
@@ -270,8 +270,8 @@ var initJobDetailForm = function(obj) {
     }else{
         tr = tr + "<li><span>资源类型：</span>无</li>";
     }
-    if(obj.jobCompanyName != null){
-        tr = tr + "<li><span>教师名称：</span>"+obj.jobCompanyName+"</li>";
+    if(obj.jobTeacherName != null){
+        tr = tr + "<li><span>教师名称：</span>"+obj.jobTeacherName+"</li>";
     }else{
         tr = tr + "<li><span>教师名称：</span>无</li>";
     }
@@ -337,7 +337,7 @@ var appendWaitNode = function(obj) {
             "<td> "+obj.userEmail+"</td>"+
             "<td> "+obj.userPhone+"</td>"+
             "<td>"+
-            "<a  href =\"../company/showInfo?userId="+obj.appliUserId+"\" >查看用户详情</a> |"+
+            "<a  href =\"../teacher/showInfo?userId="+obj.appliUserId+"\" >查看用户详情</a> |"+
             "<button type=\"button\"  onclick=\"screenUser('"+obj.appliUserId+"')\" class='btn btn-link'>审核</button>";
     "<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
     "</td>"+
@@ -354,7 +354,7 @@ var appendSuccessNode = function(obj) {
             "<td> "+obj.userEmail+"</td>"+
             "<td> "+obj.userPhone+"</td>"+
             "<td>"+
-            "<a  href =\"../company/showInfo?userId="+obj.appliUserId+"\" >查看用户详情</a> ";
+            "<a  href =\"../teacher/showInfo?userId="+obj.appliUserId+"\" >查看用户详情</a> ";
     "</td>"+
     "</tr>";
     return job_str;
@@ -369,7 +369,7 @@ var appendFailNode = function(obj) {
             "<td> "+obj.userEmail+"</td>"+
             "<td> "+obj.userPhone+"</td>"+
             "<td>"+
-            "<a  href =\"../company/showInfo?userId="+obj.appliUserId+"\" >查看用户详情</a> |"+
+            "<a  href =\"../teacher/showInfo?userId="+obj.appliUserId+"\" >查看用户详情</a> |"+
             "<button type=\"button\"  onclick=\"delAppliRecord('"+obj.id+"')\" class='btn btn-link'>删除</button>";
     "</td>"+
     "</tr>";

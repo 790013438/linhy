@@ -47,8 +47,8 @@
                         <img class="nav-user-photo" src="${resource}/resource/avatars/avatar5.png" alt="Jason's Photo" />
                         <span class="user-info">
 									<small>欢迎您,</small>
-                            <%--<s:property value="#loginuser.compName"/>--%>
-                            <%--<span id ="span_comp_name">${loginuser.compName}</span>--%>
+                            <%--<s:property value="#loginuser.teaName"/>--%>
+                            <%--<span id ="span_tea_name">${loginuser.teaName}</span>--%>
 								</span>
 
                         <i class="icon-caret-down"></i>
@@ -56,7 +56,7 @@
 
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
-                            <a href="../company/myInfo">
+                            <a href="../teacher/myInfo">
                                 <i class="icon-user"></i>
                                 个人信息
                             </a>
@@ -94,7 +94,7 @@
 
             <ul class="nav nav-list">
                 <li>
-                    <a href="../company/index">
+                    <a href="../teacher/index">
                         <i class="icon-dashboard"></i>
                         <span class="menu-text"> 教师端 </span>
                     </a>
@@ -109,14 +109,14 @@
 
                     <ul class="submenu">
                         <li class="" id="li_myjob">
-                            <a href="../company/index">
+                            <a href="../teacher/index">
                                 <i class="icon-double-angle-right"></i>
                                 我的资源
                             </a>
                         </li>
 
                         <li class=""  id="li_history">
-                            <a href="../company/myJobs">
+                            <a href="../teacher/myJobs">
                                 <i class="icon-double-angle-right"></i>
                                 发布历史
                             </a>
@@ -126,14 +126,14 @@
 
 
                 <li id="li_myInfo">
-                    <a href="../company/myInfo">
+                    <a href="../teacher/myInfo">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的信息 </span>
                     </a>
                 </li>
 
                 <li id="li_message">
-                    <a href="../company/message">
+                    <a href="../teacher/message">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 我的消息 </span>
                     </a>

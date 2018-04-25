@@ -84,7 +84,7 @@
 			</a>
 		</div><!-- /.main-container -->
 	<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/company_jobDetails.js"></script>
+	<script src="${resource}/resource/js/teacher_jobDetails.js"></script>
 	<script src="${resource}/resource/js/moment.js"></script>
 	</body>
 </html>

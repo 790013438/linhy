@@ -62,9 +62,9 @@ public class UrlController {
      * @param action
      * @return
      */
-    @RequestMapping(value="/company/{action}",method= RequestMethod.GET)
-    public String getCompany(@PathVariable("action") String action){
-        log.info("getUrl:company/"+action);
-        return "company/"+action;
+    @RequestMapping(value="/teacher/{action}",method= RequestMethod.GET)
+    public String getTeacher(@PathVariable("action") String action){
+        log.info("getUrl:teacher/"+action);
+        return "teacher/"+action;
     }
 }

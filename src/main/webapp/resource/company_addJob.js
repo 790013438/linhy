@@ -2,23 +2,23 @@
 $(function(){
     $("#btn_saveJob").click(function () {
         var data = getParams();
-        if(!checkEmail(data.compEmail)){
+        if(!checkEmail(data.teaEmail)){
             return;
         }
-        if(!checkPhone(data.compPhone)){
+        if(!checkPhone(data.teaPhone)){
             return;
         }
         if(!checkUserInformation(data)){
             return;
         }
-        updateCompany(data);
+        updateTeacher(data);
     });
 });
 
 //发布资源
-var updateCompany = function (data) {
+var updateTeacher = function (data) {
     $.ajax({
-        url: "../company/updateCompanyInfo",
+        url: "../teacher/updateTeacherInfo",
         type: 'post',
         data: data,
         dataType : 'json',
@@ -87,23 +87,23 @@ function checkSalary(obj)
  * @returns {{}}
  */
 var getParams = function(){
-    var compAccount= $.trim($("#input_jobName").val());
-    var compName = $.trim($("#comp_name").val());
-    var compContacts = $.trim($("#comp_contacts").val());
-    var compAddress = $.trim($("#comp_address").val());
-    var compInfo = $("#comp_info").val();
-    var compEmail = $("#input_email").val();
+    var teaAccount= $.trim($("#input_jobName").val());
+    var teaName = $.trim($("#tea_name").val());
+    var teaContacts = $.trim($("#tea_contacts").val());
+    var teaAddress = $.trim($("#tea_address").val());
+    var teaInfo = $("#tea_info").val();
+    var teaEmail = $("#input_email").val();
     var commWebsite = $("#comm_website").val();
-    var compPhone = $("#input_phone").val();
+    var teaPhone = $("#input_phone").val();
     var json = {};
-    json.compAccount = compAccount;
-    json.compName = compName;
-    json.compContacts = compContacts;
-    json.compAddress = compAddress;
-    json.compInfo = compInfo;
-    json.compEmail = compEmail;
+    json.teaAccount = teaAccount;
+    json.teaName = teaName;
+    json.teaContacts = teaContacts;
+    json.teaAddress = teaAddress;
+    json.teaInfo = teaInfo;
+    json.teaEmail = teaEmail;
     json.commWebsite = commWebsite;
-    json.compPhone = compPhone;
+    json.teaPhone = teaPhone;
     return json;
 
 }

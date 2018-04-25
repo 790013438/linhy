@@ -60,7 +60,7 @@
                         <input type="radio" name="type" id="student" value="1" checked> 学生
                     </label>
                     <label class="checkbox-inline">
-                        <input type="radio" name="type" id="company"  value="2"> 教师(教师)
+                        <input type="radio" name="type" id="teacher"  value="2"> 教师
                     </label>
                     <label class="checkbox-inline">
                         <input type="radio" name="type" id="admin"  value="3"> 管理员
@@ -160,7 +160,7 @@
 <script src="${ctx}/resource/js/layer.js"></script>
 <script src="${ctx}/resource/js/login.js"></script>
 <script src="${ctx}/resource/js/register.js"></script>
-<script src="${ctx}/resource/js/comp_register.js"></script>
+<script src="${ctx}/resource/js/teacher_register.js"></script>
 
 
 <!--END PAGE LEVEL SCRIPTS -->

@@ -157,7 +157,7 @@
 
 		<!-- basic scripts -->
 		<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/company_showInfo.js"></script>
+	<script src="${resource}/resource/js/teacher_showInfo.js"></script>
 
 	</body>
 </html>

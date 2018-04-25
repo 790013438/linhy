@@ -184,7 +184,7 @@ var appendJobNode = function(obj) {
             "<td> "+obj.jobDemandNumber+"</td>"+
             "<td> "+jobDeadline1+"</td>"+
             "<td>"+
-            "<a  href =\"../company/jobDetails?jobId="+obj.id+"\" >查看资源详情</a> |" +
+            "<a  href =\"../teacher/jobDetails?jobId="+obj.id+"\" >查看资源详情</a> |" +
             "<button type=\"button\"  onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>|";
     if(obj.jobStatus== "保存"){
         var job_str1 = job_str +"<button type=\"button\" onclick=\"submitAudit('"+obj.id+"')\" class='btn btn-link'>提交审核</button>";

@@ -7,7 +7,7 @@ import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
 import com.xy.ssm.model.*;
 import com.xy.ssm.service.CUserService;
-import com.xy.ssm.service.CompanyService;
+import com.xy.ssm.service.TeacherService;
 import com.xy.ssm.service.RegisterValidateService;
 import com.xy.ssm.service.UserService;
 import com.xy.ssm.utils.MD5Util;
@@ -39,7 +39,7 @@ public class UserController extends BaseController{
     @Resource
     private UserService userService;
     @Resource
-    private CompanyService companyService;
+    private TeacherService teacherService;
     @Resource
     private CUserService cUserService;
     @Resource
@@ -132,23 +132,23 @@ public class UserController extends BaseController{
     }
     /**
      * 教师用户注册
-     * @param cCompany
+     * @param cTeacher
      * @return
      */
-    @RequestMapping(value = "/companyRegister", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/teacherRegister", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String companyRegister(CCompany cCompany) {
+    public String teacherRegister(CTeacher cTeacher) {
         String result = "";
         BaseResult baseResult = null;
-        String password = MD5Util.getMd5 (cCompany.getCompPassword ());
-        cCompany.setCompPassword (password);
-        cCompany.setCreateTime(new Date());//myself
-        cCompany.setCompStatus("comp_successful");//myself
+        String password = MD5Util.getMd5 (cTeacher.getTeaPassword());
+        cTeacher.setTeaPassword(password);
+        cTeacher.setCreateTime(new Date());//myself
+        cTeacher.setTeaStatus("tea_successful");//myself
         try{
-            if(cCompany == null){
+            if(cTeacher == null){
                 baseResult=new BaseResult(false,"用户注册信息获取异常");
             }else {
-                int rs=companyService.addCompany(cCompany);
+                int rs=teacherService.addTeacher(cTeacher);
                 if(rs > 0){
                     baseResult=new BaseResult(true,"注册用户信息成功");
                 }else {
@@ -201,16 +201,16 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/checkTname", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String checkTname(@RequestParam(required = true) String  account) {
-        log.info("--------------------/company/checkName  called");
+        log.info("--------------------/teacher/checkName  called");
         String result = "";
         BaseResult baseResult = null;
         try{
             if(StringUtils.isEmpty(account)){
                 baseResult=new BaseResult(false,"获取教师账号异常，请联系管理员稍后再试");
             }else {
-                List<CCompany> cCompanys = companyService.checkAccount(account);
+                List<CTeacher> cTeachers = teacherService.checkAccount(account);
 
-                if(cCompanys != null && 0 < cCompanys.size ()){
+                if(cTeachers != null && 0 < cTeachers.size ()){
                     baseResult=new BaseResult(false,"教师账号已经存在");
                 }else {
                     baseResult=new BaseResult(true,"");
@@ -260,15 +260,15 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/checkTmail", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String checkTmail(@RequestParam(required = true) String  email) {
-        log.info("--------------------/company/checkMail  called");
+        log.info("--------------------/teacher/checkMail  called");
         String result = "";
         BaseResult baseResult = null;
         try{
             if(StringUtils.isEmpty(email)){
                 baseResult=new BaseResult(false,"邮箱信息获取异常，请联系管理员稍后再试");
             }else {
-                List<CCompany> cCompanys = companyService.checkMail(email);
-                if(cCompanys != null && 0 < cCompanys.size ()){
+                List<CTeacher> cTeachers = teacherService.checkMail(email);
+                if(cTeachers != null && 0 < cTeachers.size ()){
                     baseResult=new BaseResult(false,"邮箱已经存在");
                 }else {
                     baseResult=new BaseResult(true,"");
@@ -318,7 +318,7 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/checkTphone", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String checkTphone(@RequestParam(required = true) String  phone) {
-        log.info("--------------------/company/checkPhone  called");
+        log.info("--------------------/teacher/checkPhone  called");
         String result = "";
         BaseResult baseResult = null;
         log.info ("1111111111111111111111111111"+phone);
@@ -326,8 +326,8 @@ public class UserController extends BaseController{
             if(StringUtils.isEmpty(phone)){
                 baseResult=new BaseResult(false,"手机号信息获取异常，请联系管理员稍后再试");
             }else {
-                List<CCompany> cCompanys = companyService.checkPhone(phone);
-                if(cCompanys != null && 0 < cCompanys.size ()){
+                List<CTeacher> cTeachers = teacherService.checkPhone(phone);
+                if(cTeachers != null && 0 < cTeachers.size ()){
                     baseResult=new BaseResult(false,"手机号已经存在");
                 }else {
                     baseResult=new BaseResult(true,"");
@@ -352,7 +352,7 @@ public class UserController extends BaseController{
         String result = "";
         BaseResult baseResult = null;
         CUser cUser=new CUser();
-        CCompany cCompany = new CCompany();
+        CTeacher cTeacher = new CTeacher();
         Map map =new HashMap();
         try{
             if(StringUtils.isEmpty(json)){
@@ -360,7 +360,6 @@ public class UserController extends BaseController{
             }else {
                 log.info(json);
                 JSONObject obj=JSON.parseObject(json);
-                System.out.println("-------type--------:"+obj.getInteger("type"));
                 if(obj.getInteger("type") == 1){
                     String pwd=obj.getString("password");
                     cUser=cUserService.getUserByUsername(obj.getString("username"),1);
@@ -378,12 +377,12 @@ public class UserController extends BaseController{
                     }
                 }else if(obj.getInteger("type") == 2){
                     String pwd=obj.getString("password");
-                    cCompany=companyService.getCompanyByAccount(obj.getString("username"));
-                    if(cCompany != null){
-                        if(!MD5Util.validate(pwd,cCompany.getCompPassword())){
+                    cTeacher=teacherService.getTeacherByAccount(obj.getString("username"));
+                    if(cTeacher != null){
+                        if(!MD5Util.validate(pwd,cTeacher.getTeaPassword())){
                             baseResult=new BaseResult(false,"用户名或密码错误，请重新输入！");
                         }else {
-                            map.put("loginuser",cCompany);
+                            map.put("loginuser",cTeacher);
                             saveLoginUser (map);
                             baseResult=new BaseResult(true,"");
                             baseResult.setData(2);
@@ -494,7 +493,7 @@ public class UserController extends BaseController{
         CApplication cApplication = new CApplication();
         CUser cUser =(CUser)getLoginUser ().get ("loginuser");
         try{
-            CJobs job=companyService.getJobDetails (jobId);
+            CJobs job=teacherService.getJobDetails (jobId);
             if(job == null){
                 baseResult=new BaseResult(false,"该资源不存在");
                 result= JSON.toJSONString(baseResult);
@@ -506,10 +505,10 @@ public class UserController extends BaseController{
                 int resultCode = cUserService.addJobApplication(cApplication);
                 if(resultCode > 0){
                     //查询该资源的报名人数
-                    int count=companyService.getJobApplicationCount(jobId);
+                    int count=teacherService.getJobApplicationCount(jobId);
                     //设置报名人数上限为需求人数的两倍，供教师筛选
                     if(count == 2*job.getJobDemandNumber ()){
-                        int resultCode1 = companyService.updateJobStatus (jobId,"4");
+                        int resultCode1 = teacherService.updateJobStatus (jobId,"4");
                         if(resultCode1 > 0){
                             baseResult=new BaseResult(true,"");
                         }else{
@@ -628,7 +627,6 @@ public class UserController extends BaseController{
         String result = "";
         BaseResult baseResult = null;
         CUser cUser1 =(CUser)getLoginUser ().get ("loginuser");
-        System.out.println(cUser1.toString());
         cUser.setId (cUser1.getId ());
         try{
             List<CUser> cUsers = cUserService.checkName (cUser.getUserName ());

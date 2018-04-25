@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
 import com.xy.ssm.model.*;
-import com.xy.ssm.service.CompanyService;
+import com.xy.ssm.service.TeacherService;
 import com.xy.ssm.service.MessageService;
 import com.xy.ssm.service.UserService;
 import com.xy.ssm.utils.MD5Util;
@@ -25,14 +25,14 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/company")
+@RequestMapping("/teacher")
 @SessionAttributes("currentUser")//讲登录后命名为currentUser的加入session
-public class CompanyController extends BaseController {
+public class TeacherController extends BaseController {
 
-    private Logger log = Logger.getLogger(CompanyController.class);
+    private Logger log = Logger.getLogger(TeacherController.class);
     //上面是LOG的声明，下面的Resource 可以考虑使用Autowired来注入Service
     @Resource
-    private CompanyService companyService;
+    private TeacherService teacherService;
 
     @Autowired
     private MessageService messageService;
@@ -56,16 +56,16 @@ public class CompanyController extends BaseController {
     public String addJobs(@RequestParam(required = true) String  json) {
         String result = "";
         BaseResult baseResult = null;
-        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
+        CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
         try{
             CJobs cJobs=(CJobs)JSON.parseObject (json,CJobs.class);
             log.info (JSON.toJSONString (cJobs));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             cJobs.setJobTime (sdf.parse (cJobs.getTime()));
             cJobs.setJobDeadline (sdf.parse(cJobs.getDeadline()));
-            Long companyId = cCompany.getId();
-            cJobs.setJobCompanyId(companyId);
-            Long id = companyService.addJobs(cJobs);
+            Long teacherId = cTeacher.getId();
+            cJobs.setJobTeacherId(teacherId);
+            Long id = teacherService.addJobs(cJobs);
             if(id != null){
                 baseResult=new BaseResult(true,"保存资源信息成功");
             }else{
@@ -84,19 +84,19 @@ public class CompanyController extends BaseController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/getJobsByCompanyId", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getJobsByTeacherId", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getJobsByCompanyId(@RequestParam(required = false) Integer offset,
+    public String getJobsByTeacherId(@RequestParam(required = false) Integer offset,
                                      @RequestParam(required = false) Integer limit,
                                      @RequestParam(required = false) String queryTerm,
                                      @RequestParam(required = false) String jobStatus) {
         String result = "";
         BaseResult baseResult = null;
-        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
-        Long companyId = cCompany.getId();
+        CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
+        Long teacherId = cTeacher.getId();
         try{
-            List<CJobs> list = companyService.getJobsByCompanyId(queryTerm,companyId, offset,limit,jobStatus);
-            int count = companyService.getJobsCountByCompanyId(queryTerm,companyId);
+            List<CJobs> list = teacherService.getJobsByTeacherId(queryTerm,teacherId, offset,limit,jobStatus);
+            int count = teacherService.getJobsCountByTeacherId(queryTerm,teacherId);
             if(list != null && 0<list.size()) {
                 BootStrapTableResult tableResult = new BootStrapTableResult<CJobs>(list,count);
                 baseResult = new BaseResult(true, "");
@@ -124,7 +124,7 @@ public class CompanyController extends BaseController {
         String result = "";
         BaseResult baseResult = null;
         try{
-            List<CApplication> applicationList = companyService.getEnrollmentSituation(jobId,appliStatus);
+            List<CApplication> applicationList = teacherService.getEnrollmentSituation(jobId,appliStatus);
             if(applicationList != null && 0<applicationList.size()) {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(applicationList);
@@ -153,12 +153,12 @@ public class CompanyController extends BaseController {
         try{
             if(appliStatus.equals ("appli_successful")){
                 //查询报名成功的人数
-                List<CApplication> applicationList = companyService.getEnrollmentSituation(jobId,"appli_successful");
+                List<CApplication> applicationList = teacherService.getEnrollmentSituation(jobId,"appli_successful");
                 int appliSuccessCount = applicationList.size ();
                 if(appliSuccessCount == demandNumber){
                     baseResult = new BaseResult(false, "人数已达到需求人数");
                 }else{
-                    int resultCode = companyService.updateApplicationStatus(jobId,userId,appliStatus);
+                    int resultCode = teacherService.updateApplicationStatus(jobId,userId,appliStatus);
                     if(resultCode  > 0) {
                         baseResult = new BaseResult(true, "");
                     } else {
@@ -166,7 +166,7 @@ public class CompanyController extends BaseController {
                     }
                 }
             }else{
-                int resultCode = companyService.updateApplicationStatus(jobId,userId,appliStatus);
+                int resultCode = teacherService.updateApplicationStatus(jobId,userId,appliStatus);
                 if(resultCode  > 0) {
                     baseResult = new BaseResult(true, "");
                 } else {
@@ -189,11 +189,11 @@ public class CompanyController extends BaseController {
      */
     @RequestMapping(value = "/deleteJobById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String deleteJobById(@RequestParam(required = true) Long jobId,@ModelAttribute("currentUser")CCompany cCompany) {
+    public String deleteJobById(@RequestParam(required = true) Long jobId,@ModelAttribute("currentUser")CTeacher cTeacher) {
         String result = "";
         BaseResult baseResult = null;
         try{
-            int rs = companyService.deleteJobById (jobId);
+            int rs = teacherService.deleteJobById (jobId);
             if(rs > 0){
                 baseResult=new BaseResult(true,"删除资源成功");
             }else{
@@ -217,13 +217,13 @@ public class CompanyController extends BaseController {
     public String submitAudit(@RequestParam(required = true) Long jobId) {
         String result = "";
         BaseResult baseResult = null;
-        CCompany cCompany =(CCompany) getLoginUser ().get ("loginuser");
+        CTeacher cTeacher =(CTeacher) getLoginUser ().get ("loginuser");
         String jobStatus = "1";
         try{
-            if(cCompany.getCompStatus ().equals ("comp_apply")){
+            if(cTeacher.getTeaStatus().equals ("comp_apply")){
                 baseResult=new BaseResult(false,"教师还未通过审核，暂不能提交资源");
             }else{
-                int rs = companyService.updateJobStatus (jobId,jobStatus);
+                int rs = teacherService.updateJobStatus (jobId,jobStatus);
                 if(rs > 0){
                     String message="资源id为"+jobId+"的资源进行请求审批！";
                     messageService.sendMessage (MessageUtils.getMessage (1L,1L,1,message));
@@ -250,15 +250,15 @@ public class CompanyController extends BaseController {
                                  @RequestParam(required = true)String newPassword) {
         String result = "";
         BaseResult baseResult = null;
-        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
+        CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
         try{
             String oldPw = MD5Util.encode2hex(oldPassword);
             String newPw = MD5Util.encode2hex(newPassword);
-            if(!cCompany.getCompPassword ().equals(oldPw))
+            if(!cTeacher.getTeaPassword().equals(oldPw))
             {
                 baseResult = new BaseResult(false, "密码错误");
             }else {
-                int rs = companyService.updateCompPassword(newPw,cCompany.getId ());
+                int rs = teacherService.updateCompPassword(newPw,cTeacher.getId ());
                 if (rs == 1) {
                     baseResult = new BaseResult(true, "");
                 } else {
@@ -283,7 +283,7 @@ public class CompanyController extends BaseController {
         String result = "";
         BaseResult baseResult = null;
         try{
-            CJobs job = companyService.getJobDetails(jobId);
+            CJobs job = teacherService.getJobDetails(jobId);
             if(job != null) {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(job);
@@ -310,7 +310,7 @@ public class CompanyController extends BaseController {
         String result = "";
         BaseResult baseResult = null;
         try{
-            int resultCode = companyService.updateJobSign(jobId);
+            int resultCode = teacherService.updateJobSign(jobId);
             if(resultCode > 0) {
                 baseResult = new BaseResult(true, "");
             } else {
@@ -336,9 +336,9 @@ public class CompanyController extends BaseController {
                                  @RequestParam(required = true) Long  jobId) {
         String result = "";
         BaseResult baseResult = null;
-        CCompany cCompany =(CCompany)getLoginUser ().get ("loginuser");
+        CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
         try{
-            int re=companyService.updateCompSign (applicationId,jobId);
+            int re=teacherService.updateCompSign (applicationId,jobId);
             if(re > 0){
                 baseResult=new BaseResult(true,"");
             }else {
@@ -356,17 +356,17 @@ public class CompanyController extends BaseController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/getCompanyInfoById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getTeacherInfoById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getCompanyInfoById() {
+    public String getTeacherInfoById() {
         String result = "";
         BaseResult baseResult = null;
-        CCompany cCompany =(CCompany) getLoginUser ().get ("loginuser");
+        CTeacher cTeacher =(CTeacher) getLoginUser ().get ("loginuser");
         try{
-            CCompany companyInfo = companyService.getCompanyInfo(cCompany.getId ());
-            if(companyInfo != null) {
+            CTeacher teacherInfo = teacherService.getTeacherInfo(cTeacher.getId ());
+            if(teacherInfo != null) {
                 baseResult = new BaseResult(true, "");
-                baseResult.setData(companyInfo);
+                baseResult.setData(teacherInfo);
             } else {
                 baseResult = new BaseResult(true, "该教师不存在");
             }
@@ -384,34 +384,34 @@ public class CompanyController extends BaseController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/updateCompanyInfo", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/updateTeacherInfo", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String updateUserInfo(CCompany  cCompany) {
-        log.info("--------------------/company/updateCompanyInfo  called");
+    public String updateUserInfo(CTeacher  cTeacher) {
+        log.info("--------------------/teacher/updateTeacherInfo  called");
         String result = "";
         BaseResult baseResult = null;
-        CCompany cCompany1 =(CCompany) getLoginUser ().get ("loginuser");
-        cCompany.setId (cCompany1.getId ());
+        CTeacher cTeacher1 =(CTeacher) getLoginUser ().get ("loginuser");
+        cTeacher.setId (cTeacher1.getId ());
         try{
-            List<CCompany> cCompanys = companyService.checkAccount (cCompany.getCompAccount ());
-            List<CCompany> cCompanys1 = companyService.checkPhone (cCompany.getCompPhone ());
-            List<CCompany> cCompanys2 = companyService.checkMail (cCompany.getCompEmail ());
-            if(cCompanys != null && cCompanys.size() > 1){
+            List<CTeacher> cTeachers = teacherService.checkAccount (cTeacher.getTeaAccount());
+            List<CTeacher> cTeachers1 = teacherService.checkPhone (cTeacher.getTeaPhone());
+            List<CTeacher> cTeachers2 = teacherService.checkMail (cTeacher.getTeaEmail());
+            if(cTeachers != null && cTeachers.size() > 1){
                 baseResult=new BaseResult(false,"登录名已存在，请重新输入");
-            }else if(cCompanys.size() == 1 && !cCompanys.get(0).getId().toString().equals(cCompany.getId().toString())){
+            }else if(cTeachers.size() == 1 && !cTeachers.get(0).getId().toString().equals(cTeacher.getId().toString())){
                 baseResult=new BaseResult(false,"登录名已存在，请重新添加");
             }else{
-                if(cCompanys1 != null && cCompanys1.size() > 1){
+                if(cTeachers1 != null && cTeachers1.size() > 1){
                     baseResult=new BaseResult(false,"手机号已存在，请重新输入");
-                }else if(cCompanys1.size() == 1 && !cCompanys1.get(0).getId().toString().equals(cCompany.getId().toString())){
+                }else if(cTeachers1.size() == 1 && !cTeachers1.get(0).getId().toString().equals(cTeacher.getId().toString())){
                     baseResult=new BaseResult(false,"登录名已存在，请重新添加");
                 }else{
-                    if(cCompanys2 != null && cCompanys2.size() > 1){
+                    if(cTeachers2 != null && cTeachers2.size() > 1){
                         baseResult=new BaseResult(false,"邮箱已存在，请重新输入");
-                    }else if(cCompanys2.size() == 1 && !cCompanys2.get(0).getId().toString().equals(cCompany.getId().toString())){
+                    }else if(cTeachers2.size() == 1 && !cTeachers2.get(0).getId().toString().equals(cTeacher.getId().toString())){
                         baseResult=new BaseResult(false,"邮箱已存在，请重新添加");
                     }else{
-                        int rs = companyService.updateCompany(cCompany);
+                        int rs = teacherService.updateTeacher(cTeacher);
                         if (rs == 1) {
                             baseResult = new BaseResult(true, "修改教师信息成功");
                         } else {

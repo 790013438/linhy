@@ -18,7 +18,7 @@ public class VOCApplication implements Serializable {
     //报名状态
     private String appliStatus;
     //发布资源教师名称
-    private String jobCompanyName;
+    private String jobTeacherName;
     //资源名称
     private String jobTitle;
     //资源类型
@@ -95,14 +95,14 @@ public class VOCApplication implements Serializable {
         this.appliStatus = appliStatus;
     }
 
-    public String getJobCompanyName ()
+    public String getJobTeacherName ()
     {
-        return jobCompanyName;
+        return jobTeacherName;
     }
 
-    public void setJobCompanyName (String jobCompanyName)
+    public void setJobTeacherName (String jobTeacherName)
     {
-        this.jobCompanyName = jobCompanyName;
+        this.jobTeacherName = jobTeacherName;
     }
 
     public String getJobTitle ()

@@ -12,9 +12,9 @@ public class CJobs implements Serializable {
     //资源id
     private Long id;
     //发布资源教师id
-    private Long jobCompanyId;
+    private Long jobTeacherId;
     //发布资源教师id
-    private String jobCompanyName;
+    private String jobTeacherName;
     //资源名称
     private String jobTitle;
     //资源类型
@@ -88,24 +88,24 @@ public class CJobs implements Serializable {
         this.id = id;
     }
 
-    public Long getJobCompanyId ()
+    public Long getJobTeacherId ()
     {
-        return jobCompanyId;
+        return jobTeacherId;
     }
 
-    public void setJobCompanyId (Long jobCompanyId)
+    public void setJobTeacherId (Long jobTeacherId)
     {
-        this.jobCompanyId = jobCompanyId;
+        this.jobTeacherId = jobTeacherId;
     }
 
-    public String getJobCompanyName ()
+    public String getJobTeacherName ()
     {
-        return jobCompanyName;
+        return jobTeacherName;
     }
 
-    public void setJobCompanyName (String jobCompanyName)
+    public void setJobTeacherName (String jobTeacherName)
     {
-        this.jobCompanyName = jobCompanyName;
+        this.jobTeacherName = jobTeacherName;
     }
 
     public String getJobTitle ()

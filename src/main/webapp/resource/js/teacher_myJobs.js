@@ -1,61 +1,60 @@
-
 var condition = {
-    jobStatus:"1",
+    jobStatus:"3",
 };
 $(function(){
     $('.menu-list').removeClass('active open');
     $("#jobManage").addClass('active open');
     $('.submenu').find('li').removeClass('active open');
-    $("#systemIdex").addClass('active open');
-    getWaitingAudit(condition);
-    $("#btnAdoptJob").click(function () {
+    $("#li_history").addClass('active open');
+    queryMyJob(condition);
+    $("#btn_removeJob").click(function () {
         closepop();
         var jobId = $("#input_jobId").val();
-        var condition = {
+        var data = {
             jobId:jobId,
-            jobStatus:3
         };
-        updateJobStatus(condition);
+        removeJobById(data);
     });
-    $("#btnRefuseJob").click(function () {
+    $("#btn_closeJob").click(function () {
         closepop();
         var jobId = $("#input_jobId").val();
-        var condition = {
+        var data = {
             jobId:jobId,
-            jobStatus:2
+            jobStatus:"-1",
         };
-        updateJobStatus(condition);
+        closeJobById(data);
     });
+
 });
 
-//查询待审核资源列表
-var getWaitingAudit = function(condition) {
+//查询我的资源
+var queryMyJob = function(data) {
 	$.ajax({
-		url:"../admin/getAllJobs",
+		url:"../teacher/getJobsByTeacherId",
 		type : 'post',
-		data : condition,
+		data : data,
 		dataType : 'json',
 		success:function(result){
 			if (result.success == true) {
 				if (result.error != "") {
 					alert(result.error);
-					$("#waitingAudit tbody").empty();
+					$("#table_jobs tbody").empty();
 					return;
 				}
 				if (result.data.data!=null){
 					console.log(result.data);
-					$("#waitingAudit tbody").empty();
+					$("#table_jobs tbody").empty();
 					$.each(result.data.data, function (index, obj) {
 						var tr = appendJobNode(obj);
-						$("#waitingAudit tbody").append(tr);
-						appendTabTitleById("waitingAudit");
+						$("#table_jobs tbody").append(tr);
+						appendTabTitleById("table_myJobs");
                     });
                     $(document).ready(function(){
-                        $('#waitingAudit').DataTable();
+                        $('#table_jobs').DataTable();
                     });
 				} else{
-					$("#waitingAudit tbody").empty();
-					var txt = "暂无待审核表资源";
+					$("#table_jobs tbody").empty();
+					var txt = "没有查询到符合条件的信息";
 					alert(txt);
 					return;
 				}
@@ -68,16 +67,51 @@ var getWaitingAudit = function(condition) {
 		},
 		error : function(obj, msg) {
 			//还得先清空所有行
-			$("#waitingAudit tbody").empty();
-			var txt = "暂无待审核表资源";
+			$("#table_jobs tbody").empty();
+			var txt = "没有查询到符合条件的信息";
 			alert(txt);
 			return;
 		},
 	});
 }
+//移除资源
+var removeJobById = function(data) {
+        $.ajax({
+            url:"../teacher/removeJobById",
+            type : 'post',
+            data :data,
+            dataType : 'json',
+            success:function(result){
+                console.log(result);
+                if (result.success == true) {
+                    if (result.error != "") {
+                        alert(result.error);
+                        return;
+                    }else{
+                        var txt = "移除资源成功";
+                        alert(txt);
+                        return;
+                    }
+                } else {
+                    //还得先清空所有行
+                    var txt = result.error;
+                    alert(txt);
+                    return;
+                }
+            },
+            error : function(obj, msg) {
+                var txt = "移除资源失败";
+                alert(txt);
+                return;
+            },
+            complete: function () {
+                queryMyJob(condition);
+            }
+        });
+    }
 
-//审核资源
-var updateJobStatus = function(data) {
+//关闭资源
+var closeJobById = function(data) {
     $.ajax({
         url:"../admin/auditingJob",
         type : 'post',
@@ -90,7 +124,7 @@ var updateJobStatus = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "审核资源成功";
+                    var txt = "关闭资源成功";
                     alert(txt);
                     return;
                 }
@@ -102,12 +136,12 @@ var updateJobStatus = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "审核资源失败";
+            var txt = "关闭资源失败";
             alert(txt);
             return;
         },
         complete: function () {
-            window.location.href = '../system/index';
+            queryMyJob(condition);
         }
     });
 }
@@ -156,28 +190,39 @@ $(".table tr td input").each(function(){
 
 var appendJobNode = function(obj) {
     var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
-    var sign = 1;
     var job_str = "<tr>"+
-            "<td>"+obj.id+"</td>"+
+         "<td>"+obj.id+"</td>"+
 		"<td>"+obj.jobTitle+"</td>"+
+		"<td> "+obj.jobType+"</td>"+
 		"<td> "+obj.jobStatus+"</td>"+
 		"<td> "+obj.jobDemandNumber+"</td>"+
-		"<td> "+obj.jobTeacherName+"</td>"+
-		"<td> "+jobDeadline1+"</td>"+
+        "<td> "+obj.appliCount+"</td>"+
+        "<td> "+jobDeadline1+"</td>"+
 		"<td>"+
-		"<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看资源详情</a> |"+
-       "<button type=\"button\" onclick=\"auditJob('"+obj.id+"')\" class='btn btn-link'>审核资源</button>";
+		"<a  href =\"../teacher/jobInfo?jobId="+obj.id+"\" >查看报名情况</a> |";
+    if(obj.jobStatus== "结束"){
+        var job_str1 = job_str +"<button type=\"button\"  onclick=\"removeJob('"+obj.id+"')\" class='btn btn-link'>移除</button>";
+    }else{
+        var job_str1 = job_str +"<button type=\"button\"  onclick=\"closeJob('"+obj.id+"')\" class='btn btn-link'>关闭</button>";
+    }
 		"<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
 		"</td>"+
 		"</tr>";
-	return job_str;
+	return job_str1;
 }
-function auditJob(data)
-{
+
+var removeJob = function(data) {
     $("#input_jobId").val(data);
     $(".pop").show();
-    $(".popinto").show();
+    $("#popinto_remove").show();
 }
+var closeJob = function(data) {
+    $("#input_jobId").val(data);
+    $(".pop").show();
+    $("#popinto_close").show();
+}
+
+
 
 
 

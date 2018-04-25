@@ -35,7 +35,7 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div id="container"> 
    								<!-- 定义一个表格元素 --> 
-   									<table id="table_company" class="table table-striped table-bordered">
+   									<table id="table_teacher" class="table table-striped table-bordered">
     									<thead> 
      										<tr>
       											<th>教师名</th>
@@ -73,7 +73,7 @@
     <div class="deletediv_btn">
         <p class="pull-left"><button type="button" class="btn btn-primary" id="btnFrozen">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
-        <input hidden="hidden" id="companyId"/>
+        <input hidden="hidden" id="teacherId"/>
     </div>
 </div>
 	<div class="popinto" id="popinto_thaw">
@@ -95,7 +95,7 @@
 		<!-- basic scripts -->
 	<%@include file="commonFoot.jsp"%>
 	<script src="${resource}/resource/js/moment.js"></script>
-	<script src="${resource}/resource/js/system_company.js"></script>
+	<script src="${resource}/resource/js/system_teacher.js"></script>
 
 
 		<script type="text/javascript">

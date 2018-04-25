@@ -168,7 +168,7 @@
 		<!-- basic scripts -->
 	<%@include file="commonFoot.jsp"%>
 	<script src="${resource}/resource/js/moment.js"></script>
-	<script src="${resource}/resource/js/company_addJob.js"></script>
+	<script src="${resource}/resource/js/teacher_addJob.js"></script>
 	<script src="${resource}/resource/js/check.js"></script>
 
 	<script type="text/javascript">

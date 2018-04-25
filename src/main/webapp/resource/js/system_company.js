@@ -2,50 +2,50 @@
 $(function(){
     $('.menu-list').removeClass('active open');
     $('.submenu').find('li').removeClass('active open');
-    $("#systemCompany").addClass('active open');
-    getCompanyList();
+    $("#systemTeacher").addClass('active open');
+    getTeacherList();
     $("#btnFrozen").click(function () {
         closepop();
-        var companyId = $("#companyId").val();
+        var teacherId = $("#teacherId").val();
         var condition = {
-            companyId:companyId,
-            compStatus:'comp_frozen'
+            teacherId:teacherId,
+            teaStatus:'comp_frozen'
         };
         updateCompStatus(condition);
     });
     $("#btnThaw").click(function () {
         closepop();
-        var companyId = $("#companyId").val();
+        var teacherId = $("#teacherId").val();
         var condition = {
-            companyId:companyId,
-            compStatus:'comp_successful'
+            teacherId:teacherId,
+            teaStatus:'comp_successful'
         };
         updateCompStatus(condition);
     });
     $("#btnAuditAgree").click(function () {
         closepop();
-        var companyId = $("#companyId").val();
+        var teacherId = $("#teacherId").val();
         var condition = {
-            companyId:companyId,
-            compStatus:'comp_successful'
+            teacherId:teacherId,
+            teaStatus:'comp_successful'
         };
         updateCompStatus(condition);
     });
     $("#btnAuditRefuse").click(function () {
         closepop();
-        var companyId = $("#companyId").val();
+        var teacherId = $("#teacherId").val();
         var condition = {
-            companyId:companyId,
-            compStatus:'comp_refused'
+            teacherId:teacherId,
+            teaStatus:'comp_refused'
         };
         updateCompStatus(condition);
     });
 });
 
 //查询用户列表
-var getCompanyList = function() {
+var getTeacherList = function() {
     $.ajax({
-        url:"../admin/getAllCompany",
+        url:"../admin/getAllTeacher",
         type : 'post',
         data : null,
         dataType : 'json',
@@ -53,22 +53,22 @@ var getCompanyList = function() {
             if (result.success == true) {
                 if (result.error != "") {
                     alert(result.error);
-                    $("#table_company tbody").empty();
+                    $("#table_teacher tbody").empty();
                     return;
                 }
                 if (result.data!=null){
                     console.log(result.data);
-                    $("#table_company tbody").empty();
+                    $("#table_teacher tbody").empty();
                     $.each(result.data, function (index, obj) {
-                        var tr = appendCompanyNode(obj);
-                        $("#table_company tbody").append(tr);
-                        appendTabTitleById("table_company");
+                        var tr = appendTeacherNode(obj);
+                        $("#table_teacher tbody").append(tr);
+                        appendTabTitleById("table_teacher");
                     });
                     $(document).ready(function(){
-                        $('#table_company').DataTable();
+                        $('#table_teacher').DataTable();
                     });
                 } else{
-                    $("#table_company tbody").empty();
+                    $("#table_teacher tbody").empty();
                     var txt = "没有查询到符合条件的信息";
                     alert(txt);
                     return;
@@ -82,7 +82,7 @@ var getCompanyList = function() {
         },
         error : function(obj, msg) {
             //还得先清空所有行
-            $("#table_company tbody").empty();
+            $("#table_teacher tbody").empty();
             var txt = "没有查询到符合条件的信息";
             alert(txt);
             return;
@@ -93,7 +93,7 @@ var getCompanyList = function() {
 //修改教师状态
 var updateCompStatus = function(data) {
     $.ajax({
-        url:"../admin/updateCompanyStatus",
+        url:"../admin/updateTeacherStatus",
         type : 'post',
         data :data,
         dataType : 'json',
@@ -121,7 +121,7 @@ var updateCompStatus = function(data) {
             return;
         },
         complete: function () {
-            getCompanyList();
+            getTeacherList();
         }
     });
 }
@@ -168,46 +168,46 @@ var appendTabTitle = function()
 
 
 
-var appendCompanyNode = function(obj) {
+var appendTeacherNode = function(obj) {
     var user_str = "<tr>"+
-            "<td>"+obj.compAccount+"</td>"+
-            "<td> "+obj.compStatus+"</td>"+
-            "<td> "+obj.compContacts+"</td>"+
-            "<td> "+obj.compPhone+"</td>"+
-    "<td> "+obj.compEmail+"</td>"+
+            "<td>"+obj.teaAccount+"</td>"+
+            "<td> "+obj.teaStatus+"</td>"+
+            "<td> "+obj.teaContacts+"</td>"+
+            "<td> "+obj.teaPhone+"</td>"+
+    "<td> "+obj.teaEmail+"</td>"+
     "<td> "+obj.commWebsite+"</td>"+
-    "<td> "+obj.compAddress+"</td>"+
+    "<td> "+obj.teaAddress+"</td>"+
             "<td>"+
-            "<a  href =\"../system/company_showinfo?companyId="+obj.id+"\" >查看教师信息</a> |";
-    if(obj.compStatus == '禁用'){
-        user_str =user_str+ "<button type=\"button\" onclick=\"thawCompany('"+obj.id+"')\" class='btn btn-link'>解禁</button>";
-    }else if(obj.compStatus =='注册成功'){
-        user_str = user_str+"<button type=\"button\" onclick=\"frozenCompany('"+obj.id+"')\" class='btn btn-link'>禁用</button>";
+            "<a  href =\"../system/teacher_showinfo?teacherId="+obj.id+"\" >查看教师信息</a> |";
+    if(obj.teaStatus == '禁用'){
+        user_str =user_str+ "<button type=\"button\" onclick=\"thawTeacher('"+obj.id+"')\" class='btn btn-link'>解禁</button>";
+    }else if(obj.teaStatus =='注册成功'){
+        user_str = user_str+"<button type=\"button\" onclick=\"frozenTeacher('"+obj.id+"')\" class='btn btn-link'>禁用</button>";
     }
-    if(obj.compStatus == '申请注册'){
-        user_str =user_str+ "<button type=\"button\" onclick=\" AuditCompany('"+obj.id+"')\" class='btn btn-link'>审核</button>";
+    if(obj.teaStatus == '申请注册'){
+        user_str =user_str+ "<button type=\"button\" onclick=\" AuditTeacher('"+obj.id+"')\" class='btn btn-link'>审核</button>";
     }else{
         user_str = user_str+"<button type=\"button\" disabled='disabled'  class='btn btn-link'>审核</button>";
     }
     user_str=user_str+"<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\"></td></tr>";
     return user_str;
 }
-function frozenCompany(data)
+function frozenTeacher(data)
 {
-    $("#companyId").val(data);
+    $("#teacherId").val(data);
     $(".pop").show();
     $("#popinto_frozen").show();
 }
-function thawCompany(data)
+function thawTeacher(data)
 {
-    $("#companyId").val(data);
+    $("#teacherId").val(data);
     $(".pop").show();
     $("#popinto_thaw").show();
 }
 
-function AuditCompany(data)
+function AuditTeacher(data)
 {
-    $("#companyId").val(data);
+    $("#teacherId").val(data);
     $(".pop").show();
     $("#popinto_audit").show();
 }

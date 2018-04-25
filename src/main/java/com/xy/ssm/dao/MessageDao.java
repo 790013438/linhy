@@ -1,6 +1,6 @@
 package com.xy.ssm.dao;
 
-import com.xy.ssm.model.CCompany;
+import com.xy.ssm.model.CTeacher;
 import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CMessage;
 import org.apache.ibatis.annotations.Param;

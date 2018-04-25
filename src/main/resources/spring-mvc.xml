@@ -59,7 +59,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/system/*"/>
             <!--myself 设置了这个之后教师注册姓名查重功能失败-->
-            <mvc:mapping path="/company/*"/>
+            <mvc:mapping path="/teacher/*"/>
             <mvc:mapping path="/student/*"/>
             <bean class="com.xy.ssm.intercepter.UserSecurityInterceptor"></bean>
         </mvc:interceptor>

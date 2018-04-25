@@ -8,16 +8,16 @@ $(function(){
         var var1 = $("#li_basic").attr("class");
         if(var1 == "active"){
             var data = getParams();
-            if(!checkEmail(data.compEmail)){
+            if(!checkEmail(data.teaEmail)){
                 return;
             }
-            if(!checkPhone(data.compPhone)){
+            if(!checkPhone(data.teaPhone)){
                 return;
             }
             if(!checkUserInformation(data)){
                 return;
             }
-            updateCompany(data);
+            updateTeacher(data);
         }else{
             if(checkPassword()){
                 var oldPassword =  $.trim($("#form-field-oldPass").val());
@@ -42,7 +42,7 @@ $(function(){
  */
 var updatePassword = function(data) {
     $.ajax({
-        url: "../company/updateCompPassword",
+        url: "../teacher/updateCompPassword",
         type: 'post',
         data:data,
         dataType : 'json',
@@ -100,14 +100,14 @@ function checkPassword() {
 //查询用户信息
 var queryMyInfo = function() {
 	$.ajax({
-		url:"../company/getCompanyInfoById",
+		url:"../teacher/getTeacherInfoById",
 		type : 'post',
 		data : null,
 		dataType : 'json',
         success: function (result) {
 		    console.log(result);
             if (result.data != null) {
-                initCompanyForm(result.data);
+                initTeacherForm(result.data);
             }
             else{
                 var txt = "无教师信息";
@@ -123,9 +123,9 @@ var queryMyInfo = function() {
 /**
  * 修改个人信息
  */
-var updateCompany = function (data) {
+var updateTeacher = function (data) {
     $.ajax({
-        url: "../company/updateCompanyInfo",
+        url: "../teacher/updateTeacherInfo",
         type: 'post',
         data: data,
         dataType : 'json',
@@ -166,30 +166,30 @@ var checkUserInformation = function(data)
     for ( var p in data )
     {
         if (checknull(data[p])==false){
-            if(p == "compAccount"){
+            if(p == "teaAccount"){
                 var name = "账号";
             }
-            if(p == "compName"){
+            if(p == "teaName"){
                 var name = "教师名";
             }
-            if(p == "compContacts"){
+            if(p == "teaContacts"){
                 var name = "教师联系人";
             }
-            if(p == "compAddress"){
+            if(p == "teaAddress"){
                 var name = "教师地址";
             }
-            if(p == "compInfo"){
+            if(p == "teaInfo"){
                 var name = "教师简介";
             }
-            if(p == "compEmail"){
+            if(p == "teaEmail"){
                 var name = "邮箱";
             }
-            if(p == "compPhone"){
+            if(p == "teaPhone"){
                 var name = "联系电话";
             }
-            if(p == "commWebsite"){
+/*            if(p == "commWebsite"){
                 var name = "教师网站";
-            }
+            }*/
             alert("请输入"+name);
             return false;
         }
@@ -286,16 +286,16 @@ $('#user-profile-3')
 /**
  * 向个人信息设置页面填充教师信息
  */
-var initCompanyForm = function (obj) {
+var initTeacherForm = function (obj) {
     console.log(obj);
-    $("#comp_account").val(obj.compAccount);
-    $("#comp_name").val(obj.compName);
-    $("#comp_contacts").val(obj.compContacts);
-    $("#comp_address").val(obj.compAddress);
-    $("#comp_info").val(obj.compInfo);
-    $("#input_email").val(obj.compEmail);
-    $("#input_phone").val(obj.compPhone);
-    $("#comm_website").val(obj.commWebsite);
+    $("#tea_account").val(obj.teaAccount);
+    $("#tea_name").val(obj.teaName);
+    $("#tea_contacts").val(obj.teaContacts);
+    $("#tea_address").val(obj.teaAddress);
+    $("#tea_info").val(obj.teaInfo);
+    $("#input_email").val(obj.teaEmail);
+    $("#input_phone").val(obj.teaPhone);
+/*    $("#comm_website").val(obj.commWebsite);*/
 }
 
 /**
@@ -303,23 +303,23 @@ var initCompanyForm = function (obj) {
  * @returns {{}}
  */
 var getParams = function(){
-    var compAccount= $.trim($("#comp_account").val());
-    var compName = $.trim($("#comp_name").val());
-    var compContacts = $.trim($("#comp_contacts").val());
-    var compAddress = $.trim($("#comp_address").val());
-    var compInfo = $("#comp_info").val();
-    var compEmail = $("#input_email").val();
-    var commWebsite = $("#comm_website").val();
-    var compPhone = $("#input_phone").val();
+    var teaAccount= $.trim($("#tea_account").val());
+    var teaName = $.trim($("#tea_name").val());
+    var teaContacts = $.trim($("#tea_contacts").val());
+    var teaAddress = $.trim($("#tea_address").val());
+    var teaInfo = $("#tea_info").val();
+    var teaEmail = $("#input_email").val();
+/*    var commWebsite = $("#comm_website").val();*/
+    var teaPhone = $("#input_phone").val();
     var json = {};
-    json.compAccount = compAccount;
-    json.compName = compName;
-    json.compContacts = compContacts;
-    json.compAddress = compAddress;
-    json.compInfo = compInfo;
-    json.compEmail = compEmail;
-    json.commWebsite = commWebsite;
-    json.compPhone = compPhone;
+    json.teaAccount = teaAccount;
+    json.teaName = teaName;
+    json.teaContacts = teaContacts;
+    json.teaAddress = teaAddress;
+    json.teaInfo = teaInfo;
+    json.teaEmail = teaEmail;
+/*    json.commWebsite = commWebsite;*/
+    json.teaPhone = teaPhone;
     return json;
 
 }

@@ -3,7 +3,7 @@ package com.xy.ssm.controller;
 import com.alibaba.fastjson.JSON;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
-import com.xy.ssm.model.CCompany;
+import com.xy.ssm.model.CTeacher;
 import com.xy.ssm.model.CMessage;
 import com.xy.ssm.model.CUser;
 import com.xy.ssm.model.User;
@@ -45,7 +45,7 @@ public class MessageController extends BaseController
                 objId=1L;
             } else if (type == 2)
             {
-                CCompany curUser = (CCompany) getLoginUser ().get ("loginuser");
+                CTeacher curUser = (CTeacher) getLoginUser ().get ("loginuser");
                 sendId=curUser.getId ();
                 objId=2L;
             } else

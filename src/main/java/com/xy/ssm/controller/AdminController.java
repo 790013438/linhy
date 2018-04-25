@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
 import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CCompany;
+import com.xy.ssm.model.CTeacher;
 import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CUser;
 import com.xy.ssm.service.CUserService;
-import com.xy.ssm.service.CompanyService;
+import com.xy.ssm.service.TeacherService;
 import com.xy.ssm.service.MessageService;
 import com.xy.ssm.service.UserService;
 import org.apache.log4j.Logger;
@@ -31,7 +31,7 @@ public class AdminController extends BaseController
     @Resource
     private UserService userService;
     @Resource
-    private CompanyService companyService;
+    private TeacherService teacherService;
     @Resource
     private CUserService cUserService;
     @Autowired
@@ -52,14 +52,14 @@ public class AdminController extends BaseController
      */
     @RequestMapping(value = "/getAllJobs", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getJobsByCompanyId(@RequestParam(required = false) Integer offset,
+    public String getJobsByTeacherId(@RequestParam(required = false) Integer offset,
                                      @RequestParam(required = false) Integer limit,
                                      @RequestParam(required = true) String jobStatus) {
         String result = "";
         BaseResult baseResult = null;
         try{
-            List<CJobs> list = companyService.getAllJobs(jobStatus,offset, limit);
-            int count = companyService.getAllJobsCount(jobStatus);
+            List<CJobs> list = teacherService.getAllJobs(jobStatus,offset, limit);
+            int count = teacherService.getAllJobsCount(jobStatus);
             if(list != null && 0<list.size()) {
                 BootStrapTableResult tableResult = new BootStrapTableResult<CJobs>(list,count);
                 baseResult = new BaseResult(true, "");
@@ -107,13 +107,13 @@ public class AdminController extends BaseController
      * @param
      * @return
      */
-    @RequestMapping(value = "/getAllCompany", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getAllTeacher", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getAllCompany() {
+    public String getAllTeacher() {
         String result = "";
         BaseResult baseResult = null;
         try{
-            List<CCompany> list = companyService.getAllCompany();
+            List<CTeacher> list = teacherService.getAllTeacher();
             if(list != null && 0<list.size()) {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(list);
@@ -141,7 +141,7 @@ public class AdminController extends BaseController
         BaseResult baseResult = null;
         CUser cUser =(CUser) getLoginUser ().get ("loginuser");
         try{
-            CJobs job = companyService.getJobDetails(jobId);
+            CJobs job = teacherService.getJobDetails(jobId);
             if(job != null) {
                 if(cUserService.getAppliByTwoId(job.getId (),cUser.getId ()) != null){
                     job.setFlag(1);
@@ -174,11 +174,11 @@ public class AdminController extends BaseController
         String result = "";
         BaseResult baseResult = null;
         try{
-            CJobs cJobs=companyService.getJobDetails (jobId);
-            int resultCode = companyService.updateJobStatus(jobId,jobStatus);
+            CJobs cJobs=teacherService.getJobDetails (jobId);
+            int resultCode = teacherService.updateJobStatus(jobId,jobStatus);
             if(resultCode > 0) {
                 String message="资源id为<a href=\"jobDetails?id=" + jobId + "\">"+jobId+"</a>的资源已经审批！";
-                messageService.sendMessage (MessageUtils.getMessage (cJobs.getJobCompanyId (),2L,1,message));
+                messageService.sendMessage (MessageUtils.getMessage (cJobs.getJobTeacherId (),2L,1,message));
                 baseResult = new BaseResult(true, "");
             } else {
                 baseResult = new BaseResult(true, "修改资源状态失败");
@@ -203,7 +203,7 @@ public class AdminController extends BaseController
         String result = "";
         BaseResult baseResult = null;
         try{
-            int resultCode = companyService.deleteJobById(jobId);
+            int resultCode = teacherService.deleteJobById(jobId);
             if(resultCode > 0) {
                 baseResult = new BaseResult(true, "");
             } else {
@@ -224,16 +224,16 @@ public class AdminController extends BaseController
      * @param
      * @return
      */
-    @RequestMapping(value = "/getCompanyInfoById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getTeacherInfoById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getCompanyInfoById(@RequestParam(required = true) Long companyId) {
+    public String getTeacherInfoById(@RequestParam(required = true) Long teacherId) {
         String result = "";
         BaseResult baseResult = null;
         try{
-            CCompany companyInfo = companyService.getCompanyInfo(companyId);
-            if(companyInfo != null) {
+            CTeacher teacherInfo = teacherService.getTeacherInfo(teacherId);
+            if(teacherInfo != null) {
                 baseResult = new BaseResult(true, "");
-                baseResult.setData(companyInfo);
+                baseResult.setData(teacherInfo);
             } else {
                 baseResult = new BaseResult(true, "该教师不存在");
             }
@@ -251,16 +251,16 @@ public class AdminController extends BaseController
      * @param
      * @return
      */
-    @RequestMapping(value = "/getCompanyCommentById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getTeacherCommentById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getCompanyCommentById(@RequestParam(required = false) Integer offset,
+    public String getTeacherCommentById(@RequestParam(required = false) Integer offset,
                                         @RequestParam(required = false) Integer limit,
-                                        @RequestParam(required = true) Long companyId) {
+                                        @RequestParam(required = true) Long teacherId) {
         String result = "";
         BaseResult baseResult = null;
         try{
-            List<CComment> comments = companyService.getCompanyComment(companyId,offset,limit);
-            int count = companyService.getCompanyCommentCount (companyId);
+            List<CComment> comments = teacherService.getTeacherComment(teacherId,offset,limit);
+            int count = teacherService.getTeacherCommentCount (teacherId);
             if(comments != null && 0 < comments.size ()) {
                 BootStrapTableResult tableResult = new BootStrapTableResult<CComment>(comments,count);
                 baseResult = new BaseResult(true, "");
@@ -282,14 +282,14 @@ public class AdminController extends BaseController
      * @param
      * @return
      */
-    @RequestMapping(value = "/updateCompanyStatus", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/updateTeacherStatus", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String updateCompanyStatus(@RequestParam(required = true) Long companyId,
-                                       @RequestParam(required = true) String compStatus) {
+    public String updateTeacherStatus(@RequestParam(required = true) Long teacherId,
+                                       @RequestParam(required = true) String teaStatus) {
         String result = "";
         BaseResult baseResult = null;
         try{
-            int resultCode = companyService.updateCompanyStatus(companyId,compStatus);
+            int resultCode = teacherService.updateTeacherStatus(teacherId,teaStatus);
             if(resultCode > 0) {
                 baseResult = new BaseResult(true, "");
             } else {

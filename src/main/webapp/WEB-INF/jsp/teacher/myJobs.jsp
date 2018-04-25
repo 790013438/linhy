@@ -25,7 +25,7 @@
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
-							<button class="btn btn-sm btn-primary" onclick="window.location='../company/addJob'">发布资源</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../teacher/addJob'">发布资源</button>
 						</div>
 					</div>
 
@@ -35,14 +35,15 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div id="container"> 
    								<!-- 定义一个表格元素 --> 
-   									<table id="table_myJobs" class="table table-striped table-bordered">
+   									<table id="table_jobs" class="table table-striped table-bordered datatables-job">
     									<thead> 
      										<tr> 
       											<th>序号</th> 
       											<th>标题</th>
 												<th>类型</th>
-												<th>状态</th>
-      											<th>需求人数</th>
+      											<th>状态</th> 
+      											<th>需求人</th> 
+      											<th>报名数</th> 
       											<th>截止时间</th> 
       											<th>操作</th> 
      										</tr> 
@@ -68,41 +69,33 @@
 		</div><!-- /.main-container -->
 
 <!--删除弹窗start-->
-<div class="popinto" id="doUpdate">
-    <div class="font16 center deletediv">真的要删除该资源吗？</div>
+<div class="popinto" id="popinto_remove">
+    <div class="font16 center deletediv">将改资源从列表中移除？</div>
     <div class="deletediv_btn">
-        <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_delJob">确定</button></p>
+        <p class="pull-left"><button type="button" class="btn btn-primary" id="btn_removeJob">确定</button></p>
         <p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
         <input hidden="hidden" id="input_jobId"/>
     </div>
 </div>
 <!--删除弹窗end-->
+	<!--删除弹窗start-->
+	<div class="popinto" id="popinto_close">
+		<div class="font16 center deletediv">资源还未结束，确定关闭该资源？</div>
+		<div class="deletediv_btn">
+			<p class="pull-left"><button type="button" class="btn btn-primary" id="btn_closeJob">确定</button></p>
+			<p class="pull-right"><button type="button" class="btn btn-default" onclick="closepop()">取消</button></p>
+		</div>
+	</div>
+	<!--删除弹窗end-->
 <div class="pop" onclick="closepop()" style="display: none;"></div>
    <%@include file="commonFoot.jsp"%>
 	<script src="${resource}/resource/js/moment.js"></script>
-	<script src="${resource}/resource/js/company_index.js"></script>
-	<script type="text/javascript">
+	<script src="${resource}/resource/js/teacher_myJobs.js"></script>
+		<script type="text/javascript">
 			function closepop(){
 				$(".pop").hide();
 				$(".popinto").hide();
 			}
-			jQuery(function($) {
-				$(".del").click(function(){
-					$(".pop").show();
-				$(".popinto").show();
-				})
-				$(document).ready(function(){
-        			$('#example').DataTable();
-    			});
-
-    			$(".delete").on(ace.click_event, function() {
-					bootbox.confirm("你确定要删除改资源吗？", function(result) {
-						if(result) {
-							//
-						}
-					});
-				});
-			})
 		</script>
 </body>
 </html>

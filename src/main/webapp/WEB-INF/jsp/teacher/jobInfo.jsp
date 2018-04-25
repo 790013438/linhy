@@ -192,7 +192,7 @@
 	<div class="pop" onclick="closepop()" style="display: none;"></div>
 	<!--删除弹窗end-->
 	<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/company_jobInfo.js"></script>
+	<script src="${resource}/resource/js/teacher_jobInfo.js"></script>
 	<script src="${resource}/resource/js/moment.js"></script>
 	<script type="text/javascript">
 			jQuery(function($) {

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.ssm.dao.TeacherDao">
+    <select id="checkAccount" resultType="com.xy.ssm.model.CTeacher">
+        select id,tea_account as teaAccount,tea_name as teaName,tea_phone as teaPhone from c_teacher
+        where tea_account = #{account}
+    </select>
+
+    <insert id="addTeacher"  parameterType="com.xy.ssm.model.CTeacher">
+        insert into c_teacher(tea_account,tea_password,tea_name,tea_contacts,tea_phone,tea_email,create_time,tea_status)
+        values(#{teaAccount},#{teaPassword},#{teaName},#{teaContacts},#{teaPhone},#{teaEmail},#{createTime},#{teaStatus})
+    </insert>
+
+    <select id="checkMail" resultType="com.xy.ssm.model.CTeacher">
+      select id,tea_account as teaAccount,tea_name as teaName,tea_phone as teaPhone from c_teacher
+      where tea_email = #{email}
+    </select>
+
+    <select id="checkPhone" resultType="com.xy.ssm.model.CTeacher">
+        select id,tea_account as teaAccount,tea_name as teaName,tea_phone as teaPhone from c_teacher
+        where tea_phone = #{phone}
+    </select>
+    <insert id="insertJob" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CJobs">
+        insert into c_jobs(job_teacher_id,job_title,job_type,job_demand_number,job_requires_gender,job_salary_type,job_hours,job_salary,job_address,job_introduction,
+        job_contact_phone,job_remarks,job_deadline,job_status,create_time)
+        values(#{jobTeacherId},#{jobTitle},#{jobType},#{jobDemandNumber},#{jobRequiresGender},#{jobSalaryType},#{jobHours},#{jobSalary},#{jobAddress},#{jobIntroduction},#{jobContactPhone},
+        #{jobRemarks},#{jobDeadline},0,#{createTime})
+    </insert>
+    <select id="selectTeacherByAccount" resultType="com.xy.ssm.model.CTeacher">
+        select id,tea_account as teaAccount,tea_password as teaPassword,tea_name as teaName,
+        tea_contacts as teaContacts,tea_phone as teaPhone,tea_email as teaEmail,tea_info as teaInfo ,
+        tea_license as teaLicense,tea_address as teaAddress , tea_photo as teaPhoto,tea_status as teaStatus,
+        create_time as createTime from c_teacher where tea_account = #{teaAccount} and tea_status != 'tea_frozen'
+    </select>
+    <select id="selectJobsByTeacherId" resultType="com.xy.ssm.model.CJobs">
+        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,b.static_value as jobStatus,
+        a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
+        a.job_salary as jobSalary,a.job_address as jobAddress,a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
+        a.create_time as createTime from c_jobs as a
+        left join c_static as b on b.static_code=a.job_status
+        where job_teacher_id = #{teacherId}
+        <if test="2== jobStatus">
+            AND  (job_status = 1 or job_status = 0 or job_status = 2 or job_status = -1)
+        </if>
+        <if test="3== jobStatus">
+            AND  (job_status = 3 or job_status = 4 or job_status = 5)
+        </if>
+    </select>
+    <select id="selectJobsCountByTeacherId" resultType="int">
+        SELECT count(*)
+        FROM c_jobs
+        WHERE job_teacher_id = #{teacherId}
+        <if test="queryTerm != null and queryTerm != ''">
+            AND  (ber.resource_name like CONCAT('%',#{queryTerm},'%') or csr.business_value like CONCAT('%',#{queryTerm},'%' ))
+        </if>
+    </select>
+
+    <select id="selectAllJobs" resultType="com.xy.ssm.model.CJobs">
+        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
+        a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
+        a.job_salary as jobSalary,a.job_address as jobAddress , a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
+        a.create_time as createTime,b.tea_name as jobTeacherName,d.static_value as jobStatus,a.job_time as jobTime,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount from c_jobs as a
+        LEFT JOIN c_teacher as b on a.job_teacher_id=b.id
+        LEFT JOIN c_static as d on d.static_code=a.job_status
+        <if test="jobStatus == 1">
+            WHERE  job_status = #{jobStatus}
+        </if>
+        <if test="jobStatus == 2">
+            WHERE  job_status > #{jobStatus}
+        </if>
+    </select>
+
+    <select id="selectAllJobsCount" resultType="int">
+        SELECT count(*)
+        FROM c_jobs
+        WHERE job_status=#{jobStatus}
+    </select>
+
+    <update id="updateJobStatus">
+        update c_jobs set job_status =#{jobStatus} where id = #{jobId}
+    </update>
+
+    <select id="selectJobDetails" resultType="com.xy.ssm.model.CJobs">
+        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
+        a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
+        a.job_salary as jobSalary,a.job_address as jobAddress , a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_status as jobStatus,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
+        a.create_time as createTime,b.tea_name as jobTeacherName,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount,a.job_time as jobTime,
+        a.create_time as createTime from c_jobs a
+        LEFT JOIN c_teacher as b on a.job_teacher_id = b.id
+        WHERE  a.id=#{jobId}
+    </select>
+
+    <select id="getJobApplicationCount" resultType="int">
+        SELECT count(*)
+        FROM c_application
+        WHERE id = #{jobId} and appli_status="appli_apply"
+    </select>
+
+    <delete id="deleteJobById">
+        DELETE FROM c_jobs WHERE id = #{jobId}
+    </delete>
+
+    <select id="getTeacherComment" resultType="com.xy.ssm.model.CComment">
+        SELECT id,comm_commentator_id,comm_content,comm_publisher_id,comm_type,comm_publishe_icon,comm_publishe_name
+        FROM c_comment
+        WHERE comm_commentator_id = #{teacherId} and comm_type = "comm_user"
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="getTeacherCommentCount" resultType="int">
+        SELECT count(*)
+        FROM c_comment
+        WHERE comm_commentator_id = #{teacherId} and comm_type = "comm_user"
+    </select>
+
+    <update id="updateTeacherStatus">
+        update c_teacher set tea_status =#{teaStatus} where id = #{teacherId}
+    </update>
+
+    <select id="getEnrollmentSituation" resultType="com.xy.ssm.model.CApplication">
+        SELECT a.id,u.id as appliUserId,u.user_name as userName,u.user_phone as userPhone,u.user_email as userEmail,
+        u.user_icon as userIcon,u.user_gender as userGender,u.user_realname as userRealName,u.user_intention_job as userIntention ,
+        u.user_profile as userProfile,u.user_type as userType , u.user_status as userStatus,a.appli_status as appliStatus,a.create_time as createTime,u.user_major as userMajor
+        FROM c_application as a
+        INNER JOIN c_users as u on a.appli_user_id = u.id
+        WHERE a.appli_job_id = #{jobId} and a.tea_sign = 1
+        <if test=" '' != appliStatus and appliStatus != null ">
+          and a.appli_status = #{appliStatus}
+        </if>
+    </select>
+
+    <update id="updateApplicationStatus">
+        update c_application set appli_status =#{appliStatus} where appli_job_id = #{jobId} and appli_user_id=#{userId}
+    </update>
+
+    <update id="updateCompPassword">
+        update c_teacher set tea_password =#{newPw} where id = #{cTeacherId}
+    </update>
+
+    <select id="getTeacherInfo" resultType="com.xy.ssm.model.CTeacher">
+        select id,tea_account as teaAccount,tea_password as teaPassword,tea_name as teaName,
+        tea_contacts as teaContacts,tea_phone as teaPhone,tea_email as teaEmail,tea_info as teaInfo ,
+        tea_license as teaLicense,tea_address as teaAddress , tea_photo as teaPhoto,tea_status as teaStatus,
+        create_time as createTime from c_teacher where id = #{teacherId}
+    </select>
+    <select id="getAllTeacher" resultType="com.xy.ssm.model.CTeacher">
+        select a.id,a.tea_account as teaAccount,a.tea_password as teaPassword,a.tea_name as teaName,
+        a.tea_contacts as teaContacts,a.tea_phone as teaPhone,a.tea_email as teaEmail,a.tea_info as teaInfo ,
+        a.tea_license as teaLicense,a.tea_address as teaAddress ,a.tea_photo as teaPhoto,b.static_value as teaStatus,
+        a.create_time as createTime from c_teacher as a
+        left join c_static as b on a.tea_status = b.static_code
+    </select>
+
+    <update id="updateJobSign">
+        update c_jobs set comm_sign =0 where id = #{jobId}
+    </update>
+
+    <update id="updateCompSign">
+        update  c_application set tea_sign = 0 where  appli_job_id = #{jobId} and id = #{applicationId}
+    </update>
+
+    <update id="updateTeacher" parameterType="com.xy.ssm.model.CTeacher">
+        update c_teacher
+        SET tea_account=#{teaAccount},tea_name=#{teaName},tea_contacts=#{teaContacts},tea_phone=#{teaPhone},
+        tea_email=#{teaEmail},tea_info=#{teaInfo},tea_address=#{teaAddress}
+        WHERE id=#{id}
+    </update><!--comm_website=#{commWebsite}, myself-->
+
+</mapper>

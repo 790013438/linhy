@@ -1,15 +1,15 @@
 var contextPath = window.location.href;
-var arrHref = contextPath.split("companyId=");
-var companyId = arrHref[1];
+var arrHref = contextPath.split("teacherId=");
+var teacherId = arrHref[1];
 var condition = {
-    companyId:companyId
+    teacherId:teacherId
 };
 $(function() {
     $('.menu-list').removeClass('active open');
     $("#userManage").addClass('active open');
     $('.submenu').find('li').removeClass('active open');
-    $("#systemCompany").addClass('active open');
-    queryCompanyInf(condition);
+    $("#systemTeacher").addClass('active open');
+    queryTeacherInf(condition);
 
 })
 
@@ -17,15 +17,15 @@ $(function() {
     /**
      * 查询教师信息
      */
-    var queryCompanyInf = function (condition) {
+    var queryTeacherInf = function (condition) {
         $.ajax({
-            url: "../admin/getCompanyInfoById",
+            url: "../admin/getTeacherInfoById",
             type: 'post',
             data:condition,
             dataType : 'json',
             success: function (result) {
                 if (result.data != null) {
-                    initCompanyForm(result.data);
+                    initTeacherForm(result.data);
                 }
                 else{
                     var txt = "无用户信息";
@@ -42,15 +42,15 @@ $(function() {
 /**
      * 向个人信息设置页面填充用户信息
      */
-    var initCompanyForm = function (obj) {
-    $("#company_name").text(obj.compName);
-    $("#span_account").text(obj.compAccount);
-        $("#span_name").text(obj.compName);
-      $("#span_contacts").text(obj.compContacts);
-      $("#span_address").text(obj.compAddress);
-      $("#span_info").text(obj.compInfo);
-      $("#span_phone").text(obj.compPhone);
-      $("#span_email").text(obj.compEmail);
+    var initTeacherForm = function (obj) {
+    $("#teacher_name").text(obj.teaName);
+    $("#span_account").text(obj.teaAccount);
+        $("#span_name").text(obj.teaName);
+      $("#span_contacts").text(obj.teaContacts);
+      $("#span_address").text(obj.teaAddress);
+      $("#span_info").text(obj.teaInfo);
+      $("#span_phone").text(obj.teaPhone);
+      $("#span_email").text(obj.teaEmail);
       $("#span_website").text(obj.commWebsite);
    // if(obj.userPic==""||obj.userPic==null){
    //     $("#user_pic").attr("src", getRootPath()+"/resource/images/photos/user-avatar.png");

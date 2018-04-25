@@ -55,7 +55,7 @@ function checkCompName (obj)
         // 调用Ajax函数,向服务器端发送查询
         $.ajax ({ //一个Ajax过程
             type: "post", //以post方式与后台沟通
-            url: getRootPath() + "/user/checkTname", //与此页面沟通company/checkName
+            url: getRootPath() + "/user/checkTname", //与此页面沟通teacher/checkName
             dataType: 'json',//返回的值以 JSON方式 解释
             data: 'account=' + obj.value, //发给的数据
             success: function (json)//这个方法没有进去，里面的内容没有实现
@@ -250,7 +250,7 @@ function registerComp (data)
     console.log (data);
     $.ajax ({ //一个Ajax过程
         type: "post", //以post方式与后台沟通
-        url: getRootPath () + "/user/companyRegister", //与此页面沟通
+        url: getRootPath () + "/user/teacherRegister", //与此页面沟通
         dataType: 'json',//返回的值以 JSON方式 解释
         data: data, //发给的数据
         success: function (json)
@@ -277,15 +277,15 @@ function registerComp (data)
  */
 var getComParams = function ()
 {
-    var compAccount = $.trim ($ ("#compname").val ());
-    var compPhone = $ ("#comphone").val ();
-    var compEmail = $ ("#comp_email").val ();
-    var compPassword = $ ("#comp_password").val ();
+    var teaAccount = $.trim ($ ("#compname").val ());
+    var teaPhone = $ ("#comphone").val ();
+    var teaEmail = $ ("#comp_email").val ();
+    var teaPassword = $ ("#comp_password").val ();
     var json = {};
-    json.compAccount = compAccount;
-    json.compPhone = compPhone;
-    json.compEmail = compEmail;
-    json.compPassword = compPassword;
+    json.teaAccount = teaAccount;
+    json.teaPhone = teaPhone;
+    json.teaEmail = teaEmail;
+    json.teaPassword = teaPassword;
     return json;
 
 }

@@ -133,7 +133,7 @@
 <div class="pop" onclick="closepop()" style="display: none;"></div>
 <!-- basic scripts -->
 <%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/company_message.js"></script>
+	<script src="${resource}/resource/js/teacher_message.js"></script>
 
 
 	<script type="text/javascript">

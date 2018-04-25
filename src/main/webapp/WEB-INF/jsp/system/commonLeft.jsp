@@ -126,8 +126,8 @@
                         </a>
 
                         <ul class="submenu">
-                            <li id="systemCompany">
-                                <a href="../system/company">
+                            <li id="systemTeacher">
+                                <a href="../system/teacher">
                                     <i class="icon-double-angle-right"></i>
                                     教师用户信息管理
                                 </a>

@@ -69,7 +69,7 @@
 
 														<div class="col-xs-12 col-sm-9">
 															<h4 class="blue">
-																<span class="middle" id="company_name"></span>
+																<span class="middle" id="teacher_name"></span>
 															</h4>
 
 															<div class="profile-user-info">
@@ -406,7 +406,7 @@
 
 	<%@include file="commonFoot.jsp"%>
 	<script src="${resource}/resource/js/moment.js"></script>
-	<script src="${resource}/resource/js/company_showInfo.js"></script>
+	<script src="${resource}/resource/js/teacher_showInfo.js"></script>
 		<script type="text/javascript">
 		
 		</script>

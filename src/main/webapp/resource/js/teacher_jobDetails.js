@@ -18,7 +18,7 @@ $(function(){
 //查询资源详情
 var getJobInfoByID = function(condition) {
 	$.ajax({
-		url:"../company/getJobDetails",
+		url:"../teacher/getJobDetails",
 		type : 'post',
 		data : condition,
 		dataType : 'json',
@@ -69,8 +69,8 @@ var initJobDetailForm = function(obj) {
     }else{
         tr = tr + "<li><span>资源类型：</span>无</li>";
     }
-    if(obj.jobCompanyName != null){
-        tr = tr + "<li><span>教师名称：</span>"+obj.jobCompanyName+"</li>";
+    if(obj.jobTeacherName != null){
+        tr = tr + "<li><span>教师名称：</span>"+obj.jobTeacherName+"</li>";
     }else{
         tr = tr + "<li><span>教师名称：</span>无</li>";
     }

@@ -78,27 +78,27 @@
 
 																<div class="col-xs-12 col-sm-8">
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right">账号名</label>
+																		<label class="col-sm-4 control-label no-padding-right">账户名</label>
 
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-6" type="text" id="comp_account" placeholder="Username" value="" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="tea_account" placeholder="Username" value="" />
 																		</div>
 																	</div>
 
 																	<div class="space-4"></div>
 
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right">教师名</label>
+																		<label class="col-sm-4 control-label no-padding-right">就职单位名称</label>
 
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-6" type="text" id="comp_name" placeholder="Username" value="" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="tea_name" placeholder="就职单位名称" value="" />
 																		</div>
 																	</div>
 																	<div class="form-group">
-																		<label class="col-sm-4 control-label no-padding-right">教师联系人</label>
+																		<label class="col-sm-4 control-label no-padding-right">职称</label>
 
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-6" type="text" id="comp_contacts" placeholder="First Name" value="" />
+																			<input class="col-xs-12 col-sm-6" type="text" id="tea_contacts" placeholder="职称" value="" />
 																		</div>
 																	</div>
 																</div>
@@ -108,9 +108,9 @@
 															<div class="space-4"></div>
 
 															<div class="form-group">
-																<label class="col-sm-3 control-label no-padding-right">教师地址</label>
+																<label class="col-sm-3 control-label no-padding-right">所在地</label>
 																<div class="col-sm-9">
-																	<textarea class="col-xs-12 col-sm-8" id="comp_address"></textarea>
+																	<textarea class="col-xs-12 col-sm-8" id="tea_address"></textarea>
 																</div>
 															</div>
 
@@ -120,7 +120,7 @@
 																<label class="col-sm-3 control-label no-padding-right">教师简介</label>
 
 																<div class="col-sm-9">
-																	<textarea class="col-xs-12 col-sm-8" id="comp_info"></textarea>
+																	<textarea class="col-xs-12 col-sm-8" id="tea_info"></textarea>
 																</div>
 															</div>
 
@@ -140,7 +140,7 @@
 
 															<div class="space-4"></div>
 
-															<div class="form-group">
+															<%--<div class="form-group">
 																<label class="col-sm-3 control-label no-padding-right" >网站</label>
 
 																<div class="col-sm-9">
@@ -149,7 +149,7 @@
 																		<i class="icon-globe"></i>
 																	</span>
 																</div>
-															</div>
+															</div>   myself--%>
 
 															<div class="space-4"></div>
 
@@ -229,7 +229,7 @@
 		</div><!-- /.main-container -->
 
 		<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/company_myInfo.js"></script>
+	<script src="${resource}/resource/js/teacher_myInfo.js"></script>
 	<script src="${resource}/resource/js/check.js"></script>
 
 		<%--<script type="text/javascript">--%>

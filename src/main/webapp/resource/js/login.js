@@ -61,7 +61,7 @@ function login() {
                 if(result.data == 1){
                     window.location.href=getRootPath()+"student/index";
                 }else if(result.data == 2){
-                    window.location.href=getRootPath()+"company/index";
+                    window.location.href=getRootPath()+"teacher/index";
                 }else{
                     window.location.href=getRootPath()+"system/index";
                 }

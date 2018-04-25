@@ -177,7 +177,7 @@
 
 							<ul class="submenu">
 								<li class="active">
-									<a href="system_company.jsp">
+									<a href="system_teacher.jsp">
 										<i class="icon-double-angle-right"></i>
 										教师用户信息管理
 									</a>

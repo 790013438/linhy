@@ -18,7 +18,7 @@ $(function(){
 //发布资源s
 var addJob = function (data) {
     $.ajax({
-        url: "../company/addJobs",
+        url: "../teacher/addJobs",
         type: 'post',
         data: {
             json:data
