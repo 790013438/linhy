@@ -300,8 +300,8 @@ var initJobDetailForm = function(obj) {
     }else{
         tr = tr + "<li><span>薪资金额：</span>无</li>";
     }
-    if(obj.jobTime != null){
-        var jobTime1 = moment(obj.jobTime).format("YYYY-MM-DD HH:mm:ss");
+    if(obj.createTime != null){
+        var jobTime1 = moment(obj.createTime).format("YYYY-MM-DD HH:mm:ss");
          tr = tr + "<li><span>资源开始时间：</span>"+jobTime1+"</li>";
     } else{
          tr = tr + "<li><span>资源开始时间：</span>无</li>";

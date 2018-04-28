@@ -235,7 +235,7 @@
 											<div class="col-xs-12">
 												<div class="widget-box">
 													<div class="widget-header widget-header-flat">
-														<h4 class="smaller">成都金牛万达广场发传单</h4>
+														<h4 class="smaller">资源详情</h4>
 
 														<div class="widget-toolbar">
 															<label>
@@ -247,7 +247,7 @@
 													<div class="widget-body">
 														<div class="widget-main">
 															<dl id="dt-list-1">
-																<dt>资源标题：成都金牛万达广场发传单</dt>
+																<dt>资源标题：资源详情</dt>
 																<dt>资源类型：发传单</dt>
 																<dt>资源人数：5人</dt>
 																<dt>薪资类型：时薪</dt>

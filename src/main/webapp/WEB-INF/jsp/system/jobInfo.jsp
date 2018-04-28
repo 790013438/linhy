@@ -47,7 +47,7 @@
 											<div class="col-xs-12">
 												<div class="widget-box">
 													<div class="widget-header widget-header-flat">
-														<h4 class="smaller">成都金牛万达广场发传单</h4>
+														<h4 class="smaller">资源详情</h4>
 														<div class="widget-toolbar">
 															<label>
 																<button class="btn btn-xs btn-link" id="btn_appli"></button>

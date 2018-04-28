@@ -61,7 +61,8 @@ public class TeacherController extends BaseController {
             CJobs cJobs=(CJobs)JSON.parseObject (json,CJobs.class);
             log.info (JSON.toJSONString (cJobs));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            cJobs.setJobTime (sdf.parse (cJobs.getTime()));
+//            cJobs.setJobTime (sdf.parse (cJobs.getTime()));
+            cJobs.setJobTime (Double.parseDouble(cJobs.getTime()));//myself
             cJobs.setJobDeadline (sdf.parse(cJobs.getDeadline()));
             Long teacherId = cTeacher.getId();
             cJobs.setJobTeacherId(teacherId);

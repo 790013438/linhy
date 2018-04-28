@@ -25,8 +25,6 @@ public class CJobs implements Serializable {
     private String jobRequiresGender ;
     //薪资类型
     private String jobSalaryType;
-    //每日工作时长
-    private String jobHours;
     //薪资金额
     private String jobSalary;
     //工作地点
@@ -44,11 +42,14 @@ public class CJobs implements Serializable {
     //该资源报名人数
     private int appliCount;
     //工作时间
-    private Date jobTime;
+    private Double jobHours;
     //报名截止时间
     private Date jobDeadline;
     //创建时间
     private Date createTime;
+
+    private String time;
+    private String deadline;
 
     public String getTime ()
     {
@@ -69,9 +70,6 @@ public class CJobs implements Serializable {
     {
         this.deadline = deadline;
     }
-
-    private String time;
-    private String deadline;
 
     public static long getSerialVersionUID ()
     {
@@ -156,16 +154,6 @@ public class CJobs implements Serializable {
     public void setJobSalaryType (String jobSalaryType)
     {
         this.jobSalaryType = jobSalaryType;
-    }
-
-    public String getJobHours ()
-    {
-        return jobHours;
-    }
-
-    public void setJobHours (String jobHours)
-    {
-        this.jobHours = jobHours;
     }
 
     public String getJobSalary ()
@@ -258,16 +246,21 @@ public class CJobs implements Serializable {
         this.createTime = createTime;
     }
 
-    public Date getJobTime ()
+    public Double getJobTime ()
     {
-        return jobTime;
+        return jobHours;
     }
 
-    public void setJobTime (Date jobTime)
+    public void setJobTime (Double jobHours)
     {
-        this.jobTime = jobTime;
+        this.jobHours = jobHours;
     }
-
+    public void setJobHours(Double jobHours){
+        this.jobHours=jobHours;
+    }
+    public Double getJobHours(){
+        return jobHours;
+    }
     public int getFlag ()
     {
         return flag;
