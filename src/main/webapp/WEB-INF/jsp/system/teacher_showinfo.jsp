@@ -90,7 +90,7 @@
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 教师联系人 </div>
+																	<div class="profile-info-name"> 教师职称 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_contacts">无</span>

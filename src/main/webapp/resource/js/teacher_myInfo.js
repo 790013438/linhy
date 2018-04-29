@@ -173,7 +173,7 @@ var checkUserInformation = function(data)
                 var name = "教师名";
             }
             if(p == "teaContacts"){
-                var name = "教师联系人";
+                var name = "教师职称";
             }
             if(p == "teaAddress"){
                 var name = "教师地址";

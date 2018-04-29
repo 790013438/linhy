@@ -19,7 +19,7 @@ public class CTeacher implements Serializable {
     private String commWebsite ;*/
     //教师名
     private String teaName ;
-    //教师联系人
+    //教师职称
     private String teaContacts;
     //联系电话
     private String teaPhone ;
