@@ -59,10 +59,10 @@ public class TeacherController extends BaseController {
         CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
         try{
             CJobs cJobs=(CJobs)JSON.parseObject (json,CJobs.class);
-            log.info (JSON.toJSONString (cJobs));
+            cJobs.setCreateTime(new Date());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            cJobs.setJobTime (sdf.parse (cJobs.getTime()));
-            cJobs.setJobTime (Double.parseDouble(cJobs.getTime()));//myself
+            //cJobs.setJobTime (sdf.parse (cJobs.getTime()));
+           // cJobs.setJobTime (Double.parseDouble(cJobs.getTime()));//myself
             cJobs.setJobDeadline (sdf.parse(cJobs.getDeadline()));
             Long teacherId = cTeacher.getId();
             cJobs.setJobTeacherId(teacherId);

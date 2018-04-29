@@ -18,7 +18,7 @@ $(function(){
 //查询我的消息
 var queryMessageList = function() {
     $.ajax({
-        url:"../admin/queryMessageList",
+        url:"../message/getMessage",/*  url:"../admin/queryMessageList",*/
         type : 'post',
         data : null,
         dataType : 'json',

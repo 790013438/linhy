@@ -128,16 +128,16 @@
 											<input  id="job_hours" placeholder="资源时长（时）" onchange="checkHours(this.value)" maxlength="5" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-									<div class="form-group">
+									<%--<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 资源时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
-													<input type="text" id="input_jobTime" class="form-control hasDatepicker date-picker" id="jobTime" data-date-format="yyyy-mm-dd">
+													<input type="text" id="input_jobTime" class="form-control hasDatepicker date-picker" id="jobTime" data-date-format="yyyy-MM-dd">&lt;%&ndash;yyyy-mm-dd&ndash;%&gt;
 													<span class="input-group-addon">
 														<i class="icon-calendar"></i>
 													</span>
 										</div>
-									</div>
+									</div>    myself--%>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 报名截止时间</label>
 

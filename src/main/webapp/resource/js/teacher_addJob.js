@@ -56,6 +56,7 @@ function checkNumber(obj) {
         return true;
     } else {
         alert("输入人数不合理");
+        document.getElementById("input_jobNumber").value="";
         return false;
     }
 }
@@ -68,6 +69,7 @@ function checkHours(obj)
     } else
     {
         alert ("输入时长不合理");
+        document.getElementById("job_hours").value="";
         return false;
     }
 }
@@ -81,6 +83,7 @@ function checkSalary(obj)
     } else
     {
         alert ("输入薪资不合理");
+        document.getElementById("salary_salary").value="";
         return false;
     }
 }
@@ -93,12 +96,16 @@ var checkJobInformation = function(data)
 
     for ( var p in data )
     {
-        if (checknull(data[p])==false){
+/*        if (checknull(data[p])==false){
             return false;
-        }
+        }*/
+          if (data[p]==""||data[p]==null){
+              return false;
+          }
     }
     return true;
 }
+
 /**
  * 获取修改后的用户信息
  * @returns {{}}
@@ -114,7 +121,7 @@ var getParams = function(){
     var jobSalaryType = $("#salary_type").val();
     var jobSalary = $("#salary_salary").val();
     var jobHours = $("#job_hours").val();
-    var jobTime= $("#input_jobTime").val();
+   /* var jobTime= $("#input_jobTime").val();*/
     var jobDeadline = $("#input_deadline").val();
     var json = {};
     json.jobTitle = jobTitle;
@@ -127,10 +134,9 @@ var getParams = function(){
     json.jobRemarks = jobRemarks;
     json.jobSalaryType = jobSalaryType;
     json.jobHours = jobHours;
-    json.time = jobTime;
+ /*   json.time = jobTime;*/
     json.deadline = jobDeadline;
     return json;
-
 }
 
 

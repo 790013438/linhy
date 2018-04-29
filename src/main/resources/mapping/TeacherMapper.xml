@@ -22,9 +22,9 @@
     </select>
     <insert id="insertJob" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CJobs">
         insert into c_jobs(job_teacher_id,job_title,job_type,job_demand_number,job_requires_gender,job_salary_type,job_hours,job_salary,job_address,job_introduction,
-        job_contact_phone,job_remarks,job_deadline,job_status,create_time)
+        job_contact_phone,job_remarks,job_deadline,job_status,create_time,user_sign)
         values(#{jobTeacherId},#{jobTitle},#{jobType},#{jobDemandNumber},#{jobRequiresGender},#{jobSalaryType},#{jobHours},#{jobSalary},#{jobAddress},#{jobIntroduction},#{jobContactPhone},
-        #{jobRemarks},#{jobDeadline},0,#{createTime})
+        #{jobRemarks},#{jobDeadline},0,#{createTime},1)
     </insert>
     <select id="selectTeacherByAccount" resultType="com.xy.ssm.model.CTeacher">
         select id,tea_account as teaAccount,tea_password as teaPassword,tea_name as teaName,

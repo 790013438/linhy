@@ -10,10 +10,7 @@ import com.xy.ssm.model.User;
 import com.xy.ssm.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,8 @@ import java.util.List;
  * Created by Administrator on 2017/4/21.
  */
 @Controller
-@RequestMapping("message")
+@RequestMapping("/message")
+@SessionAttributes("currentUser")//讲登录后命名为currentUser的加入session
 public class MessageController extends BaseController
 {
 
