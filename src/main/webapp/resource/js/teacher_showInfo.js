@@ -51,7 +51,7 @@ $(function() {
       $("#span_info").text(obj.teaInfo);
       $("#span_phone").text(obj.teaPhone);
       $("#span_email").text(obj.teaEmail);
-      $("#span_website").text(obj.commWebsite);
+     /* $("#span_website").text(obj.commWebsite);*/
    // if(obj.userPic==""||obj.userPic==null){
    //     $("#user_pic").attr("src", getRootPath()+"/resource/images/photos/user-avatar.png");
    //  } else {

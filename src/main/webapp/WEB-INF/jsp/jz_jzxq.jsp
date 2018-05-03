@@ -89,7 +89,7 @@
 								<img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎您,</small>
-									XX教师
+									教师
 								</span>
 
 								<i class="icon-caret-down"></i>

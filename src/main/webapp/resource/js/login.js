@@ -49,14 +49,12 @@ function login() {
     var data={
        json:JSON.stringify(json)
     };
-    console.log(json);
     $.ajax({ //一个Ajax过程
         type: "post", //以post方式与后台沟通
         url :getRootPath()+"/user/login", //与此页面沟通
         dataType:'json',//返回的值以 JSON方式 解释
         data: data, //发给的数据
         success: function(result){//如果调用成功
-            console.log(result);
             if(result.success== true){
                 if(result.data == 1){
                     window.location.href=getRootPath()+"student/index";

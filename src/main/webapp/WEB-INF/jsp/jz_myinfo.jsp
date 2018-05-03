@@ -265,7 +265,7 @@
 																		<label class="col-sm-4 control-label no-padding-right" for="form-field-username">教师名</label>
 
 																		<div class="col-sm-8">
-																			<input class="col-xs-12 col-sm-10" type="text" id="form-field-username" placeholder="Username" value="XXX教师" />
+																			<input class="col-xs-12 col-sm-10" type="text" id="form-field-username" placeholder="Username" value="X教师" />
 																		</div>
 																	</div>
 

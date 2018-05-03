@@ -221,7 +221,6 @@ function showclass(target,Infos){
 }
 
 function register(data) {
-    console.log(data);
     $.ajax({ //一个Ajax过程
         type: "post", //以post方式与后台沟通
         url :getRootPath()+"/user/userRegister", //与此页面沟通

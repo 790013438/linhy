@@ -18,7 +18,7 @@ $(function(){
 //查询我的消息
 var queryMessageList = function() {
     $.ajax({
-        url:"../message/getMessage",/*  url:"../admin/queryMessageList",*/
+        url:"../message/getMessage?type="+2,/*  url:"../admin/queryMessageList",*/
         type : 'post',
         data : null,
         dataType : 'json',
@@ -175,7 +175,7 @@ var appendTabTitle = function()
 
 
 var appendJobNode = function(obj) {
-    var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
+    var jobDeadline1 = moment(obj.createTime).format("YYYY-Do-DD HH:mm:ss");
     var job_str = "<tr>"+
             "<td>"+obj.id+"</td>"+
             "<td>"+obj.jobTitle+"</td>"+

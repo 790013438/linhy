@@ -32,7 +32,7 @@
 				<!-- PAGE CONTENT BEGINS -->
 				<div id="container">
 					<!-- 定义一个表格元素 -->
-					<table id="table_essage" class="table table-striped table-bordered">
+					<table id="table_message" class="table table-striped table-bordered">
 						<thead>
 						<tr>
 							<th>序号</th>
@@ -134,7 +134,7 @@
 <!-- basic scripts -->
 <%@include file="commonFoot.jsp"%>
 	<script src="${resource}/resource/js/teacher_message.js"></script>
-
+    <script src="${resource}/resource/js/moment.js"></script>
 
 	<script type="text/javascript">
 

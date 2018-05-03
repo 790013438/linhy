@@ -96,9 +96,10 @@
         WHERE id = #{jobId} and appli_status="appli_apply"
     </select>
 
-    <delete id="deleteJobById">
+    <update id="deleteJobById">
         DELETE FROM c_jobs WHERE id = #{jobId}
-    </delete>
+        update c_jobs set user_sign=0 where id = #{jobId}
+    </update>
 
     <select id="getTeacherComment" resultType="com.xy.ssm.model.CComment">
         SELECT id,comm_commentator_id,comm_content,comm_publisher_id,comm_type,comm_publishe_icon,comm_publishe_name
@@ -117,9 +118,10 @@
         update c_teacher set tea_status =#{teaStatus} where id = #{teacherId}
     </update>
 
+    <!-- u.user_icon as userIcon,u.user_intention_job as userIntention ,字段被删除-->
     <select id="getEnrollmentSituation" resultType="com.xy.ssm.model.CApplication">
         SELECT a.id,u.id as appliUserId,u.user_name as userName,u.user_phone as userPhone,u.user_email as userEmail,
-        u.user_icon as userIcon,u.user_gender as userGender,u.user_realname as userRealName,u.user_intention_job as userIntention ,
+       u.user_gender as userGender,u.user_realname as userRealName,
         u.user_profile as userProfile,u.user_type as userType , u.user_status as userStatus,a.appli_status as appliStatus,a.create_time as createTime,u.user_major as userMajor
         FROM c_application as a
         INNER JOIN c_users as u on a.appli_user_id = u.id

@@ -94,7 +94,7 @@
 								<img class="nav-user-photo" src="${resource}/resource/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎您,</small>
-									XX教师
+									教师
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -260,7 +260,7 @@
 
 														<div class="col-xs-12 col-sm-9">
 															<h4 class="blue">
-																<span class="middle">XXX教师</span>
+																<span class="middle">教师</span>
 															</h4>
 
 															<div class="profile-user-info">

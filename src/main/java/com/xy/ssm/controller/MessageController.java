@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -28,25 +29,26 @@ public class MessageController extends BaseController
 
     @RequestMapping(value = "/getMessage", produces = {"application/json;charset=UTF-8"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String submitAudit (int type)
+    public String submitAudit (HttpServletRequest request)
     {
+        String type=request.getParameter("type");
         String result = "";
         BaseResult baseResult = null;
         try
         {
             Long sendId;
             Long objId;
-            if (type == 1)
+            if ("1".equals(type))/*学生*/
             {
                 CUser curUser = (CUser) getLoginUser ().get ("loginuser");
                 sendId=curUser.getId ();
                 objId=1L;
-            } else if (type == 2)
+            } else if ("2".equals(type))/*教师*/
             {
                 CTeacher curUser = (CTeacher) getLoginUser ().get ("loginuser");
                 sendId=curUser.getId ();
                 objId=2L;
-            } else
+            } else/*管理员*/
             {
                 CUser curUser = (CUser) getLoginUser ().get ("loginuser");
                 sendId=curUser.getId ();

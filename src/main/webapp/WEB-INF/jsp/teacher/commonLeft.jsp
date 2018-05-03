@@ -138,6 +138,12 @@
                         <span class="menu-text"> 我的消息 </span>
                     </a>
                 </li>
+                <li id="li_homework">
+                    <a href="#">
+                        <i class="icon-text-width"></i>
+                        <span class="menu-text"> 已经发布的作业 </span>
+                    </a>
+                </li>
             </ul><!-- /.nav-list -->
 
             <div class="sidebar-collapse" id="sidebar-collapse">

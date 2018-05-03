@@ -14,7 +14,7 @@ public class CUser implements Serializable {
     private String userName;
     //用户手机号
     private String userPhone;
-    //用户头像
+    //用户头像，not use
     private String userIcon;
     //用户邮箱
     private String userEmail;
@@ -22,7 +22,7 @@ public class CUser implements Serializable {
     private String userGender;
     //用户真实姓名
     private String userRealName;
-    //用户资源意向---如发传单等。
+    //用户资源意向，not use
     private String userIntention;
     //用户专业
     private String userMajor;
