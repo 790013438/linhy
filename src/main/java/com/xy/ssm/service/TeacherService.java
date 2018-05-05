@@ -5,7 +5,9 @@ import com.xy.ssm.model.CComment;
 import com.xy.ssm.model.CTeacher;
 import com.xy.ssm.model.CJobs;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wuchenl on 2017/1/28.
@@ -41,6 +43,8 @@ public interface TeacherService {
     int updateTeacher(CTeacher cTeacher);
     List<CTeacher> getAllTeacher();
     int addTeacher(CTeacher cTeacher);
-
-
+/*添加文件*/
+void addFile(Map map);
+/*通过创建时间，得到资源的id*/
+String getJobId(String jobCreateTime);
 }

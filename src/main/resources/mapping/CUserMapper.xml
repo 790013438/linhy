@@ -39,11 +39,12 @@
         insert into c_application(appli_user_id,appli_job_id,appli_status,create_time)
         values(#{appliUserId},#{appliJobId},#{appliStatus},#{createTime})
     </insert>
-
+<!--a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender, a.job_salary_type as jobSalaryType, a.job_salary as jobSalary, a.job_address as jobAddress ,-->
+    <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
     <select id="getJobList" resultType="com.xy.ssm.model.CJobs">
         select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
-        a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
-        a.job_salary as jobSalary,a.job_address as jobAddress , a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_status as jobStatus,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
+       a.job_hours as jobHours ,
+       a.job_introduction as jobIntroduction,a.job_status as jobStatus,a.job_deadline as jobDeadline,
         a.create_time as createTime,b.tea_name as jobTeacherName,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount from c_jobs as a
         LEFT JOIN c_teacher as b on a.job_teacher_id = b.id
         where job_status = 3

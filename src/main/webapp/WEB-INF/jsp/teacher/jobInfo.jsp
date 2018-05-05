@@ -186,7 +186,7 @@
 			<p class="pull-left"><button type="button" class="btn btn-primary" id="btn_agree">同意</button></p>
 			<p class="pull-left"><button type="button" class="btn btn-primary" id="btn_refuse">拒绝</button></p>
 			<input hidden="hidden" id="input_userId"/>
-			<input hidden="hidden" id="input_jobDemandNumber"/>
+			<%--<input hidden="hidden" id="input_jobDemandNumber"/>--%>
 		</div>
 	</div>
 	<div class="pop" onclick="closepop()" style="display: none;"></div>

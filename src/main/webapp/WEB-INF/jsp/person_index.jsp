@@ -226,44 +226,38 @@
     									<thead> 
      										<tr>
       											<th>标题</th> 
-      											<th>状态</th>
+      											<th>资源类型</th>
 												<th>教师名称</th>
 												<th>报名人数</th>
       											<th>截止时间</th> 
-      											<th>薪资类型</th> 
-      											<th>薪资金额</th> 
+      											<%--<th>薪资类型</th> --%>
+      											<%--<th>薪资金额</th>--%>
       											<th>操作</th> 
      										</tr> 
     									</thead> 
     									<tbody>
     										<tr>
-    											<td>23</td>
-    											<td>派发传单</td>
+    											<td>Java</td>
+    											<td>Java中jsp讲解</td>
     											<td>报名中</td>
     											<td>2</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td>时薪</td>
-    											<td>20</td>
+    											<td>2019-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请报名</button></td>
     										</tr>
     										<tr>
-    											<td>40</td>
-    											<td>小学家教</td>
+    											<td>JavaScript</td>
+    											<td>浏览器脚本</td>
     											<td>报名中</td>
     											<td>1</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td>时薪</td>
-    											<td>100</td>
+    											<td>2019-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请报名</button></td>
     										</tr>
     										<tr>
-    											<td>41</td>
-    											<td>中学家教</td>
+    											<td>php</td>
+    											<td>php入门开发基础</td>
     											<td>报名中</td>
     											<td>5</td>
-    											<td>2017-02-25 22:14:53</td>
-    											<td>时薪</td>
-    											<td>100</td>
+    											<td>2019-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请报名</button></td>
     										</tr>
     									</tbody> 

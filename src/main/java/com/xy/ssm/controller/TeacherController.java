@@ -10,15 +10,24 @@ import com.xy.ssm.service.TeacherService;
 import com.xy.ssm.service.MessageService;
 import com.xy.ssm.service.UserService;
 import com.xy.ssm.utils.MD5Util;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wuchen on 2017/1/12.
@@ -29,6 +38,16 @@ import java.util.List;
 @SessionAttributes("currentUser")//讲登录后命名为currentUser的加入session
 public class TeacherController extends BaseController {
 
+    private static Date jobCreateTime=null;
+
+    public void setJobCreateTime(Date jobCreateTime) {
+        this.jobCreateTime = jobCreateTime;
+    }
+
+    public Date getJobCreateTime() {
+        return jobCreateTime;
+    }
+    private Integer number;
     private Logger log = Logger.getLogger(TeacherController.class);
     //上面是LOG的声明，下面的Resource 可以考虑使用Autowired来注入Service
     @Resource
@@ -53,13 +72,14 @@ public class TeacherController extends BaseController {
      */
     @RequestMapping(value = "/addJobs", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String addJobs(@RequestParam(required = true) String  json) {
+    public String addJobs(@RequestParam(required = true) String  json, HttpServletRequest request) {
         String result = "";
         BaseResult baseResult = null;
         CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
         try{
             CJobs cJobs=(CJobs)JSON.parseObject (json,CJobs.class);
             cJobs.setCreateTime(new Date());
+            setJobCreateTime(cJobs.getCreateTime());//得到创建时间
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             //cJobs.setJobTime (sdf.parse (cJobs.getTime()));
            // cJobs.setJobTime (Double.parseDouble(cJobs.getTime()));//myself
@@ -78,6 +98,50 @@ public class TeacherController extends BaseController {
         }
         result= JSON.toJSONString(baseResult);
         return result;
+    }
+
+    /**
+     * 发布资源信息
+     * @return
+     */
+    @RequestMapping(value = "/addJobFiles", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    /*@ResponseBody*/
+    public String addJobFiles(@RequestParam("job_file")MultipartFile[] files,HttpServletResponse response){
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String result="";
+        /*文件上传*/
+        /*上传文件保存目录*/
+        Map<String,String> map=new HashMap();
+        String savePath="E:\\spring-mvc-mybatis-IDEA\\upload\\";
+        String id=teacherService.getJobId(format.format(jobCreateTime));
+        map.put("file_job_id",id);
+        if (files!=null && files.length!=0){
+            for (MultipartFile file:files){
+                String filename=file.getOriginalFilename();
+                map.put("file_route",savePath+filename);
+                map.put("file_realname",filename);
+                map.put("file_size",((Long)(file.getSize()/1024)).toString());
+                map.put("file_type",filename.substring(filename.lastIndexOf(".")));
+                teacherService.addFile(map);
+                result="success";
+                try {
+                    file.transferTo(new File(savePath+filename));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            result="false";
+        }
+        /*设置页面提示信息*/
+       /* response.setContentType("text/html;charset=utf8");
+        try {
+            PrintWriter out=response.getWriter();
+            out.print("<script language=\"javascript\">alert('"+result+"');window.location.href='/teacher/addJob'</script>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        return "redirect:/teacher/addJob?"+result;
     }
 
     /**
@@ -145,10 +209,11 @@ public class TeacherController extends BaseController {
      * 筛选资源用户
      * @param
      * @return
+     * @RequestParam(required = true) Integer demandNumber,
      */
     @RequestMapping(value = "/screenApplicationUser", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getEnrollmentSituation(@RequestParam(required = true) Long jobId,@RequestParam(required = true) Long userId,@RequestParam(required = true) Integer demandNumber,@RequestParam(required = true) String appliStatus) {
+    public String getEnrollmentSituation(@RequestParam(required = true) Long jobId,@RequestParam(required = true) Long userId,@RequestParam(required = true) String appliStatus) {
         String result = "";
         BaseResult baseResult = null;
         try{
@@ -156,16 +221,16 @@ public class TeacherController extends BaseController {
                 //查询报名成功的人数
                 List<CApplication> applicationList = teacherService.getEnrollmentSituation(jobId,"appli_successful");
                 int appliSuccessCount = applicationList.size ();
-                if(appliSuccessCount == demandNumber){
+ /*               if(appliSuccessCount == demandNumber){
                     baseResult = new BaseResult(false, "人数已达到需求人数");
-                }else{
+                }else{*/
                     int resultCode = teacherService.updateApplicationStatus(jobId,userId,appliStatus);
                     if(resultCode  > 0) {
                         baseResult = new BaseResult(true, "");
                     } else {
                         baseResult = new BaseResult(false, "修改用户报名状态失败");
                     }
-                }
+                /*}*/
             }else{
                 int resultCode = teacherService.updateApplicationStatus(jobId,userId,appliStatus);
                 if(resultCode  > 0) {

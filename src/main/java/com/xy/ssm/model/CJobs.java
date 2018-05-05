@@ -20,25 +20,25 @@ public class CJobs implements Serializable {
     //资源类型
     private String jobType ;
     //需求人数
-    private int jobDemandNumber;
+    /*private int jobDemandNumber;*/
     //性别要求
-    private String jobRequiresGender ;
+    /*private String jobRequiresGender ;*/
     //薪资类型
-    private String jobSalaryType;
+    /*private String jobSalaryType;*/
     //薪资金额
-    private String jobSalary;
+/*    private String jobSalary;*/
     //工作地点
-    private String jobAddress ;
+  /*  private String jobAddress ;*/
     //资源描述
     private String jobIntroduction;
     //联系电话
-    private String jobContactPhone;
+/*    private String jobContactPhone;*/
     //资源状态
     private String jobStatus ;
     //标志
     private int flag ;
     //备注
-    private String jobRemarks;
+    /*private String jobRemarks;*/
     //该资源报名人数
     private int appliCount;
     //工作时间
@@ -126,55 +126,48 @@ public class CJobs implements Serializable {
         this.jobType = jobType;
     }
 
-    public int getJobDemandNumber ()
+   /* public int getJobDemandNumber ()
     {
         return jobDemandNumber;
     }
-
     public void setJobDemandNumber (int jobDemandNumber)
     {
         this.jobDemandNumber = jobDemandNumber;
-    }
+    }*/
 
-    public String getJobRequiresGender ()
+    /*public String getJobRequiresGender ()
     {
         return jobRequiresGender;
     }
-
     public void setJobRequiresGender (String jobRequiresGender)
     {
         this.jobRequiresGender = jobRequiresGender;
-    }
-
-    public String getJobSalaryType ()
+    }*/
+    /*public String getJobSalaryType ()
     {
         return jobSalaryType;
     }
-
     public void setJobSalaryType (String jobSalaryType)
     {
         this.jobSalaryType = jobSalaryType;
-    }
-
-    public String getJobSalary ()
+    }*/
+/*    public String getJobSalary ()
     {
         return jobSalary;
     }
-
     public void setJobSalary (String jobSalary)
     {
         this.jobSalary = jobSalary;
-    }
+    }*/
 
-    public String getJobAddress ()
+/*    public String getJobAddress ()
     {
         return jobAddress;
     }
-
     public void setJobAddress (String jobAddress)
     {
         this.jobAddress = jobAddress;
-    }
+    }*/
 
     public String getJobIntroduction ()
     {
@@ -186,15 +179,14 @@ public class CJobs implements Serializable {
         this.jobIntroduction = jobIntroduction;
     }
 
-    public String getJobContactPhone ()
+/*    public String getJobContactPhone ()
     {
         return jobContactPhone;
     }
-
     public void setJobContactPhone (String jobContactPhone)
     {
         this.jobContactPhone = jobContactPhone;
-    }
+    }*/
 
     public String getJobStatus ()
     {
@@ -206,15 +198,14 @@ public class CJobs implements Serializable {
         this.jobStatus = jobStatus;
     }
 
-    public String getJobRemarks ()
+/*    public String getJobRemarks ()
     {
         return jobRemarks;
     }
-
     public void setJobRemarks (String jobRemarks)
     {
         this.jobRemarks = jobRemarks;
-    }
+    }*/
 
     public int getAppliCount ()
     {

@@ -7,7 +7,9 @@ import com.xy.ssm.model.CJobs;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wuchen on 2017/1/12.
@@ -41,5 +43,7 @@ public interface TeacherDao {
     int updateTeacher (CTeacher cTeacher);
     List<CTeacher> getAllTeacher();
     int addTeacher(CTeacher cTeacher);
-
+    /*添加文件*/
+    void addFile(Map map);
+    String getJobId(String jobCreateTime);
 }

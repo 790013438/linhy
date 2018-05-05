@@ -195,7 +195,7 @@ var appendJobNode = function(obj) {
 		"<td>"+obj.jobTitle+"</td>"+
 		"<td> "+obj.jobType+"</td>"+
 		"<td> "+obj.jobStatus+"</td>"+
-		"<td> "+obj.jobDemandNumber+"</td>"+
+		/*"<td> "+obj.jobDemandNumber+"</td>"+*/
         "<td> "+obj.appliCount+"</td>"+
         "<td> "+jobDeadline1+"</td>"+
 		"<td>"+

@@ -185,7 +185,7 @@ var appendJobNode = function(obj) {
 		"<td>"+obj.jobTitle+"</td>"+
 		"<td> "+obj.jobType+"</td>"+
 		"<td> "+obj.jobStatus+"</td>"+
-		"<td> "+obj.jobDemandNumber+"</td>"+
+		/*"<td> "+obj.jobDemandNumber+"</td>"+*/
 		"<td> "+jobDeadline1+"</td>"+
 		"<td>"+
 		"<a  href =\"../teacher/jobDetails?jobId="+obj.id+"\" >查看资源详情</a> |" +

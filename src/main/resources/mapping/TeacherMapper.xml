@@ -20,11 +20,13 @@
         select id,tea_account as teaAccount,tea_name as teaName,tea_phone as teaPhone from c_teacher
         where tea_phone = #{phone}
     </select>
+    <!--job_demand_number,#{jobDemandNumber},job_requires_gender,#{jobRequiresGender},job_salary_type,#{jobSalaryType},job_salary,#{jobSalary},job_address,#{jobAddress},-->
+    <!--job_contact_phone,#{jobContactPhone},job_remarks,#{jobRemarks},-->
     <insert id="insertJob" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CJobs">
-        insert into c_jobs(job_teacher_id,job_title,job_type,job_demand_number,job_requires_gender,job_salary_type,job_hours,job_salary,job_address,job_introduction,
-        job_contact_phone,job_remarks,job_deadline,job_status,create_time,user_sign)
-        values(#{jobTeacherId},#{jobTitle},#{jobType},#{jobDemandNumber},#{jobRequiresGender},#{jobSalaryType},#{jobHours},#{jobSalary},#{jobAddress},#{jobIntroduction},#{jobContactPhone},
-        #{jobRemarks},#{jobDeadline},0,#{createTime},1)
+        insert into c_jobs(job_teacher_id,job_title,job_type,job_hours,job_introduction,
+        job_deadline,job_status,create_time,user_sign)
+        values(#{jobTeacherId},#{jobTitle},#{jobType},#{jobHours},#{jobIntroduction},
+        #{jobDeadline},0,#{createTime},1)
     </insert>
     <select id="selectTeacherByAccount" resultType="com.xy.ssm.model.CTeacher">
         select id,tea_account as teaAccount,tea_password as teaPassword,tea_name as teaName,
@@ -32,10 +34,12 @@
         tea_license as teaLicense,tea_address as teaAddress , tea_photo as teaPhoto,tea_status as teaStatus,
         create_time as createTime from c_teacher where tea_account = #{teaAccount} and tea_status != 'tea_frozen'
     </select>
+    <!-- a.job_demand_number as jobDemandNumber, a.job_requires_gender as jobRequiresGender, a.job_salary_type as jobSalaryType, a.job_salary as jobSalary,a.job_address as jobAddress,-->
+    <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
     <select id="selectJobsByTeacherId" resultType="com.xy.ssm.model.CJobs">
         select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,b.static_value as jobStatus,
-        a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
-        a.job_salary as jobSalary,a.job_address as jobAddress,a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
+     a.job_hours as jobHours ,
+       a.job_introduction as jobIntroduction,a.job_deadline as jobDeadline,
         a.create_time as createTime from c_jobs as a
         left join c_static as b on b.static_code=a.job_status
         where job_teacher_id = #{teacherId}
@@ -54,11 +58,11 @@
             AND  (ber.resource_name like CONCAT('%',#{queryTerm},'%') or csr.business_value like CONCAT('%',#{queryTerm},'%' ))
         </if>
     </select>
-
+<!-- a.job_demand_number as jobDemandNumber, a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_salary as jobSalary,a.job_address as jobAddress ,-->
+    <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
     <select id="selectAllJobs" resultType="com.xy.ssm.model.CJobs">
         select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
-        a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
-        a.job_salary as jobSalary,a.job_address as jobAddress , a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
+      a.job_hours as jobHours , a.job_introduction as jobIntroduction,a.job_deadline as jobDeadline,
         a.create_time as createTime,b.tea_name as jobTeacherName,d.static_value as jobStatus,a.job_hours as jobTime,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount from c_jobs as a
         LEFT JOIN c_teacher as b on a.job_teacher_id=b.id
         LEFT JOIN c_static as d on d.static_code=a.job_status
@@ -79,11 +83,11 @@
     <update id="updateJobStatus">
         update c_jobs set job_status =#{jobStatus} where id = #{jobId}
     </update>
-
+<!-- a.job_demand_number as jobDemandNumber, a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType, a.job_salary as jobSalary, a.job_address as jobAddress ,-->
+   <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
     <select id="selectJobDetails" resultType="com.xy.ssm.model.CJobs">
-        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
-        a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_hours as jobHours ,
-        a.job_salary as jobSalary,a.job_address as jobAddress , a.job_introduction as jobIntroduction,a.job_contact_phone as jobContactPhone,a.job_status as jobStatus,a.job_remarks as jobRemarks,a.job_deadline as jobDeadline,
+        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,a.job_hours as jobHours ,
+       a.job_introduction as jobIntroduction,a.job_status as jobStatus,a.job_deadline as jobDeadline,
         a.create_time as createTime,b.tea_name as jobTeacherName,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount,a.job_hours as jobTime,
         a.create_time as createTime from c_jobs a
         LEFT JOIN c_teacher as b on a.job_teacher_id = b.id
@@ -167,5 +171,13 @@
         tea_email=#{teaEmail},tea_info=#{teaInfo},tea_address=#{teaAddress}
         WHERE id=#{id}
     </update><!--comm_website=#{commWebsite}, myself-->
-
+    <!--添加文件-->
+    <insert id="addFile" parameterType="java.util.Map">
+        insert into c_job_files (file_route,file_realname,file_type,file_size,file_job_id)
+        VALUES (#{file_route},#{file_realname},#{file_type},#{file_size},#{file_job_id})
+    </insert>
+    <!--通过创建时间，得到资源id-->
+    <select id="getJobId" parameterType="java.lang.String"  resultType="java.lang.String">
+        select id from c_jobs where create_time like #{jobCreateTime}
+    </select>
 </mapper>

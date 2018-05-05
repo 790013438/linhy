@@ -498,16 +498,16 @@ public class UserController extends BaseController{
                 baseResult=new BaseResult(false,"该资源不存在");
                 result= JSON.toJSONString(baseResult);
             }else {
-                cApplication.setAppliJobId (jobId);
-                cApplication.setAppliStatus ("appli_apply");
-                cApplication.setAppliUserId (cUser.getId ());
+                cApplication.setAppliJobId(jobId);
+                cApplication.setAppliStatus("appli_apply");
+                cApplication.setAppliUserId(cUser.getId());
                 //向数据库中添加申请报名记录
                 int resultCode = cUserService.addJobApplication(cApplication);
-                if(resultCode > 0){
+                if (resultCode > 0) {
                     //查询该资源的报名人数
-                    int count=teacherService.getJobApplicationCount(jobId);
+                    int count = teacherService.getJobApplicationCount(jobId);
                     //设置报名人数上限为需求人数的两倍，供教师筛选
-                    if(count == 2*job.getJobDemandNumber ()){
+/*                   if(count == 2*job.getJobDemandNumber ()){
                         int resultCode1 = teacherService.updateJobStatus (jobId,"4");
                         if(resultCode1 > 0){
                             baseResult=new BaseResult(true,"");
@@ -516,12 +516,13 @@ public class UserController extends BaseController{
                         }
                     }else{
                         baseResult=new BaseResult(true,"");
-                    }
+                    }*/
                 }else{
                     baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
                 }
-            }
-            result= JSON.toJSONString(baseResult);
+                }
+                result = JSON.toJSONString(baseResult);
+          /*  }*/
         }catch (Exception e){
             log.error("申请报名资源异常"+e);
             baseResult=new BaseResult(false,"申请报名资源异常");

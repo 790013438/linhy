@@ -40,12 +40,13 @@
         FROM c_comment
         WHERE comm_commentator_id = #{userId} and comm_type = "comm_comp"
     </select>
-
+<!--j.job_demand_number as jobDemandNumber,j.job_requires_gender as jobRequiresGender,j.job_salary_type as jobSalaryType, j.job_salary as jobSalary,j.job_address as jobAddress ,-->
+    <!--j.job_contact_phone as jobContactPhone,j.job_remarks as jobRemarks,-->
     <select id="getMyAppliSituation" resultType="com.xy.ssm.model.VOCApplication">
          select a.id,a.appli_user_id as appliUserId,a.appli_job_id as appliJobId,a.create_time as createTime,
         j.job_teacher_id as jobTeacherId,j.job_title as jobTitle,j.job_type as jobType,
-        j.job_demand_number as jobDemandNumber,j.job_requires_gender as jobRequiresGender,j.job_salary_type as jobSalaryType,j.job_hours as jobHours ,
-        j.job_salary as jobSalary,j.job_address as jobAddress , j.job_introduction as jobIntroduction,j.job_contact_phone as jobContactPhone,j.job_status as jobStatus,j.job_remarks as jobRemarks,
+        j.job_hours as jobHours ,
+        j.job_introduction as jobIntroduction,j.job_status as jobStatus,
         j.job_deadline as jobDeadline,c.tea_name as jobTeacherName,s.static_value as appliStatus
         from c_jobs as j
         INNER JOIN c_application as a on j.id = a.appli_job_id

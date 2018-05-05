@@ -234,10 +234,10 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 资源类型 </label>
 										<div class="col-sm-2">
 											<select class="form-control" id="form-field-select-1">
-												<option value="">发传单</option>
-																<option value="AL">销售</option>
-																<option value="AK">礼仪</option>
-																<option value="AZ">翻译</option>
+												<option value="">JavaWeb</option>
+																<option value="AL">Web前端</option>
+																<option value="AK">php</option>
+																<option value="AZ">大数据</option>
 																<option value="AR">其他</option>
 															</select>
 														</div>
@@ -253,13 +253,13 @@
 											<input type="password" id="form-field-2" placeholder="资源人数" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-									<div class="form-group">
+									<%--<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 工作地址 </label>
 
 										<div class="col-sm-9">
 											<input type="text" id="form-field-1" placeholder="工作地址" class="col-xs-10 col-sm-5" />
 										</div>
-									</div>
+									</div>--%>
 
 									<div class="space-4"></div>
 
@@ -270,7 +270,7 @@
 											<input type="password" id="form-field-2" placeholder="资源描述" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-									<div class="form-group">
+									<%--<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 薪资类型 </label>
 										<div class="col-sm-2">
 											<select class="form-control" id="form-field-select-1">
@@ -280,14 +280,14 @@
 													<option value="AZ">其他</option>
 											</select>
 										</div>
-									</div>
-									<div class="form-group">
+									</div>--%>
+									<%--<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 薪资金额</label>
 
 										<div class="col-sm-9">
 											<input type="text" id="form-field-1" placeholder="薪资金额" class="col-xs-10 col-sm-5" />
 										</div>
-									</div>
+									</div>--%>
 
 									<div class="space-4"></div>
 

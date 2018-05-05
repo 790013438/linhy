@@ -1,12 +1,25 @@
 $(function(){
+    /*文件上传提示信息*/
+    var url=location.search;
+    if(url.indexOf("?")!=-1){
+        var str=url.substr(1);
+        if (str=="success"){
+            alert("文件上传成功！")
+        }
+        if(str=="false"){
+            alert("文件上传失败！")
+        }
+    }
+
     $("#btn_saveJob").click(function () {
         var data = getParams();
-        if(!checkNumber(data.jobDemandNumber)){
-        }
+        document.getElementById("btn_saveFile").removeAttribute("disabled");
+/*        if(!checkNumber(data.jobDemandNumber)){
+        }*/
         if(!checkHours(data.jobHours)){
         }
-        if(!checkSalary(data.jobSalary)){
-        }
+/*        if(!checkSalary(data.jobSalary)){
+        }*/
         if(!checkJobInformation(data)){
             alert("输入了空字符串或者信息不完善");
         }
@@ -25,7 +38,7 @@ var addJob = function (data) {
         },
         dataType : 'json',
         error: function (obj, msg) {
-            var txt = "保存资源失败";
+            var txt = "保存资源信息失败";
             alert(txt);
             return;
         },
@@ -34,7 +47,7 @@ var addJob = function (data) {
         success: function (result) {
             if (result.success == true) {
                 if (result.data > 0) {
-                    alert("保存资源成功，可以提交审核");
+                    alert("保存资源信息成功，可以提交审核");
                     window.location.href='index';
                 }
                 else {
@@ -56,7 +69,6 @@ function checkNumber(obj) {
         return true;
     } else {
         alert("输入人数不合理");
-        document.getElementById("input_jobNumber").value="";
         return false;
     }
 }
@@ -69,7 +81,7 @@ function checkHours(obj)
     } else
     {
         alert ("输入时长不合理");
-        document.getElementById("job_hours").value="";
+        document.getElementById("job_hours").value=null;
         return false;
     }
 }
@@ -83,7 +95,6 @@ function checkSalary(obj)
     } else
     {
         alert ("输入薪资不合理");
-        document.getElementById("salary_salary").value="";
         return false;
     }
 }
@@ -96,16 +107,12 @@ var checkJobInformation = function(data)
 
     for ( var p in data )
     {
-/*        if (checknull(data[p])==false){
+        if (checknull(data[p])==false){
             return false;
-        }*/
-          if (data[p]==""||data[p]==null){
-              return false;
-          }
+        }
     }
     return true;
 }
-
 /**
  * 获取修改后的用户信息
  * @returns {{}}
@@ -113,30 +120,31 @@ var checkJobInformation = function(data)
 var getParams = function(){
     var jobTitle= $.trim($("#input_jobName").val());
     var jobType = $.trim($("#input_jobType").val());
-    var jobDemandNumber = $.trim($("#input_jobNumber").val());
-    var jobAddress = $.trim($("#input_jobAddress").val());
-    var jobRequiresGender = $("#requires_gender").val();
-    var jobIntroduction = $("#input_introduction").val();
-    var jobRemarks = $("#job_remarks").val();
-    var jobSalaryType = $("#salary_type").val();
-    var jobSalary = $("#salary_salary").val();
+/*    var jobDemandNumber = $.trim($("#input_jobNumber").val());*/
+    /*var jobAddress = $.trim($("#input_jobAddress").val());*/
+   /* var jobRequiresGender = $("#requires_gender").val();*/
+  var jobIntroduction = $("#input_introduction").val();
+/*    var jobRemarks = $("#job_remarks").val();*/
+/*/!*    var jobSalaryType = $("#salary_type").val();*!/
+    var jobSalary = $("#salary_salary").val();*/
     var jobHours = $("#job_hours").val();
-   /* var jobTime= $("#input_jobTime").val();*/
+/*    var jobTime= $("#input_jobTime").val();*/
     var jobDeadline = $("#input_deadline").val();
     var json = {};
     json.jobTitle = jobTitle;
     json.jobType = jobType;
-    json.jobSalary = jobSalary;
+/*    json.jobSalary = jobSalary;
     json.jobDemandNumber = jobDemandNumber;
     json.jobRequiresGender = jobRequiresGender;
-    json.jobAddress = jobAddress;
+    json.jobAddress = jobAddress;*/
     json.jobIntroduction = jobIntroduction;
-    json.jobRemarks = jobRemarks;
-    json.jobSalaryType = jobSalaryType;
+/*    json.jobRemarks = jobRemarks;
+    json.jobSalaryType = jobSalaryType;*/
     json.jobHours = jobHours;
- /*   json.time = jobTime;*/
+/*    json.time = jobTime;*/
     json.deadline = jobDeadline;
     return json;
+
 }
 
 

@@ -148,8 +148,8 @@ var appendJobNode = function(obj) {
             "<td> "+"已结束"+"</td>"+
             "<td> "+obj.jobTeacherName+"</td>"+
             "<td> "+jobTime1+"</td>"+
-            "<td> "+obj.jobSalaryType+"</td>"+
-            "<td> "+obj.jobSalary+"</td>"+
+          /*  "<td> "+obj.jobSalaryType+"</td>"+*/
+          /*  "<td> "+obj.jobSalary+"</td>"+*/
             "<td>"+
             "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看资源详情</a> |"+
             "<button type=\"button\" class='btn btn-link' onclick=\"delAppli('"+obj.id+"')\" >删除</button>";

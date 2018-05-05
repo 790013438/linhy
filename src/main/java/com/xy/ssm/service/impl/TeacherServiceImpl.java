@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wuchen on 2017/1/12.
@@ -133,6 +135,18 @@ public class TeacherServiceImpl implements TeacherService {
     public int addTeacher (CTeacher cTeacher)
     {
         return teacherDao.addTeacher(cTeacher);
+    }
+
+
+    /*添加文件*/
+    @Override
+    public void addFile(Map map) {
+    teacherDao.addFile(map);
+    }
+    /*通过创建时间，得到资源的id*/
+    @Override
+    public String getJobId(String jobCreateTime) {
+        return teacherDao.getJobId(jobCreateTime);
     }
 
     public List<CJobs> getJobsByTeacherId(String queryTerm, Long teacherId, Integer offset, Integer limit,String jobStatus) {
