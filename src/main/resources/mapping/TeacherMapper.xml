@@ -171,13 +171,37 @@
         tea_email=#{teaEmail},tea_info=#{teaInfo},tea_address=#{teaAddress}
         WHERE id=#{id}
     </update><!--comm_website=#{commWebsite}, myself-->
-    <!--添加文件-->
+    <!--添加资源文件-->
     <insert id="addFile" parameterType="java.util.Map">
-        insert into c_job_files (file_route,file_realname,file_type,file_size,file_job_id)
-        VALUES (#{file_route},#{file_realname},#{file_type},#{file_size},#{file_job_id})
+        insert into c_job_files (file_route,file_realname,file_type,file_size,file_job_id,file_name)
+        VALUES (#{file_route},#{file_realname},#{file_type},#{file_size},#{file_job_id},#{file_name})
+    </insert>
+    <!--添加作业文件-->
+    <insert id="addHomFile" parameterType="java.util.Map">
+        insert into c_hom_files (file_route,file_realname,file_type,file_size,file_hom_id,file_name)
+        VALUES (#{file_route},#{file_realname},#{file_type},#{file_size},#{file_hom_id},#{file_name})
     </insert>
     <!--通过创建时间，得到资源id-->
     <select id="getJobId" parameterType="java.lang.String"  resultType="java.lang.String">
         select id from c_jobs where create_time like #{jobCreateTime}
+    </select>
+    <!--通过创建时间，得到id作业-->
+    <select id="getHomId" parameterType="java.lang.String"  resultType="java.lang.String">
+        select id from c_homework where create_time like #{jobCreateTime}
+    </select>
+    <!--添加作业信息-->
+    <insert id="addHom" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CHomework">
+        insert into c_homework(hom_teacher_id,hom_title,hom_type,hom_introduction,
+        hom_deadline,hom_status,create_time,user_sign)
+        values(#{teacherId},#{homTitle},#{homType},#{homIntroduction},
+        #{homDeadline},0,#{createTime},1)
+    </insert>
+    <!--根据资源id，得到资源文件信息-->
+    <select id="getJobFiles" parameterType="java.lang.String"  resultType="com.xy.ssm.model.CJobFile">
+        select file_id,file_realname,file_name,file_size,file_type,file_route,file_job_id from c_job_files where file_job_id like #{file_job_id}
+    </select>
+    <!--getJobFileDetails,根据uuid名字得到资源文件信息-->
+    <select id="getJobFileDetails" parameterType="java.lang.String"  resultType="com.xy.ssm.model.CJobFile">
+        select file_id,file_realname,file_name,file_size,file_type,file_route,file_job_id from c_job_files where file_name like #{filename}
     </select>
 </mapper>

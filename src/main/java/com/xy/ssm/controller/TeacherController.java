@@ -15,19 +15,24 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.HttpHeaders;
+import javax.xml.ws.spi.http.HttpHandler;
 import java.io.*;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wuchen on 2017/1/12.
@@ -81,8 +86,6 @@ public class TeacherController extends BaseController {
             cJobs.setCreateTime(new Date());
             setJobCreateTime(cJobs.getCreateTime());//得到创建时间
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            //cJobs.setJobTime (sdf.parse (cJobs.getTime()));
-           // cJobs.setJobTime (Double.parseDouble(cJobs.getTime()));//myself
             cJobs.setJobDeadline (sdf.parse(cJobs.getDeadline()));
             Long teacherId = cTeacher.getId();
             cJobs.setJobTeacherId(teacherId);
@@ -99,9 +102,39 @@ public class TeacherController extends BaseController {
         result= JSON.toJSONString(baseResult);
         return result;
     }
-
     /**
-     * 发布资源信息
+     * 发布作业信息
+     * @return
+     */
+    @RequestMapping(value = "/addHoms", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String addHoms(@RequestParam(required = true) String  json, HttpServletRequest request) {
+        String result = "";
+        BaseResult baseResult = null;
+        CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
+        try{
+            CHomework cHomework=(CHomework) JSON.parseObject (json,CHomework.class);
+            cHomework.setCreateTime(new Date());
+            setJobCreateTime(cHomework.getCreateTime());//得到创建时间
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            cHomework.setHomDeadline(sdf.parse(cHomework.getDeadline()));
+            Long teacherId = cTeacher.getId();
+            cHomework.setTeacherId(teacherId);
+            Long id = teacherService.addHom(cHomework);
+            if(id != null){
+                baseResult=new BaseResult(true,"保存作业信息成功");
+            }else{
+                baseResult=new BaseResult(false,"保存作业信息失败");
+            }
+        }catch (Exception e){
+            log.error("保存作业信息异常,请先登录"+e);
+            baseResult=new BaseResult(false,"保存作业信息异常，请先登录");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+    /**
+     * 发布资源文件
      * @return
      */
     @RequestMapping(value = "/addJobFiles", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
@@ -118,14 +151,17 @@ public class TeacherController extends BaseController {
         if (files!=null && files.length!=0){
             for (MultipartFile file:files){
                 String filename=file.getOriginalFilename();
-                map.put("file_route",savePath+filename);
+                UUID uuid=UUID.randomUUID();
+                String type=filename.substring(filename.lastIndexOf("."));
+                map.put("file_name",uuid.toString()+type);
+                map.put("file_route",savePath);
                 map.put("file_realname",filename);
                 map.put("file_size",((Long)(file.getSize()/1024)).toString());
-                map.put("file_type",filename.substring(filename.lastIndexOf(".")));
+                map.put("file_type",type);
                 teacherService.addFile(map);
                 result="success";
                 try {
-                    file.transferTo(new File(savePath+filename));
+                    file.transferTo(new File(savePath+uuid+type));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -133,17 +169,82 @@ public class TeacherController extends BaseController {
         }else{
             result="false";
         }
-        /*设置页面提示信息*/
-       /* response.setContentType("text/html;charset=utf8");
-        try {
-            PrintWriter out=response.getWriter();
-            out.print("<script language=\"javascript\">alert('"+result+"');window.location.href='/teacher/addJob'</script>");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         return "redirect:/teacher/addJob?"+result;
     }
+    /**
+     * 发布作业文件
+     * @return
+     */
+    @RequestMapping(value = "/addHomFiles", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    /*@ResponseBody*/
+    public String addHomFiles(@RequestParam("hom_file")MultipartFile[] files,HttpServletResponse response){
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String result="";
+        /*文件上传*/
+        /*上传文件保存目录*/
+        Map<String,String> map=new HashMap();
+        String savePath="E:\\spring-mvc-mybatis-IDEA\\uploadHom\\";
+        String id=teacherService.getHomId(format.format(jobCreateTime));
+        map.put("file_hom_id",id);
+        if (files!=null && files.length!=0){
+            for (MultipartFile file:files){
+                UUID uuid=UUID.randomUUID();
+                String filename=file.getOriginalFilename();
+                String type=filename.substring(filename.lastIndexOf("."));
+                map.put("file_route",savePath);
+                map.put("file_realname",filename);
+                map.put("file_name",uuid.toString()+type);
+                map.put("file_size",((Long)(file.getSize()/1024)).toString());
+                map.put("file_type",type);
+                teacherService.addHomFile(map);
+                try {
+                    file.transferTo(new File(savePath+uuid+type));
+                    result="success";
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    result="false";
+                }
+            }
+        }else{
+            result="false";
+        }
+        return "redirect:/teacher/addHom?"+result;
+    }
+    /*downloadJobFiles 资源文件下载*/
+    @RequestMapping(value="/downloadJobFiles",  produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public void downloadJobFiles(@RequestParam("name") String filename){
 
+        CJobFile jobFile=teacherService.getJobFileDetails(filename);
+        String path=jobFile.getFile_route();
+        File file=new File(path, jobFile.getFile_name());
+        if (!file.exists()){
+            try {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if (mimeType==null){
+            mimeType="application/octet-stream";
+        }
+        response.setContentType(mimeType);
+        try {
+            response.setHeader("Content-disposition",String.format("attachment;filename=\"%s\"", URLEncoder.encode(file.getName(),"UTF-8")));
+            response.setContentLength((int)file.length());
+            InputStream inputStream=new BufferedInputStream(new FileInputStream(file));
+            FileCopyUtils.copy(inputStream,response.getOutputStream());
+            inputStream.close();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 分页获取当前教师发布的资源信息列表
      * @param
@@ -338,21 +439,21 @@ public class TeacherController extends BaseController {
         result= JSON.toJSONString(baseResult);
         return result;
     }
-    /**
-     * 查看资源详情
-     * @param
-     * @return
-     */
     @RequestMapping(value = "/getJobDetails", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getJobDetails(@RequestParam(required = true) Long jobId) {
+    public String getJobDetails(@RequestParam(required = true) Long jobId, HttpServletRequest request) {
         String result = "";
         BaseResult baseResult = null;
+        List list=new ArrayList();
         try{
             CJobs job = teacherService.getJobDetails(jobId);
             if(job != null) {
                 baseResult = new BaseResult(true, "");
-                baseResult.setData(job);
+                list.add(job);
+                String file_job_id=job.getId().toString();
+                List<CJobFile> jobFile=teacherService.getJobFiles(file_job_id);
+                list.add(jobFile);
+                baseResult.setData(list);
             } else {
                 baseResult = new BaseResult(true, "该资源不存在");
             }
@@ -364,7 +465,6 @@ public class TeacherController extends BaseController {
         }
         return result;
     }
-
     /**
      * 移除资源（该资源对教师用户不可见）
      * @param
@@ -390,7 +490,6 @@ public class TeacherController extends BaseController {
         }
         return result;
     }
-
     /**
      *删除资源记录
      * @param applicationId

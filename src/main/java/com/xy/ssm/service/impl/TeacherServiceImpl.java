@@ -2,10 +2,7 @@ package com.xy.ssm.service.impl;
 
 
 import com.xy.ssm.dao.TeacherDao;
-import com.xy.ssm.model.CApplication;
-import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CTeacher;
-import com.xy.ssm.model.CJobs;
+import com.xy.ssm.model.*;
 import com.xy.ssm.service.TeacherService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -147,6 +144,36 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public String getJobId(String jobCreateTime) {
         return teacherDao.getJobId(jobCreateTime);
+    }
+/*添加作业记录信息*/
+    @Override
+    public Long addHom(CHomework cHomework) {
+        return teacherDao.addHom(cHomework);
+    }
+/*通过创建时间，得到作业的id*/
+    @Override
+    public String getHomId(String jobCreateTime) {
+        return teacherDao.getHomId(jobCreateTime);
+    }
+/*添加作业文件*/
+    @Override
+    public void addHomFile(Map map) {
+       teacherDao.addHomFile(map);
+    }
+/*根据资源id，得到资源文件信息*/
+    @Override
+    public List<CJobFile> getJobFiles(String file_job_id) {
+        return teacherDao.getJobFiles(file_job_id);
+    }
+
+    /**
+     * 根据uuid名字得到资源文件信息
+     * @param filename
+     * @return
+     */
+    @Override
+    public CJobFile getJobFileDetails(String filename) {
+        return teacherDao.getJobFileDetails(filename);
     }
 
     public List<CJobs> getJobsByTeacherId(String queryTerm, Long teacherId, Integer offset, Integer limit,String jobStatus) {

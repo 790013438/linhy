@@ -26,6 +26,7 @@
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
 							<button class="btn btn-sm btn-primary" onclick="window.location='../teacher/addJob'">发布资源</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../teacher/addHom'">发布作业</button>
 						</div>
 					</div>
 

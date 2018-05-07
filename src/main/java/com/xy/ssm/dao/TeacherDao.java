@@ -1,9 +1,6 @@
 package com.xy.ssm.dao;
 
-import com.xy.ssm.model.CApplication;
-import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CTeacher;
-import com.xy.ssm.model.CJobs;
+import com.xy.ssm.model.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -46,4 +43,13 @@ public interface TeacherDao {
     /*添加文件*/
     void addFile(Map map);
     String getJobId(String jobCreateTime);
+    /*添加作业信息*/
+    Long addHom(CHomework cHomework);
+    /**/
+    String getHomId(String jobCreateTime);
+    void addHomFile(Map map);
+    /*根据资源id，得到资源文件信息*/
+    List<CJobFile> getJobFiles(String file_job_id);
+    /*根据uuid名字得到资源文件信息*/
+    CJobFile getJobFileDetails(String filename);
 }

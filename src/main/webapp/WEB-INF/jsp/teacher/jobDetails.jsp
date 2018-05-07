@@ -58,14 +58,38 @@
 															</label>
 														</div>
 													</div>
-
+                                                    <%--资源记录详细信息--%>
 													<div class="widget-body">
 														<div class="widget-main">
 															<ul id="ul_jobDetail">
-
 															</ul>
 														</div>
 													</div>
+                                                    <%--资源文件详细信息--%>
+                                                    <div class="widget-body">
+                                                        <div class="widget-main">
+                                                            <span>资源文件</span>
+                                                            <table id="ta_jobFile" class="table table-striped table-bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    <span><th>序号</th></span>
+                                                                    <span><th>文件名</th></span>
+                                                                    <span><th>文件类型</th></span>
+                                                                    <span><th>文件大小（KB，取整)</th></span>
+                                                                    <span><th>操作</th></span>
+                                                                </tr>
+                                                                </thead>
+                    <%--                                            <c:forEach items="${list}" var="map">
+                                                                    <tr>
+                                                                        <td>${map.file_id}</td>
+                                                                        <td>${map.file_realname}</td>
+                                                                        <td>${map.file_size}</td>
+                                                                        <td><a href="/teacher/downloadJobFiles?name="+${map.file_id}>下载</a></td>
+                                                                    </tr>
+                                                                </c:forEach>--%>
+                                                            </table>
+                                                        </div>
+                                                    </div>
 												</div>
 											</div>
 										</div>
