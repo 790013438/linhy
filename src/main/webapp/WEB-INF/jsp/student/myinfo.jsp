@@ -19,7 +19,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/student/index">首页</a>
 							</li>
 
 							<li>

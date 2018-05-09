@@ -38,7 +38,6 @@ public class CUser implements Serializable {
     public String getValidateCode() {
         return validateCode;
     }
-
     public void setValidateCode(String validateCode) {
         this.validateCode = validateCode;
     }
@@ -49,7 +48,7 @@ public class CUser implements Serializable {
     private Date birthdate;
     //创建时间
     private Date createTime;
-
+/*激活码*/
     private String validateCode;
 
     public static long getSerialVersionUID ()
@@ -237,7 +236,7 @@ public class CUser implements Serializable {
                 ", userPassword='" + userPassword + '\'' +
                 ", birthdate=" + birthdate +
                 ", createTime=" + createTime +
-                ", validateCode='" + validateCode + '\'' +
+             /*   ", validateCode='" + validateCode + '\'' +*/
                 '}';
     }
 }

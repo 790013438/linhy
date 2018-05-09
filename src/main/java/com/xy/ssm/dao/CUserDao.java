@@ -1,6 +1,7 @@
 package com.xy.ssm.dao;
 
 import com.xy.ssm.model.CApplication;
+import com.xy.ssm.model.CHomework;
 import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CUser;
 import org.apache.ibatis.annotations.Param;
@@ -56,11 +57,16 @@ public interface CUserDao {
     CUser getUserById(@Param("id")Long id);
 
     int addJobApplication(CApplication cApplication);
+    int addHomApplication(CApplication cApplication);
 
     List<CJobs> getJobList (@Param("condition")String condition,@Param("offset")Integer offset,@Param("limit")Integer limit);
+    /*获取可报名作业列表*/
+    List<CHomework> getHomList(@Param("condition")String condition, @Param("offset")Integer offset, @Param("limit")Integer limit);
     int getJobCount(@Param("condition")String condition,@Param("offset")Integer offset,@Param("limit")Integer limit);
+    int getHomCount(@Param("condition")String condition,@Param("offset")Integer offset,@Param("limit")Integer limit);
     int updateUser(CUser cUser);
     CApplication getAppliByTwoId(@Param("jobId")Long jobId,@Param("userId") Long userId);
+    CApplication getHomAppliByTwoId(@Param("jobId")Long jobId,@Param("userId") Long userId);
 
 
 }

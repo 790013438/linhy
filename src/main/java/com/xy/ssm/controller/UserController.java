@@ -477,7 +477,116 @@ public class UserController extends BaseController{
         }
         return result;
     }
+    /**
+     * 获取可报名作业列表
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getHomList", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getHomList(@RequestParam(required = false) String  condition,
+                             @RequestParam(required = false) Integer  offset,
+                             @RequestParam(required = false) Integer  limit) {
+        String result = "";
+        BaseResult baseResult = null;
+        CUser cUser =(CUser) getLoginUser ().get ("loginuser");
+        try{
+            List<CHomework> homList = cUserService.getHomList(condition,offset,limit);
+            int count = cUserService.getHomount(condition,offset,limit);
+            if(homList != null && 0 < homList.size ()) {
+                for(int i=0;i<homList.size();i++){
+                    if(cUserService.getHomAppliByTwoId(homList.get(i).getId (),cUser.getId ()) != null){
+                        homList.get(i).setFlag(1);
+                    }else{
+                        homList.get(i).setFlag(0);
+                    }
+                }
+                BootStrapTableResult tableResult = new BootStrapTableResult<CHomework>(homList, count);
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(tableResult);
+            } else {
+                baseResult = new BaseResult(true, "暂无作业信息可提交");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取可提交作业列表异常！", e);
+            baseResult = new BaseResult(false, "获取可提交作业列表异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
 
+    /**
+     * 查询本人上传作业文件详情
+     * @return
+     */
+    @RequestMapping(value = "/getMyHomFile", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getMyHomFile() {
+        String result = "";
+        BaseResult baseResult = null;
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
+        Long userId = cUser.getId();
+        try{
+            List<CHomFile> list = userService.getMyHomFile(userId);
+            if(list != null && 0<list.size()) {
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(list);
+            } else {
+                baseResult = new BaseResult(false, "暂无本人作业文件");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取本人作业文件情况异常！", e);
+            baseResult = new BaseResult(false, "获取本人作业文件情况异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
+
+    /**
+     *申请报名作业
+     * @param jobId
+     * @return
+     */
+    @RequestMapping(value = "/applicationHom", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String applicationHom(@RequestParam(required = true) Long  jobId) {
+        String result = "";
+        BaseResult baseResult = null;
+        CApplication cApplication = new CApplication();
+        CUser cUser =(CUser)getLoginUser ().get ("loginuser");
+        try{
+            CHomework job=teacherService.getHomDetails(jobId);
+            if(job == null){
+                baseResult=new BaseResult(false,"该资源不存在");
+                result= JSON.toJSONString(baseResult);
+            }else {
+                cApplication.setAppliJobId(jobId);
+                cApplication.setAppliStatus("appli_apply");
+                cApplication.setAppliUserId(cUser.getId());
+                cApplication.setCreateTime(new Date());
+                //向数据库中添加申请报名记录
+                int resultCode = cUserService.addHomApplication(cApplication);
+                if (resultCode > 0) {
+                    //查询该资源的报名人数
+                   /* int count = teacherService.getJobApplicationCount(jobId);*/
+                    baseResult=new BaseResult(true,"");
+                }else{
+                    baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
+                }
+                }
+                result = JSON.toJSONString(baseResult);
+          /*  }*/
+        }catch (Exception e){
+            log.error("申请报名资源异常"+e);
+            baseResult=new BaseResult(false,"申请报名资源异常");
+            result= JSON.toJSONString(baseResult);
+        }
+        log.info (result);
+        return result;
+    }
 
     /**
      *申请报名资源
@@ -487,7 +596,6 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/applicationJob", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String applicationJob(@RequestParam(required = true) Long  jobId) {
-        log.info("--------------------/user/applicationJob  called");
         String result = "";
         BaseResult baseResult = null;
         CApplication cApplication = new CApplication();
@@ -501,11 +609,14 @@ public class UserController extends BaseController{
                 cApplication.setAppliJobId(jobId);
                 cApplication.setAppliStatus("appli_apply");
                 cApplication.setAppliUserId(cUser.getId());
+                cApplication.setCreateTime(new Date());
                 //向数据库中添加申请报名记录
                 int resultCode = cUserService.addJobApplication(cApplication);
                 if (resultCode > 0) {
                     //查询该资源的报名人数
-                    int count = teacherService.getJobApplicationCount(jobId);
+                   /* int count = teacherService.getJobApplicationCount(jobId);*/
+                    baseResult=new BaseResult(true,"");
+                    /*baseResult.setData(count);*/
                     //设置报名人数上限为需求人数的两倍，供教师筛选
 /*                   if(count == 2*job.getJobDemandNumber ()){
                         int resultCode1 = teacherService.updateJobStatus (jobId,"4");
@@ -520,9 +631,9 @@ public class UserController extends BaseController{
                 }else{
                     baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
                 }
-                }
-                result = JSON.toJSONString(baseResult);
-          /*  }*/
+            }
+            result = JSON.toJSONString(baseResult);
+            /*  }*/
         }catch (Exception e){
             log.error("申请报名资源异常"+e);
             baseResult=new BaseResult(false,"申请报名资源异常");

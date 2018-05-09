@@ -53,4 +53,18 @@ String getJobId(String jobCreateTime);
     List<CJobFile> getJobFiles(String file_job_id);
     /*根据uuid名字得到资源文件信息*/
     CJobFile getJobFileDetails(String filename);
+    /*得到作业信息*/
+    List<CHomework> getHomsByTeacherId(Long teacherId);
+    /*得到作业记录总数*/
+    int getHomsCountByTeacherId(Long teacherId);
+    /*删除id的作业*/
+    int deleteHomById(Long jobId);
+    /*作业状态为待审核*/
+    int updateHomStatus(Long jobId);
+    /*通过id得到作业详细信息*/
+    CHomework getHomDetails(Long jobId);
+    /*通过id得到对应作业文件*/
+    List<CHomFile> gethomFiles(Long file_hom_id);
+    /*通过作业文件名得到作业文件地址*/
+    CHomFile getHomFileDetails(String filename);
 }

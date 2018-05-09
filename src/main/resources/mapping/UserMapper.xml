@@ -72,5 +72,13 @@
     <update id="updateUserPassword">
         update c_users set user_password =#{newPw} where id = #{userId}
     </update>
-
+    <!--添加作业文件-->
+    <insert id="addHomFile" parameterType="java.util.Map">
+        insert into c_hom_files (file_route,file_realname,file_type,file_size,file_hom_id,file_name,file_user_id)
+        VALUES (#{file_route},#{file_realname},#{file_type},#{file_size},#{file_hom_id},#{file_name},#{file_user_id})
+    </insert>
+    <!--getMyHomFile-->
+    <select id="getMyHomFile" parameterType="java.lang.Long"  resultType="com.xy.ssm.model.CHomFile">
+        select file_id,file_realname,file_name,file_hom_id,file_user_id,file_size,file_route,file_type from c_hom_files where file_user_id like #{userId}
+    </select>
 </mapper>

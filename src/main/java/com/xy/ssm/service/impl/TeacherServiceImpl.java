@@ -175,6 +175,66 @@ public class TeacherServiceImpl implements TeacherService {
     public CJobFile getJobFileDetails(String filename) {
         return teacherDao.getJobFileDetails(filename);
     }
+   /*得到作业信息*/
+    @Override
+    public List<CHomework> getHomsByTeacherId(Long teacherId) {
+        return teacherDao.getHomsByTeacherId(teacherId);
+    }
+
+    /**
+     * 得到作业记录总数
+     * @param teacherId
+     * @return
+     */
+    @Override
+    public int getHomsCountByTeacherId(Long teacherId) {
+        return teacherDao.getHomsCountByTeacherId(teacherId);
+    }
+/*删除id的作业*/
+    @Override
+    public int deleteHomById(Long jobId) {
+        return teacherDao.deleteHomById(jobId);
+    }
+
+    /**
+     * 作业状态为待审核
+     * @param jobId
+     * @return
+     */
+    @Override
+    public int updateHomStatus(Long jobId) {
+        return teacherDao.updateHomStatus(jobId);
+    }
+
+    /**
+     * 通过id得到作业详情
+     * @param jobId
+     * @return
+     */
+    @Override
+    public CHomework getHomDetails(Long jobId) {
+        return teacherDao.getHomDetails(jobId);
+    }
+
+    /**
+     * 通过id得到对应作业文件
+     * @param file_hom_id
+     * @return
+     */
+    @Override
+    public List<CHomFile> gethomFiles(Long file_hom_id) {
+        return teacherDao.gethomFiles(file_hom_id);
+    }
+
+    /**
+     * 通过作业文件名得到作业文件地址
+     * @param filename
+     * @return
+     */
+    @Override
+    public CHomFile getHomFileDetails(String filename) {
+        return teacherDao.getHomFileDetails(filename);
+    }
 
     public List<CJobs> getJobsByTeacherId(String queryTerm, Long teacherId, Integer offset, Integer limit,String jobStatus) {
         return teacherDao.selectJobsByTeacherId(queryTerm,teacherId, offset, limit,jobStatus);

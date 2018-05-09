@@ -1,16 +1,14 @@
 package com.xy.ssm.service.impl;
 
 import com.xy.ssm.dao.UserDao;
-import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CUser;
-import com.xy.ssm.model.User;
-import com.xy.ssm.model.VOCApplication;
+import com.xy.ssm.model.*;
 import com.xy.ssm.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wuchen on 2017/1/12.
@@ -72,5 +70,15 @@ public class UserServiceImpl implements UserService {
     public List<CUser> getAllUsers ()
     {
         return userDao.getAllUsers();
+    }
+
+    @Override
+    public void addHomFile(Map map) {
+        userDao.addHomFile(map);
+    }
+/*查询本人上传作业文件详情*/
+    @Override
+    public List<CHomFile> getMyHomFile(Long userId) {
+        return userDao.getMyHomFile(userId);
     }
 }

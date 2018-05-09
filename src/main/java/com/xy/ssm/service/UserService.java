@@ -1,11 +1,9 @@
 package com.xy.ssm.service;
 
-import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CUser;
-import com.xy.ssm.model.User;
-import com.xy.ssm.model.VOCApplication;
+import com.xy.ssm.model.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wuchen on 2017/1/12.
@@ -22,4 +20,7 @@ public interface UserService {
     int updateUserPassword(String newPw,Long userId);
     int delApplication(Long applicationId,Long userId);
     List<CUser> getAllUsers();
+    void addHomFile(Map map);
+    /*查询本人上传作业文件详情*/
+    List<CHomFile> getMyHomFile(Long userId);
 }

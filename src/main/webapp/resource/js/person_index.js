@@ -132,14 +132,16 @@ $(".table tr td input").each(function(){
 
 
 var appendJobNode = function(obj) {
+    var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
 	var job_str = "<tr>"+
+        "<td>"+obj.id+"</td>"+
 		"<td>"+obj.jobTitle+"</td>"+
 		"<td> "+obj.jobType+"</td>"+
 		"<td> "+obj.jobTeacherName+"</td>"+
 		"<td> "+obj.appliCount+"</td>"+
-		"<td> "+obj.jobDeadline+"</td>"+
+		"<td> "+jobDeadline1+"</td>"+
       /*  "<td> "+obj.jobSalaryType+"</td>"+*/
-        "<td> "+obj.jobSalary+"</td>"+
+      /*  "<td> "+obj.jobSalary+"</td>"+*/
 		"<td>"+
 		"<a  href =\"../student/jobInfo?jobId="+obj.id+"\" >查看资源详情</a> |";
 	    if(obj.flag== 0){

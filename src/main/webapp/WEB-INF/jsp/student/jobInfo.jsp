@@ -19,7 +19,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="person_index.jsp">首页</a>
+								<a href="/student/index">首页</a>
 							</li>
 
 							<li class="active">资源详情</li>
@@ -33,10 +33,10 @@
 						<div class="page-header">
 							<h1>
 								资源信息
-								<small>
+								<%--<small>
 									<i class="icon-double-angle-right"></i>
 									请勿相信轻松高薪等资源，如发现不合理信息请及时举报。
-								</small>
+								</small>--%>
 							</h1>
 						</div><!-- /.page-header -->
 
@@ -65,6 +65,22 @@
 
 															</ul>
 														</div>
+													</div>
+												</div>
+												<div class="widget-body">
+													<div class="widget-main">
+														<span>资源文件</span>
+														<table id="ta_jobFile" class="table table-striped table-bordered">
+															<thead>
+															<tr>
+																<span><th>序号</th></span>
+																<span><th>文件名</th></span>
+																<span><th>文件类型</th></span>
+																<span><th>文件大小（KB，取整)</th></span>
+																<span><th>操作</th></span>
+															</tr>
+															</thead>
+														</table>
 													</div>
 												</div>
 											</div>

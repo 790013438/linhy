@@ -50,6 +50,17 @@
             AND  (job_status = 3 or job_status = 4 or job_status = 5)
         </if>
     </select>
+    <!--getHomsByTeacherId-->
+    <select id="getHomsByTeacherId" resultType="com.xy.ssm.model.CHomework">
+        select id,hom_teacher_id as teacherId,hom_title as homTitle,
+        hom_type as homType,hom_introduction as homIntroduction,
+        hom_status as homStatus,
+        create_time as createTime,hom_deadline as homDeadline
+        from c_homework
+        where hom_teacher_id=#{teacherId}
+        and user_sign=1
+    </select>
+
     <select id="selectJobsCountByTeacherId" resultType="int">
         SELECT count(*)
         FROM c_jobs
@@ -57,6 +68,13 @@
         <if test="queryTerm != null and queryTerm != ''">
             AND  (ber.resource_name like CONCAT('%',#{queryTerm},'%') or csr.business_value like CONCAT('%',#{queryTerm},'%' ))
         </if>
+    </select>
+    <!--getHomsCountByTeacherId得到作业记录总数-->
+    <select id="getHomsCountByTeacherId" resultType="int">
+        SELECT count(*)
+        FROM c_homework
+        WHERE hom_teacher_id = #{teacherId}
+        and user_sign=1
     </select>
 <!-- a.job_demand_number as jobDemandNumber, a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_salary as jobSalary,a.job_address as jobAddress ,-->
     <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
@@ -97,11 +115,10 @@
     <select id="getJobApplicationCount" resultType="int">
         SELECT count(*)
         FROM c_application
-        WHERE id = #{jobId} and appli_status="appli_apply"
+        WHERE id = #{jobId} and appli_status="appli_apply" AND appli_type=0
     </select>
-
+    <!--DELETE FROM c_jobs WHERE id = #{jobId}-->
     <update id="deleteJobById">
-        DELETE FROM c_jobs WHERE id = #{jobId}
         update c_jobs set user_sign=0 where id = #{jobId}
     </update>
 
@@ -203,5 +220,28 @@
     <!--getJobFileDetails,根据uuid名字得到资源文件信息-->
     <select id="getJobFileDetails" parameterType="java.lang.String"  resultType="com.xy.ssm.model.CJobFile">
         select file_id,file_realname,file_name,file_size,file_type,file_route,file_job_id from c_job_files where file_name like #{filename}
+    </select>
+    <!--deleteHomById,DELETE FROM c_jobs WHERE id = #{jobId}-->
+    <update id="deleteHomById">
+        update c_homework set user_sign=0 where id = #{jobId}
+    </update>
+    <!--updateHomStatus-->
+    <update id="updateHomStatus">
+        update c_homework set hom_status =1 where id = #{jobId}
+    </update>
+    <!--getHomDetails-->
+    <select id="getHomDetails" parameterType="java.lang.Long"  resultType="com.xy.ssm.model.CHomework">
+        select id,hom_teacher_id as teacherId,
+        hom_title as homTitle,hom_type as homType,
+        hom_introduction as homIntroduction,hom_status as homStatus,
+        create_time as createTime,hom_deadline as homDeadline from c_homework where id=#{jobId}
+    </select>
+    <!--gethomFiles-->
+    <select id="gethomFiles" parameterType="java.lang.Long"  resultType="com.xy.ssm.model.CHomFile">
+        select file_id,file_realname,file_name,file_hom_id,file_user_id,file_size,file_route,file_type from c_hom_files where file_hom_id=#{file_hom_id}
+    </select>
+    <!--getHomFileDetails通过filename得到作业文件路径-->
+    <select id="getHomFileDetails" parameterType="java.lang.String"  resultType="com.xy.ssm.model.CHomFile">
+        select file_id,file_realname,file_name,file_hom_id,file_user_id,file_size,file_route,file_type from c_hom_files where file_name like #{filename}
     </select>
 </mapper>

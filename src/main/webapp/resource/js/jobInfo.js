@@ -21,6 +21,8 @@ var getJobInfoByID = function(condition) {
 		data : condition,
 		dataType : 'json',
 		success:function(result){
+		    var list=result.data;
+            var strFiles=jobFileList(list[1]);
 			if (result.success == true) {
 				if (result.error != "") {
                     $("#ul_jobDetail").empty();
@@ -30,16 +32,15 @@ var getJobInfoByID = function(condition) {
 				if (result.data!=null){
                     $("#ul_jobDetail").empty();
                     //填充信息
-                    var detail_str = initJobDetailForm(result.data);
-                    console.log(result.data);
-                    if(result.data.flag == 0){
+                    var detail_str = initJobDetailForm(list[0]);/*result.data*/
+                    if(list[0].flag == 0){
                         document.getElementById("btn_appli").value="报名资源";
                     }else{
                         document.getElementById("btn_appli").value="已报名";
-                        console.log(result.data);
+                      /*  console.log(list[0]);*/
                         $("#btn_appli").attr("disabled", true);
                     }
-                    $("#jobId").val(result.data.id);
+                    $("#jobId").val(list[0].id);
                     $("#ul_jobDetail").append(detail_str);
 				} else{
                     $("#ul_jobDetail").empty();
@@ -171,6 +172,20 @@ var initJobDetailForm = function(obj) {
         tr = tr + "<li><span>资源描述信息：</span>无</li>";
     }
     return tr;
+}
+/*显示资源文件信息*/
+function jobFileList(file){
+    var jobfile=file;
+    if (jobfile!=null){
+        for(var i=0;i<jobfile.length;i++){
+            var x=document.getElementById("ta_jobFile").insertRow();
+            x.insertCell(0).innerHTML =jobfile[i].file_id;
+            x.insertCell(1).innerHTML=jobfile[i].file_realname;
+            x.insertCell(2).innerHTML=jobfile[i].file_type;
+            x.insertCell(3).innerHTML=jobfile[i].file_size;
+            x.insertCell(4).innerHTML="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
+        }
+    }
 }
 
 

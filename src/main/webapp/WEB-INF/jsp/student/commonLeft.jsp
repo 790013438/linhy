@@ -104,6 +104,12 @@
                         <span class="menu-text"> 资源中心 </span>
                     </a>
                 </li>
+                <li class="active" id="hom_center">
+                    <a href="../student/homIndex">
+                        <i class="icon-text-width"></i>
+                        <span class="menu-text"> 作业中心 </span>
+                    </a>
+                </li>
                 <li id="li_myjob">
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-list"></i>

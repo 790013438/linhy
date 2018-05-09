@@ -79,14 +79,6 @@
                                                                     <span><th>操作</th></span>
                                                                 </tr>
                                                                 </thead>
-                    <%--                                            <c:forEach items="${list}" var="map">
-                                                                    <tr>
-                                                                        <td>${map.file_id}</td>
-                                                                        <td>${map.file_realname}</td>
-                                                                        <td>${map.file_size}</td>
-                                                                        <td><a href="/teacher/downloadJobFiles?name="+${map.file_id}>下载</a></td>
-                                                                    </tr>
-                                                                </c:forEach>--%>
                                                             </table>
                                                         </div>
                                                     </div>

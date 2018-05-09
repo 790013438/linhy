@@ -18,7 +18,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="person_index.jsp">首页</a>
+								<a href="/student/index">首页</a>
 							</li>
 
 							<li class="active">资源中心</li>
@@ -26,6 +26,7 @@
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
 							<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">资源中心</button>
+							<button class="btn btn-sm btn-primary" onclick="window.location='../student/homIndex'">作业中心</button>
 						</div>
 					</div>
 
@@ -38,8 +39,9 @@
    									<table class="table table-striped table-bordered" id="job_list">
     									<thead> 
      										<tr>
+												<th>序号</th>
       											<th>标题</th> 
-      											<th>状态</th>
+      											<th>类型</th>
 												<th>教师名称</th>
 												<th>报名人数</th>
       											<th>截止时间</th> 
@@ -69,6 +71,7 @@
 		</div><!-- /.main-container -->
 </div>
 	<%@include file="commonFoot.jsp"%>
+	<script src="${resource}/resource/js/moment.js"></script><%--myself--%>
 	<script src="${resource}/resource/js/person_index.js"></script>
 	</body>
 </html>

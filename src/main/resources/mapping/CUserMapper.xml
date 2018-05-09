@@ -15,10 +15,10 @@
         select id,user_name,user_phone,user_email from c_users
         where user_phone = #{phone}
     </select>
-
+<!--validateCode,#{validateCode},-->
     <insert id="regUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CUser">
-        insert into c_users(user_name,user_phone,user_email,user_gender,user_password,user_type,validateCode,create_time)
-        values(#{userName},#{userPhone},#{userEmail},#{userGender},#{userPassword},#{userType},#{validateCode},#{createTime})
+        insert into c_users(user_name,user_phone,user_email,user_gender,user_password,user_type,create_time)
+        values(#{userName},#{userPhone},#{userEmail},#{userGender},#{userPassword},#{userType},#{createTime})
     </insert>
 <!--user_icon as userIcon,user_intention_job as userIntention ,字段被删-->
     <select id="getUserByUsername" resultType="com.xy.ssm.model.CUser">
@@ -27,17 +27,21 @@
         user_profile as userProfile,user_type as userType , user_status as userStatus,user_password as userPassword,
         create_time as createTime from c_users where user_name = #{username} and user_type = #{userType} and user_status = 1
     </select>
-<!-- user_icon as userIcon,user_intention_job as userIntention ,-->
+<!-- user_icon as userIcon,user_intention_job as userIntention ,validateCode as validateCode-->
     <select id="getUserById" resultType="com.xy.ssm.model.CUser">
         select id,user_name as userName,user_phone as userPhone,user_email as userEmail,user_major as userMajor ,user_departments as userDepartments,
        user_gender as userGender,user_realname as userRealName,
         user_profile as userProfile,user_type as userType , user_status as userStatus,user_password as userPassword,
-        create_time as createTime,validateCode as validateCode from c_users where id = #{id}
+        create_time as createTime from c_users where id = #{id}
     </select>
 
     <insert id="addJobApplication" parameterType="com.xy.ssm.model.CApplication">
-        insert into c_application(appli_user_id,appli_job_id,appli_status,create_time)
-        values(#{appliUserId},#{appliJobId},#{appliStatus},#{createTime})
+        insert into c_application(appli_user_id,appli_job_id,appli_status,create_time,appli_type,user_sign)
+        values(#{appliUserId},#{appliJobId},#{appliStatus},#{createTime},0,1)
+    </insert>
+    <insert id="addHomApplication" parameterType="com.xy.ssm.model.CApplication">
+        insert into c_application(appli_user_id,appli_job_id,appli_status,create_time,appli_type,user_sign)
+        values(#{appliUserId},#{appliJobId},#{appliStatus},#{createTime},1,1)
     </insert>
 <!--a.job_demand_number as jobDemandNumber,a.job_requires_gender as jobRequiresGender, a.job_salary_type as jobSalaryType, a.job_salary as jobSalary, a.job_address as jobAddress ,-->
     <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
@@ -45,13 +49,17 @@
         select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
        a.job_hours as jobHours ,
        a.job_introduction as jobIntroduction,a.job_status as jobStatus,a.job_deadline as jobDeadline,
-        a.create_time as createTime,b.tea_name as jobTeacherName,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount from c_jobs as a
+        a.create_time as createTime,b.tea_name as jobTeacherName,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed'and appli_type=0) as appliCount from c_jobs as a
         LEFT JOIN c_teacher as b on a.job_teacher_id = b.id
         where job_status = 3
     </select>
 
     <select id="getJobCount" resultType="int">
         select count(*) from c_jobs where job_status = 3
+    </select>
+    <!--where job_status = 3-->
+    <select id="getHomCount" resultType="int">
+        select count(*) from c_homework  where hom_deadline-CURRENT_TIMESTAMP()>0
     </select>
     <update id="updateUser" parameterType="com.xy.ssm.model.CUser">
         update c_users
@@ -62,6 +70,24 @@
     <select id="getAppliByTwoId" resultType="com.xy.ssm.model.CApplication">
         SELECT id,appli_user_id as appliUserId,appli_job_id as appliJobId,appli_status as appliStatus,create_time as createTime
         FROM c_application
-        WHERE appli_job_id = #{jobId} and appli_user_id = #{userId}
+        WHERE appli_job_id = #{jobId} and appli_user_id = #{userId} AND appli_type=0
+    </select>
+    <select id="getHomAppliByTwoId" resultType="com.xy.ssm.model.CApplication">
+        SELECT id,appli_user_id as appliUserId,appli_job_id as appliJobId,appli_status as appliStatus,create_time as createTime
+        FROM c_application
+        WHERE appli_job_id = #{jobId} and appli_user_id = #{userId} AND appli_type=1
+    </select>
+    <!--getHomList获取可报名作业列表homTeacherName-->
+    <select id="getHomList" resultType="com.xy.ssm.model.CHomework">
+        select a.id,hom_teacher_id as teacherId,
+        hom_title as homTitle,hom_type as homType,
+        hom_introduction as homIntroduction,hom_status as homStatus,
+        a.create_time AS createTime,hom_deadline as homDeadline,
+        tea_name as homTeacherName,
+        (SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed'and appli_type=1) as appliCount
+        from c_homework as a, c_teacher
+        where hom_deadline-CURRENT_TIMESTAMP()>0
+        and user_sign=1
+        AND a.hom_teacher_id = c_teacher.id
     </select>
 </mapper>

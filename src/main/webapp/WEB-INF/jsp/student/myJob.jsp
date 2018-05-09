@@ -19,7 +19,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="person_index.jsp">首页</a>
+								<a href="/student/index">首页</a>
 							</li>
 
 							<li class="active">我的资源</li>

@@ -2,6 +2,7 @@ package com.xy.ssm.service.impl;
 
 import com.xy.ssm.dao.CUserDao;
 import com.xy.ssm.model.CApplication;
+import com.xy.ssm.model.CHomework;
 import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CUser;
 import com.xy.ssm.service.CUserService;
@@ -73,13 +74,29 @@ public class CUserServiceImpl implements CUserService {
         return cUserDao.addJobApplication(cApplication);
     }
 
+    @Override
+    public int addHomApplication(CApplication cApplication) {
+        return cUserDao.addHomApplication(cApplication);
+    }
+
     public List<CJobs> getJobList (String condition, Integer offset, Integer limit)
     {
         return cUserDao.getJobList(condition,offset,limit);
     }
+ /*获取可报名作业列表*/
+    @Override
+    public List<CHomework> getHomList(String condition, Integer offset, Integer limit) {
+        return cUserDao.getHomList(condition,offset,limit);
+    }
+
     public int getJobCount (String condition, Integer offset, Integer limit)
     {
         return cUserDao.getJobCount(condition,offset,limit);
+    }
+
+    @Override
+    public int getHomount(String condition, Integer offset, Integer limit) {
+        return cUserDao.getHomCount(condition,offset,limit);
     }
 
     public int updateUser (CUser cUser)
@@ -90,5 +107,10 @@ public class CUserServiceImpl implements CUserService {
     public CApplication getAppliByTwoId (Long jobId, Long userId)
     {
         return cUserDao.getAppliByTwoId(jobId,userId);
+    }
+
+    @Override
+    public CApplication getHomAppliByTwoId(Long jobId, Long userId) {
+        return cUserDao.getHomAppliByTwoId(jobId,userId);
     }
 }

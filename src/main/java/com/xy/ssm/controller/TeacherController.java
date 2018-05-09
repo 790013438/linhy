@@ -1,33 +1,23 @@
 package com.xy.ssm.controller;
 
 
-import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
 import com.xy.ssm.model.*;
 import com.xy.ssm.service.TeacherService;
 import com.xy.ssm.service.MessageService;
-import com.xy.ssm.service.UserService;
 import com.xy.ssm.utils.MD5Util;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.HttpHeaders;
-import javax.xml.ws.spi.http.HttpHandler;
 import java.io.*;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -245,8 +235,63 @@ public class TeacherController extends BaseController {
             e.printStackTrace();
         }
     }
+    /*downloadHomFiles 作业文件下载*/
+    @RequestMapping(value="/downloadHomFiles",  produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public void downloadHomFiles(@RequestParam("name") String filename)throws Exception{
+
+        CHomFile homFile=teacherService.getHomFileDetails(filename);
+        String path=homFile.getFile_route();
+        File file=new File(path, homFile.getFile_name());
+        if (!file.exists()){
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if (mimeType==null){
+            mimeType="application/octet-stream";
+        }
+        response.setContentType(mimeType);
+        response.setHeader("Content-disposition",String.format("attachment;filename=\"%s\"", URLEncoder.encode(file.getName(),"UTF-8")));
+        response.setContentLength((int)file.length());
+        InputStream inputStream=new BufferedInputStream(new FileInputStream(file));
+        FileCopyUtils.copy(inputStream,response.getOutputStream());
+        inputStream.close();
+    }
     /**
      * 分页获取当前教师发布的资源信息列表
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getHomsByTeacherId", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getHomsByTeacherId() {
+        String result = "";
+        BaseResult baseResult = null;
+        CTeacher cTeacher =(CTeacher)getLoginUser ().get ("loginuser");
+        Long teacherId = cTeacher.getId();
+        try{
+            List<CHomework> list = teacherService.getHomsByTeacherId(teacherId);
+            System.out.println("========================="+list.get(0).getHomTitle()+list.get(0).getHomType());
+            int count = teacherService.getHomsCountByTeacherId(teacherId);
+            if(list != null && 0<list.size()) {
+                BootStrapTableResult tableResult = new BootStrapTableResult<CHomework>(list,count);
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(tableResult);
+            } else {
+                baseResult = new BaseResult(true, "没有查询到相关信息");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取资源信息列表异常！", e);
+            baseResult = new BaseResult(false, "当前教师发布的资源信息列表异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
+    /**
+     * 分页获取当前教师发布的作业信息列表
      * @param
      * @return
      */
@@ -373,9 +418,32 @@ public class TeacherController extends BaseController {
         result= JSON.toJSONString(baseResult);
         return result;
     }
-
     /**
-     * 提交审核
+     * 删除某作业
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/deleteHomById", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String deleteHomById(@RequestParam(required = true) Long homId,@ModelAttribute("currentUser")CTeacher cTeacher) {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            int rs = teacherService.deleteHomById (homId);
+            if(rs > 0){
+                baseResult=new BaseResult(true,"删除资源成功");
+            }else{
+                baseResult=new BaseResult(false,"删除资源失败");
+            }
+        }catch (Exception e){
+            log.error("删除资源异常"+e);
+            baseResult=new BaseResult(false,"删除资源异常");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+    /**
+     * 资源提交审核
      * @param
      * @return
      */
@@ -393,6 +461,39 @@ public class TeacherController extends BaseController {
                 int rs = teacherService.updateJobStatus (jobId,jobStatus);
                 if(rs > 0){
                     String message="资源id为"+jobId+"的资源进行请求审批！";
+                    messageService.sendMessage (MessageUtils.getMessage (1L,1L,1,message));
+                    baseResult=new BaseResult(true,"");
+                }else{
+                    baseResult=new BaseResult(false,"提交审核失败");
+                }
+            }
+        }catch (Exception e){
+            log.error("提交审核异常"+e);
+            baseResult=new BaseResult(false,"提交审核异常");
+        }
+        result= JSON.toJSONString(baseResult);
+        return result;
+    }
+    /**
+     * 资源提交审核
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/submitHomAudit", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String submitHomAudit(@RequestParam(required = true) Long jobId) {
+        String result = "";
+        BaseResult baseResult = null;
+        CTeacher cTeacher =(CTeacher) getLoginUser ().get ("loginuser");
+        /*String jobStatus = "1";*/
+        try{
+            if(cTeacher.getTeaStatus().equals ("comp_apply")){
+                baseResult=new BaseResult(false,"教师还未通过审核，暂不能提交资源");
+            }else{
+                int rs = teacherService.updateHomStatus (jobId);
+                if(rs > 0){
+                    String message="作业id为"+jobId+"的作业记录进行请求审批！";
+                    /*发送信息，暂时没有改*/
                     messageService.sendMessage (MessageUtils.getMessage (1L,1L,1,message));
                     baseResult=new BaseResult(true,"");
                 }else{
@@ -439,6 +540,13 @@ public class TeacherController extends BaseController {
         result= JSON.toJSONString(baseResult);
         return result;
     }
+
+    /**
+     * 通过id得到资源详情
+     * @param jobId
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getJobDetails", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String getJobDetails(@RequestParam(required = true) Long jobId, HttpServletRequest request) {
@@ -453,6 +561,38 @@ public class TeacherController extends BaseController {
                 String file_job_id=job.getId().toString();
                 List<CJobFile> jobFile=teacherService.getJobFiles(file_job_id);
                 list.add(jobFile);
+                baseResult.setData(list);
+            } else {
+                baseResult = new BaseResult(true, "该资源不存在");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取资源信息详情异常！", e);
+            baseResult = new BaseResult(false, "获取资源信息详情异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+    /**
+     * 通过id得到作业详情
+     * @param jobId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/getHomDetails", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getHomDetails(@RequestParam(required = true) Long jobId, HttpServletRequest request) {
+        String result = "";
+        BaseResult baseResult = null;
+        List list=new ArrayList();
+        try{
+            CHomework homework = teacherService.getHomDetails(jobId);
+            if(homework != null) {
+                baseResult = new BaseResult(true, "");
+                list.add(homework);
+                Long file_hom_id=homework.getId();
+                List<CHomFile> homFile=teacherService.gethomFiles(file_hom_id);
+                list.add(homFile);
                 baseResult.setData(list);
             } else {
                 baseResult = new BaseResult(true, "该资源不存在");

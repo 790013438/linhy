@@ -1,6 +1,7 @@
 package com.xy.ssm.service;
 
 import com.xy.ssm.model.CApplication;
+import com.xy.ssm.model.CHomework;
 import com.xy.ssm.model.CJobs;
 import com.xy.ssm.model.CUser;
 
@@ -46,10 +47,14 @@ public interface CUserService {
     CUser getUserById(Long id);
 
     int addJobApplication(CApplication cApplication);
+    int addHomApplication(CApplication cApplication);
 
    List<CJobs> getJobList(String condition,Integer offset,Integer limit);
+    /*获取可报名作业列表*/
+    List<CHomework> getHomList(String condition,Integer offset,Integer limit);
     int getJobCount(String condition,Integer offset,Integer limit);
+    int getHomount(String condition,Integer offset,Integer limit);
     int updateUser(CUser cUser);
     CApplication getAppliByTwoId(Long jobId,Long userId);
-
+    CApplication getHomAppliByTwoId(Long jobId,Long userId);
 }

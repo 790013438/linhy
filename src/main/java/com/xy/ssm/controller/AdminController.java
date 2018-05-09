@@ -3,10 +3,7 @@ package com.xy.ssm.controller;
 import com.alibaba.fastjson.JSON;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
-import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CTeacher;
-import com.xy.ssm.model.CJobs;
-import com.xy.ssm.model.CUser;
+import com.xy.ssm.model.*;
 import com.xy.ssm.service.CUserService;
 import com.xy.ssm.service.TeacherService;
 import com.xy.ssm.service.MessageService;
@@ -15,9 +12,15 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by wuchenl on 2017/1/13.
@@ -136,9 +139,10 @@ public class AdminController extends BaseController
      */
     @RequestMapping(value = "/getJobDetails", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getJobDetails(@RequestParam(required = true) Long jobId) {
+    public String getJobDetails(@RequestParam(required = true) Long jobId, HttpServletRequest request) {
         String result = "";
         BaseResult baseResult = null;
+        List list=new ArrayList();
         CUser cUser =(CUser) getLoginUser ().get ("loginuser");
         try{
             CJobs job = teacherService.getJobDetails(jobId);
@@ -148,8 +152,13 @@ public class AdminController extends BaseController
                 }else{
                     job.setFlag(0);
                 }
+                list.add(job);
+                String file_job_id=job.getId().toString();
+                List<CJobFile> jobFile=teacherService.getJobFiles(file_job_id);
+                list.add(jobFile);
                 baseResult = new BaseResult(true, "");
-                baseResult.setData(job);
+                baseResult.setData(list);
+
             } else {
                 baseResult = new BaseResult(true, "该资源不存在");
             }
@@ -161,7 +170,90 @@ public class AdminController extends BaseController
         }
         return result;
     }
+    /**
+     * 查看作业详情
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getHomDetails", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getHomDetails(@RequestParam(required = true) Long jobId, HttpServletRequest request) {
+        String result = "";
+        BaseResult baseResult = null;
+        List list=new ArrayList();
+        CUser cUser =(CUser) getLoginUser ().get ("loginuser");
+        try{
+            CHomework homework = teacherService.getHomDetails(jobId);
+            if(homework != null) {
+                if(cUserService.getAppliByTwoId(homework.getId (),cUser.getId ()) != null){
+                    homework.setFlag(1);
+                }else{
+                    homework.setFlag(0);
+                }
+                list.add(homework);
+                Long file_hom_id=homework.getId();
+                List<CHomFile> homFiles=teacherService.gethomFiles(file_hom_id);
+                List<CHomFile> cHList=new ArrayList();
+                for (CHomFile c: homFiles ){
+                    if(c.getFile_user_id()==null){
+                        cHList.add(c);
+                    }
+                }
+                list.add(cHList);
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(list);
 
+            } else {
+                baseResult = new BaseResult(true, "该资源不存在");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取资源信息详情异常！", e);
+            baseResult = new BaseResult(false, "获取资源信息详情异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+    /**
+     * 上传作业文件
+     * @return
+     */
+    @RequestMapping(value = "/addHomFiles", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    /*@ResponseBody*/
+    public String addHomFiles(@RequestParam("hom_file")MultipartFile[] files,@RequestParam("homId") String id, HttpServletResponse response){
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String result="";
+        /*文件上传*/
+        /*上传文件保存目录*/
+        Map<String,String> map=new HashMap();
+        String savePath="E:\\spring-mvc-mybatis-IDEA\\uploadHom\\";
+        CUser cUser =(CUser) getLoginUser ().get ("loginuser");
+        map.put("file_hom_id",id);
+        map.put("file_user_id",cUser.getId().toString());
+        if (files!=null && files.length!=0){
+            for (MultipartFile file:files){
+                UUID uuid=UUID.randomUUID();
+                String filename=file.getOriginalFilename();
+                String type=filename.substring(filename.lastIndexOf("."));
+                map.put("file_route",savePath);
+                map.put("file_realname",filename);
+                map.put("file_name",uuid.toString()+type);
+                map.put("file_size",((Long)(file.getSize()/1024)).toString());
+                map.put("file_type",type);
+                userService.addHomFile(map);
+                try {
+                    file.transferTo(new File(savePath+uuid+type));
+                    result="success";
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    result="false";
+                }
+            }
+        }else{
+            result="false";
+        }
+        return "redirect:/student/homInfo?jobId="+id;
+    }
     /**
      * 审核资源
      * @param

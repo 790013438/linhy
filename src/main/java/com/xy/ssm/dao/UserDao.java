@@ -1,13 +1,11 @@
 package com.xy.ssm.dao;
 
-import com.xy.ssm.model.CComment;
-import com.xy.ssm.model.CUser;
-import com.xy.ssm.model.User;
-import com.xy.ssm.model.VOCApplication;
+import com.xy.ssm.model.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wuchen on 2017/1/12.
@@ -26,4 +24,6 @@ public interface UserDao {
     int delApplication(@Param("applicationId") Long applicationId,@Param("userId") Long userId);
     int updateUserPassword(@Param("newPw") String newPw,@Param("userId") Long userId);
     List<CUser> getAllUsers();
+    void addHomFile(Map map);
+    List<CHomFile> getMyHomFile(Long userId);
 }

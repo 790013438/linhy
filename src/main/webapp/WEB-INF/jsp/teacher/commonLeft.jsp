@@ -139,9 +139,9 @@
                     </a>
                 </li>
                 <li id="li_homework">
-                    <a href="#">
+                    <a href="../teacher/homIndex">
                         <i class="icon-text-width"></i>
-                        <span class="menu-text"> 已经发布的作业 </span>
+                        <span class="menu-text"> 发布的作业 </span>
                     </a>
                 </li>
             </ul><!-- /.nav-list -->
