@@ -33,7 +33,7 @@ import java.util.*;
 @SessionAttributes("currentUser")//讲登录后命名为currentUser的加入session
 public class TeacherController extends BaseController {
 
-    private static Date jobCreateTime=null;
+/*    private static Date jobCreateTime=null;
 
     public void setJobCreateTime(Date jobCreateTime) {
         this.jobCreateTime = jobCreateTime;
@@ -41,7 +41,7 @@ public class TeacherController extends BaseController {
 
     public Date getJobCreateTime() {
         return jobCreateTime;
-    }
+    }*/
     private Integer number;
     private Logger log = Logger.getLogger(TeacherController.class);
     //上面是LOG的声明，下面的Resource 可以考虑使用Autowired来注入Service
@@ -74,7 +74,7 @@ public class TeacherController extends BaseController {
         try{
             CJobs cJobs=(CJobs)JSON.parseObject (json,CJobs.class);
             cJobs.setCreateTime(new Date());
-            setJobCreateTime(cJobs.getCreateTime());//得到创建时间
+           /* setJobCreateTime(cJobs.getCreateTime());*///得到创建时间
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             cJobs.setJobDeadline (sdf.parse(cJobs.getDeadline()));
             Long teacherId = cTeacher.getId();
@@ -105,7 +105,7 @@ public class TeacherController extends BaseController {
         try{
             CHomework cHomework=(CHomework) JSON.parseObject (json,CHomework.class);
             cHomework.setCreateTime(new Date());
-            setJobCreateTime(cHomework.getCreateTime());//得到创建时间
+            /*setJobCreateTime(cHomework.getCreateTime());*///得到创建时间
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             cHomework.setHomDeadline(sdf.parse(cHomework.getDeadline()));
             Long teacherId = cTeacher.getId();
@@ -130,13 +130,13 @@ public class TeacherController extends BaseController {
     @RequestMapping(value = "/addJobFiles", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     /*@ResponseBody*/
     public String addJobFiles(@RequestParam("job_file")MultipartFile[] files,HttpServletResponse response){
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        /*SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
         String result="";
         /*文件上传*/
         /*上传文件保存目录*/
         Map<String,String> map=new HashMap();
         String savePath="E:\\spring-mvc-mybatis-IDEA\\upload\\";
-        String id=teacherService.getJobId(format.format(jobCreateTime));
+        String id=teacherService.getJobId();/*format.format(jobCreateTime)*/
         map.put("file_job_id",id);
         if (files!=null && files.length!=0){
             for (MultipartFile file:files){
@@ -174,7 +174,8 @@ public class TeacherController extends BaseController {
         /*上传文件保存目录*/
         Map<String,String> map=new HashMap();
         String savePath="E:\\spring-mvc-mybatis-IDEA\\uploadHom\\";
-        String id=teacherService.getHomId(format.format(jobCreateTime));
+        String id=teacherService.getHomId();/*String id=teacherService.getHomId();*/
+       /* String id=teacherService.getHomId(jobCreateTime.toString());*/
         map.put("file_hom_id",id);
         if (files!=null && files.length!=0){
             for (MultipartFile file:files){
@@ -460,8 +461,11 @@ public class TeacherController extends BaseController {
             }else{
                 int rs = teacherService.updateJobStatus (jobId,jobStatus);
                 if(rs > 0){
-                    String message="资源id为"+jobId+"的资源进行请求审批！";
-                    messageService.sendMessage (MessageUtils.getMessage (1L,1L,1,message));
+                    String message="资源序号为"+jobId+"的资源进行请求审批！";
+                    messageService.sendMessage (
+                            new CMessage(cTeacher.getId(),null,1,
+                                    message,0,new Date(),0,2)
+                    );
                     baseResult=new BaseResult(true,"");
                 }else{
                     baseResult=new BaseResult(false,"提交审核失败");
@@ -475,7 +479,7 @@ public class TeacherController extends BaseController {
         return result;
     }
     /**
-     * 资源提交审核
+     * 作业提交审核
      * @param
      * @return
      */
@@ -492,9 +496,12 @@ public class TeacherController extends BaseController {
             }else{
                 int rs = teacherService.updateHomStatus (jobId);
                 if(rs > 0){
-                    String message="作业id为"+jobId+"的作业记录进行请求审批！";
+                    String message="作业记录序号为"+jobId+"的作业记录进行发布！";
                     /*发送信息，暂时没有改*/
-                    messageService.sendMessage (MessageUtils.getMessage (1L,1L,1,message));
+                    messageService.sendMessage (
+                            new CMessage(cTeacher.getId(),null,2,
+                                    message,0,new Date(),0,2)
+                    );
                     baseResult=new BaseResult(true,"");
                 }else{
                     baseResult=new BaseResult(false,"提交审核失败");
@@ -692,7 +699,6 @@ public class TeacherController extends BaseController {
     @RequestMapping(value = "/updateTeacherInfo", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String updateUserInfo(CTeacher  cTeacher) {
-        log.info("--------------------/teacher/updateTeacherInfo  called");
         String result = "";
         BaseResult baseResult = null;
         CTeacher cTeacher1 =(CTeacher) getLoginUser ().get ("loginuser");

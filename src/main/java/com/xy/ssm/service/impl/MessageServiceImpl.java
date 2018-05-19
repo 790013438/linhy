@@ -30,21 +30,33 @@ public class MessageServiceImpl implements MessageService
      * @param message
      */
     @Override
-    public void sendMessage (CMessage message)
+    public int sendMessage (CMessage message)
     {
-        messageDao.sendMessage (message);
+        return messageDao.sendMessage (message);
     }
 
     /**
      * 获取当前消息
-     *
-     * @param id
-     * @param id2
      * @return
      */
     @Override
-    public List<CMessage> getMessage (Long id, Long id2)
+    public List<CMessage> getMessage (CMessage cMessage)
     {
-        return messageDao.getMessage (id, id2);
+        return messageDao.getMessage (cMessage);
+    }
+
+    @Override
+    public String getSenderNameFromCUser(CMessage cMessage) {
+        return messageDao.getSenderNameFromCUser(cMessage);
+    }
+
+    @Override
+    public String getSenderNameFromCTeacher(CMessage cMessage) {
+        return messageDao.getSenderNameFromCTeacher(cMessage);
+    }
+/*消息状态为删除*/
+    @Override
+    public Integer deleteMessage(String mesId) {
+        return messageDao.deleteMessage(mesId);
     }
 }

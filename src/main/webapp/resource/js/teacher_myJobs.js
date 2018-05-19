@@ -110,8 +110,8 @@ var removeJobById = function(data) {
         });
     }
 
-//关闭资源
-var closeJobById = function(data) {
+//关闭资源====>调用方法错误
+/*var closeJobById = function(data) {
     $.ajax({
         url:"../admin/auditingJob",
         type : 'post',
@@ -144,7 +144,7 @@ var closeJobById = function(data) {
             queryMyJob(condition);
         }
     });
-}
+}*/
 
 $(".table tr td input").each(function(){
     $(this).attr("title",$(this).val());

@@ -115,8 +115,12 @@
                             </li>
                         </ul>
                     </li>
-
-
+                    <li class="menu-list" id="li_homework">
+                        <a href="../system/homework">
+                            <i class="icon-text-width"></i>
+                            <span class="menu-text">作业管理</span>
+                        </a>
+                    </li>
                     <li class="menu-list" id="userManage">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-list"></i>

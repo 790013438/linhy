@@ -6,12 +6,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.xy.ssm.common.BaseResult;
 import com.xy.ssm.common.BootStrapTableResult;
 import com.xy.ssm.model.*;
-import com.xy.ssm.service.CUserService;
-import com.xy.ssm.service.TeacherService;
-import com.xy.ssm.service.RegisterValidateService;
-import com.xy.ssm.service.UserService;
+import com.xy.ssm.service.*;
 import com.xy.ssm.utils.MD5Util;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -44,6 +42,8 @@ public class UserController extends BaseController{
     private CUserService cUserService;
     @Resource
     private RegisterValidateService service;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * 跳转到大学生用户页面
@@ -143,7 +143,7 @@ public class UserController extends BaseController{
         String password = MD5Util.getMd5 (cTeacher.getTeaPassword());
         cTeacher.setTeaPassword(password);
         cTeacher.setCreateTime(new Date());//myself
-        cTeacher.setTeaStatus("tea_successful");//myself
+        cTeacher.setTeaStatus("1");//myself
         try{
             if(cTeacher == null){
                 baseResult=new BaseResult(false,"用户注册信息获取异常");
@@ -573,6 +573,13 @@ public class UserController extends BaseController{
                     //查询该资源的报名人数
                    /* int count = teacherService.getJobApplicationCount(jobId);*/
                     baseResult=new BaseResult(true,"");
+                    /*发送留言*/
+                    String message="报名作业，作业记录序号为"+jobId+"，标题为'"+job.getHomTitle()+"'的作业记录。";
+                    /*发送信息报名消息*/
+                    messageService.sendMessage (
+                            new CMessage(cUser.getId(),job.getTeacherId(),2,
+                                    message,0,new Date(),1,0)
+                    );
                 }else{
                     baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
                 }
@@ -618,16 +625,12 @@ public class UserController extends BaseController{
                     baseResult=new BaseResult(true,"");
                     /*baseResult.setData(count);*/
                     //设置报名人数上限为需求人数的两倍，供教师筛选
-/*                   if(count == 2*job.getJobDemandNumber ()){
-                        int resultCode1 = teacherService.updateJobStatus (jobId,"4");
-                        if(resultCode1 > 0){
-                            baseResult=new BaseResult(true,"");
-                        }else{
-                            baseResult=new BaseResult(true,"修改资源状态失败");
-                        }
-                    }else{
-                        baseResult=new BaseResult(true,"");
-                    }*/
+                    String message="报名资源，资源记录序号为"+jobId+"，标题为'"+job.getJobTitle()+"'的资源。";
+                    /*发送信息报名消息*/
+                    messageService.sendMessage (
+                            new CMessage(cUser.getId(),job.getJobTeacherId(),1,
+                                    message,0,new Date(),1,0)
+                    );
                 }else{
                     baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
                 }

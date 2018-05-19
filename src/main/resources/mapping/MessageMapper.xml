@@ -6,12 +6,37 @@
 
     <insert id="sendMessage" useGeneratedKeys="true" keyProperty="id"
             parameterType="com.xy.ssm.model.CMessage">
-        insert into c_message(mes_sender_id,mes_object_id,mes_type,mes_contents,create_time)
-        values(#{mesSenderId},#{mesObjectId},#{mesType},#{mesContents},now())
+        insert into c_message(mes_sender_id,mes_object_id,mes_type,mes_contents,
+        mes_status,create_time,mes_sender_type,mes_object_type)
+        values(#{mesSenderId},#{mesObjectId},#{mesType},#{mesContents},#{mesStatus},#{createTime},#{mesSenderType},#{mesObjectType})
     </insert>
 
-    <select id="getMessage" resultType="com.xy.ssm.model.CMessage">
-        select id,mes_sender_id as mesSenderId,mes_object_id as mesObjectId,mes_type as mesType,mes_contents as mesContents,create_time as createTime, mes_status as mesStatus  from c_message
-        where mes_sender_id =#{id} and mes_object_id =#{id2} and mes_status != 2
+    <select id="getMessage" parameterType="com.xy.ssm.model.CMessage" resultType="com.xy.ssm.model.CMessage">
+        select id,mes_sender_id as mesSenderId,mes_object_id as mesObjectId,
+        mes_type as mesType,mes_contents as mesContents,
+        mes_status as mesStatus,create_time as createTime,
+         mes_sender_type as mesSenderType,
+         mes_object_type as mesObjectType
+          from c_message
+        where  mes_object_type=#{mesObjectType}
+        <if test=" mesObjectId !=null and mesObjectId !=''">
+            and mes_object_id =#{mesObjectId}
+        </if>
+        and mes_status != 2
     </select>
+    <select id="getSenderNameFromCUser" parameterType="com.xy.ssm.model.CMessage" resultType="String">
+        select user_name
+        from c_users
+        where  id=#{mesSenderId}
+    </select>
+    <select id="getSenderNameFromCTeacher" parameterType="com.xy.ssm.model.CMessage" resultType="String">
+        select tea_name
+        from c_teacher
+        where  id=#{mesSenderId}
+    </select>
+<update id="deleteMessage" parameterType="String" >
+    update c_message
+        SET mes_status=2
+        WHERE id=#{mesId}
+</update>
 </mapper>

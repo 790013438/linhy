@@ -199,12 +199,12 @@
         VALUES (#{file_route},#{file_realname},#{file_type},#{file_size},#{file_hom_id},#{file_name})
     </insert>
     <!--通过创建时间，得到资源id-->
-    <select id="getJobId" parameterType="java.lang.String"  resultType="java.lang.String">
-        select id from c_jobs where create_time like #{jobCreateTime}
+    <select id="getJobId" resultType="java.lang.String">
+        select max(id) from c_jobs
     </select>
-    <!--通过创建时间，得到id作业-->
-    <select id="getHomId" parameterType="java.lang.String"  resultType="java.lang.String">
-        select id from c_homework where create_time like #{jobCreateTime}
+    <!--通过创建时间，得到id作业  where create_time like #{jobCreateTime}-->
+    <select id="getHomId" resultType="java.lang.String">
+        select max(id) from c_homework
     </select>
     <!--添加作业信息-->
     <insert id="addHom" useGeneratedKeys="true" keyProperty="id" parameterType="com.xy.ssm.model.CHomework">
@@ -243,5 +243,31 @@
     <!--getHomFileDetails通过filename得到作业文件路径-->
     <select id="getHomFileDetails" parameterType="java.lang.String"  resultType="com.xy.ssm.model.CHomFile">
         select file_id,file_realname,file_name,file_hom_id,file_user_id,file_size,file_route,file_type from c_hom_files where file_name like #{filename}
+    </select>
+    <!--getAllHomsOne-->
+    <select id="getAllHomsOne" resultType="com.xy.ssm.model.CHomework">
+        select c_homework.id as id,hom_title as homTitle,hom_type as homType,
+        hom_introduction as homIntroduction,hom_status as homStatus,
+        c_homework.create_time as createTime,hom_deadline as homDeadline,
+         tea_account as homTeacherName
+         from c_homework,c_teacher
+        where hom_deadline-now()>=0
+        and c_homework.user_sign=1
+        and c_teacher.id=c_homework.hom_teacher_id
+    </select>
+    <!--getAllHomsOneCount-->
+    <select id="getAllHomsOneCount" resultType="java.lang.Integer">
+        select count(id) from c_homework where hom_deadline-getdate()>0 or hom_deadline-getdate()=0
+    </select>
+    <!--getOldHoms得到已截止的文件-->
+    <select id="getOldHoms" resultType="com.xy.ssm.model.CHomework">
+        select c_homework.id as id,hom_title as homTitle,hom_type as homType,
+        hom_introduction as homIntroduction,hom_status as homStatus,
+        c_homework.create_time as createTime,hom_deadline as homDeadline,
+        tea_account as homTeacherName
+        from c_homework,c_teacher
+        where  now()-hom_deadline>0
+        and c_homework.user_sign=1
+        and c_teacher.id=c_homework.hom_teacher_id
     </select>
 </mapper>

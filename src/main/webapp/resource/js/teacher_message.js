@@ -18,7 +18,7 @@ $(function(){
 //查询我的消息
 var queryMessageList = function() {
     $.ajax({
-        url:"../message/getMessage?type="+2,/*  url:"../admin/queryMessageList",*/
+        url:"../message/getMessage?type="+0,/*  url:"../admin/queryMessageList",*/
         type : 'post',
         data : null,
         dataType : 'json',
@@ -30,7 +30,6 @@ var queryMessageList = function() {
                     return;
                 }
                 if (result.data.data!=null){
-                    console.log(result.data);
                     $("#table_message tbody").empty();
                     $.each(result.data.data, function (index, obj) {
                         var tr = appendJobNode(obj);
@@ -60,41 +59,6 @@ var queryMessageList = function() {
             alert(txt);
             return;
         },
-    });
-}
-//删除消息
-var delJobById = function(data) {
-    $.ajax({
-        url:"../admin/deleteMessageById",
-        type : 'post',
-        data :data,
-        dataType : 'json',
-        success:function(result){
-            console.log(result);
-            if (result.success == true) {
-                if (result.error != "") {
-                    alert(result.error);
-                    return;
-                }else{
-                    var txt = "删除消息成功";
-                    alert(txt);
-                    return;
-                }
-            } else {
-                //还得先清空所有行
-                var txt = result.error;
-                alert(txt);
-                return;
-            }
-        },
-        error : function(obj, msg) {
-            var txt = "删除消息失败";
-            alert(txt);
-            return;
-        },
-        complete: function () {
-            queryMessageList();
-        }
     });
 }
 //将消息标记为已读
@@ -175,34 +139,140 @@ var appendTabTitle = function()
 
 
 var appendJobNode = function(obj) {
-    var jobDeadline1 = moment(obj.createTime).format("YYYY-Do-DD HH:mm:ss");
-    var job_str = "<tr>"+
-            "<td>"+obj.id+"</td>"+
-            "<td>"+obj.jobTitle+"</td>"+
-            "<td> "+obj.jobType+"</td>"+
-            "<td> "+obj.jobStatus+"</td>"+
-           /* "<td> "+obj.jobDemandNumber+"</td>"+*/
-            "<td> "+jobDeadline1+"</td>"+
-            "<td>"+
-            "<a  href =\"../teacher/jobDetails?jobId="+obj.id+"\" >查看资源详情</a> |" +
-            "<button type=\"button\"  onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>|";
-    if(obj.jobStatus== "保存"){
-        var job_str1 = job_str +"<button type=\"button\" onclick=\"submitAudit('"+obj.id+"')\" class='btn btn-link'>提交审核</button>";
-    }else{
-        var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>提交审核</button>";
-        // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已报名</a>";
+    var jobDeadline1 = moment(obj.createTime).format("YYYY-MM-DD HH:mm:ss");
+    var mesType;
+    var mesSenderType;
+    if(obj.mesType==1){
+        mesType="资源消息";
     }
-    "<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
-    "</td>"+
-    "</tr>";
-    return job_str1;
+    if(obj.mesType==2){
+        mesType="作业消息";
+    }
+    if(obj.mesSenderType==0){
+        mesSenderType="教师"
+    }
+    if(obj.mesSenderType==1){
+        mesSenderType="学生"
+    }
+    if(obj.mesSenderType==2){
+        mesSenderType="管理员"
+    }
+    var job_str = "<tr>"+
+        "<td>"+obj.id+"</td>"+
+        "<td>"+obj.mesSenderName+"</td>"+
+        "<td>"+mesSenderType+"</td>"+
+        "<td> "+mesType+"</td>"+
+        "<td> "+jobDeadline1+"</td>"+
+        "<td> "+obj.mesContents+"</td>"+
+        "<td><button type=\"button\"  onclick=\"delJob("+"this,"+obj.id+")\" class='btn btn-link'>删除</button>|" +
+        "<button type=\"button\"  onclick=\"showFn("+obj.mesSenderId+","+obj.mesSenderType+","+obj.mesObjectType+","+obj.mesType+")\" class='btn btn-link'>回复</button></td>" +
+        "</tr>|";
+    return job_str;
 }
 
-var delJob = function(data) {
-    $("#input_jobId").val(data);
-    $(".pop").show();
-    $(".popinto").show();
+var delJob = function(myself,mesId) {
+if(confirm("确定删除这条记录？")){
+    console.log("mesId:"+mesId);
+    $.ajax({
+        url:"../message/deleteMessage?mesId="+mesId,
+        type : 'get',
+        data : null,
+        dataType : 'json',
+        success:function(result){
+            if (result.success == true) {
+                /*删除当前行*/
+                $(myself).parent().parent().remove();
+                if (result.error != "") {
+                    alert(result.error);
+                    return;
+                }else{
+                    var txt = "修改状态成功";
+                    alert(txt);
+                    return;
+                }
+            } else {
+                //还得先清空所有行
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        },
+        error : function(obj, msg) {
+            var txt = "修改状态失败";
+            alert(txt);
+            return;
+        },
+        complete: function () {
+            queryMessageList();
+        }
+    });
+}else{}
 }
+/*显示发送信息表单*/
+var showFn = function(senderId,senderType,ObjectType,mesType){
+/*        document.getElementById( "replyMes").style.visibility= "visible";
+        document.getElementById( "senderId").style.visibility= "hidden";
+        为什么这种显示效果不行*/
+$("#replyMes").show();
+    $("#senderId").hide();
+    $("#senderType").hide();
+    $("#objectType").hide();
+    $("#mesType").hide();
+        document.getElementById("senderId").value=senderId;
+        document.getElementById( "senderType").value=senderType;
+    document.getElementById( "objectType").value=ObjectType;
+    document.getElementById( "mesType").value=mesType;
+}
+/*保存留言信息*/
+var saveMes=function(){
+    var objectId=document.getElementById("senderId").value;
+    var objectType=document.getElementById( "senderType").value;
+    var con=document.getElementById( "input_content").value;
+    var senderType=document.getElementById( "objectType").value;
+    var mesType=document.getElementById( "mesType").value;
+    var params={};
+    params.objectId=objectId;
+    params.senderType=senderType;
+    params.objectType=objectType;
+    params.con=con;
+    params.mesType=mesType;
+    $.ajax({
+        url:"../message/sendMessage",
+        type : 'post',
+        data : params,
+        dataType : 'json',
+        success:function(result){
+            if (result.success == true) {
+                /*隐藏留言板*/
+                $("#replyMes").hide();
+                /*清空留言内容*/
+                document.getElementById( "input_content").value=null;
+                if (result.error != "") {
+                    alert(result.error);
+                    return;
+                }else{
+                    var txt = "留言信息成功发送";
+                    alert(txt);
+                    return;
+                }
+            } else {
+                //还得先清空所有行
+                var txt = result.error;
+                alert(txt);
+                return;
+            }
+        },
+        error : function(obj, msg) {
+            var txt = "留言信息发送失败";
+            alert(txt);
+            return;
+        },
+        complete: function () {
+            queryMessageList();
+        }
+    });
+}
+
 
 
 

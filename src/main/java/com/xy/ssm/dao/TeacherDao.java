@@ -42,11 +42,11 @@ public interface TeacherDao {
     int addTeacher(CTeacher cTeacher);
     /*添加文件*/
     void addFile(Map map);
-    String getJobId(String jobCreateTime);
+    String getJobId();
     /*添加作业信息*/
     Long addHom(CHomework cHomework);
     /**/
-    String getHomId(String jobCreateTime);
+    String getHomId();
     void addHomFile(Map map);
     /*根据资源id，得到资源文件信息*/
     List<CJobFile> getJobFiles(String file_job_id);
@@ -64,4 +64,8 @@ public interface TeacherDao {
     List<CHomFile> gethomFiles(Long file_hom_id);
     /*通过作业文件名得到作业文件地址*/
     CHomFile getHomFileDetails(String filename);
+    List<CHomework> getAllHomsOne();
+    int getAllHomsOneCount();
+    /*得到已截止的文件*/
+    List<CHomework> getOldHoms();
 }

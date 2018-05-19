@@ -142,8 +142,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
     /*通过创建时间，得到资源的id*/
     @Override
-    public String getJobId(String jobCreateTime) {
-        return teacherDao.getJobId(jobCreateTime);
+    public String getJobId() {
+        return teacherDao.getJobId();
     }
 /*添加作业记录信息*/
     @Override
@@ -152,8 +152,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 /*通过创建时间，得到作业的id*/
     @Override
-    public String getHomId(String jobCreateTime) {
-        return teacherDao.getHomId(jobCreateTime);
+    public String getHomId() {
+        return teacherDao.getHomId();
     }
 /*添加作业文件*/
     @Override
@@ -234,6 +234,29 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public CHomFile getHomFileDetails(String filename) {
         return teacherDao.getHomFileDetails(filename);
+    }
+
+    /**
+     * 获取所有未截止的作业信息
+     * @return
+     */
+    @Override
+    public List<CHomework> getAllHomsOne() {
+        return teacherDao.getAllHomsOne();
+    }
+
+    /**
+     * 得到未截止作业总数
+     * @return
+     */
+    @Override
+    public int getAllHomsOneCount() {
+        return teacherDao.getAllHomsOneCount();
+    }
+    /*获取已截止的作业*/
+    @Override
+    public List<CHomework> getOldHoms() {
+        return teacherDao.getOldHoms();
     }
 
     public List<CJobs> getJobsByTeacherId(String queryTerm, Long teacherId, Integer offset, Integer limit,String jobStatus) {

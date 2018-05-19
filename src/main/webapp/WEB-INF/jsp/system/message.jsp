@@ -34,11 +34,14 @@
    								<!-- 定义一个表格元素 --> 
    									<table id="table_message" class="table table-striped table-bordered">
     									<thead> 
-     										<tr> 
-      											<th>序号</th>
-      											<th>类型</th>
-      											<th>时间</th> 
-      											<th>详情</th>
+     										<tr>
+												<th>序号</th>
+												<th>发送者名字</th>
+												<th>发送者身份</th>
+												<th>类型</th>
+												<th>时间</th>
+												<th>内容</th>
+												<th>操作</th>
      										</tr> 
     									</thead> 
     									<tbody>
@@ -51,6 +54,27 @@
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
+
+						<%--留言信息表--%>
+						<div>
+							<form class="form-horizontal" id="replyMes" hidden="hidden">
+								<input type="text" id="senderId"/>
+								<input type="text" id="senderType"/>
+								<input type="text" id="objectType"/>
+								<input type="text" id="mesType"/>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">留言</label>
+
+									<div class="col-sm-9">
+										<textarea placeholder="留言内容" maxlength="500" id="input_content" class="col-xs-10 col-sm-5" ></textarea>
+									</div>
+								</div>
+								<div align="center">
+									<button style="width:200px;height:50px;background:#338FCC;" id="btn_saveMes" type="button" onclick="saveMes()">保存</button>
+								</div>
+							</form>
+						</div>
+
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
 
@@ -80,9 +104,9 @@
     <div class="popcon">
         <ul class="gray_three">
             <li><span>消息名称:</span>有人报名了你的资源</li>
-            <li><span>消息时间:</span>2017-03-10 16:11:38</li>
+            <li><span>消息时间:</span>2018-04-10 16:11:38</li>
             <li><span>发送人:</span>系统提示</li>
-            <li><span>消息内容:</span>你发布的资源金牛万达广场发传单已经有人报名了，请前去处理</li>
+            <li><span>消息内容:</span>好好学习，天天向上</li>
         </ul>
     </div>
 </div>
@@ -91,9 +115,8 @@
 <div class="pop" onclick="closepop()" style="display: none;"></div>
 		<!-- basic scripts -->
 	<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/system_message.js"></script>
 	<script src="${resource}/resource/js/moment.js"></script>
-
+	<script src="${resource}/resource/js/system_message.js"></script>
 	<script type="text/javascript">
 
 		function closepop(){

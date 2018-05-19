@@ -14,14 +14,16 @@ public interface MessageService
      * 发送消息
      * @param message
      */
-    void sendMessage(CMessage message);
+    int sendMessage(CMessage message);
 
     /**
      * 获取当前消息
-     * @param id
-     * @param id2
      * @return
      */
-    List<CMessage> getMessage(Long id,Long id2);
-
+    List<CMessage> getMessage(CMessage cMessage);
+    /*得到消息发送者的名字*/
+    String getSenderNameFromCUser(CMessage cMessage);
+    String getSenderNameFromCTeacher(CMessage cMessage);
+    /*消息状态为删除*/
+    Integer deleteMessage(String mesId);
 }

@@ -2,6 +2,7 @@ package com.xy.ssm.service;
 
 import com.xy.ssm.model.*;
 
+import javax.validation.constraints.Future;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +44,11 @@ public interface TeacherService {
 /*添加文件*/
 void addFile(Map map);
 /*通过创建时间，得到资源的id*/
-String getJobId(String jobCreateTime);
+String getJobId();
 /*添加作业记录*/
   Long addHom(CHomework cHomework);
   /*通过创建时间，得到作业的id*/
-    String getHomId(String jobCreateTime);
+    String getHomId();
     void addHomFile(Map map);
     /*根据资源id，得到资源文件信息*/
     List<CJobFile> getJobFiles(String file_job_id);
@@ -67,4 +68,10 @@ String getJobId(String jobCreateTime);
     List<CHomFile> gethomFiles(Long file_hom_id);
     /*通过作业文件名得到作业文件地址*/
     CHomFile getHomFileDetails(String filename);
+    /*获取所有未截止的作业信息*/
+    List<CHomework> getAllHomsOne();
+    /*得到未截止作业总数*/
+    int getAllHomsOneCount();
+    /*获取已截止的作业*/
+    List<CHomework> getOldHoms();
 }

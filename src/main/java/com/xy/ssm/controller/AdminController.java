@@ -80,6 +80,66 @@ public class AdminController extends BaseController
     }
 
     /**
+     * 未截止的所有作业
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getAllHoms", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getAllHoms() {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            List<CHomework> list = teacherService.getAllHomsOne();
+           /* int count = teacherService.getAllHomsOneCount();*/
+           int count=list.size();
+            if(list != null && 0<list.size()) {
+                BootStrapTableResult tableResult = new BootStrapTableResult<CHomework>(list,count);
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(tableResult);
+            } else {
+                baseResult = new BaseResult(true, "没有查询到未截止的作业信息");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取未截止的作业信息列表异常！", e);
+            baseResult = new BaseResult(false, "获取未截止的作业信息列表异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
+    /**
+     * 已截止的所有作业
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getOldHoms", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getOldHoms() {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            List<CHomework> list = teacherService.getOldHoms();
+            /* int count = teacherService.getAllHomsOneCount();*/
+            int count=list.size();
+            if(list != null && 0<list.size()) {
+                BootStrapTableResult tableResult = new BootStrapTableResult<CHomework>(list,count);
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(tableResult);
+            } else {
+                baseResult = new BaseResult(true, "没有查询到已截止的作业信息");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取已截止的作业信息列表异常！", e);
+            baseResult = new BaseResult(false, "获取已截止的作业信息列表异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
+
+    /**
      * 获取大学生用户列表
      * @param
      * @return
@@ -255,30 +315,33 @@ public class AdminController extends BaseController
         return "redirect:/student/homInfo?jobId="+id;
     }
     /**
-     * 审核资源
+     * 删除作业
      * @param
      * @return
      */
-    @RequestMapping(value = "/auditingJob", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/deleteHom", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String auditingJob(@RequestParam(required = true) Long jobId,
-                                     @RequestParam(required = true) String jobStatus) {
+    public String deleteHom(@RequestParam(required = true) Long jobId) {
         String result = "";
         BaseResult baseResult = null;
         try{
-            CJobs cJobs=teacherService.getJobDetails (jobId);
-            int resultCode = teacherService.updateJobStatus(jobId,jobStatus);
-            if(resultCode > 0) {
-                String message="资源id为<a href=\"jobDetails?id=" + jobId + "\">"+jobId+"</a>的资源已经审批！";
-                messageService.sendMessage (MessageUtils.getMessage (cJobs.getJobTeacherId (),2L,1,message));
+            CUser cUser =(CUser) getLoginUser ().get ("loginuser");
+            CHomework cHomework=teacherService.getHomDetails(jobId);
+            int number=teacherService.deleteHomById (jobId);
+            if(number > 0) {
+                String message="作业记录序号为‘" + jobId+"’，作业标题为‘"+cHomework.getHomTitle()+"'的作业已经被管理员删除！详情请联系管理员";
+                messageService.sendMessage (
+                        new CMessage(cUser.getId(),cHomework.getTeacherId(),
+                                2,message,0,new Date(),2,0)
+                );
                 baseResult = new BaseResult(true, "");
             } else {
-                baseResult = new BaseResult(true, "修改资源状态失败");
+                baseResult = new BaseResult(true, "删除作业并通知教师失败");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("修改资源状态异常！", e);
-            baseResult = new BaseResult(false, "修改资源状态异常！");
+            log.error("删除作业并通知教师异常！", e);
+            baseResult = new BaseResult(false, "删除作业并通知教师异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;

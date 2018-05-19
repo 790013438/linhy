@@ -255,13 +255,14 @@ function registerComp (data)
         data: data, //发给的数据
         success: function (json)
         {//如果调用成功
-            if (json.success == false)
+            alert (json.error);
+           /* if (json.success == false)
             {
                 alert (json.error);
             } else
             {
-                alert (json.success);//error-->success myslef
-            }
+                alert (json.success);
+            }*/
         },
         error: function (json)
         {

@@ -28,7 +28,7 @@ $(function(){
     });
 });
 
-//查询待审核资源列表
+//查询作业列表
 var getWaitingAudit = function(condition) {
 	$.ajax({
 		url:"../admin/getAllJobs",

@@ -17,12 +17,15 @@ import java.util.List;
 public interface MessageDao
 {
 
-    void sendMessage(CMessage message);
+    int sendMessage(CMessage message);
 
     /**
      * 根据当前用户的类型和id获取自己的消息
-     * @param id
+     * @param
      * @return
      */
-    List<CMessage> getMessage(@Param ("id") Long id,@Param ("id2") Long id2);
+    List<CMessage> getMessage(CMessage cMessage);
+    String getSenderNameFromCUser(CMessage cMessage);
+    String getSenderNameFromCTeacher(CMessage cMessage);
+    Integer deleteMessage(String mesId);
 }

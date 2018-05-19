@@ -313,7 +313,7 @@
     <div class="popcon">
         <ul class="gray_three">
             <li><span>消息名称:</span>申请报名结果反馈</li>
-            <li><span>消息时间:</span>2017-03-10 16:11:38</li>
+            <li><span>消息时间:</span>2018-04-10 16:11:38</li>
             <li><span>发送人:</span>测试教师1</li>
             <li><span>申请岗位:</span>翻译</li>
             <li><span>消息内容:</span>拒绝</li>
