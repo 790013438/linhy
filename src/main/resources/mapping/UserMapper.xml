@@ -78,7 +78,21 @@
         VALUES (#{file_route},#{file_realname},#{file_type},#{file_size},#{file_hom_id},#{file_name},#{file_user_id})
     </insert>
     <!--getMyHomFile-->
-    <select id="getMyHomFile" parameterType="java.lang.Long"  resultType="com.xy.ssm.model.CHomFile">
-        select file_id,file_realname,file_name,file_hom_id,file_user_id,file_size,file_route,file_type from c_hom_files where file_user_id like #{userId}
+    <select id="getMyHomFile" parameterType="java.util.Map"  resultType="com.xy.ssm.model.CHomFile">
+        select file_id,file_realname,file_name,file_hom_id,file_user_id,file_size,file_route,file_type
+        from c_hom_files
+        where file_user_id like #{userId}
+        and file_hom_id like #{jobId}
+    </select>
+    <!--getNumberType-->
+    <select id="getNumberType"   resultType="com.xy.ssm.model.NumberType">
+        select jiangyi,kj,lx,jc,zds,rj,dm FROM
+        (select count(id) as jiangyi from c_jobs WHERE job_type='讲义') as a,
+        (select count(id) as kj from c_jobs WHERE job_type='课件') as b,
+        (select count(id) as lx from c_jobs WHERE job_type='录像') as c,
+        (select count(id) as jc from c_jobs WHERE job_type='教材') as d,
+        (select count(id) as zds from c_jobs WHERE job_type='指导书')as e,
+        (select count(id) as rj from c_jobs WHERE job_type='软件') as f,
+        (select count(id) as dm from c_jobs WHERE job_type='代码')as g
     </select>
 </mapper>

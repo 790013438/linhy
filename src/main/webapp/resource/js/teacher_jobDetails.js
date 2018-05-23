@@ -89,9 +89,9 @@ var initJobDetailForm = function(obj) {
     }
     if(obj.jobDeadline != null){
         var jobDeadlineTime = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
-         tr = tr + "<li><span>报名截止时间：</span>"+jobDeadlineTime+"</li>";
+         tr = tr + "<li><span>截止时间：</span>"+jobDeadlineTime+"</li>";
     } else{
-         tr = tr + "<li><span>报名截止时间：</span>无</li>";
+         tr = tr + "<li><span>截止时间：</span>无</li>";
     }
     if(+obj.jobIntroduction != null){
         tr = tr + "<li><span>资源描述信息：</span>" +

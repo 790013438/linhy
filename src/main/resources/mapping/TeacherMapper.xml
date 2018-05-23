@@ -36,19 +36,23 @@
     </select>
     <!-- a.job_demand_number as jobDemandNumber, a.job_requires_gender as jobRequiresGender, a.job_salary_type as jobSalaryType, a.job_salary as jobSalary,a.job_address as jobAddress,-->
     <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
-    <select id="selectJobsByTeacherId" resultType="com.xy.ssm.model.CJobs">
-        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,b.static_value as jobStatus,
-     a.job_hours as jobHours ,
-       a.job_introduction as jobIntroduction,a.job_deadline as jobDeadline,
-        a.create_time as createTime from c_jobs as a
-        left join c_static as b on b.static_code=a.job_status
-        where job_teacher_id = #{teacherId}
-        <if test="2== jobStatus">
+    <!--b.static_value as jobStatus, <if test="2== jobStatus">
             AND  (job_status = 1 or job_status = 0 or job_status = 2 or job_status = -1)
         </if>
         <if test="3== jobStatus">
             AND  (job_status = 3 or job_status = 4 or job_status = 5)
-        </if>
+        </if>-->
+    <select id="selectJobsByTeacherId" resultType="com.xy.ssm.model.CJobs">
+        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,a.job_status as jobStatus,
+       a.job_hours as jobHours ,
+       a.job_introduction as jobIntroduction,a.job_deadline as jobDeadline,
+        a.create_time as createTime,
+        b.appliCount
+        from c_jobs as a
+        LEFT JOIN (select count(id) as appliCount,appli_job_id from c_application where appli_type=1 group by appli_job_id) as b
+        ON b.appli_job_id=a.id
+        where job_teacher_id = #{teacherId}
+        and (a.job_status=0 or a.job_status=1)
     </select>
     <!--getHomsByTeacherId-->
     <select id="getHomsByTeacherId" resultType="com.xy.ssm.model.CHomework">
@@ -81,14 +85,17 @@
     <select id="selectAllJobs" resultType="com.xy.ssm.model.CJobs">
         select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
       a.job_hours as jobHours , a.job_introduction as jobIntroduction,a.job_deadline as jobDeadline,
-        a.create_time as createTime,b.tea_name as jobTeacherName,d.static_value as jobStatus,a.job_hours as jobTime,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount from c_jobs as a
+        a.create_time as createTime,b.tea_name as jobTeacherName,d.static_value as jobStatus,a.job_hours as jobTime,
+        (SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount
+        from c_jobs as a
         LEFT JOIN c_teacher as b on a.job_teacher_id=b.id
         LEFT JOIN c_static as d on d.static_code=a.job_status
+        where a.user_sign=1
         <if test="jobStatus == 1">
-            WHERE  job_status = #{jobStatus}
+            AND  job_status = #{jobStatus}
         </if>
         <if test="jobStatus == 2">
-            WHERE  job_status > #{jobStatus}
+            AND  job_status > #{jobStatus}
         </if>
     </select>
 
@@ -139,17 +146,18 @@
         update c_teacher set tea_status =#{teaStatus} where id = #{teacherId}
     </update>
 
-    <!-- u.user_icon as userIcon,u.user_intention_job as userIntention ,字段被删除-->
+    <!-- u.user_icon as userIcon,u.user_intention_job as userIntention ,字段被删除
+            <if test=" '' != appliStatus and appliStatus != null ">
+          and a.appli_status = #{appliStatus}
+        </if>
+    -->
     <select id="getEnrollmentSituation" resultType="com.xy.ssm.model.CApplication">
         SELECT a.id,u.id as appliUserId,u.user_name as userName,u.user_phone as userPhone,u.user_email as userEmail,
        u.user_gender as userGender,u.user_realname as userRealName,
         u.user_profile as userProfile,u.user_type as userType , u.user_status as userStatus,a.appli_status as appliStatus,a.create_time as createTime,u.user_major as userMajor
         FROM c_application as a
         INNER JOIN c_users as u on a.appli_user_id = u.id
-        WHERE a.appli_job_id = #{jobId} and a.tea_sign = 1
-        <if test=" '' != appliStatus and appliStatus != null ">
-          and a.appli_status = #{appliStatus}
-        </if>
+        WHERE a.appli_job_id = #{jobId} and a.user_sign = 1
     </select>
 
     <update id="updateApplicationStatus">
@@ -166,12 +174,12 @@
         tea_license as teaLicense,tea_address as teaAddress , tea_photo as teaPhoto,tea_status as teaStatus,
         create_time as createTime from c_teacher where id = #{teacherId}
     </select>
+    <!--left join c_static as b on a.tea_status = b.static_code-->
     <select id="getAllTeacher" resultType="com.xy.ssm.model.CTeacher">
         select a.id,a.tea_account as teaAccount,a.tea_password as teaPassword,a.tea_name as teaName,
         a.tea_contacts as teaContacts,a.tea_phone as teaPhone,a.tea_email as teaEmail,a.tea_info as teaInfo ,
-        a.tea_license as teaLicense,a.tea_address as teaAddress ,a.tea_photo as teaPhoto,b.static_value as teaStatus,
+        a.tea_license as teaLicense,a.tea_address as teaAddress ,a.tea_photo as teaPhoto,a.tea_status as teaStatus,
         a.create_time as createTime from c_teacher as a
-        left join c_static as b on a.tea_status = b.static_code
     </select>
 
     <update id="updateJobSign">

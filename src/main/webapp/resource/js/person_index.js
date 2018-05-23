@@ -67,7 +67,7 @@ var applicationJob = function(id) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "申请报名成功";
+                    var txt = "申请成功";
                     alert(txt);
                     return;
                 }
@@ -145,7 +145,7 @@ var appendJobNode = function(obj) {
 		"<td>"+
 		"<a  href =\"../student/jobInfo?jobId="+obj.id+"\" >查看资源详情</a> |";
 	    if(obj.flag== 0){
-            var job_str1 = job_str +"<button type=\"button\" onclick=\"applicationJob('"+obj.id+"')\" class='btn btn-link'>申请报名</button>";
+            var job_str1 = job_str +"<button type=\"button\" onclick=\"applicationJob('"+obj.id+"')\" class='btn btn-link'>申请</button>";
         }else{
             var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>已报名</button>";
            // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已报名</a>";

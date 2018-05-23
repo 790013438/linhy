@@ -22,5 +22,7 @@ public interface UserService {
     List<CUser> getAllUsers();
     void addHomFile(Map map);
     /*查询本人上传作业文件详情*/
-    List<CHomFile> getMyHomFile(Long userId);
+    List<CHomFile> getMyHomFile(Map map);
+    /*得到资源类型数量*/
+    NumberType getNumberType();
 }

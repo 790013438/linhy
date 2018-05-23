@@ -172,7 +172,6 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/checkName", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String checkName(@RequestParam(required = true) String  username) {
-        log.info("--------------------/user/checkName  called");
         String result = "";
         BaseResult baseResult = null;
         try{
@@ -318,10 +317,8 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/checkTphone", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String checkTphone(@RequestParam(required = true) String  phone) {
-        log.info("--------------------/teacher/checkPhone  called");
         String result = "";
         BaseResult baseResult = null;
-        log.info ("1111111111111111111111111111"+phone);
         try{
             if(StringUtils.isEmpty(phone)){
                 baseResult=new BaseResult(false,"手机号信息获取异常，请联系管理员稍后再试");
@@ -522,13 +519,16 @@ public class UserController extends BaseController{
      */
     @RequestMapping(value = "/getMyHomFile", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String getMyHomFile() {
+    public String getMyHomFile(@RequestParam(required = true) Long jobId) {
         String result = "";
         BaseResult baseResult = null;
         CUser cUser =(CUser)getLoginUser ().get ("loginuser");
         Long userId = cUser.getId();
+        Map<String,Long> map=new HashMap<String, Long>();
+        map.put("userId",userId);
+        map.put("jobId",jobId);
         try{
-            List<CHomFile> list = userService.getMyHomFile(userId);
+            List<CHomFile> list = userService.getMyHomFile(map);
             if(list != null && 0<list.size()) {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(list);
@@ -546,7 +546,7 @@ public class UserController extends BaseController{
 
 
     /**
-     *申请报名作业
+     *申请作业
      * @param jobId
      * @return
      */
@@ -567,7 +567,7 @@ public class UserController extends BaseController{
                 cApplication.setAppliStatus("appli_apply");
                 cApplication.setAppliUserId(cUser.getId());
                 cApplication.setCreateTime(new Date());
-                //向数据库中添加申请报名记录
+                //向数据库中添加申请记录
                 int resultCode = cUserService.addHomApplication(cApplication);
                 if (resultCode > 0) {
                     //查询该资源的报名人数
@@ -581,14 +581,14 @@ public class UserController extends BaseController{
                                     message,0,new Date(),1,0)
                     );
                 }else{
-                    baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
+                    baseResult=new BaseResult(true,"申请失败，请刷新后重试");
                 }
                 }
                 result = JSON.toJSONString(baseResult);
           /*  }*/
         }catch (Exception e){
-            log.error("申请报名资源异常"+e);
-            baseResult=new BaseResult(false,"申请报名资源异常");
+            log.error("申请资源异常"+e);
+            baseResult=new BaseResult(false,"申请资源异常");
             result= JSON.toJSONString(baseResult);
         }
         log.info (result);
@@ -596,7 +596,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     *申请报名资源
+     *申请资源
      * @param jobId
      * @return
      */
@@ -617,7 +617,7 @@ public class UserController extends BaseController{
                 cApplication.setAppliStatus("appli_apply");
                 cApplication.setAppliUserId(cUser.getId());
                 cApplication.setCreateTime(new Date());
-                //向数据库中添加申请报名记录
+                //向数据库中添加申请记录
                 int resultCode = cUserService.addJobApplication(cApplication);
                 if (resultCode > 0) {
                     //查询该资源的报名人数
@@ -632,14 +632,14 @@ public class UserController extends BaseController{
                                     message,0,new Date(),1,0)
                     );
                 }else{
-                    baseResult=new BaseResult(true,"申请报名失败，请刷新后重试");
+                    baseResult=new BaseResult(true,"申请失败，请刷新后重试");
                 }
             }
             result = JSON.toJSONString(baseResult);
             /*  }*/
         }catch (Exception e){
-            log.error("申请报名资源异常"+e);
-            baseResult=new BaseResult(false,"申请报名资源异常");
+            log.error("申请资源异常"+e);
+            baseResult=new BaseResult(false,"申请资源异常");
             result= JSON.toJSONString(baseResult);
         }
         log.info (result);

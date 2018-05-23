@@ -80,7 +80,7 @@ var appliJobById = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "申请报名成功";
+                    var txt = "申请成功";
                     alert(txt);
                     return;
                 }
@@ -155,9 +155,9 @@ var initJobDetailForm = function(obj) {
     }
     if(obj.jobDeadline != null){
         var jobDeadlineTime = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
-         tr = tr + "<li><span>报名截止时间：</span>"+jobDeadlineTime+"</li>";
+         tr = tr + "<li><span>截止时间：</span>"+jobDeadlineTime+"</li>";
     } else{
-         tr = tr + "<li><span>报名截止时间：</span>无</li>";
+         tr = tr + "<li><span>截止时间：</span>无</li>";
     }
     /*if(obj.jobAddress != null){
         tr = tr + "<li><span>工作地点：</span>"+obj.jobAddress+"</li>";

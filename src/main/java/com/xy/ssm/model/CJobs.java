@@ -43,7 +43,7 @@ public class CJobs implements Serializable {
     private int appliCount;
     //工作时间
     private Double jobHours;
-    //报名截止时间
+    //截止时间
     private Date jobDeadline;
     //创建时间
     private Date createTime;

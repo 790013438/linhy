@@ -72,7 +72,7 @@
         </div>
         <div id="forgot" class="tab-pane">
             <form action="index.html" class="form-signin">
-                <p class="text-muted text-center btn-block btn btn-primary btn-rect">清输入你的邮箱来找回密码</p>
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">请输入你的邮箱来找回密码</p>
                 <input type="email"  required="required" placeholder="你注册时填写的邮箱信息"  class="form-control" maxlength="32"/>
                 <br />
                 <button class="btn text-muted text-center btn-success" type="submit">重置密码</button>

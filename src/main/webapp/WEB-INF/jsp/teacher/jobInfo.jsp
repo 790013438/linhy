@@ -69,6 +69,23 @@
 										</div>
 
 										<hr/>
+									<%--资源文件详细信息--%>
+									<div class="widget-body">
+										<div class="widget-main">
+											<span>资源文件</span>
+											<table id="ta_jobFile" class="table table-striped table-bordered">
+												<thead>
+												<tr>
+													<span><th>序号</th></span>
+													<span><th>文件名</th></span>
+													<span><th>文件类型</th></span>
+													<span><th>文件大小（KB，取整)</th></span>
+													<span><th>操作</th></span>
+												</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
 
 										<div class="row">
 											<div class="col-sm-12">
@@ -192,8 +209,8 @@
 	<div class="pop" onclick="closepop()" style="display: none;"></div>
 	<!--删除弹窗end-->
 	<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/teacher_jobInfo.js"></script>
 	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/teacher_jobInfo.js"></script>
 	<script type="text/javascript">
 			jQuery(function($) {
 

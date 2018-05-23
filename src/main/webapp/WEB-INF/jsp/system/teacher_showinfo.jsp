@@ -20,7 +20,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="../system/teacher">首页</a>
 							</li>
 
 							<li>
@@ -74,7 +74,7 @@
 
 															<div class="profile-user-info">
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 教师账号 </div>
+																	<div class="profile-info-name"> 教师姓名 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_account">无</span>
@@ -82,7 +82,7 @@
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 教师名 </div>
+																	<div class="profile-info-name"> 就职单位名称 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_name">无</span>
@@ -105,7 +105,7 @@
 																</div>
 
 																<div class="profile-info-row">
-																	<div class="profile-info-name"> 教师简介 </div>
+																	<div class="profile-info-name"> 个人简介 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_info">无</span>
@@ -131,14 +131,14 @@
 
 															<div class="hr hr-8 dotted"></div>
 
-															<div class="profile-user-info">
+															<%--<div class="profile-user-info">
 																		<div class="profile-info-row">
 																			<div class="profile-info-name"> 教师网站 </div>
 
 																	<div class="profile-info-value">
 																		<span id="span_website">无</span>																	</div>
 																</div>
-															</div>
+															</div>--%>
 														</div><!-- /span -->
 													</div><!-- /row-fluid -->
 

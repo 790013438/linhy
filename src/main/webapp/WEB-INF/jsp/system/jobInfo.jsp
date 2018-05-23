@@ -70,6 +70,23 @@
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
+							<%--资源文件详细信息--%>
+							<div class="widget-body">
+								<div class="widget-main">
+									<span>资源文件</span>
+									<table id="ta_jobFile" class="table table-striped table-bordered">
+										<thead>
+										<tr>
+											<span><th>序号</th></span>
+											<span><th>文件名</th></span>
+											<span><th>文件类型</th></span>
+											<span><th>文件大小（KB，取整)</th></span>
+											<span><th>操作</th></span>
+										</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
 

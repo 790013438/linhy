@@ -65,6 +65,8 @@ var getJobInfoByID = function(condition) {
 		dataType : 'json',
 		success:function(result){
 			if (result.success == true) {
+                var list=result.data;
+                var strFiles=jobFileList(list[1]);/*未实现*/
                 if(sign == 0){
                     $("#btn_appli").val("删除资源");
                 }else{
@@ -78,7 +80,7 @@ var getJobInfoByID = function(condition) {
 				if (result.data!=null){
                     $("#ul_jobDetail").empty();
                     //填充信息
-                    var detail_str = initJobDetailForm(result.data);
+                    var detail_str = initJobDetailForm(list[0]);
                     console.log(result.data);
                     $("#ul_jobDetail").append(detail_str);
 				} else{
@@ -229,9 +231,9 @@ var initJobDetailForm = function(obj) {
     }
     if(obj.jobDeadline != null){
         var jobDeadlineTime = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
-         tr = tr + "<li><span>报名截止时间：</span>"+jobDeadlineTime+"</li>";
+         tr = tr + "<li><span>截止时间：</span>"+jobDeadlineTime+"</li>";
     } else{
-         tr = tr + "<li><span>报名截止时间：</span>无</li>";
+         tr = tr + "<li><span>截止时间：</span>无</li>";
     }
     /*if(obj.jobAddress != null){
         tr = tr + "<li><span>工作地点：</span>"+obj.jobAddress+"</li>";
@@ -248,7 +250,20 @@ var initJobDetailForm = function(obj) {
     return tr;
 }
 
-
+/*显示资源文件信息*/
+function jobFileList(file){
+    var jobfile=file;
+    if (jobfile!=null){
+        for(var i=0;i<jobfile.length;i++){
+            var x=document.getElementById("ta_jobFile").insertRow();
+            x.insertCell(0).innerHTML =jobfile[i].file_id;
+            x.insertCell(1).innerHTML=jobfile[i].file_realname;
+            x.insertCell(2).innerHTML=jobfile[i].file_type;
+            x.insertCell(3).innerHTML=jobfile[i].file_size;
+            x.insertCell(4).innerHTML="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
+        }
+    }
+}
 
 
 

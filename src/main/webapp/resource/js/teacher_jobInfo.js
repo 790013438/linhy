@@ -67,9 +67,11 @@ var getJobInfoByID = function(condition)
                         }
                         if (result.data != null)
                         {
+                            var list=result.data;
+                            var strFiles=jobFileList(list[1]);
                             $ ("#ul_jobDetail").empty ();
                             //填充信息
-                            var detail_str = initJobDetailForm (result.data);
+                            var detail_str = initJobDetailForm (list[0]);
                             console.log (result.data);
                             $ ("#ul_jobDetail").append (detail_str);
                         } else
@@ -275,31 +277,11 @@ var initJobDetailForm = function(obj) {
     }else{
         tr = tr + "<li><span>教师名称：</span>无</li>";
     }
-   /* if(obj.jobDemandNumber != null){
-        tr = tr + "<li><span>需求人数：</span>"+obj.jobDemandNumber+"<span>（人）</span></li>";
-    }else{
-        tr = tr + "<li><span>需求人数：</span>无</li>";
-    }*/
-   /* if(obj.jobRequiresGender != null){
-        tr = tr + "<li><span>性别要求：</span>"+obj.jobRequiresGender+"</li>";
-    }else{
-        tr = tr + "<li><span>性别要求：</span>无</li>";
-    }*/
-   /* if(obj.jobSalaryType != null){
-        tr = tr + "<li><span>薪资类型：</span>"+obj.jobSalaryType+"</li>";
-    }else{
-        tr = tr + "<li><span>薪资类型：</span>无</li>";
-    }*/
     if(obj.jobHours != null){
         tr = tr + "<li><span>建议每日学习时长：</span>"+obj.jobHours+"<span>（时）</span></li>";
     }else{
         tr = tr + "<li><span>建议每日学习时长：</span>无</li>";
     }
-    /*if(obj.jobSalary != null){
-        tr = tr + "<li><span>薪资金额：</span>"+obj.jobSalary+"<span>（元）</span></li>";
-    }else{
-        tr = tr + "<li><span>薪资金额：</span>无</li>";
-    }*/
     if(obj.createTime != null){
         var jobTime1 = moment(obj.createTime).format("YYYY-MM-DD HH:mm:ss");
          tr = tr + "<li><span>资源开始时间：</span>"+jobTime1+"</li>";
@@ -308,15 +290,10 @@ var initJobDetailForm = function(obj) {
     }
     if(obj.jobDeadline != null){
         var jobDeadlineTime = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
-         tr = tr + "<li><span>报名截止时间：</span>"+jobDeadlineTime+"</li>";
+         tr = tr + "<li><span>截止时间：</span>"+jobDeadlineTime+"</li>";
     } else{
-         tr = tr + "<li><span>报名截止时间：</span>无</li>";
+         tr = tr + "<li><span>截止时间：</span>无</li>";
     }
-   /* if(obj.jobAddress != null){
-        tr = tr + "<li><span>工作地点：</span>"+obj.jobAddress+"</li>";
-    }else{
-        tr = tr + "<li><span>工作地点：</span>无</li>";
-    }*/
     if(+obj.jobIntroduction != null){
         tr = tr + "<li><span>资源描述信息：</span>" +
                 "<textarea style='width:70%;' disabled=\"disabled\">"+obj.jobIntroduction+"</textarea>" +
@@ -393,5 +370,18 @@ function closepop(){
     $(".popinto").hide();
 }
 
-
+/*显示资源文件信息*/
+function jobFileList(file){
+    var jobfile=file;
+    if (jobfile!=null){
+        for(var i=0;i<jobfile.length;i++){
+            var x=document.getElementById("ta_jobFile").insertRow();
+            x.insertCell(0).innerHTML =jobfile[i].file_id;
+            x.insertCell(1).innerHTML=jobfile[i].file_realname;
+            x.insertCell(2).innerHTML=jobfile[i].file_type;
+            x.insertCell(3).innerHTML=jobfile[i].file_size;
+            x.insertCell(4).innerHTML="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
+        }
+    }
+}
 

@@ -4,39 +4,47 @@ $(function(){
     $('.submenu').find('li').removeClass('active open');
     $("#systemTeacher").addClass('active open');
     getTeacherList();
+    /*禁用*/
     $("#btnFrozen").click(function () {
         closepop();
         var teacherId = $("#teacherId").val();
         var condition = {
             teacherId:teacherId,
-            teaStatus:'comp_frozen'
+           /* teaStatus:'comp_frozen'*/
+            teaStatus:3
         };
         updateCompStatus(condition);
     });
+    /*解禁*/
     $("#btnThaw").click(function () {
         closepop();
         var teacherId = $("#teacherId").val();
         var condition = {
             teacherId:teacherId,
-            teaStatus:'comp_successful'
+           /* teaStatus:'comp_successful'*/
+            teaStatus:1
         };
         updateCompStatus(condition);
     });
+    /*审核通过*/
     $("#btnAuditAgree").click(function () {
         closepop();
         var teacherId = $("#teacherId").val();
         var condition = {
             teacherId:teacherId,
-            teaStatus:'comp_successful'
+           /* teaStatus:'comp_successful'*/
+            teaStatus:1
         };
         updateCompStatus(condition);
     });
+    /*审核拒绝*/
     $("#btnAuditRefuse").click(function () {
         closepop();
         var teacherId = $("#teacherId").val();
         var condition = {
             teacherId:teacherId,
-            teaStatus:'comp_refused'
+           /* teaStatus:'comp_refused'*/
+            teaStatus:2
         };
         updateCompStatus(condition);
     });
@@ -169,22 +177,31 @@ var appendTabTitle = function()
 
 
 var appendTeacherNode = function(obj) {
+    var status="审核通过";
+    if(obj.teaStatus==0){
+        status="未审核"
+    }else if(obj.teaStatus==1){
+        status="审核通过";
+    }else if(obj.teaStatus==2){
+        status="审核未通过"
+    }else if(obj.teaStatus==3){
+        status="禁用"
+    }
     var user_str = "<tr>"+
             "<td>"+obj.teaAccount+"</td>"+
-            "<td> "+obj.teaStatus+"</td>"+
+            "<td> "+status+"</td>"+
             "<td> "+obj.teaContacts+"</td>"+
             "<td> "+obj.teaPhone+"</td>"+
     "<td> "+obj.teaEmail+"</td>"+
-    "<td> "+obj.commWebsite+"</td>"+
+  /*  "<td> "+obj.commWebsite+"</td>"+*/
     "<td> "+obj.teaAddress+"</td>"+
             "<td>"+
             "<a  href =\"../system/teacher_showinfo?teacherId="+obj.id+"\" >查看教师信息</a> |";
-    if(obj.teaStatus == '禁用'){
+    if(obj.teaStatus==3){
         user_str =user_str+ "<button type=\"button\" onclick=\"thawTeacher('"+obj.id+"')\" class='btn btn-link'>解禁</button>";
-    }else if(obj.teaStatus =='注册成功'){
+    }else if(obj.teaStatus ==1){
         user_str = user_str+"<button type=\"button\" onclick=\"frozenTeacher('"+obj.id+"')\" class='btn btn-link'>禁用</button>";
-    }
-    if(obj.teaStatus == '申请注册'){
+    }else  if(obj.teaStatus == 0){
         user_str =user_str+ "<button type=\"button\" onclick=\" AuditTeacher('"+obj.id+"')\" class='btn btn-link'>审核</button>";
     }else{
         user_str = user_str+"<button type=\"button\" disabled='disabled'  class='btn btn-link'>审核</button>";

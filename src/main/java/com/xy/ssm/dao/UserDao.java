@@ -25,5 +25,6 @@ public interface UserDao {
     int updateUserPassword(@Param("newPw") String newPw,@Param("userId") Long userId);
     List<CUser> getAllUsers();
     void addHomFile(Map map);
-    List<CHomFile> getMyHomFile(Long userId);
+    List<CHomFile> getMyHomFile(Map map);
+    NumberType getNumberType();
 }

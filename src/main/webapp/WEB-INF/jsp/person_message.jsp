@@ -238,7 +238,7 @@
     											<td>12</td>
     											<td>3</td>
     											<td>未读</td>
-    											<td>申请报名结果反馈</td>
+    											<td>申请结果反馈</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" id="infoDetails">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -246,7 +246,7 @@
     											<td>13</td>
     											<td>2</td>
     											<td>未读</td>
-    											<td>申请报名结果反馈</td>
+    											<td>申请结果反馈</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" id="infoDetails">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -254,7 +254,7 @@
     											<td>3</td>
     											<td>2</td>
     											<td>未读</td>
-    											<td>申请报名结果反馈</td>
+    											<td>申请结果反馈</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" id="infoDetails">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -262,7 +262,7 @@
     											<td>4</td>
     											<td>1</td>
     											<td>未读</td>
-    											<td>申请报名结果反馈</td>
+    											<td>申请结果反馈</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" id="infoDetails">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -270,7 +270,7 @@
     											<td>5</td>
     											<td>1</td>
     											<td>未读</td>
-    											<td>申请报名结果反馈</td>
+    											<td>申请结果反馈</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link see" >查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -312,7 +312,7 @@
     </h1>
     <div class="popcon">
         <ul class="gray_three">
-            <li><span>消息名称:</span>申请报名结果反馈</li>
+            <li><span>消息名称:</span>申请结果反馈</li>
             <li><span>消息时间:</span>2018-04-10 16:11:38</li>
             <li><span>发送人:</span>测试教师1</li>
             <li><span>申请岗位:</span>翻译</li>

@@ -43,7 +43,7 @@ public class VOCApplication implements Serializable {
     private String jobStatus ;
     //备注
     /*private String jobRemarks;*/
-    //报名截止时间
+    //截止时间
     private Date jobDeadline;
     //资源时间
     private Date jobTime;

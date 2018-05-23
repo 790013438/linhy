@@ -545,4 +545,31 @@ public class AdminController extends BaseController
         }
         return result;
     }
+
+    /**
+     * 得到每种资源类型的数量
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getNumber", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getNumber() {
+        String result = "";
+        BaseResult baseResult = null;
+        try{
+            NumberType numberType = userService.getNumberType();
+            if(numberType != null) {
+                baseResult = new BaseResult(true, "");
+                baseResult.setData(numberType);
+            } else {
+                baseResult = new BaseResult(true, "系统中暂时没有资源存在");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("获取资源信息异常！", e);
+            baseResult = new BaseResult(false, "获取资源信息异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
 }

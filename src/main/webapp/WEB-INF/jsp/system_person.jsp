@@ -8,7 +8,7 @@
 		<meta charset="utf-8" />
 		<title>计算机专业学习资源系统--管理员端</title>
 		<meta name="keywords" content="计算机专业学习资源系统" />
-		<meta name="description" content="专为大学和教师用户设计的桥梁" />
+		<meta name="description" content="专为学生和教师用户设计的桥梁" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -158,9 +158,15 @@
 								</li>
 
 								<li >
-									<a href="system_jzgl.jsp">
+								<a href="system_jzgl.jsp">
+									<i class="icon-double-angle-right"></i>
+									审核后资源管理
+								</a>
+							</li>
+								<li >
+									<a href="system_diagram.jsp">
 										<i class="icon-double-angle-right"></i>
-										审核后资源管理
+										资源统计图
 									</a>
 								</li>
 							</ul>

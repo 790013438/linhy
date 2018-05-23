@@ -78,7 +78,13 @@ public class UserServiceImpl implements UserService {
     }
 /*查询本人上传作业文件详情*/
     @Override
-    public List<CHomFile> getMyHomFile(Long userId) {
-        return userDao.getMyHomFile(userId);
+    public List<CHomFile> getMyHomFile(Map map) {
+        return userDao.getMyHomFile(map);
+    }
+
+    /*得到资源类型数量*/
+    @Override
+    public NumberType getNumberType() {
+        return userDao.getNumberType();
     }
 }

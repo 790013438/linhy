@@ -51,7 +51,16 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 资源类型 </label>
 										<div class="col-sm-6">
-											<input type="text" id="input_jobType" placeholder="如：JavaWeb" class="col-xs-10 col-sm-5" />
+											<%--<input type="text" id="input_jobType" placeholder="" class="col-xs-10 col-sm-5" />--%>
+												<select id="input_jobType" class="col-xs-10 col-sm-5">
+													<option value ="讲义">讲义</option>
+													<option value ="课件">课件</option>
+													<option value="录像">录像</option>
+													<option value="教材">教材</option>
+													<option value ="指导书">指导书</option>
+													<option value="软件">软件</option>
+													<option value="代码">代码</option>
+												</select>
 										</div>
 									</div>
 									<div class="space-4"></div>
@@ -139,7 +148,7 @@
 										</div>
 									</div>    myself--%>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"> 报名截止时间</label>
+										<label class="col-sm-3 control-label no-padding-right"> 截止时间</label>
 
 										<div class="col-sm-2 input-group input-group-sm">
 													<input type="text" id="input_deadline" class="form-control hasDatepicker date-picker" data-date-format="yyyy-mm-dd" >

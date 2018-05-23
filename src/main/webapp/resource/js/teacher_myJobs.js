@@ -189,18 +189,33 @@ $(".table tr td input").each(function(){
 
 
 var appendJobNode = function(obj) {
+     var status="保存";
+     if(obj.jobStatus==0){
+         status="保存"
+     }else if(obj.jobStatus==1){
+         status="待审核"
+     }else if (obj.jobStatus==2){
+         status="驳回"
+     }else if (obj.jobStatus==3){
+         status="已审核"
+     }else if(obj.jobStatus==5){
+         status="结束"
+     }
+     if(obj.appliCount==""||obj.appliCount==null){
+         obj.appliCount=0
+     }
     var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
     var job_str = "<tr>"+
          "<td>"+obj.id+"</td>"+
 		"<td>"+obj.jobTitle+"</td>"+
 		"<td> "+obj.jobType+"</td>"+
-		"<td> "+obj.jobStatus+"</td>"+
+		"<td> "+status+"</td>"+
 		/*"<td> "+obj.jobDemandNumber+"</td>"+*/
         "<td> "+obj.appliCount+"</td>"+
         "<td> "+jobDeadline1+"</td>"+
 		"<td>"+
 		"<a  href =\"../teacher/jobInfo?jobId="+obj.id+"\" >查看报名情况</a> |";
-    if(obj.jobStatus== "结束"){
+    if(obj.jobStatus== 5){
         var job_str1 = job_str +"<button type=\"button\"  onclick=\"removeJob('"+obj.id+"')\" class='btn btn-link'>移除</button>";
     }else{
         var job_str1 = job_str +"<button type=\"button\"  onclick=\"closeJob('"+obj.id+"')\" class='btn btn-link'>关闭</button>";

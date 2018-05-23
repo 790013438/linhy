@@ -235,7 +235,7 @@
 											<div class="col-xs-12">
 												<div class="widget-box">
 													<div class="widget-header widget-header-flat">
-														<h4 class="smaller">申请报名结果反馈</h4>
+														<h4 class="smaller">申请结果反馈</h4>
 
 														<div class="widget-toolbar">
 															<label>

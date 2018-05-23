@@ -229,8 +229,9 @@
 		</div><!-- /.main-container -->
 
 		<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/teacher_myInfo.js"></script>
 	<script src="${resource}/resource/js/check.js"></script>
+	<script src="${resource}/resource/js/teacher_myInfo.js"></script>
+
 
 		<%--<script type="text/javascript">--%>
 			<%--jQuery(function($) {--%>

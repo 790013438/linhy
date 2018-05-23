@@ -163,6 +163,12 @@
 										已审核资源管理
 									</a>
 								</li>
+								<li >
+									<a href="system_diagram.jsp">
+										<i class="icon-double-angle-right"></i>
+										资源统计图
+									</a>
+								</li>
 							</ul>
 						</li>
 

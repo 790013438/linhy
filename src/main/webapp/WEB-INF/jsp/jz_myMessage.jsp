@@ -249,7 +249,7 @@
     											<td>11</td>
     											<td>8</td>
     											<td>已读</td>
-    											<td>申请报名</td>
+    											<td>申请</td>
     											<td>2017-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>

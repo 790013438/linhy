@@ -231,8 +231,8 @@
 		</div><!-- /.main-container -->
 
 	<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/myInfo.js"></script>
 	<script src="${resource}/resource/js/check.js"></script>
+	<script src="${resource}/resource/js/myInfo.js"></script>
 	</body>
 
 

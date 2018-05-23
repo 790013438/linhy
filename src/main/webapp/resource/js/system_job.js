@@ -68,7 +68,7 @@ var getMyJobs = function(condition) {
 //删除资源
 var delJobById = function(data) {
     $.ajax({
-        url:"../admin/deleteJobById",
+        url:"../admin/deleteJobById?jobId="+data,
         type : 'post',
         data :data,
         dataType : 'json',
@@ -144,20 +144,30 @@ var appendTabTitle = function()
 
 
 var appendJobNode = function(obj) {
+    var status="保存";
+    if(obj.jobStatus==0){
+        status="保存"
+    }else if(obj.jobStatus==1){
+        status="待审核"
+    }else if (obj.jobStatus==2){
+        status="驳回"
+    }else if (obj.jobStatus==3){
+        status="已审核"
+    }
     var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
     var jobTime1 = moment(obj.jobTime).format("YYYY-MM-DD HH:mm:ss");
     var sign = 0;
     var job_str = "<tr>"+
             "<td>"+obj.id+"</td>"+
             "<td>"+obj.jobTitle+"</td>"+
-            "<td> "+obj.jobStatus+"</td>"+
-         /*   "<td> "+obj.jobDemandNumber+"</td>"+*/
+            "<td> "+status+"</td>"+
+            "<td> "+obj.jobType+"</td>"+
             "<td> "+obj.appliCount+"</td>"+
             "<td> "+jobDeadline1+"</td>"+
             "<td> "+jobTime1+"</td>"+
             "<td>"+
             "<a  href =\"../system/jobInfo?jobId="+obj.id+"&sign="+sign+"\" >查看资源详情</a> |"+
-            "<button type=\"button\" onclick=\"delJob('"+obj.id+"')\" class='btn btn-link'>删除</button>";
+            "<button type=\"button\" onclick=\"delJobById('"+obj.id+"')\" class='btn btn-link'>删除</button>";
     "<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
     "</td>"+
     "</tr>";

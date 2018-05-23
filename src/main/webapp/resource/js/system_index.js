@@ -155,13 +155,23 @@ $(".table tr td input").each(function(){
 
 
 var appendJobNode = function(obj) {
+    var status="保存";
+    if(obj.jobStatus==0){
+        status="保存"
+    }else if(obj.jobStatus==1){
+        status="待审核"
+    }else if (obj.jobStatus==2){
+        status="驳回"
+    }else if (obj.jobStatus==3){
+        status="已审核"
+    }
     var jobDeadline1 = moment(obj.jobDeadline).format("YYYY-MM-DD HH:mm:ss");
     var sign = 1;
     var job_str = "<tr>"+
             "<td>"+obj.id+"</td>"+
 		"<td>"+obj.jobTitle+"</td>"+
-		"<td> "+obj.jobStatus+"</td>"+
-		/*"<td> "+obj.jobDemandNumber+"</td>"+*/
+		"<td> "+status+"</td>"+
+		"<td> "+obj.jobType+"</td>"+
 		"<td> "+obj.jobTeacherName+"</td>"+
 		"<td> "+jobDeadline1+"</td>"+
 		"<td>"+

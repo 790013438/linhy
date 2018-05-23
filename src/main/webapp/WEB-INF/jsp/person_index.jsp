@@ -242,7 +242,7 @@
     											<td>报名中</td>
     											<td>2</td>
     											<td>2019-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请报名</button></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请</button></td>
     										</tr>
     										<tr>
     											<td>JavaScript</td>
@@ -250,7 +250,7 @@
     											<td>报名中</td>
     											<td>1</td>
     											<td>2019-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请报名</button></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请</button></td>
     										</tr>
     										<tr>
     											<td>php</td>
@@ -258,7 +258,7 @@
     											<td>报名中</td>
     											<td>5</td>
     											<td>2019-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请报名</button></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请</button></td>
     										</tr>
     									</tbody> 
     
