@@ -135,7 +135,14 @@ public class TeacherController extends BaseController {
         /*文件上传*/
         /*上传文件保存目录*/
         Map<String,String> map=new HashMap();
-        String savePath="E:\\spring-mvc-mybatis-IDEA\\upload\\";
+        String savePath="E:\\spring-mvc-mybatis-IDEA\\spring-mvc-mybatis-IDEA\\src\\main\\webapp\\resource\\plugins\\pdfjs\\web\\upload\\";
+        File filexam=new File(savePath);
+        if (!filexam.getParentFile().exists()){
+            boolean pd=filexam.getParentFile().mkdirs();
+            if(!pd){
+                result="上传文件路径创建失败";
+            }
+        }
         String id=teacherService.getJobId();/*format.format(jobCreateTime)*/
         map.put("file_job_id",id);
         if (files!=null && files.length!=0){

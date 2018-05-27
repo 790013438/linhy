@@ -19,7 +19,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="person_index.jsp">首页</a>
+								<a href="/system/index">首页</a>
 							</li>
 
 							<li class="active">资源详情</li>
@@ -113,7 +113,7 @@
 	</div>
 	<div class="pop" onclick="closepop()" style="display: none;"></div>
 	<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/system_jobInfo.js"></script>
 	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/system_jobInfo.js"></script>
 	</body>
 </html>

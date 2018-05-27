@@ -100,7 +100,7 @@
 			</a>
 		</div><!-- /.main-container -->
 	<%@include file="commonFoot.jsp"%>
-	<script src="${resource}/resource/js/jobInfo.js"></script>
 	<script src="${resource}/resource/js/moment.js"></script>
+	<script src="${resource}/resource/js/jobInfo.js"></script>
 	</body>
 </html>

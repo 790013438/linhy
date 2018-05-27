@@ -338,14 +338,13 @@ public class UserController extends BaseController{
         return result;
     }
     /**
-     *登录
+     *登录学生或管理员用户
      * @param json
      * @return
      */
     @RequestMapping(value = "/login", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String login(@RequestParam(required = true) String  json) {
-        log.info("--------------------/user/login  called");
         String result = "";
         BaseResult baseResult = null;
         CUser cUser=new CUser();
@@ -421,7 +420,6 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/myinfo",produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String myinfo(@ModelAttribute("currentUser")CUser cUser){
-        log.info("--------------------/user/myinfo  called");
         String result = "";
         BaseResult baseResult = null;
         try{

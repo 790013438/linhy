@@ -21,6 +21,7 @@ public interface MessageDao
 
     /**
      * 根据当前用户的类型和id获取自己的消息
+     * 得到教师信息
      * @param
      * @return
      */

@@ -8,23 +8,25 @@ $(function(){
     $('.submenu').find('li').removeClass('active open');
     $("#systemIdex").addClass('active open');
     getWaitingAudit(condition);
+    /*通过*/
     $("#btnAdoptJob").click(function () {
-        closepop();
         var jobId = $("#input_jobId").val();
         var condition = {
             jobId:jobId,
             jobStatus:3
         };
         updateJobStatus(condition);
-    });
-    $("#btnRefuseJob").click(function () {
         closepop();
+    });
+    /*拒绝*/
+    $("#btnRefuseJob").click(function () {
         var jobId = $("#input_jobId").val();
         var condition = {
             jobId:jobId,
             jobStatus:2
         };
         updateJobStatus(condition);
+        closepop();
     });
 });
 

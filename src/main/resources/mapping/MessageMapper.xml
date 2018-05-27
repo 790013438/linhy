@@ -10,7 +10,7 @@
         mes_status,create_time,mes_sender_type,mes_object_type)
         values(#{mesSenderId},#{mesObjectId},#{mesType},#{mesContents},#{mesStatus},#{createTime},#{mesSenderType},#{mesObjectType})
     </insert>
-
+<!-- right join c_teacher, AND  mes_sender_type=0 and c_message.mes_sender_id=c_teacher.id-->
     <select id="getMessage" parameterType="com.xy.ssm.model.CMessage" resultType="com.xy.ssm.model.CMessage">
         select id,mes_sender_id as mesSenderId,mes_object_id as mesObjectId,
         mes_type as mesType,mes_contents as mesContents,
@@ -25,12 +25,12 @@
         and mes_status != 2
     </select>
     <select id="getSenderNameFromCUser" parameterType="com.xy.ssm.model.CMessage" resultType="String">
-        select user_name
+        select user_realname
         from c_users
         where  id=#{mesSenderId}
     </select>
     <select id="getSenderNameFromCTeacher" parameterType="com.xy.ssm.model.CMessage" resultType="String">
-        select tea_name
+        select tea_account
         from c_teacher
         where  id=#{mesSenderId}
     </select>

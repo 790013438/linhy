@@ -92,7 +92,7 @@ var appliJobById = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "报名资源失败";
+            var txt = "申请资源失败";
             alert(txt);
             return;
         },
@@ -122,21 +122,6 @@ var initJobDetailForm = function(obj) {
     }else{
         tr = tr + "<li><span>教师名称：</span>无</li>";
     }
-   /* if(obj.jobDemandNumber != null){
-        tr = tr + "<li><span>需求人数：</span>"+obj.jobDemandNumber+"<span>（人）</span></li>";
-    }else{
-        tr = tr + "<li><span>需求人数：</span>无</li>";
-    }*/
-   /* if(obj.jobRequiresGender != null){
-        tr = tr + "<li><span>性别要求：</span>"+obj.jobRequiresGender+"</li>";
-    }else{
-        tr = tr + "<li><span>性别要求：</span>无</li>";
-    }*/
-  /*  if(obj.jobSalaryType != null){
-        tr = tr + "<li><span>薪资类型：</span>"+obj.jobSalaryType+"</li>";
-    }else{
-        tr = tr + "<li><span>薪资类型：</span>无</li>";
-    }*/
     if(obj.jobHours != null){
         tr = tr + "<li><span>建议每日学习时长：</span>"+obj.jobHours+"<span>（时）</span></li>";
     }else{
@@ -178,12 +163,16 @@ function jobFileList(file){
     var jobfile=file;
     if (jobfile!=null){
         for(var i=0;i<jobfile.length;i++){
+            var operation="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
+            if(jobfile[i].file_type==".pdf"){
+                operation=operation+"|<a href='/resource/plugins/pdfjs/web/viewer.html?file=upload/"+jobfile[i].file_name+"'>在线预览</a>"
+            }
             var x=document.getElementById("ta_jobFile").insertRow();
             x.insertCell(0).innerHTML =jobfile[i].file_id;
             x.insertCell(1).innerHTML=jobfile[i].file_realname;
             x.insertCell(2).innerHTML=jobfile[i].file_type;
             x.insertCell(3).innerHTML=jobfile[i].file_size;
-            x.insertCell(4).innerHTML="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
+            x.insertCell(4).innerHTML=operation;
         }
     }
 }

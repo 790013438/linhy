@@ -107,12 +107,16 @@ function jobFileList(file){
     var jobfile=file;
     if (jobfile!=null){
         for(var i=0;i<jobfile.length;i++){
+            var operation="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
+            if(jobfile[i].file_type==".pdf"){
+                operation=operation+"|<a href='/resource/plugins/pdfjs/web/viewer.html?file=upload/"+jobfile[i].file_name+"'>在线预览</a>"
+            }
            var x=document.getElementById("ta_jobFile").insertRow();
            x.insertCell(0).innerHTML =jobfile[i].file_id;
            x.insertCell(1).innerHTML=jobfile[i].file_realname;
            x.insertCell(2).innerHTML=jobfile[i].file_type;
            x.insertCell(3).innerHTML=jobfile[i].file_size;
-           x.insertCell(4).innerHTML="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
+           x.insertCell(4).innerHTML=operation;
         }
     }
 }

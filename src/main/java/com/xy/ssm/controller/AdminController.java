@@ -572,4 +572,44 @@ public class AdminController extends BaseController
         }
         return result;
     }
+
+    /**
+     * 审核资源
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/auditingJob", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String auditingJob(@RequestParam(required = true) Long jobId,
+                              @RequestParam(required = true) String jobStatus) {
+        String result = "";
+        BaseResult baseResult = null;
+        CUser user=(CUser) getLoginUser ().get ("loginuser");
+        try{
+            CJobs cJobs=teacherService.getJobDetails (jobId);
+            int resultCode = teacherService.updateJobStatus(jobId,jobStatus);
+            if(resultCode > 0) {
+                String message="";
+                if("3".equals(jobStatus)){
+                    message="资源序号为"+jobId+"的资源审核通过！";
+                }else{
+                    message="资源序号为"+jobId+"的资源审核未通过！";
+                }
+                /*"资源序号为"+jobId+"的资源进行请求审批！";*/
+                messageService.sendMessage (
+                        new CMessage(user.getId(),null,1,
+                                message,0,new Date(),0,2)
+                );
+                baseResult = new BaseResult(true, "");
+            } else {
+                baseResult = new BaseResult(true, "修改资源状态失败");
+            }
+            result= JSON.toJSONString(baseResult);
+        }catch (Exception e) {
+            log.error("修改资源状态异常！", e);
+            baseResult = new BaseResult(false, "修改资源状态异常！");
+            result = JSON.toJSONString(baseResult);
+        }
+        return result;
+    }
 }

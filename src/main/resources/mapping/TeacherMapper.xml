@@ -28,11 +28,12 @@
         values(#{jobTeacherId},#{jobTitle},#{jobType},#{jobHours},#{jobIntroduction},
         #{jobDeadline},0,#{createTime},1)
     </insert>
+    <!--登录使用，查找教师用户-->
     <select id="selectTeacherByAccount" resultType="com.xy.ssm.model.CTeacher">
         select id,tea_account as teaAccount,tea_password as teaPassword,tea_name as teaName,
         tea_contacts as teaContacts,tea_phone as teaPhone,tea_email as teaEmail,tea_info as teaInfo ,
         tea_license as teaLicense,tea_address as teaAddress , tea_photo as teaPhoto,tea_status as teaStatus,
-        create_time as createTime from c_teacher where tea_account = #{teaAccount} and tea_status != 'tea_frozen'
+        create_time as createTime from c_teacher where tea_account = #{teaAccount} and tea_status != 2 and tea_status != 3
     </select>
     <!-- a.job_demand_number as jobDemandNumber, a.job_requires_gender as jobRequiresGender, a.job_salary_type as jobSalaryType, a.job_salary as jobSalary,a.job_address as jobAddress,-->
     <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
