@@ -33,7 +33,7 @@
 								资源信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									资源报名情况
+									资源申请情况
 								</small>
 							</h1>
 						</div><!-- /.page-header -->

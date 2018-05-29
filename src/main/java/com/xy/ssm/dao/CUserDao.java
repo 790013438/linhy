@@ -60,7 +60,7 @@ public interface CUserDao {
     int addHomApplication(CApplication cApplication);
 
     List<CJobs> getJobList (@Param("condition")String condition,@Param("offset")Integer offset,@Param("limit")Integer limit);
-    /*获取可报名作业列表*/
+    /*获取未截止作业列表*/
     List<CHomework> getHomList(@Param("condition")String condition, @Param("offset")Integer offset, @Param("limit")Integer limit);
     int getJobCount(@Param("condition")String condition,@Param("offset")Integer offset,@Param("limit")Integer limit);
     int getHomCount(@Param("condition")String condition,@Param("offset")Integer offset,@Param("limit")Integer limit);

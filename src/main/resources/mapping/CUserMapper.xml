@@ -47,9 +47,10 @@
     <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
     <select id="getJobList" resultType="com.xy.ssm.model.CJobs">
         select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
-       a.job_hours as jobHours ,
-       a.job_introduction as jobIntroduction,a.job_status as jobStatus,a.job_deadline as jobDeadline,
-        a.create_time as createTime,b.tea_name as jobTeacherName,(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed'and appli_type=0) as appliCount from c_jobs as a
+       a.job_hours as jobHours ,a.job_introduction as jobIntroduction,
+			 a.job_status as jobStatus,a.job_deadline as jobDeadline,
+        a.create_time as createTime,b.tea_account as jobTeacherName,
+				(SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed'and appli_type=0) as appliCount from c_jobs as a
         LEFT JOIN c_teacher as b on a.job_teacher_id = b.id
         where job_status = 3
     </select>
@@ -77,13 +78,13 @@
         FROM c_application
         WHERE appli_job_id = #{jobId} and appli_user_id = #{userId} AND appli_type=1
     </select>
-    <!--getHomList获取可报名作业列表homTeacherName-->
+    <!--getHomList获取可申请作业列表homTeacherName-->
     <select id="getHomList" resultType="com.xy.ssm.model.CHomework">
         select a.id,hom_teacher_id as teacherId,
         hom_title as homTitle,hom_type as homType,
         hom_introduction as homIntroduction,hom_status as homStatus,
         a.create_time AS createTime,hom_deadline as homDeadline,
-        tea_name as homTeacherName,
+        tea_account as homTeacherName,
         (SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed'and appli_type=1) as appliCount
         from c_homework as a, c_teacher
         where hom_deadline-CURRENT_TIMESTAMP()>0

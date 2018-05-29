@@ -233,7 +233,7 @@
     											<td>22</td>
     											<td>8</td>
     											<td>未读</td>
-    											<td>退出报名</td>
+    											<td>退出申请</td>
     											<td>2017-02-26 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
@@ -291,7 +291,7 @@
     </h1>
     <div class="popcon">
         <ul class="gray_three">
-            <li><span>消息名称:</span>有人报名了你的资源</li>
+            <li><span>消息名称:</span>有人申请了你的资源</li>
             <li><span>消息时间:</span>2018-04-10 16:11:38</li>
             <li><span>发送人:</span>系统提示</li>
             <li><span>消息内容:</span>好好学习，天天向上</li>

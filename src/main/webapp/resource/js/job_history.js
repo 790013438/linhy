@@ -62,7 +62,7 @@ var queryMyAppliJobs = function(condition) {
     });
 }
 
-//删除指定报名记录
+//删除指定申请记录
 var delApplicationById = function(data) {
     $.ajax({
         url:"../user/delApplication",

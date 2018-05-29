@@ -39,7 +39,7 @@ public class CJobs implements Serializable {
     private int flag ;
     //备注
     /*private String jobRemarks;*/
-    //该资源报名人数
+    //该资源申请人数
     private int appliCount;
     //工作时间
     private Double jobHours;

@@ -215,7 +215,7 @@
 								资源信息
 								<small>
 									<i class="icon-double-angle-right"></i>
-									资源报名情况
+									资源申请情况
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -247,7 +247,7 @@
 																<dt>资源标题：资源详情</dt>
 																<dt>资源类型：JavaWeb</dt>
 																<%--<dt>需求人数：5人</dt>--%>
-																<dt>报名人数：1人</dt>
+																<dt>申请人数：1人</dt>
 																<%--<dt>薪资类型：时薪</dt>--%>
 															<%--	<dt>薪资金额：20￥/小时</dt>--%>
 																<dt>资源时长：4小时</dt>
@@ -305,7 +305,7 @@
     											<td>1502774793@qq.com</td>
     											<td>陈坤</td>
     											<td>3558543875</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看报名用户</button><button class="btn btn-link delete">审批</button></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看申请用户</button><button class="btn btn-link delete">审批</button></td>
     										</tr>
     									</tbody> 
     

@@ -395,7 +395,7 @@ public class UserController extends BaseController{
                         }else {
                             map.put("loginuser",cUser);
                             saveLoginUser (map);
-                            baseResult=new BaseResult(true,"");
+                            baseResult=new BaseResult(true,"学生用户注册成功，可以登录使用");
                             baseResult.setData(3);
 
                         }
@@ -435,7 +435,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * 获取可报名资源列表
+     * 获取可申请资源列表
      * @param
      * @return
      */
@@ -462,18 +462,18 @@ public class UserController extends BaseController{
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(tableResult);
             } else {
-                baseResult = new BaseResult(true, "暂无可报名资源信息");
+                baseResult = new BaseResult(true, "暂无可申请资源信息");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取可报名资源列表异常！", e);
-            baseResult = new BaseResult(false, "获取可报名资源列表异常！");
+            log.error("获取可申请资源列表异常！", e);
+            baseResult = new BaseResult(false, "获取可申请资源列表异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
     }
     /**
-     * 获取可报名作业列表
+     * 获取未截止作业列表
      * @param
      * @return
      */
@@ -568,12 +568,12 @@ public class UserController extends BaseController{
                 //向数据库中添加申请记录
                 int resultCode = cUserService.addHomApplication(cApplication);
                 if (resultCode > 0) {
-                    //查询该资源的报名人数
+                    //查询该资源的申请人数
                    /* int count = teacherService.getJobApplicationCount(jobId);*/
                     baseResult=new BaseResult(true,"");
                     /*发送留言*/
-                    String message="报名作业，作业记录序号为"+jobId+"，标题为'"+job.getHomTitle()+"'的作业记录。";
-                    /*发送信息报名消息*/
+                    String message="申请作业，作业记录序号为"+jobId+"，标题为'"+job.getHomTitle()+"'的作业记录。";
+                    /*发送信息申请消息*/
                     messageService.sendMessage (
                             new CMessage(cUser.getId(),job.getTeacherId(),2,
                                     message,0,new Date(),1,0)
@@ -618,13 +618,12 @@ public class UserController extends BaseController{
                 //向数据库中添加申请记录
                 int resultCode = cUserService.addJobApplication(cApplication);
                 if (resultCode > 0) {
-                    //查询该资源的报名人数
+                    //查询该资源的申请人数
                    /* int count = teacherService.getJobApplicationCount(jobId);*/
                     baseResult=new BaseResult(true,"");
                     /*baseResult.setData(count);*/
-                    //设置报名人数上限为需求人数的两倍，供教师筛选
-                    String message="报名资源，资源记录序号为"+jobId+"，标题为'"+job.getJobTitle()+"'的资源。";
-                    /*发送信息报名消息*/
+                    String message="申请资源，资源记录序号为"+jobId+"，标题为'"+job.getJobTitle()+"'的资源。";
+                    /*发送信息申请消息*/
                     messageService.sendMessage (
                             new CMessage(cUser.getId(),job.getJobTeacherId(),1,
                                     message,0,new Date(),1,0)
@@ -645,7 +644,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * 查看我的资源情况
+     * 查看我的资源历史情况
      * @param
      * @return
      */
@@ -661,12 +660,12 @@ public class UserController extends BaseController{
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(vocApplicationList);
             } else {
-                baseResult = new BaseResult(true, "暂无报名情况");
+                baseResult = new BaseResult(true, "暂无历史资源");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("查看我的报名情况异常！", e);
-            baseResult = new BaseResult(false, "查看我的报名情况异常！");
+            log.error("查看我的历史资源异常！", e);
+            baseResult = new BaseResult(false, "查看我的历史资源异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;

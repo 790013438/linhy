@@ -234,6 +234,9 @@ function jobFileList(file){
             if(jobfile[i].file_type==".pdf"){
                 operation=operation+"|<a href='/resource/plugins/pdfjs/web/viewer.html?file=upload/"+jobfile[i].file_name+"'>在线预览</a>"
             }
+            if (jobfile[i].file_type==".mp4"){
+                operation=operation+"|<a href='/teacher/play?name="+jobfile[i].file_name+"'>在线播放</a>"
+            }
             var x=document.getElementById("ta_jobFile").insertRow();
             x.insertCell(0).innerHTML =jobfile[i].file_id;
             x.insertCell(1).innerHTML=jobfile[i].file_realname;

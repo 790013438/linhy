@@ -118,15 +118,19 @@ public class MessageController extends BaseController
     }
 
     /**
-     * 自主发送留言
-     * @param
+     * 发送消息
+     * @param objectId 消息接收者id
+     * @param senderType 消息发送人类型
+     * @param con 消息内容
+     * @param objectType 消息接受者类型
+     * @param mesType 消息类型
      * @return
      */
     @RequestMapping(value = "/sendMessage", produces = {"application/json;charset=UTF-8"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String sendMessage (@RequestParam(required = true)Long objectId,
                                @RequestParam(required = true)Integer senderType,
-                               @RequestParam(required = false)String con,
+                               @RequestParam(required = true)String con,
                                @RequestParam(required = false)Integer objectType,
                                @RequestParam(required = false)Integer mesType){
         String result = "";

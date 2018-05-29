@@ -159,7 +159,7 @@
 								<li class="active">
 									<a href="person_myjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										资源报名情况
+										资源申请情况
 									</a>
 								</li>
 
@@ -209,7 +209,7 @@
 							</li>
 
 							<li class="active">我的资源</li>
-							<li class="active">资源报名情况</li>
+							<li class="active">资源申请情况</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
@@ -231,7 +231,7 @@
       											<th>资源时间</th>
       											<th>资源状态</th>
       											<th>发布教师</th>
-      											<th>报名状态</th> 
+      											<th>申请状态</th>
       											<th>操作</th> 
      										</tr> 
     									</thead> 
@@ -240,7 +240,7 @@
     											<td>11</td>
     											<td>派发传单</td>
     											<td>2017-02-25 22:14:53</td>
-    											<td>报名中</td>
+    											<td>申请中</td>
     											<td>测试教师2</td>
     											<td>待审核</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">退出资源</button></a></td>
@@ -249,7 +249,7 @@
     											<td>2</td>
     											<td>派发传单</td>
     											<td>2017-02-25 22:14:53</td>
-    											<td>报名中</td>
+    											<td>申请中</td>
     											<td>测试教师3</td>
     											<td>审核通过</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">退出资源</button></a></td>

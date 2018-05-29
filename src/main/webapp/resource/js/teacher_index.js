@@ -204,7 +204,7 @@ var appendJobNode = function(obj) {
         var job_str1 = job_str +"<button type=\"button\" onclick=\"submitAudit('"+obj.id+"')\" class='btn btn-link'>提交审核</button>";
     }else{
         var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>提交审核</button>";
-        // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已报名</a>";
+        // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已申请</a>";
     }
 		"<input type=\"hidden\" name=\"job_id\" value=\""+obj.id+"\">"+
 		"</td>"+

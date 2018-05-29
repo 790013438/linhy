@@ -110,7 +110,7 @@
                         <span class="menu-text"> 作业中心 </span>
                     </a>
                 </li>
-                <li id="li_myjob">
+<%--                <li id="li_myjob">
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-list"></i>
                         <span class="menu-text"> 我的资源 </span>
@@ -122,7 +122,7 @@
                         <li id="li_myAppliJob">
                             <a href="../student/myJob">
                                 <i class="icon-double-angle-right"></i>
-                                查看资源报名情况
+                                查看资源申请情况
                             </a>
                         </li>
 
@@ -133,7 +133,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
 
                 <li id="li_myInfo">
                     <a href="../student/myinfo">

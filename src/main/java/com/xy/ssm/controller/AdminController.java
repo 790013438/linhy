@@ -45,7 +45,6 @@ public class AdminController extends BaseController
      */
     @RequestMapping("index")
     private String toIndex(){
-        log.info("--------------------call:index");
         return "system_index";
     }
     /**
@@ -68,7 +67,7 @@ public class AdminController extends BaseController
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(tableResult);
             } else {
-                baseResult = new BaseResult(true, "没有查询到待审核资源信息");
+                baseResult = new BaseResult(true, "没有查询到资源信息");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {

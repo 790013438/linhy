@@ -83,21 +83,23 @@
     </select>
 <!-- a.job_demand_number as jobDemandNumber, a.job_requires_gender as jobRequiresGender,a.job_salary_type as jobSalaryType,a.job_salary as jobSalary,a.job_address as jobAddress ,-->
     <!--a.job_contact_phone as jobContactPhone,a.job_remarks as jobRemarks,-->
-    <select id="selectAllJobs" resultType="com.xy.ssm.model.CJobs">
-        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
-      a.job_hours as jobHours , a.job_introduction as jobIntroduction,a.job_deadline as jobDeadline,
-        a.create_time as createTime,b.tea_name as jobTeacherName,d.static_value as jobStatus,a.job_hours as jobTime,
-        (SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount
-        from c_jobs as a
-        LEFT JOIN c_teacher as b on a.job_teacher_id=b.id
-        LEFT JOIN c_static as d on d.static_code=a.job_status
-        where a.user_sign=1
-        <if test="jobStatus == 1">
+    <!--d.static_value as jobStatus,        LEFT JOIN c_static as d on d.static_code=a.job_status-->
+    <!--        <if test="jobStatus == 1">
             AND  job_status = #{jobStatus}
         </if>
         <if test="jobStatus == 2">
             AND  job_status > #{jobStatus}
-        </if>
+        </if>-->
+    <select id="selectAllJobs" resultType="com.xy.ssm.model.CJobs">
+        select a.id,a.job_teacher_id as jobTeacherId,a.job_title as jobTitle,a.job_type as jobType,
+      a.job_hours as jobHours , a.job_introduction as jobIntroduction,a.job_deadline as jobDeadline,
+        a.create_time as createTime,b.tea_name as jobTeacherName,a.job_hours as jobTime,
+        a.job_status as jobStatus,
+        (SELECT count(*) from c_application where c_application.appli_job_id = a.id and appli_status != 'appli_failed') as appliCount
+        from c_jobs as a
+        LEFT JOIN c_teacher as b on a.job_teacher_id=b.id
+        where a.user_sign=1
+        AND  job_status = #{jobStatus}
     </select>
 
     <select id="selectAllJobsCount" resultType="int">

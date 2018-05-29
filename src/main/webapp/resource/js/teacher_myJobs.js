@@ -214,7 +214,7 @@ var appendJobNode = function(obj) {
         "<td> "+obj.appliCount+"</td>"+
         "<td> "+jobDeadline1+"</td>"+
 		"<td>"+
-		"<a  href =\"../teacher/jobInfo?jobId="+obj.id+"\" >查看报名情况</a> |";
+		"<a  href =\"../teacher/jobInfo?jobId="+obj.id+"\" >查看申请情况</a> |";
     if(obj.jobStatus== 5){
         var job_str1 = job_str +"<button type=\"button\"  onclick=\"removeJob('"+obj.id+"')\" class='btn btn-link'>移除</button>";
     }else{

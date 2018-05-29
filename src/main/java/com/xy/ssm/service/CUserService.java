@@ -50,7 +50,7 @@ public interface CUserService {
     int addHomApplication(CApplication cApplication);
 
    List<CJobs> getJobList(String condition,Integer offset,Integer limit);
-    /*获取可报名作业列表*/
+    /*获取未截止作业列表*/
     List<CHomework> getHomList(String condition,Integer offset,Integer limit);
     int getJobCount(String condition,Integer offset,Integer limit);
     int getHomount(String condition,Integer offset,Integer limit);

@@ -23,7 +23,7 @@
 							</li>
 
 							<li class="active">我的资源</li>
-							<li class="active">资源报名情况</li>
+							<li class="active">资源申请情况</li>
 							
 						</ul><!-- .breadcrumb -->
 						<div style="position:absolute;top:3px;right:22px;line-height:24px">
@@ -45,7 +45,7 @@
       											<th>资源状态</th>
 												<th>工作时长</th>
 												<th>发布教师</th>
-      											<th>报名状态</th> 
+      											<th>申请状态</th>
       											<th>操作</th> 
      										</tr> 
     									</thead> 

@@ -14,6 +14,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +61,14 @@ public class TeacherController extends BaseController {
 //        log.info("--------------------call:index");
 //        return "jz_index";
 //    }
-
+    /*跳转视屏播放页面*/
+@RequestMapping(value="/play", produces = {"application/json;charset=UTF-8"},method = {RequestMethod.GET,RequestMethod.POST})
+public ModelAndView play(ModelAndView modelAndView,
+                         @RequestParam(value = "name", defaultValue = "1") String name) {
+    modelAndView.setViewName("/teacher/jobVideo");
+    modelAndView.addObject("name", name);
+    return modelAndView;
+}
     /**
      * 发布资源信息
      * @return
@@ -333,7 +341,7 @@ public class TeacherController extends BaseController {
     }
 
     /**
-     * 获取资源报名情况
+     * 获取资源申请情况
      * @param
      * @return
      */
@@ -348,12 +356,12 @@ public class TeacherController extends BaseController {
                 baseResult = new BaseResult(true, "");
                 baseResult.setData(applicationList);
             } else {
-                baseResult = new BaseResult(false, "暂无资源报名情况");
+                baseResult = new BaseResult(false, "暂无申请资源人");
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("获取资源报名情况异常！", e);
-            baseResult = new BaseResult(false, "获取资源报名情况异常！");
+            log.error("获取资源申请人情况异常！", e);
+            baseResult = new BaseResult(false, "获取资源申请人情况异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;
@@ -372,7 +380,7 @@ public class TeacherController extends BaseController {
         BaseResult baseResult = null;
         try{
             if(appliStatus.equals ("appli_successful")){
-                //查询报名成功的人数
+                //查询申请资源成功的人数
                 List<CApplication> applicationList = teacherService.getEnrollmentSituation(jobId,"appli_successful");
                 int appliSuccessCount = applicationList.size ();
  /*               if(appliSuccessCount == demandNumber){
@@ -382,7 +390,7 @@ public class TeacherController extends BaseController {
                     if(resultCode  > 0) {
                         baseResult = new BaseResult(true, "");
                     } else {
-                        baseResult = new BaseResult(false, "修改用户报名状态失败");
+                        baseResult = new BaseResult(false, "修改用户申请状态失败");
                     }
                 /*}*/
             }else{
@@ -390,13 +398,13 @@ public class TeacherController extends BaseController {
                 if(resultCode  > 0) {
                     baseResult = new BaseResult(true, "");
                 } else {
-                    baseResult = new BaseResult(false, "修改用户报名状态失败");
+                    baseResult = new BaseResult(false, "修改用户申请状态失败");
                 }
             }
             result= JSON.toJSONString(baseResult);
         }catch (Exception e) {
-            log.error("修改用户报名状态异常！", e);
-            baseResult = new BaseResult(false, "修改用户报名状态异常！");
+            log.error("修改用户申请状态异常！", e);
+            baseResult = new BaseResult(false, "修改用户申请状态异常！");
             result = JSON.toJSONString(baseResult);
         }
         return result;

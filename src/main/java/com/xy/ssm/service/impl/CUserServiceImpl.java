@@ -83,7 +83,7 @@ public class CUserServiceImpl implements CUserService {
     {
         return cUserDao.getJobList(condition,offset,limit);
     }
- /*获取可报名作业列表*/
+ /*获取未截止作业列表*/
     @Override
     public List<CHomework> getHomList(String condition, Integer offset, Integer limit) {
         return cUserDao.getHomList(condition,offset,limit);

@@ -147,7 +147,7 @@
 								<span class="menu-text"> 资源中心 </span>
 							</a>
 						</li>
-						<li>
+<%--						<li>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
 								<span class="menu-text"> 我的资源 </span>
@@ -159,7 +159,7 @@
 								<li>
 									<a href="person_myjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										查看资源报名情况
+										查看资源申请情况
 									</a>
 								</li>
 
@@ -170,7 +170,7 @@
 									</a>
 								</li>
 							</ul>
-						</li>
+						</li>--%>
 						
 						<li>
 							<a href="person_myinfo.jsp">
@@ -228,7 +228,7 @@
       											<th>标题</th> 
       											<th>资源类型</th>
 												<th>教师名称</th>
-												<th>报名人数</th>
+												<th>申请人数</th>
       											<th>截止时间</th> 
       											<%--<th>薪资类型</th> --%>
       											<%--<th>薪资金额</th>--%>
@@ -239,7 +239,7 @@
     										<tr>
     											<td>Java</td>
     											<td>Java中jsp讲解</td>
-    											<td>报名中</td>
+    											<td>申请中</td>
     											<td>2</td>
     											<td>2019-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请</button></td>
@@ -247,7 +247,7 @@
     										<tr>
     											<td>JavaScript</td>
     											<td>浏览器脚本</td>
-    											<td>报名中</td>
+    											<td>申请中</td>
     											<td>1</td>
     											<td>2019-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请</button></td>
@@ -255,7 +255,7 @@
     										<tr>
     											<td>php</td>
     											<td>php入门开发基础</td>
-    											<td>报名中</td>
+    											<td>申请中</td>
     											<td>5</td>
     											<td>2019-02-25 22:14:53</td>
     											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看资源详情</button><button class="btn btn-link delete">申请</button></td>

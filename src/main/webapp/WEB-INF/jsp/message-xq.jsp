@@ -147,7 +147,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#" class="dropdown-toggle">
+<%--							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
 								<span class="menu-text"> 我的资源 </span>
 
@@ -158,7 +158,7 @@
 								<li>
 									<a href="person_myjz.jsp">
 										<i class="icon-double-angle-right"></i>
-										查看资源报名情况
+										查看资源申请情况
 									</a>
 								</li>
 
@@ -169,7 +169,7 @@
 									</a>
 								</li>
 							</ul>
-						</li>
+						</li>--%>
 						
 						<li>
 							<a href="person_myinfo.jsp">
@@ -239,7 +239,7 @@
 
 														<div class="widget-toolbar">
 															<label>
-																<button class="btn btn-xs btn-link" onclick="window.location='jz_fbjz.jsp'">报名资源</button>
+																<button class="btn btn-xs btn-link" onclick="window.location='jz_fbjz.jsp'">申请资源</button>
 															</label>
 														</div>
 													</div>

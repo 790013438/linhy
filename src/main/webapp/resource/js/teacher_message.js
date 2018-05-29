@@ -210,9 +210,6 @@ if(confirm("确定删除这条记录？")){
 }
 /*显示发送信息表单*/
 var showFn = function(senderId,senderType,ObjectType,mesType){
-/*        document.getElementById( "replyMes").style.visibility= "visible";
-        document.getElementById( "senderId").style.visibility= "hidden";
-        为什么这种显示效果不行*/
 $("#replyMes").show();
     $("#senderId").hide();
     $("#senderType").hide();

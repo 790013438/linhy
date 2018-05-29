@@ -100,7 +100,7 @@
 	</h1>
 	<div class="popcon">
 		<ul class="gray_three">
-			<li><span>消息名称:</span>有人报名了你的资源</li>
+			<li><span>消息名称:</span>有人申请了你的资源</li>
 			<li><span>消息时间:</span>2018-04-10 16:11:38</li>
 			<li><span>发送人:</span>系统提示</li>
 			<li><span>消息内容:</span>好好学习，天天向上</li>

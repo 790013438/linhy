@@ -224,7 +224,7 @@
       											<th>标题</th> 
       											<th>状态</th> 
       										<%--	<th>需求人</th> --%>
-      											<th>报名数</th> 
+      											<th>申请数</th>
       											<th>截止时间</th> 
       											<th>操作</th> 
      										</tr> 
@@ -233,20 +233,20 @@
     										<tr>
     											<td>11</td>
     											<td>中学家教</td>
-    											<td>报名中</td>
+    											<td>申请中</td>
     											<td>3</td>
     											<td>2</td>
     											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看报名情况</button><button class="btn btn-link delete">删除</button></a></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看申请情况</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
     										<tr>
     											<td>22</td>
     											<td>发放传单</td>
-    											<td>报名中</td>
+    											<td>申请中</td>
     											<td>10</td>
     											<td>1</td>
     											<td>2017-02-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看报名详情</button><button class="btn btn-link delete">删除</button></a></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看申请详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
     										<tr>
     											<td>8</td>
@@ -255,7 +255,7 @@
     											<td>5</td>
     											<td>5</td>
     											<td>2017-01-25 22:14:53</td>
-    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看报名详情</button><button class="btn btn-link delete">删除</button></a></td>
+    											<td><button class="btn btn-link" onclick="window.location='jz_jzxq.jsp'">查看申请详情</button><button class="btn btn-link delete">删除</button></a></td>
     										</tr>
     								
     									

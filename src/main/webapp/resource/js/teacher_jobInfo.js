@@ -100,7 +100,7 @@ var getJobInfoByID = function(condition)
             });
         }
 
-    //删除指定报名记录
+    //删除指定申请记录
     var delApplicationById = function(data) {
         $.ajax({
             url:"../teacher/updateCompSign",
@@ -114,7 +114,7 @@ var getJobInfoByID = function(condition)
                         alert(result.error);
                         return;
                     }else{
-                        var txt = "删除报名记录成功";
+                        var txt = "删除申请记录成功";
                         alert(txt);
                         return;
                     }
@@ -126,7 +126,7 @@ var getJobInfoByID = function(condition)
                 }
             },
             error : function(obj, msg) {
-                var txt = "删除报名记录失败";
+                var txt = "删除申请记录失败";
                 alert(txt);
                 return;
             },
@@ -136,7 +136,7 @@ var getJobInfoByID = function(condition)
         });
     }
 
-//查询资源报名情况
+//查询资源申请情况
 var getAppliByID = function(condition) {
     $.ajax({
         url:"../teacher/getEnrollmentSituation",
@@ -220,7 +220,7 @@ var updateAppliStatus = function(data) {
                     alert(result.error);
                     return;
                 }else{
-                    var txt = "修改用户报名状态成功";
+                    var txt = "修改用户申请状态成功";
                     alert(txt);
                     return;
                 }
@@ -232,7 +232,7 @@ var updateAppliStatus = function(data) {
             }
         },
         error : function(obj, msg) {
-            var txt = "修改用户报名状态失败";
+            var txt = "修改用户申请状态失败";
             alert(txt);
             return;
         },

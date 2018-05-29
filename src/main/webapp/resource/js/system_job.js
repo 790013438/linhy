@@ -1,5 +1,5 @@
 var condition = {
-    jobStatus:"2",
+    jobStatus:"3",/*已审核*/
 };
 $(function(){
     $('.menu-list').removeClass('active open');

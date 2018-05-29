@@ -5,17 +5,17 @@ import java.util.Date;
 
 /**
  * Created by xiongyan on 2017/2/11.
- * 资源报名表
+ * 资源申请表
  */
 public class VOCApplication implements Serializable {
     private static final long serialVersionUID = 4015147211524700827L;
     //流水号
     private Long id;
-    //报名用户id
+    //申请用户id
     private Long appliUserId;
     //资源id
     private Long appliJobId;
-    //报名状态
+    //申请状态
     private String appliStatus;
     //发布资源教师名称
     private String jobTeacherName;

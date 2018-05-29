@@ -65,32 +65,6 @@
 									</div>
 									<div class="space-4"></div>
 
-									<%--<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"> 需求人数</label>
-
-										<div class="col-sm-6">
-											<input  id="input_jobNumber" maxlength="10" onchange="checkNumber(this.value)" placeholder="需求人数" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>--%>
-									<%--<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" > 工作地址 </label>
-
-										<div class="col-sm-9">
-											<textarea placeholder="工作地址" maxlength="100" id="input_jobAddress" class="col-xs-10 col-sm-5" ></textarea>
-											&lt;%&ndash;<input type="text" id="input_jobAddress" placeholder="工作地址" class="col-xs-10 col-sm-5" />&ndash;%&gt;
-										</div>
-									</div>--%>
-									<%--<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"> 性别要求 </label>
-										<div class="col-sm-2">
-											<select class="form-control" id="requires_gender">
-												<option value="">性别要求</option>
-												<option value="male">男</option>
-												<option value="female">女</option>
-												<option value="unlimited">不限</option>
-											</select>
-										</div>
-									</div>--%>
 									<div class="space-4"></div>
 
 									<div class="form-group">
@@ -101,32 +75,6 @@
 											<%--<input  id="input_introduction" placeholder="资源描述" class="col-xs-10 col-sm-5" />--%>
 										</div>
 									</div>
-									<%--<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right">备注信息</label>
-
-										<div class="col-sm-9">
-											<textarea placeholder="备注信息" maxlength="100" id="job_remarks" class="col-xs-10 col-sm-5" ></textarea>
-										</div>
-									</div>--%>
-									<%--<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" > 薪资类型 </label>
-										<div class="col-sm-2">
-											<select class="form-control" id="salary_type">
-												<option value="">薪资类型</option>
-												<option value="monthly_pay">月薪</option>
-												<option value="daily_wage">日薪</option>
-												<option value="hourly_wage">时薪</option>
-												<option value="other">其他</option>
-											</select>
-										</div>
-									</div>--%>
-									<%--<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" > 薪资金额</label>
-
-										<div class="col-sm-6">
-											<input type="text" id="salary_salary" onchange="checkSalary(this.value)" maxlength="10" placeholder="薪资金额（元）" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>--%>
 
 									<div class="space-4"></div>
 
@@ -137,16 +85,7 @@
 											<input  id="job_hours" placeholder="资源时长（时）" onchange="checkHours(this.value)" maxlength="5" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-									<%--<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"> 资源时间</label>
 
-										<div class="col-sm-2 input-group input-group-sm">
-													<input type="text" id="input_jobTime" class="form-control hasDatepicker date-picker" id="jobTime" data-date-format="yyyy-MM-dd">&lt;%&ndash;yyyy-mm-dd&ndash;%&gt;
-													<span class="input-group-addon">
-														<i class="icon-calendar"></i>
-													</span>
-										</div>
-									</div>    myself--%>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"> 截止时间</label>
 

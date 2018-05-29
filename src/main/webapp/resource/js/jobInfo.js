@@ -34,9 +34,9 @@ var getJobInfoByID = function(condition) {
                     //填充信息
                     var detail_str = initJobDetailForm(list[0]);/*result.data*/
                     if(list[0].flag == 0){
-                        document.getElementById("btn_appli").value="报名资源";
+                        document.getElementById("btn_appli").value="申请资源";
                     }else{
-                        document.getElementById("btn_appli").value="已报名";
+                        document.getElementById("btn_appli").value="已申请";
                       /*  console.log(list[0]);*/
                         $("#btn_appli").attr("disabled", true);
                     }
@@ -66,7 +66,7 @@ var getJobInfoByID = function(condition) {
 }
 
 
-//报名指定资源
+//申请指定资源
 var appliJobById = function(data) {
     $.ajax({
         url:"../user/applicationJob",
@@ -166,6 +166,9 @@ function jobFileList(file){
             var operation="<a href='/teacher/downloadJobFiles?name="+jobfile[i].file_name+"'>下载</a>";
             if(jobfile[i].file_type==".pdf"){
                 operation=operation+"|<a href='/resource/plugins/pdfjs/web/viewer.html?file=upload/"+jobfile[i].file_name+"'>在线预览</a>"
+            }
+            if (jobfile[i].file_type==".mp4"){
+                operation=operation+"|<a href='/teacher/play?name="+jobfile[i].file_name+"'>在线播放</a>"
             }
             var x=document.getElementById("ta_jobFile").insertRow();
             x.insertCell(0).innerHTML =jobfile[i].file_id;

@@ -30,7 +30,7 @@ $(function(){
     });
 });
 
-//查询作业列表
+//查询资源列表
 var getWaitingAudit = function(condition) {
 	$.ajax({
 		url:"../admin/getAllJobs",
@@ -57,7 +57,7 @@ var getWaitingAudit = function(condition) {
                     });
 				} else{
 					$("#waitingAudit tbody").empty();
-					var txt = "暂无待审核表资源";
+					var txt = "暂无待审核资源";
 					alert(txt);
 					return;
 				}

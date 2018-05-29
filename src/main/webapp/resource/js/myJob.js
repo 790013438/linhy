@@ -16,7 +16,7 @@ $(function(){
 
 });
 
-//查询资源报名情况
+//查询资源申请情况
 var queryMyAppliJobs = function(condition) {
     $.ajax({
         url:"../user/getMyAppliSituation",
@@ -154,11 +154,11 @@ var appendJobNode = function(obj) {
             "<td> "+obj.appliStatus+"</td>"+
             "<td>"+
             "<a  href =\"../student/jobInfo?jobId="+obj.appliJobId+"\" >查看资源详情</a> |";
-    if(obj.appliStatus != "报名失败"){
+    if(obj.appliStatus != "申请失败"){
         var job_str1 = job_str +"<button type=\"button\" class='btn btn-link' onclick=\"queryMyAppli('"+obj.id+"')\">退出资源</button>";
     }else{
         var job_str1 = job_str +"<button type=\"button\" disabled='disabled' class='btn btn-link'>退出资源</button>";
-        // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已报名</a>";
+        // var job_str1 = job_str +"<a  href=\"javascript:getJobDetails('"+obj.id+"');\" class='disabled'>已申请</a>";
     }
     "<input type=\"hidden\" name=\"application_id\" value=\""+obj.id+"\">"+
     "</td>"+
