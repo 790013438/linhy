@@ -14,12 +14,8 @@ $(function(){
     $("#btn_saveJob").click(function () {
         var data = getParams();
         document.getElementById("btn_saveFile").removeAttribute("disabled");
-/*        if(!checkNumber(data.jobDemandNumber)){
-        }*/
         if(!checkHours(data.jobHours)){
         }
-/*        if(!checkSalary(data.jobSalary)){
-        }*/
         if(!checkJobInformation(data)){
             alert("输入了空字符串或者信息不完善");
         }
@@ -120,28 +116,14 @@ var checkJobInformation = function(data)
 var getParams = function(){
     var jobTitle= $.trim($("#input_jobName").val());
     var jobType = $.trim($("#input_jobType").val());
-/*    var jobDemandNumber = $.trim($("#input_jobNumber").val());*/
-    /*var jobAddress = $.trim($("#input_jobAddress").val());*/
-   /* var jobRequiresGender = $("#requires_gender").val();*/
   var jobIntroduction = $("#input_introduction").val();
-/*    var jobRemarks = $("#job_remarks").val();*/
-/*/!*    var jobSalaryType = $("#salary_type").val();*!/
-    var jobSalary = $("#salary_salary").val();*/
     var jobHours = $("#job_hours").val();
-/*    var jobTime= $("#input_jobTime").val();*/
     var jobDeadline = $("#input_deadline").val();
     var json = {};
     json.jobTitle = jobTitle;
     json.jobType = jobType;
-/*    json.jobSalary = jobSalary;
-    json.jobDemandNumber = jobDemandNumber;
-    json.jobRequiresGender = jobRequiresGender;
-    json.jobAddress = jobAddress;*/
     json.jobIntroduction = jobIntroduction;
-/*    json.jobRemarks = jobRemarks;
-    json.jobSalaryType = jobSalaryType;*/
     json.jobHours = jobHours;
-/*    json.time = jobTime;*/
     json.deadline = jobDeadline;
     return json;
 

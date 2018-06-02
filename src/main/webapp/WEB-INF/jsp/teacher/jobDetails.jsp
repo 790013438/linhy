@@ -24,9 +24,9 @@
 
 			<li class="active">资源详情</li>
 		</ul><!-- .breadcrumb -->
-		<div style="position:absolute;top:3px;right:22px;line-height:24px">
+<%--		<div style="position:absolute;top:3px;right:22px;line-height:24px">
 			<button class="btn btn-sm btn-primary" onclick="window.location='../student/index'">资源中心</button>
-		</div>
+		</div>--%>
 	</div>
 
 	<div class="page-content">
